@@ -8,11 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		88EBF3131B2798A70090A5A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EBF3121B2798A70090A5A0 /* AppDelegate.swift */; };
-		88EBF3151B2798A70090A5A0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EBF3141B2798A70090A5A0 /* ViewController.swift */; };
-		88EBF3181B2798A70090A5A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88EBF3161B2798A70090A5A0 /* Main.storyboard */; };
-		88EBF31A1B2798A70090A5A0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88EBF3191B2798A70090A5A0 /* Images.xcassets */; };
-		88EBF31D1B2798A70090A5A0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88EBF31B1B2798A70090A5A0 /* LaunchScreen.xib */; };
 		88EBF3291B2798A70090A5A0 /* PaddleBallA52Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EBF3281B2798A70090A5A0 /* PaddleBallA52Tests.swift */; };
+		88EBF3351B2798C50090A5A0 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 88EBF3331B2798C50090A5A0 /* LICENSE */; };
+		88EBF3371B2798D80090A5A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88EBF3361B2798D80090A5A0 /* Main.storyboard */; };
+		88EBF33E1B27992E0090A5A0 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EBF3391B27992E0090A5A0 /* Settings.swift */; };
+		88EBF33F1B27992E0090A5A0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EBF33A1B27992E0090A5A0 /* User.swift */; };
+		88EBF3401B27992E0090A5A0 /* BreakoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EBF33B1B27992E0090A5A0 /* BreakoutBehavior.swift */; };
+		88EBF3411B27992E0090A5A0 /* BallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EBF33C1B27992E0090A5A0 /* BallViewController.swift */; };
+		88EBF3431B2799390090A5A0 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 88EBF3421B2799390090A5A0 /* Settings.bundle */; };
+		88EBF3461B2799540090A5A0 /* jazzloop2_70.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 88EBF3441B2799540090A5A0 /* jazzloop2_70.mp3 */; };
+		88EBF3471B2799540090A5A0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88EBF3451B2799540090A5A0 /* LaunchScreen.xib */; };
+		88EBF3491B2799B00090A5A0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88EBF3481B2799B00090A5A0 /* Images.xcassets */; };
+		88EBF34B1B2799DF0090A5A0 /* paddle1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 88EBF34A1B2799DF0090A5A0 /* paddle1.jpg */; };
+		88EBF34C1B279D880090A5A0 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 88EBF3321B2798C50090A5A0 /* README.md */; };
+		88EBF34E1B27A5B70090A5A0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EBF34D1B27A5B70090A5A0 /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,13 +38,22 @@
 		88EBF30D1B2798A70090A5A0 /* PaddleBallA52.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaddleBallA52.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88EBF3111B2798A70090A5A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88EBF3121B2798A70090A5A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		88EBF3141B2798A70090A5A0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		88EBF3171B2798A70090A5A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		88EBF3191B2798A70090A5A0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		88EBF31C1B2798A70090A5A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		88EBF3221B2798A70090A5A0 /* PaddleBallA52Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PaddleBallA52Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		88EBF3271B2798A70090A5A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88EBF3281B2798A70090A5A0 /* PaddleBallA52Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddleBallA52Tests.swift; sourceTree = "<group>"; };
+		88EBF3321B2798C50090A5A0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		88EBF3331B2798C50090A5A0 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		88EBF3361B2798D80090A5A0 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		88EBF3391B27992E0090A5A0 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		88EBF33A1B27992E0090A5A0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		88EBF33B1B27992E0090A5A0 /* BreakoutBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BreakoutBehavior.swift; sourceTree = "<group>"; };
+		88EBF33C1B27992E0090A5A0 /* BallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BallViewController.swift; sourceTree = "<group>"; };
+		88EBF3421B2799390090A5A0 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		88EBF3441B2799540090A5A0 /* jazzloop2_70.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = jazzloop2_70.mp3; sourceTree = "<group>"; };
+		88EBF3451B2799540090A5A0 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		88EBF3481B2799B00090A5A0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		88EBF34A1B2799DF0090A5A0 /* paddle1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = paddle1.jpg; sourceTree = "<group>"; };
+		88EBF34D1B27A5B70090A5A0 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,11 +95,19 @@
 		88EBF30F1B2798A70090A5A0 /* PaddleBallA52 */ = {
 			isa = PBXGroup;
 			children = (
-				88EBF3121B2798A70090A5A0 /* AppDelegate.swift */,
-				88EBF3141B2798A70090A5A0 /* ViewController.swift */,
-				88EBF3161B2798A70090A5A0 /* Main.storyboard */,
-				88EBF3191B2798A70090A5A0 /* Images.xcassets */,
-				88EBF31B1B2798A70090A5A0 /* LaunchScreen.xib */,
+				88EBF3321B2798C50090A5A0 /* README.md */,
+				88EBF3331B2798C50090A5A0 /* LICENSE */,
+				88EBF3361B2798D80090A5A0 /* Main.storyboard */,
+				88EBF3421B2799390090A5A0 /* Settings.bundle */,
+				88EBF3391B27992E0090A5A0 /* Settings.swift */,
+				88EBF34D1B27A5B70090A5A0 /* SettingsViewController.swift */,
+				88EBF33A1B27992E0090A5A0 /* User.swift */,
+				88EBF33B1B27992E0090A5A0 /* BreakoutBehavior.swift */,
+				88EBF33C1B27992E0090A5A0 /* BallViewController.swift */,
+				88EBF3481B2799B00090A5A0 /* Images.xcassets */,
+				88EBF3441B2799540090A5A0 /* jazzloop2_70.mp3 */,
+				88EBF3451B2799540090A5A0 /* LaunchScreen.xib */,
+				88EBF34A1B2799DF0090A5A0 /* paddle1.jpg */,
 				88EBF3101B2798A70090A5A0 /* Supporting Files */,
 			);
 			path = PaddleBallA52;
@@ -90,6 +116,7 @@
 		88EBF3101B2798A70090A5A0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				88EBF3121B2798A70090A5A0 /* AppDelegate.swift */,
 				88EBF3111B2798A70090A5A0 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -161,6 +188,7 @@
 				TargetAttributes = {
 					88EBF30C1B2798A70090A5A0 = {
 						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = 7P9362E76E;
 					};
 					88EBF3211B2798A70090A5A0 = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -192,9 +220,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88EBF3181B2798A70090A5A0 /* Main.storyboard in Resources */,
-				88EBF31D1B2798A70090A5A0 /* LaunchScreen.xib in Resources */,
-				88EBF31A1B2798A70090A5A0 /* Images.xcassets in Resources */,
+				88EBF34C1B279D880090A5A0 /* README.md in Resources */,
+				88EBF3371B2798D80090A5A0 /* Main.storyboard in Resources */,
+				88EBF3461B2799540090A5A0 /* jazzloop2_70.mp3 in Resources */,
+				88EBF3491B2799B00090A5A0 /* Images.xcassets in Resources */,
+				88EBF3471B2799540090A5A0 /* LaunchScreen.xib in Resources */,
+				88EBF34B1B2799DF0090A5A0 /* paddle1.jpg in Resources */,
+				88EBF3431B2799390090A5A0 /* Settings.bundle in Resources */,
+				88EBF3351B2798C50090A5A0 /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,8 +245,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88EBF3151B2798A70090A5A0 /* ViewController.swift in Sources */,
+				88EBF3401B27992E0090A5A0 /* BreakoutBehavior.swift in Sources */,
+				88EBF33F1B27992E0090A5A0 /* User.swift in Sources */,
 				88EBF3131B2798A70090A5A0 /* AppDelegate.swift in Sources */,
+				88EBF3411B27992E0090A5A0 /* BallViewController.swift in Sources */,
+				88EBF33E1B27992E0090A5A0 /* Settings.swift in Sources */,
+				88EBF34E1B27A5B70090A5A0 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,25 +271,6 @@
 			targetProxy = 88EBF3231B2798A70090A5A0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		88EBF3161B2798A70090A5A0 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				88EBF3171B2798A70090A5A0 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		88EBF31B1B2798A70090A5A0 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				88EBF31C1B2798A70090A5A0 /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		88EBF32A1B2798A70090A5A0 /* Debug */ = {
@@ -342,6 +360,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = PaddleBallA52/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -352,6 +371,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = PaddleBallA52/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

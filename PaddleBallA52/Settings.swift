@@ -20,38 +20,54 @@ class Settings {
         static let CornerRadiusKey = "Settings.Corner.Radius" //allow brick corner radius adjustment:
         static let CourtColorKey = "Settings.Court.Color"
         static let DifficultyKey = "Settings.Difficulty" //chooses if the last row of bricks should be “black” and thus need two collisions to be destroyed:
-        static let HighScoreKey = "Settings.High.Score" //if the settings have been changed:
+        static let HighScoreKey = "Settings.High.Score"
+        static let HighScoreOnKey = "Settings.High.Score.On" //toggle to reset high score to zero
         static let PaddleColorKey = "Settings.Paddle.Color"
-        static let PaddleWidthMultiplierKey = "Settings.Paddle.Width.Multiplier"
-        static let RowsKey = "Settings.Rows"
+        static let PaddleWidthMultiplierKey = "Settings.Paddle.Width.Multiplier" //1 thru 4, initially 2 (ball widths)
+        static let RowsKey = "Settings.Rows" //half the # of columns
         static let SoundKey = "Settings.Sound" //allow balls make a sound on collision:
         static let SpeedKey = "Settings.Ball.Speed" //control the speed of the ball/push:
     }
     let defaults = NSUserDefaults.standardUserDefaults()
-    
-    var columns: Int? {
-        get { return defaults.objectForKey(Const.ColumnsKey) as? Int }
-        set { defaults.setObject(newValue, forKey: Const.ColumnsKey) }
+    var autoStart: Bool {
+        get { return defaults.objectForKey(Const.AutoStartKey) as? Bool ?? false }
+        set { defaults.setObject(newValue, forKey: Const.AutoStartKey) }
     }
-    var rows: Int? {
-        get { return defaults.objectForKey(Const.RowsKey) as? Int }
-        set { defaults.setObject(newValue, forKey: Const.RowsKey) }
+    var ballColor: String {
+        get { return defaults.objectForKey(Const.BallColorKey) as? String ?? "Yellow" }
+        set { defaults.setObject(newValue, forKey: Const.BallColorKey) }
+    }
+    var ballRotation: Bool {
+        get { return defaults.objectForKey(Const.BallRotationKey) as? Bool ?? true }
+        set { defaults.setObject(newValue, forKey: Const.BallRotationKey) }
     }
     var balls: Int? {
         get { return defaults.objectForKey(Const.BallsKey) as? Int }
         set { defaults.setObject(newValue, forKey: Const.BallsKey) }
     }
+    var columns: Int? {
+        get { return defaults.objectForKey(Const.ColumnsKey) as? Int }
+        set { defaults.setObject(newValue, forKey: Const.ColumnsKey) }
+    }
+    var cornerRadius: Float? {
+        get { return defaults.objectForKey(Const.CornerRadiusKey) as? Float }
+        set { defaults.setObject(newValue, forKey: Const.CornerRadiusKey) }
+    }
+    var courtColor: String {
+        get { return defaults.objectForKey(Const.CourtColorKey) as? String ?? "Purple" }
+        set { defaults.setObject(newValue, forKey: Const.CourtColorKey) }
+    }
     var difficulty: Int? {
         get { return defaults.objectForKey(Const.DifficultyKey) as? Int }
         set { defaults.setObject(newValue, forKey: Const.DifficultyKey) }
     }
-    var autoStart: Bool {
-        get { return defaults.objectForKey(Const.AutoStartKey) as? Bool ?? false }
-        set { defaults.setObject(newValue, forKey: Const.AutoStartKey) }
+    var highScore: Int {
+        get { return defaults.objectForKey(Const.HighScoreKey) as? Int ?? 0 }
+        set { defaults.setObject(newValue, forKey: Const.HighScoreKey) }
     }
-    var ballRotation: Bool {
-        get { return defaults.objectForKey(Const.BallRotationKey) as? Bool ?? true }
-        set { defaults.setObject(newValue, forKey: Const.BallRotationKey) }
+    var highScoreOn: Bool {
+        get { return defaults.objectForKey(Const.HighScoreOnKey) as? Bool ?? true }
+        set { defaults.setObject(newValue, forKey: Const.HighScoreOnKey) }
     }
     var soundOn: Bool {
         get { return defaults.objectForKey(Const.SoundKey) as? Bool ?? true }
@@ -61,18 +77,6 @@ class Settings {
         get { return defaults.objectForKey(Const.SpeedKey) as? Float ?? 1.0 }
         set { defaults.setObject(newValue, forKey: Const.SpeedKey) }
     }
-    var cornerRadius: Float? {
-        get { return defaults.objectForKey(Const.CornerRadiusKey) as? Float }
-        set { defaults.setObject(newValue! / 2.0, forKey: Const.CornerRadiusKey) }
-    }
-    var ballColor: String {
-        get { return defaults.objectForKey(Const.BallColorKey) as? String ?? "Yellow" }
-        set { defaults.setObject(newValue, forKey: Const.BallColorKey) }
-    }
-    var courtColor: String {
-        get { return defaults.objectForKey(Const.CourtColorKey) as? String ?? "Purple" }
-        set { defaults.setObject(newValue, forKey: Const.CourtColorKey) }
-    }
     var paddleColor: String {
         get { return defaults.objectForKey(Const.PaddleColorKey) as? String ?? "Cyan" }
         set { defaults.setObject(newValue, forKey: Const.PaddleColorKey) }
@@ -81,9 +85,9 @@ class Settings {
         get { return defaults.objectForKey(Const.PaddleWidthMultiplierKey) as? Int }
         set { defaults.setObject(newValue, forKey: Const.PaddleWidthMultiplierKey) }
     }
-    var highScore: Int {
-        get { return defaults.objectForKey(Const.HighScoreKey) as? Int ?? 0 }
-        set { defaults.setObject(newValue, forKey: Const.HighScoreKey) }
+    var rows: Int? {
+        get { return defaults.objectForKey(Const.RowsKey) as? Int }
+        set { defaults.setObject(newValue, forKey: Const.RowsKey) }
     }
     var changed: Bool {
         get { return defaults.objectForKey(Const.ChangeKey) as? Bool ?? false }

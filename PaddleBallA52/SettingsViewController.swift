@@ -32,6 +32,7 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
     @IBOutlet weak var soundSwitch: UISwitch!
     @IBOutlet weak var brickRadiusLabel: UILabel!
     @IBOutlet weak var brickRadiusSlider: UISlider!
+    @IBOutlet weak var highScoreSwitch: UISwitch!
     
     var pickerDataSource = ["Green", "Blue", "Orange", "Red", "Purple", "Yellow", "Cyan", "White", "Black" ]
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int { return 1 } //number of columns in the picker
@@ -55,86 +56,6 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         paddleColorPickerView.dataSource = self
         paddleColorPickerView.delegate = self
     }
-    var balls: Int {
-        get { return ballsLabel.text!.toInt()! }
-        set {
-            ballsLabel.text = "\(newValue)"
-            ballStepper.value = Double(newValue)
-        }
-    }
-    var paddleWidthMultiplier: Int {
-        get { return paddleWidthLabel.text!.toInt()! }
-        set {
-            paddleWidthLabel.text = "\(newValue)"
-            paddleWidthStepper.value = Double(newValue)
-        }
-    }
-    var difficulty: Int {
-        get { return difficultySelector.selectedSegmentIndex }
-        set { difficultySelector.selectedSegmentIndex = newValue }
-    }
-    var autoStart: Bool {
-        get { return autoStartSwitch.on }
-        set { autoStartSwitch.on = newValue }
-    }
-    var ballRotation: Bool {
-        get { return ballRotationSwitch.on }
-        set { ballRotationSwitch.on = newValue }
-    }
-    var sound: Bool {
-        get { return soundSwitch.on }
-        set { soundSwitch.on = newValue }
-    }
-    @IBAction func ballsChanged(sender: UIStepper) {
-        balls = Int(sender.value)
-        Settings().balls = balls
-    }
-    @IBAction func paddleWidthChanged(sender: UIStepper) {
-        paddleWidthMultiplier = Int(sender.value)
-        Settings().paddleWidthMultiplier = paddleWidthMultiplier
-    }
-    @IBAction func difficultyChanged(sender: UISegmentedControl) {
-        Settings().difficulty = difficulty
-        if difficulty == 0 {
-            paddleWidthMultiplier = max(paddleWidthMultiplier, 4)
-        }
-        else {
-            paddleWidthMultiplier = min(paddleWidthMultiplier, 2)
-        }
-        paddleWidthChanged(paddleWidthStepper)
-    }
-    @IBAction func autoStartChanged(sender: UISwitch) {
-        Settings().autoStart = autoStart
-    }
-    @IBAction func ballRotationChanged(sender: UISwitch) {
-        Settings().ballRotation = ballRotation
-    }
-    @IBAction func soundChanged(sender: UISwitch) {
-        Settings().soundOn = sound
-    }
-    var speed: Float {
-        get { return speedSlider.value / 100.0}
-        set {
-            speedSlider.value = newValue * 100.0
-            speedLabel.text = "\(Int(speedSlider.value)) %"
-        }
-    }
-    @IBAction func speedChanged(sender: UISlider) {
-        speed = sender.value / 100.0
-        Settings().speed = speed
-    }
-    var cornerRadius: Float {
-        get { return brickRadiusSlider.value / 100.0}
-        set {
-            brickRadiusSlider.value = newValue * 100.0
-            brickRadiusLabel.text = "\(Int(brickRadiusSlider.value)) %"
-        }
-    }
-    @IBAction func radiusChanged(sender: UISlider) {
-        cornerRadius = sender.value / 100.0
-        Settings().cornerRadius = cornerRadius
-        Settings().changed = true
-    }
     var ballColor: String {
         get { return ballColorLabel.text! }
         set {
@@ -156,6 +77,31 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
             Settings().paddleColor = "\(newValue)"
         }
     }
+    var autoStart: Bool {
+        get { return autoStartSwitch.on }
+        set { autoStartSwitch.on = newValue }
+    }
+    @IBAction func autoStartChanged(sender: UISwitch) {
+        Settings().autoStart = autoStart
+    }
+    var balls: Int {
+        get { return ballsLabel.text!.toInt()! }
+        set {
+            ballsLabel.text = "\(newValue)"
+            ballStepper.value = Double(newValue)
+        }
+    }
+    @IBAction func ballsChanged(sender: UIStepper) {
+        balls = Int(sender.value)
+        Settings().balls = balls
+    }
+    var ballRotation: Bool {
+        get { return ballRotationSwitch.on }
+        set { ballRotationSwitch.on = newValue }
+    }
+    @IBAction func ballRotationChanged(sender: UISwitch) {
+        Settings().ballRotation = ballRotation
+    }
     var columns: Int {
         get { return columnsLabel.text!.toInt()! }
         set {
@@ -169,9 +115,53 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
             cornerRadius = min(cornerRadius, 1.0)
             radiusChanged(brickRadiusSlider)
         }
-        //println("cornerRadius = \(cornerRadius) speed = \(speed)")
+        println("cornerRadius = \(cornerRadius) speed = \(speed)")
         Settings().columns = columns
         Settings().changed = true
+    }
+    var cornerRadius: Float {
+        get { return brickRadiusSlider.value / 100.0}
+        set {
+            brickRadiusSlider.value = newValue * 100.0
+            brickRadiusLabel.text = "\(Int(brickRadiusSlider.value)) %"
+        }
+    }
+    @IBAction func radiusChanged(sender: UISlider) {
+        cornerRadius = sender.value / 100.0
+        Settings().cornerRadius = cornerRadius
+        Settings().changed = true
+    }
+    var difficulty: Int {
+        get { return difficultySelector.selectedSegmentIndex }
+        set { difficultySelector.selectedSegmentIndex = newValue }
+    }
+    @IBAction func difficultyChanged(sender: UISegmentedControl) {
+        Settings().difficulty = difficulty
+        if difficulty == 0 {
+            paddleWidthMultiplier = max(paddleWidthMultiplier, 4)
+        }
+        else {
+            paddleWidthMultiplier = min(paddleWidthMultiplier, 2)
+        }
+        paddleWidthChanged(paddleWidthStepper)
+    }
+    var highScoreOn: Bool {
+        get { return highScoreSwitch.on }
+        set { highScoreSwitch.on = newValue }
+    }
+    @IBAction func highScoreOnChanged(sender: UISwitch) {
+        Settings().highScoreOn = highScoreOn
+    }
+    var paddleWidthMultiplier: Int {
+        get { return paddleWidthLabel.text!.toInt()! }
+        set {
+            paddleWidthLabel.text = "\(newValue)"
+            paddleWidthStepper.value = Double(newValue)
+        }
+    }
+    @IBAction func paddleWidthChanged(sender: UIStepper) {
+        paddleWidthMultiplier = Int(sender.value)
+        Settings().paddleWidthMultiplier = paddleWidthMultiplier
     }
     var rows: Int {
         get { return rowsLabel.text!.toInt()! }
@@ -184,6 +174,28 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         rows = Int(sender.value)
         Settings().rows = rows
         Settings().changed = true
+    }
+    var score: Int {
+        get { return self.score }
+        set { self.score = newValue }
+    }
+    var sound: Bool {
+        get { return soundSwitch.on }
+        set { soundSwitch.on = newValue }
+    }
+    @IBAction func soundChanged(sender: UISwitch) {
+        Settings().soundOn = sound
+    }
+    var speed: Float {
+        get { return speedSlider.value / 100.0}
+        set {
+            speedSlider.value = newValue * 100.0
+            speedLabel.text = "\(Int(speedSlider.value)) %"
+        }
+    }
+    @IBAction func speedChanged(sender: UISlider) {
+        speed = sender.value / 100.0
+        Settings().speed = speed
     }
     //When the view will appear (e.g. when switching back from the settings tab), check if something has changed. Reset the changed property. Remove all existing bricks from the view and destroy them. Remove any balls left. Reset the animator and the breakout behavior. Finally, recreate the bricks with the new settings. To be able to reset the breakout behavior, change it from let to var
     override func viewWillAppear(animated: Bool) {

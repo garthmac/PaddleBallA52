@@ -431,6 +431,7 @@
 				88EBF32E1B2798A70090A5A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		88EBF32F1B2798A70090A5A0 /* Build configuration list for PBXNativeTarget "PaddleBallA52Tests" */ = {
 			isa = XCConfigurationList;
@@ -439,6 +440,7 @@
 				88EBF3311B2798A70090A5A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

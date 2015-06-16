@@ -2,16 +2,17 @@
 
 uses segue to Tab View for primary user settings
 uses AVAudioPlayer, dynamic behaviours, timer, alert, gestures and class extentions
-- pinch gesture gives Tab view for many additional settings such as rows, columns, +balls
-  +ball speed, autoRotate ball, ball autoStart, paddle width, brick radius or easy/hard
-- Application does not run in background
+- pinch gesture gives Tab view for many additional settings such as number of rows, 
+  number of columns (vs paddle width)
+  Also +balls, ball speed slider, autoRotate ball switch, ball autoStart switch, 
+  brick radius slider, highScore reset switch or easy/hard switch
+- automatic play - levels incremented and HighScore saved
+
 uses Settings.bundle for secondary settings
 - for Ball.Elasticity, Ball.Friction, 
-- for Paddle.Elasticity, Paddle.Friction
-- for Sound F/X
-- optional userId...entering any id gives a tennis ball
-  ...enter soccer for soccer ball
-- automatic play levels incremented and HighScore saved
+- for Paddle.Elasticity, Paddle.Friction, Sound F/X and
+  optional UserId...entering any id gives a tennis ball
+                    ...enter soccer for soccer ball
 
 Xcode 6.3.2 
 

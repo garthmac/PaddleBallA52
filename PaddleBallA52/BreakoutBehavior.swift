@@ -80,10 +80,7 @@ class BreakoutBehavior: UIDynamicBehavior {
     func pushBall(ball: UIView) {
         let push = UIPushBehavior(items: [ball], mode: .Instantaneous)
         push.magnitude = speed
-        push.angle = CGFloat(Double(arc4random()) * M_PI * 2 / Double(UINT32_MAX))
-        if push.pushDirection.dy == 0.0 { //to avoid getting stuck horizontally
-            push.pushDirection.dy += 1.5
-        }
+        push.angle = CGFloat(Double.random)
         push.action = { [weak push] in
             if !push!.active {
                 self.removeChildBehavior(push!)
@@ -109,5 +106,29 @@ class BreakoutBehavior: UIDynamicBehavior {
     func removeBrick(brick: UIView) {
         gravity.removeItem(brick)
     }
+}
 
+// MARK: - extensions
+private extension Double {
+    static var random: Double { //random angle from 10 - 170 degrees in radians
+        switch arc4random() % 16 {
+        case 0: return M_PI / 18.0
+        case 1: return 2.0 * M_PI / 18.0
+        case 2: return 3.0 * M_PI / 18.0
+        case 3: return 4.0 * M_PI / 18.0
+        case 4: return 5.0 * M_PI / 18.0
+        case 5: return 6.0 * M_PI / 18.0
+        case 6: return 7.0 * M_PI / 18.0
+        case 7: return 8.0 * M_PI / 18.0
+        case 8: return 9.0 * M_PI / 18.0
+        case 9: return 10.0 * M_PI / 18.0
+        case 10: return 11.0 * M_PI / 18.0
+        case 11: return 12.0 * M_PI / 18.0
+        case 12: return 13.0 * M_PI / 18.0
+        case 13: return 14.0 * M_PI / 18.0
+        case 14: return 15.0 * M_PI / 18.0
+        case 15: return 16.0 * M_PI / 18.0
+        default: return 17.0 * M_PI / 18.0
+        }
+    }
 }

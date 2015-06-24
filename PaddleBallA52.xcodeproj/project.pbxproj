@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		881559121B30E19600D60626 /* 1-FloUnitCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 881559111B30E19600D60626 /* 1-FloUnitCircle.png */; };
+		885E94D21B3384FE00432335 /* LeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885E94D11B3384FE00432335 /* LeaderViewController.swift */; };
+		885E94D31B33957F00432335 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88EBF3481B2799B00090A5A0 /* Images.xcassets */; };
+		885E94D51B34A94900432335 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885E94D41B34A94900432335 /* ImageViewController.swift */; };
+		885E94D91B34F39600432335 /* trophy75.png in Resources */ = {isa = PBXBuildFile; fileRef = 885E94D81B34F39600432335 /* trophy75.png */; };
+		885E94DF1B39F95E00432335 /* playing-tennis.gif in Resources */ = {isa = PBXBuildFile; fileRef = 885E94DE1B39F95E00432335 /* playing-tennis.gif */; };
+		885E94E21B39FCA200432335 /* Brookes_25_27119b.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 885E94E11B39FCA200432335 /* Brookes_25_27119b.jpg */; };
+		885E94EE1B3A0C1E00432335 /* Comic Sans MS Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 885E94EA1B3A09DA00432335 /* Comic Sans MS Bold.ttf */; };
+		885E94EF1B3A0C2400432335 /* Comic Sans MS.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 885E94EC1B3A09EF00432335 /* Comic Sans MS.ttf */; };
 		88EBF3131B2798A70090A5A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EBF3121B2798A70090A5A0 /* AppDelegate.swift */; };
 		88EBF3291B2798A70090A5A0 /* PaddleBallA52Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EBF3281B2798A70090A5A0 /* PaddleBallA52Tests.swift */; };
 		88EBF3351B2798C50090A5A0 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 88EBF3331B2798C50090A5A0 /* LICENSE */; };
@@ -16,12 +25,11 @@
 		88EBF3401B27992E0090A5A0 /* BreakoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EBF33B1B27992E0090A5A0 /* BreakoutBehavior.swift */; };
 		88EBF3411B27992E0090A5A0 /* BallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EBF33C1B27992E0090A5A0 /* BallViewController.swift */; };
 		88EBF3431B2799390090A5A0 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 88EBF3421B2799390090A5A0 /* Settings.bundle */; };
-		88EBF3461B2799540090A5A0 /* jazzloop2_70.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 88EBF3441B2799540090A5A0 /* jazzloop2_70.mp3 */; };
 		88EBF3471B2799540090A5A0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88EBF3451B2799540090A5A0 /* LaunchScreen.xib */; };
-		88EBF3491B2799B00090A5A0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88EBF3481B2799B00090A5A0 /* Images.xcassets */; };
-		88EBF34B1B2799DF0090A5A0 /* paddle1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 88EBF34A1B2799DF0090A5A0 /* paddle1.jpg */; };
 		88EBF34C1B279D880090A5A0 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 88EBF3321B2798C50090A5A0 /* README.md */; };
 		88EBF34E1B27A5B70090A5A0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EBF34D1B27A5B70090A5A0 /* SettingsViewController.swift */; };
+		88F640D21B320B9700896127 /* jazzloop2_70.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 88EBF3441B2799540090A5A0 /* jazzloop2_70.mp3 */; };
+		88F640D31B320BAA00896127 /* paddle1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 88EBF34A1B2799DF0090A5A0 /* paddle1.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +43,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		881559111B30E19600D60626 /* 1-FloUnitCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1-FloUnitCircle.png"; sourceTree = "<group>"; };
+		885E94D11B3384FE00432335 /* LeaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaderViewController.swift; sourceTree = "<group>"; };
+		885E94D41B34A94900432335 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
+		885E94D81B34F39600432335 /* trophy75.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trophy75.png; sourceTree = "<group>"; };
+		885E94DE1B39F95E00432335 /* playing-tennis.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "playing-tennis.gif"; sourceTree = "<group>"; };
+		885E94E11B39FCA200432335 /* Brookes_25_27119b.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Brookes_25_27119b.jpg; sourceTree = "<group>"; };
+		885E94EA1B3A09DA00432335 /* Comic Sans MS Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comic Sans MS Bold.ttf"; sourceTree = "<group>"; };
+		885E94EC1B3A09EF00432335 /* Comic Sans MS.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comic Sans MS.ttf"; sourceTree = "<group>"; };
 		88EBF30D1B2798A70090A5A0 /* PaddleBallA52.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaddleBallA52.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88EBF3111B2798A70090A5A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88EBF3121B2798A70090A5A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +90,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		881559131B30ECFE00D60626 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				885E94EA1B3A09DA00432335 /* Comic Sans MS Bold.ttf */,
+				885E94EC1B3A09EF00432335 /* Comic Sans MS.ttf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
+		881559141B30ED5500D60626 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				88EBF34A1B2799DF0090A5A0 /* paddle1.jpg */,
+				885E94E11B39FCA200432335 /* Brookes_25_27119b.jpg */,
+				881559111B30E19600D60626 /* 1-FloUnitCircle.png */,
+				885E94DE1B39F95E00432335 /* playing-tennis.gif */,
+				885E94D81B34F39600432335 /* trophy75.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		881559151B30ED9400D60626 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				88EBF3441B2799540090A5A0 /* jazzloop2_70.mp3 */,
+			);
+			name = Audio;
+			sourceTree = "<group>";
+		};
 		88EBF3041B2798A70090A5A0 = {
 			isa = PBXGroup;
 			children = (
@@ -98,6 +143,8 @@
 				88EBF3321B2798C50090A5A0 /* README.md */,
 				88EBF3331B2798C50090A5A0 /* LICENSE */,
 				88EBF3361B2798D80090A5A0 /* Main.storyboard */,
+				885E94D11B3384FE00432335 /* LeaderViewController.swift */,
+				885E94D41B34A94900432335 /* ImageViewController.swift */,
 				88EBF3421B2799390090A5A0 /* Settings.bundle */,
 				88EBF3391B27992E0090A5A0 /* Settings.swift */,
 				88EBF34D1B27A5B70090A5A0 /* SettingsViewController.swift */,
@@ -105,9 +152,11 @@
 				88EBF33B1B27992E0090A5A0 /* BreakoutBehavior.swift */,
 				88EBF33C1B27992E0090A5A0 /* BallViewController.swift */,
 				88EBF3481B2799B00090A5A0 /* Images.xcassets */,
-				88EBF3441B2799540090A5A0 /* jazzloop2_70.mp3 */,
 				88EBF3451B2799540090A5A0 /* LaunchScreen.xib */,
-				88EBF34A1B2799DF0090A5A0 /* paddle1.jpg */,
+				88EBF3111B2798A70090A5A0 /* Info.plist */,
+				881559151B30ED9400D60626 /* Audio */,
+				881559131B30ECFE00D60626 /* Fonts */,
+				881559141B30ED5500D60626 /* Images */,
 				88EBF3101B2798A70090A5A0 /* Supporting Files */,
 			);
 			path = PaddleBallA52;
@@ -117,7 +166,6 @@
 			isa = PBXGroup;
 			children = (
 				88EBF3121B2798A70090A5A0 /* AppDelegate.swift */,
-				88EBF3111B2798A70090A5A0 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -220,13 +268,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				885E94EF1B3A0C2400432335 /* Comic Sans MS.ttf in Resources */,
+				885E94EE1B3A0C1E00432335 /* Comic Sans MS Bold.ttf in Resources */,
+				885E94DF1B39F95E00432335 /* playing-tennis.gif in Resources */,
+				885E94D31B33957F00432335 /* Images.xcassets in Resources */,
+				88F640D31B320BAA00896127 /* paddle1.jpg in Resources */,
+				88F640D21B320B9700896127 /* jazzloop2_70.mp3 in Resources */,
+				885E94E21B39FCA200432335 /* Brookes_25_27119b.jpg in Resources */,
 				88EBF34C1B279D880090A5A0 /* README.md in Resources */,
 				88EBF3371B2798D80090A5A0 /* Main.storyboard in Resources */,
-				88EBF3461B2799540090A5A0 /* jazzloop2_70.mp3 in Resources */,
-				88EBF3491B2799B00090A5A0 /* Images.xcassets in Resources */,
+				881559121B30E19600D60626 /* 1-FloUnitCircle.png in Resources */,
 				88EBF3471B2799540090A5A0 /* LaunchScreen.xib in Resources */,
-				88EBF34B1B2799DF0090A5A0 /* paddle1.jpg in Resources */,
 				88EBF3431B2799390090A5A0 /* Settings.bundle in Resources */,
+				885E94D91B34F39600432335 /* trophy75.png in Resources */,
 				88EBF3351B2798C50090A5A0 /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -246,10 +300,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				88EBF3401B27992E0090A5A0 /* BreakoutBehavior.swift in Sources */,
+				885E94D21B3384FE00432335 /* LeaderViewController.swift in Sources */,
 				88EBF33F1B27992E0090A5A0 /* User.swift in Sources */,
 				88EBF3131B2798A70090A5A0 /* AppDelegate.swift in Sources */,
 				88EBF3411B27992E0090A5A0 /* BallViewController.swift in Sources */,
 				88EBF33E1B27992E0090A5A0 /* Settings.swift in Sources */,
+				885E94D51B34A94900432335 /* ImageViewController.swift in Sources */,
 				88EBF34E1B27A5B70090A5A0 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -67,7 +67,8 @@ class BreakoutBehavior: UIDynamicBehavior {
     }
     var balls:[UIView] {
         get {
-            return collider.items.filter{$0 is UIView}.map{$0 as! UIView}
+            let balls = collider.items.filter{$0 is UIView}.map{$0 as! UIView}
+            return balls
         }
     }
     func removeBall(ball: UIView) {

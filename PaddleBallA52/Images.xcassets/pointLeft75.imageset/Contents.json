@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "tennis.png"
+      "filename" : "pointLeft25.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "tennis-1.png"
+      "filename" : "pointLeft50.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "tennis-2.png"
+      "filename" : "pointLeft75.png"
     }
   ],
   "info" : {

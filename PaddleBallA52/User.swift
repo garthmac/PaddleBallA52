@@ -9,15 +9,18 @@
 import Foundation
 struct User {
     let name: String
-    let company: String
+    let company: String?
+    let highScore: String?
+    let highScoreDate: String?
     let login: String
     let password: String
-    
     var lastLogin = NSDate.demoRandom()
     
-    init(name: String, company: String, login: String, password: String) {
+    init(name: String, company: String, highScore: String, highScoreDate: String, login: String, password: String) {
         self.name = name
         self.company = company
+        self.highScore = highScore
+        self.highScoreDate = highScoreDate
         self.login = login
         self.password = password
     }
@@ -28,17 +31,17 @@ struct User {
             return user
             }
         }
-        return nil
+        return User.login("baddie", password: "foo")
     }
     
     static let database: Dictionary<String, User> = {
         var theDatabase = Dictionary<String, User>()
         for user in [
-            User(name: "Johny Appleseed", company: "Apple", login: "japple", password: "foo"),
-            User(name: "Madison Bumgarner", company: "World Champion San Francisco Giants", login: "madbum", password: "foo"),
-            User(name: "John Hennessy", company: "Stanford", login: "hennessy", password: "foo"),
-            User(name: "Bad Guy", company: "Criminals, Inc.", login: "baddie", password: "foo"),
-            User(name: "Good Guy", company: "Rescue, Inc.", login: "soccer", password: "foo")
+            User(name: "Johny Appleseed", company: "Apple", highScore: "10,222", highScoreDate: "2015-04-01", login: "japple", password: "foo"),
+            User(name: "Madison Bumgarner", company: "World Champion San Francisco Giants", highScore: "18,222", highScoreDate: "2015-05-11", login: "madbum", password: "foo"),
+            User(name: "John Hennessy", company: "Stanford", highScore: "999", highScoreDate: "2015-06-20", login: "hennessy", password: "foo"),
+            User(name: "Bad Guy", company: "Criminals, Inc.", highScore: "6,666", highScoreDate: "2015-06-06", login: "baddie", password: "foo"),
+            User(name: "Good Guy", company: "Rescue, Inc.", highScore: "8,888", highScoreDate: "2015-06-21", login: "soccer", password: "foo")
             ] {
             theDatabase[user.login] = user
         }

@@ -21,6 +21,7 @@ class Settings {
         static let CourtColorKey = "Settings.Court.Color"
         static let DifficultyKey = "Settings.Difficulty" //chooses if the last row of bricks should be “black” and thus need two collisions to be destroyed:
         static let HighScoreKey = "Settings.High.Score"
+        static let HighScoreDateKey = "Settings.High.Score.Date"
         static let HighScoreOnKey = "Settings.High.Score.On" //toggle to reset high score to zero
         static let PaddleColorKey = "Settings.Paddle.Color"
         static let PaddleWidthMultiplierKey = "Settings.Paddle.Width.Multiplier" //1 thru 4, initially 2 (ball widths)
@@ -64,6 +65,10 @@ class Settings {
     var highScore: Int {
         get { return defaults.objectForKey(Const.HighScoreKey) as? Int ?? 0 }
         set { defaults.setObject(newValue, forKey: Const.HighScoreKey) }
+    }
+    var highScoreDate: String? {
+        get { return defaults.objectForKey(Const.HighScoreDateKey) as? String ?? "" }
+        set { defaults.setObject(newValue, forKey: Const.HighScoreDateKey) }
     }
     var highScoreOn: Bool {
         get { return defaults.objectForKey(Const.HighScoreOnKey) as? Bool ?? true }

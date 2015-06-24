@@ -12,11 +12,11 @@
 		</dict>
 		<dict>
 			<key>DefaultValue</key>
-			<real>1</real>
+			<real>1.15</real>
 			<key>Key</key>
 			<string>Ball.Elasticity</string>
 			<key>MaximumValue</key>
-			<real>1.1</real>
+			<real>1.15</real>
 			<key>MaximumValueImage</key>
 			<string></string>
 			<key>MinimumValue</key>
@@ -34,7 +34,7 @@
 		</dict>
 		<dict>
 			<key>DefaultValue</key>
-			<integer>5</integer>
+			<integer>10</integer>
 			<key>Key</key>
 			<string>Ball.Friction</string>
 			<key>MaximumValue</key>
@@ -56,11 +56,11 @@
 		</dict>
 		<dict>
 			<key>DefaultValue</key>
-			<real>1</real>
+			<real>1.15</real>
 			<key>Key</key>
 			<string>Paddle.Elasticity</string>
 			<key>MaximumValue</key>
-			<real>1.1</real>
+			<real>1.15</real>
 			<key>MaximumValueImage</key>
 			<string></string>
 			<key>MinimumValue</key>
@@ -78,7 +78,7 @@
 		</dict>
 		<dict>
 			<key>DefaultValue</key>
-			<integer>5</integer>
+			<integer>10</integer>
 			<key>Key</key>
 			<string>Paddle.Friction</string>
 			<key>MaximumValue</key>
@@ -101,12 +101,6 @@
 			<string>Sound F/X Enabled</string>
 			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
-		</dict>
-		<dict>
-			<key>Title</key>
-			<string>User</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
 		</dict>
 		<dict>
 			<key>AutocapitalizationType</key>

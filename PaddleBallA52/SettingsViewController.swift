@@ -30,15 +30,14 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
     @IBOutlet weak var rowsLabel: UILabel!
     @IBOutlet weak var rowSlider: UISlider!
     @IBOutlet weak var soundSwitch: UISwitch!
-    @IBOutlet weak var brickRadiusLabel: UILabel!
-    @IBOutlet weak var brickRadiusSlider: UISlider!
     @IBOutlet weak var highScoreSwitch: UISwitch!
-    
-    var pickerDataSource = ["Green", "Blue", "Orange", "Red", "Purple", "Yellow", "Cyan", "White", "Black" ]
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int { return 1 } //number of columns in the picker
+    //MARK: - UIPickerViewDataSource
+    var pickerDataSource = ["Green", "Blue", "Orange", "Red", "Purple", "Yellow", "Cyan", "White", "Black"]
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int { return 1 } //number of wheels in the picker
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerDataSource.count;
+        return pickerDataSource.count
     }
+    //MARK: - UIPickerViewDelegate
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
         return pickerDataSource[row]
     }
@@ -59,22 +58,22 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
     var ballColor: String {
         get { return ballColorLabel.text! }
         set {
-            ballColorLabel.text = "\(newValue)"
-            Settings().ballColor = "\(newValue)"
+            ballColorLabel.text = newValue
+            Settings().ballColor = newValue
         }
     }
     var courtColor: String {
         get { return courtColorLabel.text! }
         set {
-            courtColorLabel.text = "\(newValue)"
-            Settings().courtColor = "\(newValue)"
+            courtColorLabel.text = newValue
+            Settings().courtColor = newValue
         }
     }
     var paddleColor: String {
         get { return paddleColorLabel.text! }
         set {
-            paddleColorLabel.text = "\(newValue)"
-            Settings().paddleColor = "\(newValue)"
+            paddleColorLabel.text = newValue
+            Settings().paddleColor = newValue
         }
     }
     var autoStart: Bool {
@@ -111,24 +110,7 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
     }
     @IBAction func columnsChanged(sender: UISlider) {
         columns = Int(sender.value)
-        if columns > 11 {
-            cornerRadius = min(cornerRadius, 1.0)
-            radiusChanged(brickRadiusSlider)
-        }
-        println("cornerRadius = \(cornerRadius) speed = \(speed)")
         Settings().columns = columns
-        Settings().changed = true
-    }
-    var cornerRadius: Float {
-        get { return brickRadiusSlider.value / 100.0}
-        set {
-            brickRadiusSlider.value = newValue * 100.0
-            brickRadiusLabel.text = "\(Int(brickRadiusSlider.value)) %"
-        }
-    }
-    @IBAction func radiusChanged(sender: UISlider) {
-        cornerRadius = sender.value / 100.0
-        Settings().cornerRadius = cornerRadius
         Settings().changed = true
     }
     var difficulty: Int {
@@ -179,12 +161,12 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         get { return self.score }
         set { self.score = newValue }
     }
-    var sound: Bool {
+    var soundOn: Bool {
         get { return soundSwitch.on }
         set { soundSwitch.on = newValue }
     }
     @IBAction func soundChanged(sender: UISwitch) {
-        Settings().soundOn = sound
+        Settings().soundOn = soundOn
     }
     var speed: Float {
         get { return speedSlider.value / 100.0}
@@ -200,17 +182,18 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
     //When the view will appear (e.g. when switching back from the settings tab), check if something has changed. Reset the changed property. Remove all existing bricks from the view and destroy them. Remove any balls left. Reset the animator and the breakout behavior. Finally, recreate the bricks with the new settings. To be able to reset the breakout behavior, change it from let to var
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        balls = Settings().balls!
-        difficulty = Settings().difficulty!
         autoStart = Settings().autoStart
-        columns = Settings().columns!
-        rows = Settings().rows!
-        speed = Settings().speed!
+        balls = Settings().balls!
         ballColor = Settings().ballColor
+        columns = Settings().columns!
         courtColor = Settings().courtColor
+        difficulty = Settings().difficulty!
+        highScoreOn = Settings().highScoreOn
         paddleColor = Settings().paddleColor
-        cornerRadius = Settings().cornerRadius!
         paddleWidthMultiplier = Settings().paddleWidthMultiplier!
+        rows = Settings().rows!
+        soundOn = Settings().soundOn
+        speed = Settings().speed!
     }
 
 }

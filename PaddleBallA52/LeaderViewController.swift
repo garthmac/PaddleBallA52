@@ -182,17 +182,9 @@ class LeaderViewController: UIViewController { //, UIPickerViewDataSource, UIPic
     @IBAction func unwindFromModalViewController(segue: UIStoryboardSegue) {
         if segue.sourceViewController.tag == 0 {
             if let iv = segue.sourceViewController.imageView {
-                profileImageView!.image = iv!.image
-            }
-        }
-        if segue.sourceViewController.tag == 1 {
-            if let iv = segue.sourceViewController.imageView {
-                profileImageView1!.image = iv!.image
-            }
-        }
-        if segue.sourceViewController.tag == 2 {
-            if let iv = segue.sourceViewController.imageView {
-                profileImageView2!.image = iv!.image
+                if iv?.image != nil {
+                    profileImageView!.image = iv!.image
+                }
             }
         }
     }

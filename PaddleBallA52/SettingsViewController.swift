@@ -10,27 +10,28 @@ import UIKit
 
 class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 
-    @IBOutlet weak var difficultySelector: UISegmentedControl!
     @IBOutlet weak var autoStartSwitch: UISwitch!
     @IBOutlet weak var ballsLabel: UILabel!
     @IBOutlet weak var ballStepper: UIStepper!
     @IBOutlet weak var ballRotationSwitch: UISwitch!
-    @IBOutlet weak var speedLabel: UILabel!
-    @IBOutlet weak var speedSlider: UISlider!
     @IBOutlet weak var ballColorLabel: UILabel!
     @IBOutlet weak var ballColorPickerView: UIPickerView!
+    @IBOutlet weak var columnsLabel: UILabel!
+    @IBOutlet weak var columnSlider: UISlider!
     @IBOutlet weak var courtColorLabel: UILabel!
     @IBOutlet weak var courtColorPickerView: UIPickerView!
+    @IBOutlet weak var difficultySelector: UISegmentedControl!
+    @IBOutlet weak var highScoreSwitch: UISwitch!
     @IBOutlet weak var paddleColorLabel: UILabel!
     @IBOutlet weak var paddleColorPickerView: UIPickerView!
     @IBOutlet weak var paddleWidthStepper: UIStepper!
     @IBOutlet weak var paddleWidthLabel: UILabel!
-    @IBOutlet weak var columnsLabel: UILabel!
-    @IBOutlet weak var columnSlider: UISlider!
     @IBOutlet weak var rowsLabel: UILabel!
     @IBOutlet weak var rowSlider: UISlider!
     @IBOutlet weak var soundSwitch: UISwitch!
-    @IBOutlet weak var highScoreSwitch: UISwitch!
+    @IBOutlet weak var speedLabel: UILabel!
+    @IBOutlet weak var speedSlider: UISlider!
+    
     //MARK: - UIPickerViewDataSource
     var pickerDataSource = ["Green", "Blue", "Orange", "Red", "Purple", "Yellow", "Cyan", "White", "Black"]
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int { return 1 } //number of wheels in the picker

@@ -18,8 +18,8 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
     private var tier: Int = 1
     private var msg: String { // a computed property instead of func
         get {
-            Settings().highScore = self.score
             if self.newHighScoreAchieved {
+                Settings().highScore = self.score
                 return "#\(self.tier)  New High Score!    "
             }
             return "#\(self.tier)    "
@@ -69,13 +69,13 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         static let BallColor = "Yellow"
         static let BallSpeed: Float = 1.0
         static let BoxPathName = "Box"
-        static let CourtColor = "Blue"
+        static let CourtColor = "Black"
         static let PaddlePathName = "Paddle"
-        static let PaddleColor = "Green"
+        static let PaddleColor = "Cyan"
         static let PaddleSize = CGSize(width: 80.0, height: 20.0)
         static let PaddleCornerRadius: CGFloat = 5.0
         static let BrickColumns = 4
-        static let BrickCornerRadius: CGFloat = 10.0
+        static let BrickCornerRadius: CGFloat = 15.0
         static let BrickTotalWidth: CGFloat = 1.0
         static let BrickTotalHeight: CGFloat = 0.46
         static let BrickTopSpacing: CGFloat = 0.02
@@ -85,8 +85,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         static let EditImageSegue = "Edit Image"
         static let ReturnImageSegue = "Back to LeaderBoard"
         static let UserId = "User.Login"
-        //        static let BrickColors = [UIColor.random, UIColor.random, UIColor.random]
-        //        static let BrickColors = [UIColor.greenColor(), UIColor.blueColor(), UIColor.redColor(), UIColor.yellowColor()]
+//        static let BrickColors = [UIColor.greenColor(), UIColor.blueColor(), UIColor.redColor(), UIColor.yellowColor()]
     }
     func printFonts() {
         let fontFamilyNames = UIFont.familyNames()
@@ -104,8 +103,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         prepareAudios()
         self.hidesBottomBarWhenPushed = true
         animator.addBehavior(breakout)
-        let defaultColumns = min(Int(gameView.bounds.maxX / paddleSize.width), Constants.BrickColumns)
-        Settings(defaultColumns: defaultColumns, defaultRows: defaultColumns / 2, defaultBalls: 1, defaultDifficulty: 1, defaultSpeed: Constants.BallSpeed, defaultBallColor: Constants.BallColor, defaultCourtColor: Constants.CourtColor, defaultPaddleColor: Constants.PaddleColor, defaultPaddleWidthMultiplier: paddleWidthMultiplier, defaultBrickCornerRadius: Float(cornerRadius))
+        Settings(defaultColumns: Constants.BrickColumns, defaultRows: Constants.BrickColumns / 2, defaultBalls: 1, defaultDifficulty: 1, defaultSpeed: Constants.BallSpeed, defaultBallColor: Constants.BallColor, defaultCourtColor: Constants.CourtColor, defaultPaddleColor: Constants.PaddleColor, defaultPaddleWidthMultiplier: paddleWidthMultiplier)
         gameView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "pushBall:"))
         gameView.layer.backgroundColor = UIColor.colorFor(Settings().courtColor).CGColor
         //The pan gesture handles most movement. However in the heat of the game it might be necessary to move faster-that’s what the left and right swipe gestures r4
@@ -140,15 +138,15 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         paddle.layer.backgroundColor = UIColor.colorFor(Settings().paddleColor).CGColor
         
         if Settings().soundOn { self.audioPlayer.play() }
-        cornerRadius = CGFloat(Settings().cornerRadius! * 1.5) //1.5 was tested to be best->15
-//        println(cornerRadius)
+        cornerRadius = Constants.BrickCornerRadius
+        //reset CORNERRADIUS before resetWall...for intended side effect->..LayoutSub..(placeBricks)
         if Settings().changed {
-            rebuildWall()
+            resetWall()
             levelOne(tier)
         }
         setAutoStartTimer()
       }
-    func rebuildWall() {
+    func resetWall() {
         Settings().changed = false
         for (index, brick) in bricks {
             brick.view.removeFromSuperview()
@@ -341,7 +339,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
                 } else {
                 //brick.backgroundColor = Constants.BrickColors[row % Constants.BrickColors.count]
                     brick.backgroundColor = UIColor.random
-                    brick.layer.cornerRadius = CGFloat(cornerRadius)
+                    brick.layer.cornerRadius = cornerRadius
                     brick.layer.borderWidth = 1.5
                     brick.layer.borderColor = UIColor.blackColor().CGColor
                     brick.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
@@ -462,7 +460,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         }
         set { self.timestamp = newValue }
     }
-    //remove the timer when a game has finished, and start it again afterwards...setAutStart
+    //remove the timer when a game has finished, and start it again afterwards...
     func levelFinished() {
         autoStartTimer?.invalidate()
         autoStartTimer = nil
@@ -488,8 +486,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             alertView(alert, clickedButtonAtIndex: alert.cancelButtonIndex)
         }
         else if NSClassFromString("UIAlertController") != nil && tier > 0 {
-            let message = ["40 - Love", "40 - 15", "40 - 30", "Advantage - 30"]
-            let alertController = UIAlertController(title: "Level Complete!", message: message[ballCounter], preferredStyle: .Alert)
+            let alertController = UIAlertController(title: "Level Complete!", message: "balls bonus = \(Constants.MaxBalls + 1 - ballCounter)", preferredStyle: .Alert)
             alertController.addAction(UIAlertAction(title: "Continue?", style: .Default, handler: { (action) in
                 self.ballCounter = 0
                 self.tier += 1
@@ -503,20 +500,16 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             presentViewController(alertController, animated: true, completion: nil)
         }
     }
-    //game complete -> restart
+    //game over -> restart
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
-        if ballCounter != 0 {
-            tier = 1
-            ballCounter = 0
-            rebuildWall()
-            score = 0
-            scoreBoard.text = ""
-            let defaultColumns = min(Int(gameView.bounds.maxX / paddleSize.width), Constants.BrickColumns)
-            //don't reset colors if user changed them!
-            Settings(defaultColumns: defaultColumns, defaultRows: defaultColumns / 2, defaultBalls: 1, defaultDifficulty: 1, defaultSpeed: Constants.BallSpeed, defaultBallColor: Settings().ballColor, defaultCourtColor: Settings().courtColor, defaultPaddleColor: Settings().paddleColor, defaultPaddleWidthMultiplier: Settings().paddleWidthMultiplier!, defaultBrickCornerRadius: Float(cornerRadius))
-            levelOne(tier)
-            setAutoStartTimer()
-        }
+        tier = 1
+        ballCounter = 0
+        cornerRadius = Constants.BrickCornerRadius
+        score = 0
+        //don't reset colors or paddleWidth if user changed them!
+        Settings(defaultColumns: Constants.BrickColumns, defaultRows: Constants.BrickColumns / 2, defaultBalls: 1, defaultDifficulty: 1, defaultSpeed: Constants.BallSpeed, defaultBallColor: Settings().ballColor, defaultCourtColor: Settings().courtColor, defaultPaddleColor: Settings().paddleColor, defaultPaddleWidthMultiplier: Settings().paddleWidthMultiplier!)
+        levelOne(tier)
+        setAutoStartTimer()
     }
 }
 // MARK: - extensions

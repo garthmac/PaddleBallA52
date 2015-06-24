@@ -17,7 +17,6 @@ class Settings {
         static let BallsKey = "Settings.Balls" //allows to add multiple balls:
         static let ChangeKey = "Settings.Change.Indicator" //if the settings have been changed:
         static let ColumnsKey = "Settings.Columns"
-        static let CornerRadiusKey = "Settings.Corner.Radius" //allow brick corner radius adjustment:
         static let CourtColorKey = "Settings.Court.Color"
         static let DifficultyKey = "Settings.Difficulty" //chooses if the last row of bricks should be “black” and thus need two collisions to be destroyed:
         static let HighScoreKey = "Settings.High.Score"
@@ -49,10 +48,6 @@ class Settings {
     var columns: Int? {
         get { return defaults.objectForKey(Const.ColumnsKey) as? Int }
         set { defaults.setObject(newValue, forKey: Const.ColumnsKey) }
-    }
-    var cornerRadius: Float? {
-        get { return defaults.objectForKey(Const.CornerRadiusKey) as? Float }
-        set { defaults.setObject(newValue, forKey: Const.CornerRadiusKey) }
     }
     var courtColor: String {
         get { return defaults.objectForKey(Const.CourtColorKey) as? String ?? "Purple" }
@@ -102,7 +97,7 @@ class Settings {
         }
     }
     //Instead of the optional variables I could have added the default values in this new class. But there are already a number of “default” values in the view controller, and I did not want to spread them to different parts of the code. Instead I added a convenience initializer to provide default values to the settings class:
-    convenience init(defaultColumns: Int, defaultRows: Int, defaultBalls: Int, defaultDifficulty: Int, defaultSpeed: Float, defaultBallColor: String, defaultCourtColor: String, defaultPaddleColor: String, defaultPaddleWidthMultiplier: Int, defaultBrickCornerRadius: Float) {
+    convenience init(defaultColumns: Int, defaultRows: Int, defaultBalls: Int, defaultDifficulty: Int, defaultSpeed: Float, defaultBallColor: String, defaultCourtColor: String, defaultPaddleColor: String, defaultPaddleWidthMultiplier: Int) {
         self.init()
         columns = defaultColumns
         rows = defaultRows
@@ -113,7 +108,6 @@ class Settings {
         courtColor = defaultCourtColor
         paddleColor = defaultPaddleColor
         paddleWidthMultiplier = defaultPaddleWidthMultiplier
-        cornerRadius = defaultBrickCornerRadius
     }
     
 }

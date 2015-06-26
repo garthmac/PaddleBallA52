@@ -11,7 +11,6 @@
 		885E94D21B3384FE00432335 /* LeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885E94D11B3384FE00432335 /* LeaderViewController.swift */; };
 		885E94D31B33957F00432335 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88EBF3481B2799B00090A5A0 /* Images.xcassets */; };
 		885E94D51B34A94900432335 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885E94D41B34A94900432335 /* ImageViewController.swift */; };
-		885E94D91B34F39600432335 /* trophy75.png in Resources */ = {isa = PBXBuildFile; fileRef = 885E94D81B34F39600432335 /* trophy75.png */; };
 		885E94DF1B39F95E00432335 /* playing-tennis.gif in Resources */ = {isa = PBXBuildFile; fileRef = 885E94DE1B39F95E00432335 /* playing-tennis.gif */; };
 		885E94E21B39FCA200432335 /* Brookes_25_27119b.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 885E94E11B39FCA200432335 /* Brookes_25_27119b.jpg */; };
 		885E94EE1B3A0C1E00432335 /* Comic Sans MS Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 885E94EA1B3A09DA00432335 /* Comic Sans MS Bold.ttf */; };
@@ -46,7 +45,6 @@
 		881559111B30E19600D60626 /* 1-FloUnitCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1-FloUnitCircle.png"; sourceTree = "<group>"; };
 		885E94D11B3384FE00432335 /* LeaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaderViewController.swift; sourceTree = "<group>"; };
 		885E94D41B34A94900432335 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
-		885E94D81B34F39600432335 /* trophy75.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trophy75.png; sourceTree = "<group>"; };
 		885E94DE1B39F95E00432335 /* playing-tennis.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "playing-tennis.gif"; sourceTree = "<group>"; };
 		885E94E11B39FCA200432335 /* Brookes_25_27119b.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Brookes_25_27119b.jpg; sourceTree = "<group>"; };
 		885E94EA1B3A09DA00432335 /* Comic Sans MS Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comic Sans MS Bold.ttf"; sourceTree = "<group>"; };
@@ -106,7 +104,6 @@
 				885E94E11B39FCA200432335 /* Brookes_25_27119b.jpg */,
 				881559111B30E19600D60626 /* 1-FloUnitCircle.png */,
 				885E94DE1B39F95E00432335 /* playing-tennis.gif */,
-				885E94D81B34F39600432335 /* trophy75.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -280,7 +277,6 @@
 				881559121B30E19600D60626 /* 1-FloUnitCircle.png in Resources */,
 				88EBF3471B2799540090A5A0 /* LaunchScreen.xib in Resources */,
 				88EBF3431B2799390090A5A0 /* Settings.bundle in Resources */,
-				885E94D91B34F39600432335 /* trophy75.png in Resources */,
 				88EBF3351B2798C50090A5A0 /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

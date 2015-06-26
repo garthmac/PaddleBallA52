@@ -27,6 +27,7 @@ class Settings {
         static let RowsKey = "Settings.Rows" //half the # of columns
         static let SoundKey = "Settings.Sound" //allow balls make a sound on collision:
         static let SpeedKey = "Settings.Ball.Speed" //control the speed of the ball/push:
+        static let UserIdKey = "Settings.User.Id"
     }
     let defaults = NSUserDefaults.standardUserDefaults()
     var autoStart: Bool {
@@ -69,14 +70,6 @@ class Settings {
         get { return defaults.objectForKey(Const.HighScoreOnKey) as? Bool ?? true }
         set { defaults.setObject(newValue, forKey: Const.HighScoreOnKey) }
     }
-    var soundOn: Bool {
-        get { return defaults.objectForKey(Const.SoundKey) as? Bool ?? true }
-        set { defaults.setObject(newValue, forKey: Const.SoundKey) }
-    }
-    var speed: Float? {
-        get { return defaults.objectForKey(Const.SpeedKey) as? Float ?? 1.0 }
-        set { defaults.setObject(newValue, forKey: Const.SpeedKey) }
-    }
     var paddleColor: String {
         get { return defaults.objectForKey(Const.PaddleColorKey) as? String ?? "Cyan" }
         set { defaults.setObject(newValue, forKey: Const.PaddleColorKey) }
@@ -88,6 +81,18 @@ class Settings {
     var rows: Int? {
         get { return defaults.objectForKey(Const.RowsKey) as? Int }
         set { defaults.setObject(newValue, forKey: Const.RowsKey) }
+    }
+    var soundOn: Bool {
+        get { return defaults.objectForKey(Const.SoundKey) as? Bool ?? true }
+        set { defaults.setObject(newValue, forKey: Const.SoundKey) }
+    }
+    var speed: Float? {
+        get { return defaults.objectForKey(Const.SpeedKey) as? Float ?? 1.0 }
+        set { defaults.setObject(newValue, forKey: Const.SpeedKey) }
+    }
+    var uid: String? {
+        get { return defaults.objectForKey(Const.UserIdKey) as? String ?? "" }
+        set { defaults.setObject(newValue, forKey: Const.UserIdKey) }
     }
     var changed: Bool {
         get { return defaults.objectForKey(Const.ChangeKey) as? Bool ?? false }

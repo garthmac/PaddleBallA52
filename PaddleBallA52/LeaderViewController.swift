@@ -69,12 +69,26 @@ class LeaderViewController: UIViewController { //, UIPickerViewDataSource, UIPic
         titleLabel.font = UIFont(name: "ComicSansMS-Bold", size: 36.0)
         addPlayers()
     }
-    lazy var uid: String = {
+    let formatter: NSDateFormatter = {
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = NSDateFormatterStyle.ShortStyle
+        formatter.timeStyle = NSDateFormatterStyle.NoStyle
+        return formatter
+        }()
+    let today = NSDate()
+    func timestamp(dateCreatedLabel: UILabel?) {
+        let timestamp = formatter.stringFromDate(today)
+        dateCreatedLabel?.text = timestamp
+    }
+    private var uid: String { // a computed property instead of func
+    get {
         if let login = NSUserDefaults.standardUserDefaults().stringForKey(BallViewController.Constants.UserId) {
             return login
         }
         return "japple"
-        }()
+    }
+        set { self.uid = newValue }
+    }
     lazy var chosenPlayers: [String] = {
         return [self.uid]
         }()
@@ -85,21 +99,14 @@ class LeaderViewController: UIViewController { //, UIPickerViewDataSource, UIPic
         }
         return player
     }
-   
-    let formatter: NSDateFormatter = {
-        let formatter = NSDateFormatter()
-        formatter.dateStyle = NSDateFormatterStyle.ShortStyle
-        formatter.timeStyle = NSDateFormatterStyle.NoStyle
-        return formatter
-    }()
-    let today = NSDate()
-    func timestamp(dateCreatedLabel: UILabel?) {
-        let timestamp = formatter.stringFromDate(today)
-        dateCreatedLabel?.text = timestamp
-    }
     //MARK: - User is the Model
     func addPlayers() {
-        if let loggedInUser = User.login(uid, password: "foo") {
+        if uid != "japple" && Settings().uid != uid { //player change
+            Settings().uid! = uid
+            Settings().highScore = 0
+            profileImageView!.image = nil
+        }
+        if let loggedInUser = User.login(uid, password: "foo") { //if uid not valid -> User.login "baddie"
             if profileImageView!.image == nil {
                 profileImageView!.image = loggedInUser.image
             }

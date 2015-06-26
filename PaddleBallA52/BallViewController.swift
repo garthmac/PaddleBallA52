@@ -41,12 +41,6 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         scoreBoard.textAlignment = NSTextAlignment.Center
         return scoreBoard
         }()
-    lazy var uid: String = {
-        if let login = NSUserDefaults.standardUserDefaults().stringForKey(Constants.UserId) {
-            return login
-        }
-        return "baddie"
-        }()
     lazy var animator: UIDynamicAnimator = { UIDynamicAnimator(referenceView: self.gameView) }()
     
     var paddleWidthMultiplier = 2
@@ -69,9 +63,9 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         static let BallColor = "Yellow"
         static let BallSpeed: Float = 1.0
         static let BoxPathName = "Box"
-        static let CourtColor = "Black"
+        static let CourtColor = "Blue"
         static let PaddlePathName = "Paddle"
-        static let PaddleColor = "Cyan"
+        static let PaddleColor = "White"
         static let PaddleSize = CGSize(width: 80.0, height: 20.0)
         static let PaddleCornerRadius: CGFloat = 5.0
         static let BrickColumns = 4
@@ -137,7 +131,11 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         paddle.frame.size = paddleSize
         paddle.layer.backgroundColor = UIColor.colorFor(Settings().paddleColor).CGColor
         
-        if Settings().soundOn { self.audioPlayer.play() }
+        if Settings().soundOn {
+            audioPlayer.play()
+        } else {
+            audioPlayer.pause()
+        }
         cornerRadius = Constants.BrickCornerRadius
         //reset CORNERRADIUS before resetWall...for intended side effect->..LayoutSub..(placeBricks)
         if Settings().changed {
@@ -198,6 +196,12 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             breakout.pushBall(breakout.balls.last!)
         }
     }
+    lazy var uid: String = {
+        if let login = NSUserDefaults.standardUserDefaults().stringForKey(Constants.UserId) {
+            return login
+        }
+        return "baddie"
+        }()
     // MARK: - ball
     lazy var loggedInUser: User? = {
         if let user = User.login(self.uid, password: "foo") {
@@ -307,7 +311,10 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         default: break
         }
     }
+    
     // MARK: - levelOne
+    let model = UIDevice.currentDevice().model
+    var adjust: CGFloat = 1.2
     func levelOne(tier: Int) {
         if bricks.count > 0 { return }
         if tier > 1 {
@@ -324,21 +331,29 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         var deltaX = Constants.BrickTotalWidth / CGFloat(Settings().columns!)
         var deltaY = Constants.BrickTotalHeight / CGFloat(Settings().rows!)
         //adjust height of brick wall at lower levels
-        if Settings().rows! < 3 {
-            deltaY = deltaY / 1.5
+        if Settings().rows! < 4 {
+            deltaY = deltaY / adjust  //shorten
+            deltaX = deltaX / adjust  //narrow
+        } else {
+            adjust = 1.0
         }
         var frame = CGRect(origin: CGPointZero, size: CGSize(width: deltaX, height: deltaY))
         for row in 0..<Settings().rows! {
             for column in 0..<Settings().columns! {
                 frame.origin.x = deltaX * CGFloat(column)
                 frame.origin.y = deltaY * CGFloat(row) + Constants.BrickTopSpacing
-                let brick = UIView(frame: frame)
-                var test: Bool = (row / 2 % 2 == 0) && (column / 2 % 2 == 1)
+                let brick = UIButton(frame: frame) //used to be UIView
+                let test = (row / 2 % 2 == 0) && (column / 2 % 2 == 1)
                 if tier > 1 && row > 0 && test {
                     brick.layer.contents = UIImage(named: "bom")!.CGImage
                 } else {
                 //brick.backgroundColor = Constants.BrickColors[row % Constants.BrickColors.count]
                     brick.backgroundColor = UIColor.random
+                    if model.hasPrefix("iPad") || Settings().columns! < 10 { //can't read numbers on iPhone after 10
+                        brick.setTitleColor(UIColor.blackColor(), forState: .Normal)
+                        brick.setTitle("\(UIColor.scoreForColor(brick.backgroundColor!))", forState: .Normal)
+                        brick.titleLabel!.font = UIFont(name: "ComicSansMS", size: 12.0)
+                    }
                     brick.layer.cornerRadius = cornerRadius
                     brick.layer.borderWidth = 1.5
                     brick.layer.borderColor = UIColor.blackColor().CGColor
@@ -381,15 +396,13 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
     }
     private typealias BrickAction = ((Int) -> Void)?
     //just takes the relative frame information boosts it to the device dimensions, and adjusts the barriers for the collision behavior:
+    
     func placeBricks() {
         for (index, brick) in bricks {
-            brick.view.frame.origin.x = brick.relativeFrame.origin.x * gameView.bounds.width
-            brick.view.frame.origin.y = brick.relativeFrame.origin.y * gameView.bounds.height
+            brick.view.frame.origin.x = brick.relativeFrame.origin.x * gameView.bounds.width * adjust
+            brick.view.frame.origin.y = brick.relativeFrame.origin.y * gameView.bounds.height * adjust
             brick.view.frame.size.width = brick.relativeFrame.width * gameView.bounds.width
             brick.view.frame.size.height = brick.relativeFrame.height * gameView.bounds.height
-            if (2 * (Constants.MaxRows - 1) - Settings().columns!) > 0 {
-                brick.view.frame.size.width = min(brick.view.frame.size.width, brick.view.frame.size.height)
-            }
             brick.view.frame = CGRectInset(brick.view.frame, Constants.BrickSpacing, Constants.BrickSpacing)
             cornerRadius = min(brick.view.frame.width, brick.view.frame.height) / 2.0
             breakout.addBarrier(UIBezierPath(roundedRect: brick.view.frame, cornerRadius: cornerRadius), named: index)
@@ -424,7 +437,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
                             if brick.view.backgroundColor == nil { //bom image
                                 self.bonus()
                             } else {
-                                self.score += Int(10 / self.paddleWidthMultiplier * UIColor.intForColor(brick.view.backgroundColor!))
+                                self.score += UIColor.scoreForColor(brick.view.backgroundColor!)
                                 self.showScore()
                             }
                             self.breakout.removeBrick(brick.view)
@@ -432,23 +445,23 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
                     })
             })
             bricks.removeValueForKey(index)
-            if self.bricks.count == 0 {
-                self.levelFinished()
+            if bricks.count == 0 {
+                levelFinished()
             }
         }
     }
     func showScore() {
-        self.scoreBoard.text = self.msg + self.score.addSeparator
+        scoreBoard.text = msg + score.addSeparator
     }
     var bonusScore = 0
-    func bonus() {
-        self.bonusScore += Int(1000 / Settings().paddleWidthMultiplier!)
+    func bonus() { //hit a bom
+        bonusScore = Int(1000 / Settings().paddleWidthMultiplier!)
         showBonusScore()
         score += bonusScore
         bonusScore = 0
     }
     func showBonusScore() {
-        self.scoreBoard.text = "Bonus!   " + self.bonusScore.addSeparator
+        scoreBoard.text = "Bonus!   " + bonusScore.addSeparator
     }
     let today = NSDate()
     private var timestamp: String { // a computed property instead of func
@@ -467,11 +480,11 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         for ball in breakout.balls {
             breakout.removeBall(ball)
         }
-        bonusScore += 1000 * (Constants.MaxBalls + 1 - ballCounter)
-        bonus()
-        if self.newHighScoreAchieved {
-            Settings().highScore = self.score
-            Settings().highScoreDate = self.timestamp
+        let ballBonus = 1000 * (Constants.MaxBalls + 1 - ballCounter) / Settings().paddleWidthMultiplier!
+        score += ballBonus
+        if newHighScoreAchieved {
+            Settings().highScore = score
+            Settings().highScoreDate = timestamp
         }
         var title = "Game Over!", message = "Try Again...", cancelButtonTitle = "Restart?"
         if Settings().rows == Constants.MaxRows && bricks.count == 0 {
@@ -486,7 +499,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             alertView(alert, clickedButtonAtIndex: alert.cancelButtonIndex)
         }
         else if NSClassFromString("UIAlertController") != nil && tier > 0 {
-            let alertController = UIAlertController(title: "Level Complete!", message: "balls bonus = \(Constants.MaxBalls + 1 - ballCounter)", preferredStyle: .Alert)
+            let alertController = UIAlertController(title: "Level Complete!", message: "Leftover Ball Bonus = " + ballBonus.addSeparator, preferredStyle: .Alert)
             alertController.addAction(UIAlertAction(title: "Continue?", style: .Default, handler: { (action) in
                 self.ballCounter = 0
                 self.tier += 1
@@ -494,7 +507,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
                 self.levelOne(self.tier)
                 self.setAutoStartTimer()
             }))
-            alertController.addAction(UIAlertAction(title: "Quit?", style: .Default, handler: { (action) in
+            alertController.addAction(UIAlertAction(title: "Quit?", style: .Destructive, handler: { (action) in
                 exit(0)
             }))
             presentViewController(alertController, animated: true, completion: nil)
@@ -502,10 +515,12 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
     }
     //game over -> restart
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
-        tier = 1
+        resetWall()
+        scoreBoard.text = "" //clear any lingering bonus score
         ballCounter = 0
         cornerRadius = Constants.BrickCornerRadius
         score = 0
+        tier = 1
         //don't reset colors or paddleWidth if user changed them!
         Settings(defaultColumns: Constants.BrickColumns, defaultRows: Constants.BrickColumns / 2, defaultBalls: 1, defaultDifficulty: 1, defaultSpeed: Constants.BallSpeed, defaultBallColor: Settings().ballColor, defaultCourtColor: Settings().courtColor, defaultPaddleColor: Settings().paddleColor, defaultPaddleWidthMultiplier: Settings().paddleWidthMultiplier!)
         levelOne(tier)
@@ -528,23 +543,25 @@ private extension UIColor {
         default: return UIColor.blackColor()
         }
     }
-    class func intForColor(sel: UIColor) -> Int {
+    class func scoreForColor(sel: UIColor) -> Int {
+        let pwm = Settings().paddleWidthMultiplier!
         switch sel {
-        case UIColor.greenColor(): return 4
-        case UIColor.blueColor(): return 40
-        case UIColor.orangeColor(): return 8
-        case UIColor.redColor(): return 12
-        case UIColor.purpleColor(): return 16
-        case UIColor.yellowColor(): return 20
-        case UIColor.brownColor(): return 24
-        case UIColor.darkGrayColor(): return 28
-        case UIColor.lightGrayColor(): return 32
-        case UIColor.cyanColor(): return 36
+        case UIColor.greenColor(): return (8 / pwm * 4)
+        case UIColor.blueColor(): return (8 / pwm * 8)
+        case UIColor.orangeColor(): return (8 / pwm * 12)
+        case UIColor.redColor(): return (8 / pwm * 16)
+        case UIColor.purpleColor(): return (8 / pwm * 20)
+        case UIColor.yellowColor(): return (8 / pwm * 24)
+        case UIColor.brownColor(): return (8 / pwm * 28)
+        case UIColor.darkGrayColor(): return (8 / pwm * 32)
+        case UIColor.lightGrayColor(): return (8 / pwm * 36)
+        case UIColor.cyanColor(): return (8 / pwm * 40)
+        case UIColor.whiteColor(): return (8 / pwm * 44)
         default: return 0
         }
     }
     class var random: UIColor {
-        switch arc4random() % 10 {
+        switch arc4random() % 11 {
         case 0: return UIColor.greenColor()
         case 1: return UIColor.blueColor()
         case 2: return UIColor.orangeColor()
@@ -555,6 +572,7 @@ private extension UIColor {
         case 7: return UIColor.darkGrayColor()
         case 8: return UIColor.lightGrayColor()
         case 9: return UIColor.cyanColor()
+        case 10: return UIColor.whiteColor()
         default: return UIColor.blackColor()
         }
     }

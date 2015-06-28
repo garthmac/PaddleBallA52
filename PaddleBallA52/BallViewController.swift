@@ -47,7 +47,6 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         return scoreBoard
         }()
     lazy var animator: UIDynamicAnimator = { UIDynamicAnimator(referenceView: self.gameView) }()
-    
     var paddleWidthMultiplier = 2
     var paddleSize = Constants.PaddleSize
     
@@ -68,9 +67,9 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         static let BallColor = "Yellow"
         static let BallSpeed: Float = 1.0
         static let BoxPathName = "Box"
-        static let CourtColor = "Blue"
+        static let CourtColor = "Black"
         static let PaddlePathName = "Paddle"
-        static let PaddleColor = "White"
+        static let PaddleColor = "Green"
         static let PaddleSize = CGSize(width: 80.0, height: 20.0)
         static let PaddleCornerRadius: CGFloat = 5.0
         static let BrickColumns = 4
@@ -98,6 +97,8 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpSwipeMeTextLayer()
+        buildCube()
         //printFonts()
         prepareAudios()
         self.hidesBottomBarWhenPushed = true
@@ -128,7 +129,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             powerBallScoreBoard.textColor = UIColor.yellowColor()
         } else {
             scoreBoard.textColor = UIColor.blueColor()
-            powerBallScoreBoard.textColor = UIColor.whiteColor()
+            powerBallScoreBoard.textColor = UIColor.blueColor()
         }
         breakout.speed = CGFloat(Settings().speed!)
         breakout.ballBehavior.allowsRotation = Settings().ballRotation
@@ -553,6 +554,128 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             setAutoStartTimer()
         }
     }
+    
+    func degreesToRadians(degrees: Double) -> CGFloat {
+        return CGFloat(degrees * M_PI / 180.0)
+    }
+    
+    func radiansToDegrees(radians: Double) -> CGFloat {
+        return CGFloat(radians / M_PI * 180.0)
+    }
+    //class RedBlockViewController: UIViewController {
+    //MARK: RedBlockViewController
+    @IBOutlet weak var viewForTransformLayer: UIView!
+    
+    enum Color: Int {
+        case Red, Orange, Yellow, Green, Blue, Purple
+    }
+    let sideLength = CGFloat(220.0) //block side is 250
+    
+    var transformLayer: CATransformLayer!
+    let swipeMeTextLayer = CATextLayer()
+    var redColor = UIColor.redColor().colorWithAlphaComponent(0.2)
+    var orangeColor = UIColor.orangeColor().colorWithAlphaComponent(0.2)
+    var yellowColor = UIColor.yellowColor().colorWithAlphaComponent(0.2)
+    var greenColor = UIColor.greenColor().colorWithAlphaComponent(0.2)
+    var blueColor = UIColor.blueColor().colorWithAlphaComponent(0.2)
+    var purpleColor = UIColor.purpleColor().colorWithAlphaComponent(0.2)
+    var trackBall: TrackBall?
+    
+    // MARK: - Quick reference
+    func setUpSwipeMeTextLayer() {
+        swipeMeTextLayer.frame = CGRect(x: 0.0, y: sideLength / 4.0, width: sideLength, height: sideLength / 2.0)
+        swipeMeTextLayer.string = "Red\r Block"
+        swipeMeTextLayer.alignmentMode = kCAAlignmentCenter
+        swipeMeTextLayer.foregroundColor = UIColor.whiteColor().CGColor
+        let fontName = "Noteworthy-Light" as CFString
+        let fontRef = CTFontCreateWithName(fontName, 18.0, nil)
+        swipeMeTextLayer.font = fontRef
+        swipeMeTextLayer.contentsScale = UIScreen.mainScreen().scale
+    }
+    
+    // MARK: - Triggered actions
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        if let touch = touches.first as? UITouch {
+            let location = touch.locationInView(viewForTransformLayer)
+            if trackBall != nil {
+                trackBall?.setStartPointFromLocation(location)
+            } else {
+                trackBall = TrackBall(location: location, inRect: viewForTransformLayer.bounds)
+            }
+            
+            for layer in transformLayer.sublayers {
+                if let hitLayer = layer.hitTest(location) {
+                    //showBoxTappedLabel()
+                    break
+                }
+            }
+        }
+    }
+    
+    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
+        if let touch = touches.first as? UITouch {
+            let location = touch.locationInView(viewForTransformLayer)
+            if let transform = trackBall?.rotationTransformForLocation(location) {
+                viewForTransformLayer.layer.sublayerTransform = transform
+            }
+        }
+    }
+    
+    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+        if let touch = touches.first as? UITouch {
+            let location = touch.locationInView(viewForTransformLayer)
+            trackBall?.finalizeTrackBallForLocation(location)
+        }
+    }
+    
+    // MARK: - Helpers
+    func buildCube() {
+        transformLayer = CATransformLayer()
+
+        var layer = sideLayerWithColor(UIColor.random.colorWithAlphaComponent(0.2))
+        layer.addSublayer(swipeMeTextLayer)
+        transformLayer.addSublayer(layer)
+        
+        layer = sideLayerWithColor(UIColor.random.colorWithAlphaComponent(0.2))
+        var transform = CATransform3DMakeTranslation(sideLength / 2.0, 0.0, sideLength / -2.0)
+        transform = CATransform3DRotate(transform, degreesToRadians(90.0), 0.0, 1.0, 0.0)
+        layer.transform = transform
+        transformLayer.addSublayer(layer)
+        
+        layer = sideLayerWithColor(UIColor.random.colorWithAlphaComponent(0.2))
+        layer.transform = CATransform3DMakeTranslation(0.0, 0.0, -sideLength)
+        transformLayer.addSublayer(layer)
+        
+        layer = sideLayerWithColor(UIColor.random.colorWithAlphaComponent(0.2))
+        transform = CATransform3DMakeTranslation(sideLength / -2.0, 0.0, sideLength / -2.0)
+        transform = CATransform3DRotate(transform, degreesToRadians(90.0), 0.0, 1.0, 0.0)
+        layer.transform = transform
+        transformLayer.addSublayer(layer)
+        
+        layer = sideLayerWithColor(UIColor.random.colorWithAlphaComponent(0.2))
+        transform = CATransform3DMakeTranslation(0.0, sideLength / -2.0, sideLength / -2.0)
+        transform = CATransform3DRotate(transform, degreesToRadians(90.0), 1.0, 0.0, 0.0)
+        layer.transform = transform
+        transformLayer.addSublayer(layer)
+        
+        layer = sideLayerWithColor(UIColor.random.colorWithAlphaComponent(0.2))
+        transform = CATransform3DMakeTranslation(0.0, sideLength / 2.0, sideLength / -2.0)
+        transform = CATransform3DRotate(transform, degreesToRadians(90.0), 1.0, 0.0, 0.0)
+        layer.transform = transform
+        transformLayer.addSublayer(layer)
+        
+        transformLayer.anchorPointZ = sideLength / -2.0
+        viewForTransformLayer.layer.addSublayer(transformLayer)
+    }
+    
+    func sideLayerWithColor(color: UIColor) -> CALayer {
+        let layer = CALayer()
+        layer.frame = CGRect(origin: CGPointZero, size: CGSize(width: sideLength, height: sideLength))
+        layer.position = CGPoint(x: CGRectGetMidX(viewForTransformLayer.bounds), y: CGRectGetMidY(viewForTransformLayer.bounds))
+        layer.backgroundColor = color.CGColor
+        return layer
+    }
+    
 }
 // MARK: - extensions
 private extension UIColor {
@@ -567,6 +690,7 @@ private extension UIColor {
         case "Cyan": return UIColor.cyanColor()
         case "White": return UIColor.whiteColor()
         case "Black": return UIColor.blackColor()
+        case "Clear": return UIColor.clearColor()
         default: return UIColor.blackColor()
         }
     }

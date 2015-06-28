@@ -84,6 +84,12 @@ extension UIImage {
     var aspectRatio: CGFloat {
         return size.height != 0 ? size.width / size.height : 0
     }
+    static func emptyImage(size: CGSize, scale: CGFloat = UIScreen.mainScreen().scale) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
 }
 
 

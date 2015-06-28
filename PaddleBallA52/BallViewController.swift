@@ -569,16 +569,10 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
     enum Color: Int {
         case Red, Orange, Yellow, Green, Blue, Purple
     }
-    let sideLength = CGFloat(220.0) //block side is 250
+    let sideLength = CGFloat(210.0) //block side
     
     var transformLayer: CATransformLayer!
     let swipeMeTextLayer = CATextLayer()
-    var redColor = UIColor.redColor().colorWithAlphaComponent(0.2)
-    var orangeColor = UIColor.orangeColor().colorWithAlphaComponent(0.2)
-    var yellowColor = UIColor.yellowColor().colorWithAlphaComponent(0.2)
-    var greenColor = UIColor.greenColor().colorWithAlphaComponent(0.2)
-    var blueColor = UIColor.blueColor().colorWithAlphaComponent(0.2)
-    var purpleColor = UIColor.purpleColor().colorWithAlphaComponent(0.2)
     var trackBall: TrackBall?
     
     // MARK: - Quick reference

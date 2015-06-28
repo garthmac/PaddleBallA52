@@ -24,11 +24,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cRS-dc-5sH">
-                                        <rect key="frame" x="175" y="221" width="250" height="250"/>
+                                        <rect key="frame" x="195" y="281" width="210" height="210"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="250" id="7eY-Kj-Mq4"/>
-                                            <constraint firstAttribute="height" constant="250" id="oGU-41-6NU"/>
-                                            <constraint firstAttribute="width" constant="250" id="pPT-iS-yJL"/>
+                                            <constraint firstAttribute="height" constant="210" id="oGU-41-6NU"/>
+                                            <constraint firstAttribute="width" constant="210" id="pPT-iS-yJL"/>
                                             <constraint firstAttribute="width" constant="250" id="ux6-iN-jkI"/>
                                         </constraints>
                                         <variation key="default">
@@ -41,7 +41,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="cRS-dc-5sH" secondAttribute="bottom" constant="80" id="EYs-7p-cec"/>
+                                    <constraint firstAttribute="bottom" secondItem="cRS-dc-5sH" secondAttribute="bottom" constant="60" id="EYs-7p-cec"/>
                                     <constraint firstAttribute="centerY" secondItem="cRS-dc-5sH" secondAttribute="centerY" constant="-142.5" id="Rfo-va-o1q"/>
                                     <constraint firstAttribute="centerX" secondItem="cRS-dc-5sH" secondAttribute="centerX" id="haM-mN-LbX"/>
                                 </constraints>

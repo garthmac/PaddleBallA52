@@ -28,6 +28,7 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
     @IBOutlet weak var paddleWidthLabel: UILabel!
     @IBOutlet weak var rowsLabel: UILabel!
     @IBOutlet weak var rowSlider: UISlider!
+    @IBOutlet weak var redBlockSwitch: UISwitch!
     @IBOutlet weak var soundSwitch: UISwitch!
     @IBOutlet weak var speedLabel: UILabel!
     @IBOutlet weak var speedSlider: UISlider!
@@ -161,6 +162,13 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
     var score: Int {
         get { return self.score }
         set { self.score = newValue }
+    }
+    var redBlockOn: Bool {
+        get { return redBlockSwitch.on }
+        set { redBlockSwitch.on = newValue }
+    }
+    @IBAction func redBlockChanged(sender: UISwitch) {
+        Settings().redBlockOn = redBlockOn
     }
     var soundOn: Bool {
         get { return soundSwitch.on }

@@ -55,12 +55,13 @@ class TrackBall {
     let distance = trackBallCurrentPoint.x** + trackBallCurrentPoint.y**
     
     if distance > trackBallRadius** {
-      trackBallCurrentPoint.z = 0.0
+        trackBallCurrentPoint.z = 0.0 //location.y - location.x //**RedBlock special effect, was z = 0.0
     } else {
       trackBallCurrentPoint.z = sqrt(trackBallRadius** - distance)
     }
     
     let startPoint = trackBallStartPoint
+    //println(startPoint)
     let currentPoint = trackBallCurrentPoint
     var x = startPoint.y * currentPoint.z - startPoint.z * currentPoint.y
     var y = -startPoint.x * currentPoint.z + trackBallStartPoint.z * currentPoint.x

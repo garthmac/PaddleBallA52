@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		881048B91B3E22F000712C9A /* TrackBall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881048B81B3E22F000712C9A /* TrackBall.swift */; };
-		881048BB1B3E2C2C00712C9A /* RedBlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881048BA1B3E2C2C00712C9A /* RedBlockViewController.swift */; };
 		881048BF1B3E59D700712C9A /* mackie_swift.png in Resources */ = {isa = PBXBuildFile; fileRef = 881048BE1B3E59D700712C9A /* mackie_swift.png */; };
 		881048C71B3E694600712C9A /* glory.png in Resources */ = {isa = PBXBuildFile; fileRef = 881048C51B3E663C00712C9A /* glory.png */; };
 		881048C91B3E6E4600712C9A /* badge-git-real-5d91905b69d46286cab389797ea81983.png in Resources */ = {isa = PBXBuildFile; fileRef = 881048C81B3E6E4600712C9A /* badge-git-real-5d91905b69d46286cab389797ea81983.png */; };
@@ -23,6 +22,7 @@
 		885E94E21B39FCA200432335 /* Brookes_25_27119b.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 885E94E11B39FCA200432335 /* Brookes_25_27119b.jpg */; };
 		885E94EE1B3A0C1E00432335 /* Comic Sans MS Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 885E94EA1B3A09DA00432335 /* Comic Sans MS Bold.ttf */; };
 		885E94EF1B3A0C2400432335 /* Comic Sans MS.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 885E94EC1B3A09EF00432335 /* Comic Sans MS.ttf */; };
+		88B46C601B41ED08006A0E54 /* RedBlockViewController.swift in Resources */ = {isa = PBXBuildFile; fileRef = 88B46C5F1B41ED08006A0E54 /* RedBlockViewController.swift */; };
 		88EBF3131B2798A70090A5A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EBF3121B2798A70090A5A0 /* AppDelegate.swift */; };
 		88EBF3291B2798A70090A5A0 /* PaddleBallA52Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EBF3281B2798A70090A5A0 /* PaddleBallA52Tests.swift */; };
 		88EBF3351B2798C50090A5A0 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 88EBF3331B2798C50090A5A0 /* LICENSE */; };
@@ -51,7 +51,6 @@
 
 /* Begin PBXFileReference section */
 		881048B81B3E22F000712C9A /* TrackBall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackBall.swift; path = PaddleBallA52/TrackBall.swift; sourceTree = "<group>"; };
-		881048BA1B3E2C2C00712C9A /* RedBlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RedBlockViewController.swift; path = PaddleBallA52/RedBlockViewController.swift; sourceTree = "<group>"; };
 		881048BE1B3E59D700712C9A /* mackie_swift.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mackie_swift.png; sourceTree = "<group>"; };
 		881048C51B3E663C00712C9A /* glory.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glory.png; sourceTree = "<group>"; };
 		881048C81B3E6E4600712C9A /* badge-git-real-5d91905b69d46286cab389797ea81983.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "badge-git-real-5d91905b69d46286cab389797ea81983.png"; sourceTree = "<group>"; };
@@ -65,6 +64,7 @@
 		885E94E11B39FCA200432335 /* Brookes_25_27119b.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Brookes_25_27119b.jpg; sourceTree = "<group>"; };
 		885E94EA1B3A09DA00432335 /* Comic Sans MS Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comic Sans MS Bold.ttf"; sourceTree = "<group>"; };
 		885E94EC1B3A09EF00432335 /* Comic Sans MS.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comic Sans MS.ttf"; sourceTree = "<group>"; };
+		88B46C5F1B41ED08006A0E54 /* RedBlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RedBlockViewController.swift; path = PaddleBallA52/RedBlockViewController.swift; sourceTree = "<group>"; };
 		88EBF30D1B2798A70090A5A0 /* PaddleBallA52.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaddleBallA52.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88EBF3111B2798A70090A5A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88EBF3121B2798A70090A5A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -141,8 +141,8 @@
 		88EBF3041B2798A70090A5A0 = {
 			isa = PBXGroup;
 			children = (
+				88B46C5F1B41ED08006A0E54 /* RedBlockViewController.swift */,
 				881048B81B3E22F000712C9A /* TrackBall.swift */,
-				881048BA1B3E2C2C00712C9A /* RedBlockViewController.swift */,
 				88EBF30F1B2798A70090A5A0 /* PaddleBallA52 */,
 				88EBF3251B2798A70090A5A0 /* PaddleBallA52Tests */,
 				88EBF30E1B2798A70090A5A0 /* Products */,
@@ -289,6 +289,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88B46C601B41ED08006A0E54 /* RedBlockViewController.swift in Resources */,
 				881048C71B3E694600712C9A /* glory.png in Resources */,
 				885E94EF1B3A0C2400432335 /* Comic Sans MS.ttf in Resources */,
 				885E94EE1B3A0C1E00432335 /* Comic Sans MS Bold.ttf in Resources */,
@@ -325,7 +326,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				881048BB1B3E2C2C00712C9A /* RedBlockViewController.swift in Sources */,
 				88EBF3401B27992E0090A5A0 /* BreakoutBehavior.swift in Sources */,
 				885E94D21B3384FE00432335 /* LeaderViewController.swift in Sources */,
 				88EBF33F1B27992E0090A5A0 /* User.swift in Sources */,

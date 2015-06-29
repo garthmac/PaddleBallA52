@@ -67,7 +67,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         static let BallColor = "Yellow"
         static let BallSpeed: Float = 1.0
         static let BoxPathName = "Box"
-        static let CourtColor = "Black"
+        static let CourtColor = "Clear"
         static let PaddlePathName = "Paddle"
         static let PaddleColor = "Green"
         static let PaddleSize = CGSize(width: 80.0, height: 20.0)
@@ -97,8 +97,6 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpSwipeMeTextLayer()
-        buildCube()
         //printFonts()
         prepareAudios()
         self.hidesBottomBarWhenPushed = true
@@ -117,6 +115,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         gameView.addGestureRecognizer(swipeRight)
         gameView.addSubview(scoreBoard)
         gameView.addSubview(powerBallScoreBoard)
+        setUpSwipeMeTextLayer()
         breakout.collisionDelegate = self
         self.tabBarController?.tabBar.hidden = true
         levelOne(tier)
@@ -139,7 +138,11 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         paddleSize = CGSize(width: pw, height: 20.0)
         paddle.frame.size = paddleSize
         paddle.layer.backgroundColor = UIColor.colorFor(Settings().paddleColor).CGColor
-        
+        if Settings().redBlockOn {
+            buildCube()
+        } else if transformLayer != nil {
+            transformLayer.removeFromSuperlayer()
+        }
         if Settings().soundOn {
             audioPlayer.play()
         } else {
@@ -291,11 +294,30 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         paddle.frame.origin = origin
         addPaddleBarrier()
     }
+    //MARK: RedBlock viewForTransformLayer
+    
     //While panning change the position of the paddle according to the panned distance. For swipes move to the far left or right:
     func panPaddle(gesture: UIPanGestureRecognizer) {
         switch gesture.state {
-        case .Ended: fallthrough
+        case .Began:
+            //redBlock
+            let location = gesture.locationInView(viewForTransformLayer)
+            //println(location)
+            if trackBall != nil {
+                trackBall?.setStartPointFromLocation(location)
+            } else {
+                trackBall = TrackBall(location: location, inRect: viewForTransformLayer.bounds)
+            }
+        case .Ended:
+            //redBlock
+            let location = gesture.locationInView(viewForTransformLayer)
+            trackBall?.finalizeTrackBallForLocation(location)
         case .Changed:
+            //redBlock
+            let location = gesture.locationInView(viewForTransformLayer)
+            if let transform = trackBall?.rotationTransformForLocation(location) {
+                viewForTransformLayer.layer.sublayerTransform = transform
+            }
             placePaddle(gesture.translationInView(gameView))
             gesture.setTranslation(CGPointZero, inView: gameView)
         default: break
@@ -323,9 +345,9 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         }
     }
     
-    // MARK: - levelOne
     let model = UIDevice.currentDevice().model
     var adjust: CGFloat = 1.2
+    // MARK: - levelOne
     func levelOne(tier: Int) {
         if bricks.count > 0 { return }
         if tier > 1 {
@@ -502,10 +524,14 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             powerBallScoreBoard.text = "PowerBall Achieved!"
             powerBall = 3
             loggedInUser = User.login("japple", password: "foo")
+            self.transformLayer.removeFromSuperlayer()
+            //don't rebuild the cube during powerBall round
         } else {
             powerBallScoreBoard.text = ""
             powerBall = 1
             loggedInUser = User.login(uid, password: "foo")
+            self.transformLayer.removeFromSuperlayer()
+            self.buildCube()
         }
         var title = "Game Over!", message = "Try Again...", cancelButtonTitle = "Restart?"
         if Settings().rows == Constants.MaxRows && bricks.count == 0 {
@@ -558,108 +584,76 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
     func degreesToRadians(degrees: Double) -> CGFloat {
         return CGFloat(degrees * M_PI / 180.0)
     }
-    
     func radiansToDegrees(radians: Double) -> CGFloat {
         return CGFloat(radians / M_PI * 180.0)
     }
-    //class RedBlockViewController: UIViewController {
-    //MARK: RedBlockViewController
+    //MARK: class RedBlockViewController: UIViewController {
     @IBOutlet weak var viewForTransformLayer: UIView!
-    
-    enum Color: Int {
-        case Red, Orange, Yellow, Green, Blue, Purple
-    }
-    let sideLength = CGFloat(210.0) //block side
-    
+
+    lazy var sideLength:CGFloat = {
+        return self.viewForTransformLayer.bounds.width //block side
+    }()
     var transformLayer: CATransformLayer!
     let swipeMeTextLayer = CATextLayer()
     var trackBall: TrackBall?
-    
     // MARK: - Quick reference
     func setUpSwipeMeTextLayer() {
         swipeMeTextLayer.frame = CGRect(x: 0.0, y: sideLength / 4.0, width: sideLength, height: sideLength / 2.0)
         swipeMeTextLayer.string = "Red\r Block"
         swipeMeTextLayer.alignmentMode = kCAAlignmentCenter
         swipeMeTextLayer.foregroundColor = UIColor.whiteColor().CGColor
-        let fontName = "Noteworthy-Light" as CFString
-        let fontRef = CTFontCreateWithName(fontName, 18.0, nil)
+        let fontName = "ArialMT" as CFString
+        let fontRef = CTFontCreateWithName(fontName, 10.0, nil)
         swipeMeTextLayer.font = fontRef
         swipeMeTextLayer.contentsScale = UIScreen.mainScreen().scale
     }
-    
-    // MARK: - Triggered actions
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        if let touch = touches.first as? UITouch {
-            let location = touch.locationInView(viewForTransformLayer)
-            if trackBall != nil {
-                trackBall?.setStartPointFromLocation(location)
-            } else {
-                trackBall = TrackBall(location: location, inRect: viewForTransformLayer.bounds)
-            }
-            
-            for layer in transformLayer.sublayers {
-                if let hitLayer = layer.hitTest(location) {
-                    //showBoxTappedLabel()
-                    break
-                }
-            }
-        }
-    }
-    
-    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
-        if let touch = touches.first as? UITouch {
-            let location = touch.locationInView(viewForTransformLayer)
-            if let transform = trackBall?.rotationTransformForLocation(location) {
-                viewForTransformLayer.layer.sublayerTransform = transform
-            }
-        }
-    }
-    
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-        if let touch = touches.first as? UITouch {
-            let location = touch.locationInView(viewForTransformLayer)
-            trackBall?.finalizeTrackBallForLocation(location)
-        }
-    }
-    
     // MARK: - Helpers
     func buildCube() {
         transformLayer = CATransformLayer()
-
-        var layer = sideLayerWithColor(UIColor.random.colorWithAlphaComponent(0.2))
-        layer.addSublayer(swipeMeTextLayer)
-        transformLayer.addSublayer(layer)
-        
-        layer = sideLayerWithColor(UIColor.random.colorWithAlphaComponent(0.2))
-        var transform = CATransform3DMakeTranslation(sideLength / 2.0, 0.0, sideLength / -2.0)
-        transform = CATransform3DRotate(transform, degreesToRadians(90.0), 0.0, 1.0, 0.0)
-        layer.transform = transform
-        transformLayer.addSublayer(layer)
-        
-        layer = sideLayerWithColor(UIColor.random.colorWithAlphaComponent(0.2))
-        layer.transform = CATransform3DMakeTranslation(0.0, 0.0, -sideLength)
-        transformLayer.addSublayer(layer)
-        
-        layer = sideLayerWithColor(UIColor.random.colorWithAlphaComponent(0.2))
-        transform = CATransform3DMakeTranslation(sideLength / -2.0, 0.0, sideLength / -2.0)
-        transform = CATransform3DRotate(transform, degreesToRadians(90.0), 0.0, 1.0, 0.0)
-        layer.transform = transform
-        transformLayer.addSublayer(layer)
-        
-        layer = sideLayerWithColor(UIColor.random.colorWithAlphaComponent(0.2))
-        transform = CATransform3DMakeTranslation(0.0, sideLength / -2.0, sideLength / -2.0)
-        transform = CATransform3DRotate(transform, degreesToRadians(90.0), 1.0, 0.0, 0.0)
-        layer.transform = transform
-        transformLayer.addSublayer(layer)
-        
-        layer = sideLayerWithColor(UIColor.random.colorWithAlphaComponent(0.2))
-        transform = CATransform3DMakeTranslation(0.0, sideLength / 2.0, sideLength / -2.0)
-        transform = CATransform3DRotate(transform, degreesToRadians(90.0), 1.0, 0.0, 0.0)
-        layer.transform = transform
-        transformLayer.addSublayer(layer)
-        
+        if Settings().redBlockOn {
+            let cr: CGFloat = cornerRadius //from bricks
+            let opacity: CGFloat = 0.1
+            var layer = sideLayerWithColor(UIColor.redColor().colorWithAlphaComponent(opacity))
+            layer.cornerRadius = cr
+            layer.addSublayer(swipeMeTextLayer) //Red Block
+            transformLayer.addSublayer(layer)
+            
+            layer = sideLayerWithColor(UIColor.random.colorWithAlphaComponent(opacity))
+            layer.cornerRadius = cr
+            var transform = CATransform3DMakeTranslation(sideLength / 2.0, 0.0, sideLength / -2.0)
+            transform = CATransform3DRotate(transform, degreesToRadians(90.0), 0.0, 1.0, 0.0)
+            layer.transform = transform
+            transformLayer.addSublayer(layer)
+            
+            layer = sideLayerWithColor(UIColor.random.colorWithAlphaComponent(opacity))
+            layer.cornerRadius = cr
+            layer.transform = CATransform3DMakeTranslation(0.0, 0.0, -sideLength)
+            transformLayer.addSublayer(layer)
+            
+            layer = sideLayerWithColor(UIColor.random.colorWithAlphaComponent(opacity))
+            layer.cornerRadius = cr
+            transform = CATransform3DMakeTranslation(sideLength / -2.0, 0.0, sideLength / -2.0)
+            transform = CATransform3DRotate(transform, degreesToRadians(90.0), 0.0, 1.0, 0.0)
+            layer.transform = transform
+            transformLayer.addSublayer(layer)
+            
+            layer = sideLayerWithColor(UIColor.random.colorWithAlphaComponent(opacity))
+            layer.cornerRadius = cr
+            transform = CATransform3DMakeTranslation(0.0, sideLength / -2.0, sideLength / -2.0)
+            transform = CATransform3DRotate(transform, degreesToRadians(90.0), 1.0, 0.0, 0.0)
+            layer.transform = transform
+            transformLayer.addSublayer(layer)
+            
+            layer = sideLayerWithColor(UIColor.random.colorWithAlphaComponent(opacity))
+            layer.cornerRadius = cr
+            transform = CATransform3DMakeTranslation(0.0, sideLength / 2.0, sideLength / -2.0)
+            transform = CATransform3DRotate(transform, degreesToRadians(90.0), 1.0, 0.0, 0.0)
+            layer.transform = transform
+            transformLayer.addSublayer(layer)
+        }
         transformLayer.anchorPointZ = sideLength / -2.0
         viewForTransformLayer.layer.addSublayer(transformLayer)
+        
     }
     
     func sideLayerWithColor(color: UIColor) -> CALayer {

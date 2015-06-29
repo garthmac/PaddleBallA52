@@ -24,6 +24,7 @@ class Settings {
         static let HighScoreOnKey = "Settings.High.Score.On" //toggle to reset high score to zero
         static let PaddleColorKey = "Settings.Paddle.Color"
         static let PaddleWidthMultiplierKey = "Settings.Paddle.Width.Multiplier" //1 thru 4, initially 2 (ball widths)
+        static let RedBlockKey = "Settings.RedBlock" //turn that annoying RedBlock off!
         static let RowsKey = "Settings.Rows" //half the # of columns
         static let SoundKey = "Settings.Sound" //allow balls make a sound on collision:
         static let SpeedKey = "Settings.Ball.Speed" //control the speed of the ball/push:
@@ -81,6 +82,10 @@ class Settings {
     var rows: Int? {
         get { return defaults.objectForKey(Const.RowsKey) as? Int }
         set { defaults.setObject(newValue, forKey: Const.RowsKey) }
+    }
+    var redBlockOn: Bool {
+        get { return defaults.objectForKey(Const.RedBlockKey) as? Bool ?? true }
+        set { defaults.setObject(newValue, forKey: Const.RedBlockKey) }
     }
     var soundOn: Bool {
         get { return defaults.objectForKey(Const.SoundKey) as? Bool ?? true }

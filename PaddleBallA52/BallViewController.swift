@@ -382,7 +382,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
                 } else {
                 //brick.backgroundColor = Constants.BrickColors[row % Constants.BrickColors.count]
                     brick.backgroundColor = UIColor.random
-                    if model.hasPrefix("iPad") || Settings().columns! < 10 { //can't read numbers on iPhone after 10
+                    if model.hasPrefix("iPad") || Settings().columns! < 10 { //can't read values on iPhone
                         brick.setTitleColor(UIColor.blackColor(), forState: .Normal)
                         brick.setTitle("\(UIColor.scoreForColor(brick.backgroundColor!))", forState: .Normal)
                         brick.titleLabel!.font = UIFont(name: "ComicSansMS", size: 12.0)
@@ -424,7 +424,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
     //Store this structure for each brick in a dictionary:
     private struct Brick {
         var relativeFrame: CGRect
-        var view: UIView
+        var view: UIButton
         var action: BrickAction
     }
     private typealias BrickAction = ((Int) -> Void)?
@@ -457,6 +457,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         breakout.removeBarrier(index)
         var trans = UIViewAnimationOptions.TransitionFlipFromBottom
         if let brick = bricks[index] {
+            brick.view.transform = CGAffineTransformMakeScale(-1, 1)
             if brick.view.backgroundColor == nil {
                 trans = UIViewAnimationOptions.TransitionCrossDissolve
             }
@@ -675,9 +676,11 @@ private extension UIColor {
         case "Red": return UIColor.redColor()
         case "Purple": return UIColor.purpleColor()
         case "Yellow": return UIColor.yellowColor()
+        case "Brown": return UIColor.brownColor()
+        case "DarkGray": return UIColor.darkGrayColor()
+        case "LightGray": return UIColor.lightGrayColor()
         case "Cyan": return UIColor.cyanColor()
         case "White": return UIColor.whiteColor()
-        case "Black": return UIColor.blackColor()
         case "Clear": return UIColor.clearColor()
         default: return UIColor.blackColor()
         }
@@ -696,11 +699,12 @@ private extension UIColor {
         case UIColor.lightGrayColor(): return (8 / pwm * 36)
         case UIColor.cyanColor(): return (8 / pwm * 40)
         case UIColor.whiteColor(): return (8 / pwm * 44)
+        case UIColor.clearColor(): return (8 / pwm * 48)
         default: return 0
         }
     }
     class var random: UIColor {
-        switch arc4random() % 11 {
+        switch arc4random() % 12 {
         case 0: return UIColor.greenColor()
         case 1: return UIColor.blueColor()
         case 2: return UIColor.orangeColor()
@@ -712,6 +716,7 @@ private extension UIColor {
         case 8: return UIColor.lightGrayColor()
         case 9: return UIColor.cyanColor()
         case 10: return UIColor.whiteColor()
+        case 11: return UIColor.clearColor()
         default: return UIColor.blackColor()
         }
     }

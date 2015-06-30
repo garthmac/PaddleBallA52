@@ -34,7 +34,7 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
     @IBOutlet weak var speedSlider: UISlider!
     
     //MARK: - UIPickerViewDataSource
-    var pickerDataSource = ["Green", "Blue", "Orange", "Red", "Purple", "Yellow", "Cyan", "White", "Black", "Clear"]
+    var pickerDataSource = ["Green", "Blue", "Orange", "Red", "Purple", "Yellow", "Brown", "DarkGray", "LightGray", "Cyan", "White", "Clear", "Black"]
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int { return 1 } //number of wheels in the picker
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return pickerDataSource.count
@@ -60,21 +60,21 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
     var ballColor: String {
         get { return ballColorLabel.text! }
         set {
-            ballColorLabel.text = newValue
+            ballColorLabel.text = "➢ " + newValue
             Settings().ballColor = newValue
         }
     }
     var courtColor: String {
         get { return courtColorLabel.text! }
         set {
-            courtColorLabel.text = newValue
+            courtColorLabel.text = "➢ " + newValue
             Settings().courtColor = newValue
         }
     }
     var paddleColor: String {
         get { return paddleColorLabel.text! }
         set {
-            paddleColorLabel.text = newValue
+            paddleColorLabel.text = "➢ " + newValue
             Settings().paddleColor = newValue
         }
     }
@@ -181,7 +181,7 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         get { return speedSlider.value / 100.0}
         set {
             speedSlider.value = newValue * 100.0
-            speedLabel.text = "\(Int(speedSlider.value)) %"
+            speedLabel.text = "\(Int(speedSlider.value))%"
         }
     }
     @IBAction func speedChanged(sender: UISlider) {

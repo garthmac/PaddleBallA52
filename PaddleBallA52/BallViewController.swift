@@ -495,7 +495,13 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         bonusScore = 0
     }
     func showBonusScore() {
+        scoreBoard.alpha = 0    //prepare for annimation
+        scoreBoard.center.y = 0
         scoreBoard.text = "Bonus!   " + bonusScore.addSeparator
+        UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0.0, options: nil, animations: {
+                self.resetPaddleAndScoreBoard()
+                self.scoreBoard.alpha = 1
+            }, completion: nil)
     }
     let today = NSDate()
     private var timestamp: String { // a computed property instead of func
@@ -521,19 +527,26 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             Settings().highScore = score
             Settings().highScoreDate = timestamp
         }
+        // MARK: - animate PowerBall Achieved!
         if ballCounter == 1 {
             powerBallScoreBoard.text = "PowerBall Achieved!"
-            powerBall = 3
-            loggedInUser = User.login("japple", password: "foo")
-            self.transformLayer.removeFromSuperlayer()
-            //don't rebuild the cube during powerBall round
+            powerBallScoreBoard.alpha = 0    //prepare for annimation
+            powerBallScoreBoard.center.x = 0 //prepare for annimation
+            UIView.animateWithDuration(2.0, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: nil, animations: {
+                self.resetPaddleAndScoreBoard()
+                self.powerBallScoreBoard.alpha = 1
+                }, completion: nil)
+            powerBall = 3 //triple score until removed
+            loggedInUser = User.login("japple", password: "foo") //bubble ball
+            self.transformLayer.removeFromSuperlayer() //don't rebuild the cube during powerBall round
         } else {
             powerBallScoreBoard.text = ""
-            powerBall = 1
+            powerBall = 1 //back to regular scoring
             loggedInUser = User.login(uid, password: "foo")
             self.transformLayer.removeFromSuperlayer()
             self.buildCube()
         }
+        
         var title = "Game Over!", message = "Try Again...", cancelButtonTitle = "Restart?"
         if Settings().rows == Constants.MaxRows && bricks.count == 0 {
             title = "Set Complete"
@@ -563,7 +576,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             presentViewController(alertController, animated: true, completion: nil)
         }
     }
-    //game over -> restart
+    // MARK: - game over -> restart
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
         if buttonIndex == 1 {
             exit(0)

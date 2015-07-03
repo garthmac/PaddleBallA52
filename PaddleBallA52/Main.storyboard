@@ -177,7 +177,7 @@
                                     <rect key="frame" x="0.0" y="28" width="165" height="0.0"/>
                                 </variation>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="snoopy-tennis.png" translatesAutoresizingMaskIntoConstraints="NO" id="0qy-Lw-7I9">
+                            <imageView userInteractionEnabled="NO" tag="111" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="snoopy-tennis.png" translatesAutoresizingMaskIntoConstraints="NO" id="0qy-Lw-7I9">
                                 <rect key="frame" x="173" y="99" width="276" height="182"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="0qy-Lw-7I9" secondAttribute="height" multiplier="215:142" id="3ce-wX-N77"/>
@@ -961,7 +961,7 @@
                                     <rect key="frame" x="5" y="136" width="67" height="21"/>
                                 </variation>
                             </label>
-                            <segmentedControl opaque="NO" tag="100" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="hZP-FC-hVJ">
+                            <segmentedControl opaque="NO" tag="222" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="hZP-FC-hVJ">
                                 <rect key="frame" x="114" y="339" width="90" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="106" id="flh-T5-pdT">

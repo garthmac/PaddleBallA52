@@ -55,6 +55,29 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
     private var audioPlayer: AVAudioPlayer!
     private var path: String! = ""
     private var soundTrack = 0
+    private var availableCredits = 0
+    func prepareTabBar() {
+        if let vcArray = tabBarController!.viewControllers as? [UIViewController] {
+            let ivc = vcArray[3]    //CREDITS
+            for view in ivc.view.subviews as! [UIView] {
+                if let animatedImageView = view as? UIImageView {
+                    if animatedImageView.tag == 111 {
+                        let gifs = (0...8).map {
+                            UIImage(named: "peanuts-anim\($0).png") as! AnyObject
+                        }
+                        animatedImageView.animationImages = gifs
+                        animatedImageView.animationDuration = 9.0
+                        //animatedImageView.animationRepeatCount = 0 //0 repeat indefinitely is default
+                        animatedImageView.startAnimating()
+                    }
+                }
+            }
+        }
+        let creditsTabItem = tabBarController!.tabBar.items![3] as! UITabBarItem
+        if availableCredits > 0 {
+            creditsTabItem.badgeValue = "\(availableCredits)"
+        }
+    }
     func prepareAudios() {
         soundTrack = Settings().soundChoice
         switch soundTrack {
@@ -107,6 +130,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         super.viewDidLoad()
         //printFonts()
         prepareAudios()
+        prepareTabBar()
         self.hidesBottomBarWhenPushed = true
         animator.addBehavior(breakout)
         Settings(defaultColumns: Constants.BrickColumns, defaultRows: Constants.BrickColumns / 2, defaultBalls: 1, defaultDifficulty: 1, defaultSpeed: Constants.BallSpeed, defaultBallColor: Constants.BallColor, defaultCourtColor: Constants.CourtColor, defaultPaddleColor: Constants.PaddleColor, defaultPaddleWidthMultiplier: paddleWidthMultiplier)
@@ -169,6 +193,11 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         }
         setAutoStartTimer()
       }
+    override func viewDidAppear(animated: Bool) {
+        if availableCredits == 0 {
+            (tabBarController!.tabBar.items![3] as! UITabBarItem).badgeValue = nil
+        }
+    }
     func resetWall() {
         Settings().changed = false
         for (index, brick) in bricks {

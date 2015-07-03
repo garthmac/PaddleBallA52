@@ -218,7 +218,7 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         let achieved = Settings().achieved  //"00000000"
         let maxSoundTrack = achieved.intAtIndex(1)!
         if maxSoundTrack > 0 {
-            if let soundTrackControl = self.view.viewWithTag(100) as? UISegmentedControl {
+            if let soundTrackControl = self.view.viewWithTag(222) as? UISegmentedControl {
                 for i in 1...maxSoundTrack {
                     soundTrackControl.setEnabled(true, forSegmentAtIndex: i)
                 }

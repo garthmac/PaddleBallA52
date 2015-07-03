@@ -30,6 +30,7 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
     @IBOutlet weak var rowSlider: UISlider!
     @IBOutlet weak var redBlockSwitch: UISwitch!
     @IBOutlet weak var soundSwitch: UISwitch!
+    @IBOutlet weak var soundChoiceSegControl: UISegmentedControl!
     @IBOutlet weak var speedLabel: UILabel!
     @IBOutlet weak var speedSlider: UISlider!
     
@@ -56,6 +57,7 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         courtColorPickerView.delegate = self
         paddleColorPickerView.dataSource = self
         paddleColorPickerView.delegate = self
+        setPurchasedExtras()
     }
     var ballColor: String {
         get { return ballColorLabel.text! }
@@ -128,6 +130,7 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
             paddleWidthMultiplier = min(paddleWidthMultiplier, 2)
         }
         paddleWidthChanged(paddleWidthStepper)
+        Settings().changed = true
     }
     var highScoreOn: Bool {
         get { return highScoreSwitch.on }
@@ -177,6 +180,13 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
     @IBAction func soundChanged(sender: UISwitch) {
         Settings().soundOn = soundOn
     }
+    var soundChoice: Int {
+        get { return soundChoiceSegControl.selectedSegmentIndex }
+        set { soundChoiceSegControl.selectedSegmentIndex = newValue }
+    }
+    @IBAction func soundChoiceChanged(sender: UISegmentedControl) {
+        Settings().soundChoice = soundChoice
+    }
     var speed: Float {
         get { return speedSlider.value / 100.0}
         set {
@@ -204,6 +214,39 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         soundOn = Settings().soundOn
         speed = Settings().speed!
     }
+    func setPurchasedExtras() {
+        let achieved = Settings().achieved  //"00000000"
+        let maxSoundTrack = achieved.intAtIndex(1)!
+        if maxSoundTrack > 0 {
+            if let soundTrackControl = self.view.viewWithTag(100) as? UISegmentedControl {
+                for i in 1...maxSoundTrack {
+                    soundTrackControl.setEnabled(true, forSegmentAtIndex: i)
+                }
+            }
+        }
+    }
+}
 
+private extension String {
+    func charAtIndex(index: Int) -> Character? {   //myString.characterAtIndex(0)!
+        var cur = 0
+        for char in self {
+            if cur == index {
+                return char
+            }
+            cur++
+        }
+        return nil
+    }
+    func intAtIndex(index: Int) -> Int? {   //"010".intAtIndex(1)! == 1
+        var cur = 0
+        for char in self {
+            if cur == index {
+                return String(char).toInt()
+            }
+            cur++
+        }
+        return nil
+    }
 }
 

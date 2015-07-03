@@ -53,8 +53,16 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
     //To start balls automatically, add a timer which periodically checks, if there is a ball (or the maximum number of balls) and push them if necessary.
     private var autoStartTimer: NSTimer?
     private var audioPlayer: AVAudioPlayer!
+    private var path: String! = ""
+    private var soundTrack = 0
     func prepareAudios() {
-        let path = NSBundle.mainBundle().pathForResource("jazzloop2_70", ofType: "mp3")
+        soundTrack = Settings().soundChoice
+        switch soundTrack {
+        case 0: path = NSBundle.mainBundle().pathForResource("jazzloop2_70", ofType: "mp3")
+        case 1: path = NSBundle.mainBundle().pathForResource("Phil Wickham-Carry My Soul(Live at RELEVANT)", ofType: "mp3")
+        case 2: path = NSBundle.mainBundle().pathForResource("Phil Wickham - At Your Name (Yahweh, Yahweh)", ofType: "mp3")
+        default: path = NSBundle.mainBundle().pathForResource("jazzloop2_70", ofType: "mp3")
+        }
         let url = NSURL.fileURLWithPath(path!)
         audioPlayer = AVAudioPlayer(contentsOfURL: url, error: nil)
         audioPlayer.delegate = self
@@ -138,10 +146,15 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         paddleSize = CGSize(width: pw, height: 20.0)
         paddle.frame.size = paddleSize
         paddle.layer.backgroundColor = UIColor.colorFor(Settings().paddleColor).CGColor
+        
         if Settings().redBlockOn {
             buildCube()
         } else if transformLayer != nil {
             transformLayer.removeFromSuperlayer()
+        }
+        if Settings().soundChoice != soundTrack {
+            audioPlayer.pause()
+            prepareAudios()
         }
         if Settings().soundOn {
             audioPlayer.play()
@@ -677,8 +690,8 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         layer.backgroundColor = color.CGColor
         return layer
     }
-    
 }
+
 // MARK: - extensions
 private extension UIColor {
     class func colorFor(sel: String) -> UIColor {

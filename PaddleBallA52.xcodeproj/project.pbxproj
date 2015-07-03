@@ -12,7 +12,6 @@
 		881048C71B3E694600712C9A /* glory.png in Resources */ = {isa = PBXBuildFile; fileRef = 881048C51B3E663C00712C9A /* glory.png */; };
 		881048C91B3E6E4600712C9A /* badge-git-real-5d91905b69d46286cab389797ea81983.png in Resources */ = {isa = PBXBuildFile; fileRef = 881048C81B3E6E4600712C9A /* badge-git-real-5d91905b69d46286cab389797ea81983.png */; };
 		881048CB1B3F09A900712C9A /* IMG_3562.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 881048CA1B3F09A900712C9A /* IMG_3562.jpg */; };
-		881048CD1B3F1F0F00712C9A /* CFo2cL_VAAAKThr.png-large.png in Resources */ = {isa = PBXBuildFile; fileRef = 881048CC1B3F1F0F00712C9A /* CFo2cL_VAAAKThr.png-large.png */; };
 		881048CF1B3F253000712C9A /* snoopy-tennis.png in Resources */ = {isa = PBXBuildFile; fileRef = 881048CE1B3F253000712C9A /* snoopy-tennis.png */; };
 		881048D11B3F314000712C9A /* padel520.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 881048D01B3F314000712C9A /* padel520.jpg */; };
 		881559121B30E19600D60626 /* 1-FloUnitCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 881559111B30E19600D60626 /* 1-FloUnitCircle.png */; };
@@ -44,6 +43,9 @@
 		885E94EE1B3A0C1E00432335 /* Comic Sans MS Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 885E94EA1B3A09DA00432335 /* Comic Sans MS Bold.ttf */; };
 		885E94EF1B3A0C2400432335 /* Comic Sans MS.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 885E94EC1B3A09EF00432335 /* Comic Sans MS.ttf */; };
 		88B46C601B41ED08006A0E54 /* RedBlockViewController.swift in Resources */ = {isa = PBXBuildFile; fileRef = 88B46C5F1B41ED08006A0E54 /* RedBlockViewController.swift */; };
+		88DCAD4B1B4452150079046A /* extension_UIImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 88DCAD4A1B4452150079046A /* extension_UIImage.png */; };
+		88DCAD501B45B76D0079046A /* Phil Wickham-Carry My Soul(Live at RELEVANT).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 88DCAD4F1B45B76D0079046A /* Phil Wickham-Carry My Soul(Live at RELEVANT).mp3 */; };
+		88DCAD521B45C37C0079046A /* Phil Wickham - At Your Name (Yahweh, Yahweh).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 88DCAD511B45C37C0079046A /* Phil Wickham - At Your Name (Yahweh, Yahweh).mp3 */; };
 		88EBF3131B2798A70090A5A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EBF3121B2798A70090A5A0 /* AppDelegate.swift */; };
 		88EBF3291B2798A70090A5A0 /* PaddleBallA52Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EBF3281B2798A70090A5A0 /* PaddleBallA52Tests.swift */; };
 		88EBF3351B2798C50090A5A0 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 88EBF3331B2798C50090A5A0 /* LICENSE */; };
@@ -76,7 +78,6 @@
 		881048C51B3E663C00712C9A /* glory.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glory.png; sourceTree = "<group>"; };
 		881048C81B3E6E4600712C9A /* badge-git-real-5d91905b69d46286cab389797ea81983.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "badge-git-real-5d91905b69d46286cab389797ea81983.png"; sourceTree = "<group>"; };
 		881048CA1B3F09A900712C9A /* IMG_3562.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_3562.jpg; sourceTree = "<group>"; };
-		881048CC1B3F1F0F00712C9A /* CFo2cL_VAAAKThr.png-large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CFo2cL_VAAAKThr.png-large.png"; sourceTree = "<group>"; };
 		881048CE1B3F253000712C9A /* snoopy-tennis.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "snoopy-tennis.png"; sourceTree = "<group>"; };
 		881048D01B3F314000712C9A /* padel520.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = padel520.jpg; sourceTree = "<group>"; };
 		881559111B30E19600D60626 /* 1-FloUnitCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1-FloUnitCircle.png"; sourceTree = "<group>"; };
@@ -107,6 +108,9 @@
 		885E94EA1B3A09DA00432335 /* Comic Sans MS Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comic Sans MS Bold.ttf"; sourceTree = "<group>"; };
 		885E94EC1B3A09EF00432335 /* Comic Sans MS.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comic Sans MS.ttf"; sourceTree = "<group>"; };
 		88B46C5F1B41ED08006A0E54 /* RedBlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RedBlockViewController.swift; path = PaddleBallA52/RedBlockViewController.swift; sourceTree = "<group>"; };
+		88DCAD4A1B4452150079046A /* extension_UIImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = extension_UIImage.png; sourceTree = "<group>"; };
+		88DCAD4F1B45B76D0079046A /* Phil Wickham-Carry My Soul(Live at RELEVANT).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Phil Wickham-Carry My Soul(Live at RELEVANT).mp3"; sourceTree = "<group>"; };
+		88DCAD511B45C37C0079046A /* Phil Wickham - At Your Name (Yahweh, Yahweh).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Phil Wickham - At Your Name (Yahweh, Yahweh).mp3"; sourceTree = "<group>"; };
 		88EBF30D1B2798A70090A5A0 /* PaddleBallA52.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaddleBallA52.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88EBF3111B2798A70090A5A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88EBF3121B2798A70090A5A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -167,7 +171,7 @@
 				881048C51B3E663C00712C9A /* glory.png */,
 				881048BE1B3E59D700712C9A /* mackie_swift.png */,
 				881559111B30E19600D60626 /* 1-FloUnitCircle.png */,
-				881048CC1B3F1F0F00712C9A /* CFo2cL_VAAAKThr.png-large.png */,
+				88DCAD4A1B4452150079046A /* extension_UIImage.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -176,6 +180,8 @@
 			isa = PBXGroup;
 			children = (
 				88EBF3441B2799540090A5A0 /* jazzloop2_70.mp3 */,
+				88DCAD4F1B45B76D0079046A /* Phil Wickham-Carry My Soul(Live at RELEVANT).mp3 */,
+				88DCAD511B45C37C0079046A /* Phil Wickham - At Your Name (Yahweh, Yahweh).mp3 */,
 			);
 			name = Audio;
 			sourceTree = "<group>";
@@ -385,6 +391,8 @@
 				885E94EF1B3A0C2400432335 /* Comic Sans MS.ttf in Resources */,
 				884225721B4355F7003122E3 /* Icon-40@2x.png in Resources */,
 				884225791B4355F7003122E3 /* Icon-44@2x.png in Resources */,
+				88DCAD501B45B76D0079046A /* Phil Wickham-Carry My Soul(Live at RELEVANT).mp3 in Resources */,
+				88DCAD4B1B4452150079046A /* extension_UIImage.png in Resources */,
 				885E94EE1B3A0C1E00432335 /* Comic Sans MS Bold.ttf in Resources */,
 				885E94D31B33957F00432335 /* Images.xcassets in Resources */,
 				881048C91B3E6E4600712C9A /* badge-git-real-5d91905b69d46286cab389797ea81983.png in Resources */,
@@ -400,6 +408,7 @@
 				88EBF3371B2798D80090A5A0 /* Main.storyboard in Resources */,
 				8842257B1B4355F7003122E3 /* Icon-98@2x.png in Resources */,
 				881559121B30E19600D60626 /* 1-FloUnitCircle.png in Resources */,
+				88DCAD521B45C37C0079046A /* Phil Wickham - At Your Name (Yahweh, Yahweh).mp3 in Resources */,
 				88EBF3471B2799540090A5A0 /* LaunchScreen.xib in Resources */,
 				8842257A1B4355F7003122E3 /* Icon-86@2x.png in Resources */,
 				88EBF3431B2799390090A5A0 /* Settings.bundle in Resources */,
@@ -416,7 +425,6 @@
 				88EBF3351B2798C50090A5A0 /* LICENSE in Resources */,
 				881048D11B3F314000712C9A /* padel520.jpg in Resources */,
 				8842257D1B4355F7003122E3 /* Icon-60@3x.png in Resources */,
-				881048CD1B3F1F0F00712C9A /* CFo2cL_VAAAKThr.png-large.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

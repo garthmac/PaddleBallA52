@@ -11,6 +11,7 @@ import Foundation
 class Settings {
     
     struct Const {
+        static let AchievedKey = "Settings.Binary" //tracks user achieved (earned or bought with In-App purchase) extra balls, audio tracks, balls skins, emojis, redBlock-off, poping targets
         static let AutoStartKey = "Settings.Auto.Start" //allow balls to appear without user interaction:
         static let BallColorKey = "Settings.Ball.Color"
         static let BallRotationKey = "Settings.Ball.Rotation" //allow balls to rotate when they encounter friction:
@@ -26,11 +27,16 @@ class Settings {
         static let PaddleWidthMultiplierKey = "Settings.Paddle.Width.Multiplier" //1 thru 4, initially 2 (ball widths)
         static let RedBlockKey = "Settings.RedBlock" //turn that annoying RedBlock off!
         static let RowsKey = "Settings.Rows" //half the # of columns
-        static let SoundKey = "Settings.Sound" //allow balls make a sound on collision:
+        static let SoundKey = "Settings.Sound" // on/off
+        static let SoundChoiceKey = "Settings.SoundChoice" // 1/2/3
         static let SpeedKey = "Settings.Ball.Speed" //control the speed of the ball/push:
         static let UserIdKey = "Settings.User.Id"
     }
     let defaults = NSUserDefaults.standardUserDefaults()
+    var achieved: String {
+        get { return defaults.objectForKey(Const.AchievedKey) as? String ?? "00000000" } //02.. tracks tested and enabled in svc...AchievedKey -tracks user achieved (earned or bought with In-App purchase) (1)extra balls, (2)audio tracks, (3)ball skins, (4)emojis, (5)redBlock-off, (6)poping targets
+        set { defaults.setObject(newValue, forKey: Const.AchievedKey) }
+    }
     var autoStart: Bool {
         get { return defaults.objectForKey(Const.AutoStartKey) as? Bool ?? false }
         set { defaults.setObject(newValue, forKey: Const.AutoStartKey) }
@@ -86,6 +92,10 @@ class Settings {
     var redBlockOn: Bool {
         get { return defaults.objectForKey(Const.RedBlockKey) as? Bool ?? true }
         set { defaults.setObject(newValue, forKey: Const.RedBlockKey) }
+    }
+    var soundChoice: Int {
+        get { return defaults.objectForKey(Const.SoundChoiceKey) as? Int ?? 0 }
+        set { defaults.setObject(newValue, forKey: Const.SoundChoiceKey) }
     }
     var soundOn: Bool {
         get { return defaults.objectForKey(Const.SoundKey) as? Bool ?? true }

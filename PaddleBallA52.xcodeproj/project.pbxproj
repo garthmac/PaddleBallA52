@@ -42,6 +42,9 @@
 		885E94E21B39FCA200432335 /* Brookes_25_27119b.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 885E94E11B39FCA200432335 /* Brookes_25_27119b.jpg */; };
 		885E94EE1B3A0C1E00432335 /* Comic Sans MS Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 885E94EA1B3A09DA00432335 /* Comic Sans MS Bold.ttf */; };
 		885E94EF1B3A0C2400432335 /* Comic Sans MS.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 885E94EC1B3A09EF00432335 /* Comic Sans MS.ttf */; };
+		889C987E1B4778C300ACDA2C /* 1000Credits0-20.png in Resources */ = {isa = PBXBuildFile; fileRef = 889C987B1B4778C300ACDA2C /* 1000Credits0-20.png */; };
+		889C987F1B4778C300ACDA2C /* 1000Credits1-20.png in Resources */ = {isa = PBXBuildFile; fileRef = 889C987C1B4778C300ACDA2C /* 1000Credits1-20.png */; };
+		889C98801B4778C300ACDA2C /* 1000Credits2-20.png in Resources */ = {isa = PBXBuildFile; fileRef = 889C987D1B4778C300ACDA2C /* 1000Credits2-20.png */; };
 		88B46C601B41ED08006A0E54 /* RedBlockViewController.swift in Resources */ = {isa = PBXBuildFile; fileRef = 88B46C5F1B41ED08006A0E54 /* RedBlockViewController.swift */; };
 		88DCAD4B1B4452150079046A /* extension_UIImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 88DCAD4A1B4452150079046A /* extension_UIImage.png */; };
 		88DCAD501B45B76D0079046A /* Phil Wickham-Carry My Soul(Live at RELEVANT).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 88DCAD4F1B45B76D0079046A /* Phil Wickham-Carry My Soul(Live at RELEVANT).mp3 */; };
@@ -116,6 +119,9 @@
 		885E94E11B39FCA200432335 /* Brookes_25_27119b.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Brookes_25_27119b.jpg; sourceTree = "<group>"; };
 		885E94EA1B3A09DA00432335 /* Comic Sans MS Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comic Sans MS Bold.ttf"; sourceTree = "<group>"; };
 		885E94EC1B3A09EF00432335 /* Comic Sans MS.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comic Sans MS.ttf"; sourceTree = "<group>"; };
+		889C987B1B4778C300ACDA2C /* 1000Credits0-20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1000Credits0-20.png"; sourceTree = "<group>"; };
+		889C987C1B4778C300ACDA2C /* 1000Credits1-20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1000Credits1-20.png"; sourceTree = "<group>"; };
+		889C987D1B4778C300ACDA2C /* 1000Credits2-20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1000Credits2-20.png"; sourceTree = "<group>"; };
 		88B46C5F1B41ED08006A0E54 /* RedBlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RedBlockViewController.swift; path = PaddleBallA52/RedBlockViewController.swift; sourceTree = "<group>"; };
 		88DCAD4A1B4452150079046A /* extension_UIImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = extension_UIImage.png; sourceTree = "<group>"; };
 		88DCAD4F1B45B76D0079046A /* Phil Wickham-Carry My Soul(Live at RELEVANT).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Phil Wickham-Carry My Soul(Live at RELEVANT).mp3"; sourceTree = "<group>"; };
@@ -199,6 +205,9 @@
 				88DCAD6D1B46EA460079046A /* peanuts-anim2.png */,
 				88DCAD6E1B46EA460079046A /* peanuts-anim1.png */,
 				88DCAD6F1B46EA460079046A /* peanuts-anim0.png */,
+				889C987B1B4778C300ACDA2C /* 1000Credits0-20.png */,
+				889C987C1B4778C300ACDA2C /* 1000Credits1-20.png */,
+				889C987D1B4778C300ACDA2C /* 1000Credits2-20.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -445,7 +454,9 @@
 				88EBF3471B2799540090A5A0 /* LaunchScreen.xib in Resources */,
 				8842257A1B4355F7003122E3 /* Icon-86@2x.png in Resources */,
 				88EBF3431B2799390090A5A0 /* Settings.bundle in Resources */,
+				889C98801B4778C300ACDA2C /* 1000Credits2-20.png in Resources */,
 				884225761B4355F7003122E3 /* Icon-57@2x.png in Resources */,
+				889C987F1B4778C300ACDA2C /* 1000Credits1-20.png in Resources */,
 				88DCAD771B46EA460079046A /* peanuts-anim1.png in Resources */,
 				884225821B4355F7003122E3 /* Icon-Small-29.png in Resources */,
 				884225731B4355F7003122E3 /* Icon-50.png in Resources */,
@@ -454,6 +465,7 @@
 				8842257C1B4355F7003122E3 /* Icon-60@2x.png in Resources */,
 				881048CB1B3F09A900712C9A /* IMG_3562.jpg in Resources */,
 				884225771B4355F7003122E3 /* Icon-24@2x.png in Resources */,
+				889C987E1B4778C300ACDA2C /* 1000Credits0-20.png in Resources */,
 				881048BF1B3E59D700712C9A /* mackie_swift.png in Resources */,
 				884225851B435605003122E3 /* iTunesArtwork@2x.png in Resources */,
 				88DCAD721B46EA460079046A /* peanuts-anim6.png in Resources */,

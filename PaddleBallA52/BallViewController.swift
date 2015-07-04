@@ -39,11 +39,13 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
     lazy var scoreBoard: UILabel = { let scoreBoard = UILabel(frame: CGRect(origin: CGPoint(x: -1 , y: -1), size: CGSize(width: min(self.gameView.frame.width, self.gameView.frame.height), height: 30.0)))
         scoreBoard.font = UIFont(name: "ComicSansMS-Bold", size: 18.0)
         scoreBoard.textAlignment = NSTextAlignment.Center
+        self.gameView.addSubview(scoreBoard)
         return scoreBoard
         }()
     lazy var powerBallScoreBoard: UILabel = { let scoreBoard = UILabel(frame: CGRect(origin: CGPoint(x: -1 , y: -1), size: CGSize(width: min(self.gameView.frame.width, self.gameView.frame.height), height: 40.0)))
         scoreBoard.font = UIFont(name: "ComicSansMS-Bold", size: 30.0)
         scoreBoard.textAlignment = NSTextAlignment.Center
+        self.gameView.addSubview(scoreBoard)
         return scoreBoard
         }()
     lazy var animator: UIDynamicAnimator = { UIDynamicAnimator(referenceView: self.gameView) }()
@@ -56,26 +58,60 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
     private var path: String! = ""
     private var soundTrack = 0
     private var availableCredits = 0
+    // MARK: - get coins!
+    lazy var coins: UIImageView = {
+        let size = CGSize(width: 42.0, height: 20.0)
+        let coins = UIImageView(frame: CGRect(origin: CGPoint(x: -1 , y: -1), size: size))
+        self.gameView.addSubview(coins)
+        return coins
+        }()
+    private var coinCount = 0
+    lazy var coinCountLabel: UILabel = { let coinCountLabel = UILabel(frame: CGRect(origin: CGPoint(x: -1 , y: -1), size: CGSize(width: 80.0, height: 20.0)))
+        coinCountLabel.font = UIFont(name: "ComicSansMS-Bold", size: 18.0)
+        coinCountLabel.textAlignment = NSTextAlignment.Center
+        self.gameView.addSubview(coinCountLabel)
+        return coinCountLabel
+        }()
+    func earnCoin() {
+        if ballCounter == 1 { //"PowerBall Achieved!"
+            //prepare for annimation
+            coinCountLabel.alpha = 0
+            coinCountLabel.center.y = gameView.bounds.maxY //move off screen
+            let images = (0...2).map {
+                UIImage(named: "1000Credits\($0)-20.png") as! AnyObject
+            }
+            if let image = images[min(coinCount, 2)] as? UIImage {
+                coins.image = image
+                coins.alpha = 0
+                coins.center.y = gameView.bounds.maxY //move off screen
+                UIView.animateWithDuration(4.0, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: nil, animations: {
+                    self.coinCount += 1
+                    if self.coinCount % 100 == 0 {
+                        self.availableCredits += 1
+                    }
+                    self.coinCountLabel.text = self.coinCount.addSeparator
+                    self.resetPaddleAndScoreBoard()
+                    self.coins.alpha = 1
+                    self.coinCountLabel.alpha = 1
+                    }, completion: nil)
+            }
+        }
+    }
     func prepareTabBar() {
         if let vcArray = tabBarController!.viewControllers as? [UIViewController] {
             let ivc = vcArray[3]    //CREDITS
             for view in ivc.view.subviews as! [UIView] {
                 if let animatedImageView = view as? UIImageView {
                     if animatedImageView.tag == 111 {
-                        let gifs = (0...8).map {
+                        let images = (0...8).map {
                             UIImage(named: "peanuts-anim\($0).png") as! AnyObject
                         }
-                        animatedImageView.animationImages = gifs
+                        animatedImageView.animationImages = images
                         animatedImageView.animationDuration = 9.0
-                        //animatedImageView.animationRepeatCount = 0 //0 repeat indefinitely is default
                         animatedImageView.startAnimating()
                     }
                 }
             }
-        }
-        let creditsTabItem = tabBarController!.tabBar.items![3] as! UITabBarItem
-        if availableCredits > 0 {
-            creditsTabItem.badgeValue = "\(availableCredits)"
         }
     }
     func prepareAudios() {
@@ -145,14 +181,16 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         let swipeRight = UISwipeGestureRecognizer(target: self, action: "swipePaddleRight:")
         swipeRight.direction = .Right
         gameView.addGestureRecognizer(swipeRight)
-        gameView.addSubview(scoreBoard)
-        gameView.addSubview(powerBallScoreBoard)
         setUpSwipeMeTextLayer()
         breakout.collisionDelegate = self
         self.tabBarController?.tabBar.hidden = true
         levelOne(tier)
     }
     override func viewWillAppear(animated: Bool) {
+        let creditsTabBarItem = tabBarController!.tabBar.items![3] as! UITabBarItem
+        if availableCredits == 0 {
+            creditsTabBarItem.badgeValue = nil
+        }
         super.viewWillAppear(animated)
         //Settings().type stuff set here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         if Settings().courtColor == "Blue" {
@@ -193,11 +231,6 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         }
         setAutoStartTimer()
       }
-    override func viewDidAppear(animated: Bool) {
-        if availableCredits == 0 {
-            (tabBarController!.tabBar.items![3] as! UITabBarItem).badgeValue = nil
-        }
-    }
     func resetWall() {
         Settings().changed = false
         for (index, brick) in bricks {
@@ -319,10 +352,15 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             paddle.center = CGPoint(x: gameView.bounds.midX, y: (gameView.bounds.maxY - paddle.bounds.height))
             scoreBoard.center = CGPoint(x: gameView.bounds.midX, y: (gameView.bounds.midY + 80.0))
             powerBallScoreBoard.center = CGPoint(x: gameView.bounds.midX, y: (gameView.bounds.midY + 110.0))
+            coins.center = CGPoint(x: gameView.bounds.midX - 40.0, y: gameView.bounds.minY + 12.0)
+            coinCountLabel.center = CGPoint(x: gameView.bounds.midX + 40.0, y: (gameView.bounds.minY + 12.0))
         } else {
             paddle.center = CGPoint(x: paddle.center.x, y: (gameView.bounds.maxY - paddle.bounds.height))
             scoreBoard.center = CGPoint(x: scoreBoard.center.x, y: (gameView.bounds.midY + 80.0))
             powerBallScoreBoard.center = CGPoint(x: scoreBoard.center.x, y: (gameView.bounds.midY + 110.0))
+            coins.center = CGPoint(x: scoreBoard.center.x - 40.0, y: gameView.bounds.minY + 12.0)
+            coinCountLabel.center = CGPoint(x: scoreBoard.center.x + 40.0, y: (gameView.bounds.minY + 12.0))
+
         }
         addPaddleBarrier()
     }
@@ -555,7 +593,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         }
         set { self.timestamp = newValue }
     }
-    var powerBall = 1
+    var powerBall = 1 //normal multiplier
     //remove the timer when a game has finished, and start it again afterwards...
     func levelFinished() {
         autoStartTimer?.invalidate()
@@ -571,14 +609,22 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         }
         // MARK: - animate PowerBall Achieved!
         if ballCounter == 1 {
-            powerBallScoreBoard.text = "PowerBall Achieved!"
+            let ac = availableCredits
+            earnCoin()
+            if ac != availableCredits {
+                powerBallScoreBoard.text = "Credit Earned!"
+                let creditsTabBarItem = tabBarController!.tabBar.items![3] as! UITabBarItem
+                creditsTabBarItem.badgeValue = "\(availableCredits)"
+            } else {
+                powerBallScoreBoard.text = "PowerBall Achieved!"
+            }
             powerBallScoreBoard.alpha = 0    //prepare for annimation
             powerBallScoreBoard.center.x = 0 //prepare for annimation
-            UIView.animateWithDuration(2.0, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: nil, animations: {
+            UIView.animateWithDuration(4.0, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: nil, animations: {
                 self.resetPaddleAndScoreBoard()
                 self.powerBallScoreBoard.alpha = 1
                 }, completion: nil)
-            powerBall = 3 //triple score until removed
+            powerBall = 3 //triple score multiplier until removed
             loggedInUser = User.login("japple", password: "foo") //bubble ball
             self.transformLayer.removeFromSuperlayer() //don't rebuild the cube during powerBall round
         } else {

@@ -13,6 +13,7 @@ class Settings {
     struct Const {
         static let AchievedKey = "Settings.Binary" //tracks user achieved (earned or bought with In-App purchase) extra balls, audio tracks, balls skins, emojis, redBlock-off, poping targets
         static let AutoStartKey = "Settings.Auto.Start" //allow balls to appear without user interaction:
+        static let AvailableCreditsKey = "Settings.Available" //
         static let BallColorKey = "Settings.Ball.Color"
         static let BallRotationKey = "Settings.Ball.Rotation" //allow balls to rotate when they encounter friction:
         static let BallsKey = "Settings.Balls" //allows to add multiple balls:
@@ -40,6 +41,10 @@ class Settings {
     var autoStart: Bool {
         get { return defaults.objectForKey(Const.AutoStartKey) as? Bool ?? false }
         set { defaults.setObject(newValue, forKey: Const.AutoStartKey) }
+    }
+    var availableCredits: Int {
+        get { return defaults.objectForKey(Const.AvailableCreditsKey) as? Int ?? 0 }
+        set { defaults.setObject(newValue, forKey: Const.AvailableCreditsKey) }
     }
     var ballColor: String {
         get { return defaults.objectForKey(Const.BallColorKey) as? String ?? "Yellow" }

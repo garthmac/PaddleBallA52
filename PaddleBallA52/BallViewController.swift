@@ -57,7 +57,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
     private var audioPlayer: AVAudioPlayer!
     private var path: String! = ""
     private var soundTrack = 0
-    private var availableCredits = 0
+    private var availableCredits = Settings().availableCredits
     // MARK: - get coins!
     lazy var coins: UIImageView = {
         let size = CGSize(width: 42.0, height: 20.0)
@@ -72,8 +72,22 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         self.gameView.addSubview(coinCountLabel)
         return coinCountLabel
         }()
+    lazy var largeCoin: UIImageView = {
+        let size = CGSize(width: 100.0, height: 100.0)
+        let coin = UIImageView(frame: CGRect(origin: CGPoint(x: -1 , y: -1), size: size))
+        self.gameView.addSubview(coin)
+        return coin
+        }()
     func earnCoin() {
         if ballCounter == 1 { //"PowerBall Achieved!"
+            //prepare for annimation
+            largeCoin.image = UIImage(named: "cufi100.png")
+            largeCoin.alpha = 1
+            largeCoin.center.y = gameView.bounds.minY //move off screen but alpha = 1
+            UIView.animateWithDuration(2.0, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: nil, animations: {
+                self.resetPaddleAndScoreBoard()
+                self.largeCoin.alpha = 0
+                }, completion: nil)
             //prepare for annimation
             coinCountLabel.alpha = 0
             coinCountLabel.center.y = gameView.bounds.maxY //move off screen
@@ -88,6 +102,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
                     self.coinCount += 1
                     if self.coinCount % 100 == 0 {
                         self.availableCredits += 1
+                        Settings().availableCredits += 1
                     }
                     self.coinCountLabel.text = self.coinCount.addSeparator
                     self.resetPaddleAndScoreBoard()
@@ -108,6 +123,14 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
                         }
                         animatedImageView.animationImages = images
                         animatedImageView.animationDuration = 9.0
+                        animatedImageView.startAnimating()
+                    }
+                    if animatedImageView.tag == 333 {
+                        let images = (0...6).map {
+                            UIImage(named: "typing-computer\($0).png") as! AnyObject
+                        }
+                        animatedImageView.animationImages = images
+                        animatedImageView.animationDuration = 1.0
                         animatedImageView.startAnimating()
                     }
                 }
@@ -134,7 +157,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         static let BallColor = "Yellow"
         static let BallSpeed: Float = 1.0
         static let BoxPathName = "Box"
-        static let CourtColor = "Clear"
+        static let CourtColor = "Black"
         static let PaddlePathName = "Paddle"
         static let PaddleColor = "Green"
         static let PaddleSize = CGSize(width: 80.0, height: 20.0)
@@ -196,9 +219,11 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         if Settings().courtColor == "Blue" {
             scoreBoard.textColor = UIColor.whiteColor()
             powerBallScoreBoard.textColor = UIColor.yellowColor()
+            coinCountLabel.textColor = UIColor.whiteColor()
         } else {
             scoreBoard.textColor = UIColor.blueColor()
             powerBallScoreBoard.textColor = UIColor.blueColor()
+            coinCountLabel.textColor = UIColor.blueColor()
         }
         breakout.speed = CGFloat(Settings().speed!)
         breakout.ballBehavior.allowsRotation = Settings().ballRotation
@@ -354,13 +379,14 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             powerBallScoreBoard.center = CGPoint(x: gameView.bounds.midX, y: (gameView.bounds.midY + 110.0))
             coins.center = CGPoint(x: gameView.bounds.midX - 40.0, y: gameView.bounds.minY + 12.0)
             coinCountLabel.center = CGPoint(x: gameView.bounds.midX + 40.0, y: (gameView.bounds.minY + 12.0))
+            largeCoin.center = CGPoint(x: gameView.bounds.midX, y: gameView.bounds.midY)
         } else {
             paddle.center = CGPoint(x: paddle.center.x, y: (gameView.bounds.maxY - paddle.bounds.height))
             scoreBoard.center = CGPoint(x: scoreBoard.center.x, y: (gameView.bounds.midY + 80.0))
             powerBallScoreBoard.center = CGPoint(x: scoreBoard.center.x, y: (gameView.bounds.midY + 110.0))
             coins.center = CGPoint(x: scoreBoard.center.x - 40.0, y: gameView.bounds.minY + 12.0)
             coinCountLabel.center = CGPoint(x: scoreBoard.center.x + 40.0, y: (gameView.bounds.minY + 12.0))
-
+            largeCoin.center = CGPoint(x: largeCoin.center.x, y: gameView.bounds.midY)
         }
         addPaddleBarrier()
     }
@@ -461,12 +487,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
                     brick.layer.contents = UIImage(named: "bom")!.CGImage
                 } else {
                 //brick.backgroundColor = Constants.BrickColors[row % Constants.BrickColors.count]
-                    brick.backgroundColor = UIColor.random
-                    if model.hasPrefix("iPad") || Settings().columns! < 10 { //can't read values on iPhone
-                        brick.setTitleColor(UIColor.blackColor(), forState: .Normal)
-                        brick.setTitle("\(UIColor.scoreForColor(brick.backgroundColor!))", forState: .Normal)
-                        brick.titleLabel!.font = UIFont(name: "ComicSansMS", size: 12.0)
-                    }
+                    prepareBrick(brick)
                     brick.layer.cornerRadius = cornerRadius
                     brick.layer.borderWidth = 1.5
                     brick.layer.borderColor = UIColor.blackColor().CGColor
@@ -492,10 +513,18 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             }
         }
     }
-    func changeBrickColor(timer: NSTimer) {
-        if let brick = timer.userInfo as? UIView {
+    func prepareBrick(brick: UIButton) {
+        brick.backgroundColor = UIColor.random
+        if model.hasPrefix("iPad") || Settings().columns! < 10 { //can't read values on iPhone
+            brick.setTitleColor(UIColor.blackColor(), forState: .Normal) //hides well
+            brick.setTitle("\(UIColor.scoreForColor(brick.backgroundColor!))", forState: .Normal)
+            brick.titleLabel!.font = UIFont(name: "ComicSansMS", size: 12.0)
+        }
+    }
+    func changeBrickColor(timer: NSTimer) { //only if overlayed with black
+        if let brick = timer.userInfo as? UIButton {
             UIView.animateWithDuration(0.5, animations: { () -> Void in
-                brick.backgroundColor = UIColor.cyanColor()
+                self.prepareBrick(brick)
                 }, completion: nil)
         }
     }
@@ -619,7 +648,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
                 powerBallScoreBoard.text = "PowerBall Achieved!"
             }
             powerBallScoreBoard.alpha = 0    //prepare for annimation
-            powerBallScoreBoard.center.x = 0 //prepare for annimation
+            powerBallScoreBoard.center.x = 0
             UIView.animateWithDuration(4.0, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: nil, animations: {
                 self.resetPaddleAndScoreBoard()
                 self.powerBallScoreBoard.alpha = 1
@@ -703,7 +732,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         swipeMeTextLayer.frame = CGRect(x: 0.0, y: sideLength / 4.0, width: sideLength, height: sideLength / 2.0)
         swipeMeTextLayer.string = "Red\r Block"
         swipeMeTextLayer.alignmentMode = kCAAlignmentCenter
-        swipeMeTextLayer.foregroundColor = UIColor.whiteColor().CGColor
+        swipeMeTextLayer.foregroundColor = UIColor.blueColor().CGColor
         let fontName = "ArialMT" as CFString
         let fontRef = CTFontCreateWithName(fontName, 10.0, nil)
         swipeMeTextLayer.font = fontRef
@@ -805,7 +834,7 @@ private extension UIColor {
         }
     }
     class var random: UIColor {
-        switch arc4random() % 12 {
+        switch arc4random() % 11 {
         case 0: return UIColor.greenColor()
         case 1: return UIColor.blueColor()
         case 2: return UIColor.orangeColor()
@@ -817,8 +846,7 @@ private extension UIColor {
         case 8: return UIColor.lightGrayColor()
         case 9: return UIColor.cyanColor()
         case 10: return UIColor.whiteColor()
-        case 11: return UIColor.clearColor()
-        default: return UIColor.blackColor()
+        default: return UIColor.clearColor()
         }
     }
 

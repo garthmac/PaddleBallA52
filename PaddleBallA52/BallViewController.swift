@@ -84,7 +84,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             largeCoin.image = UIImage(named: "cufi100.png")
             largeCoin.alpha = 1
             largeCoin.center.y = gameView.bounds.minY //move off screen but alpha = 1
-            UIView.animateWithDuration(2.0, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: nil, animations: {
+            UIView.animateWithDuration(3.0, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: nil, animations: {
                 self.resetPaddleAndScoreBoard()
                 self.largeCoin.alpha = 0
                 }, completion: nil)
@@ -100,7 +100,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
                 coins.center.y = gameView.bounds.maxY //move off screen
                 UIView.animateWithDuration(4.0, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: nil, animations: {
                     self.coinCount += 1
-                    if self.coinCount % 100 == 0 {
+                    if self.coinCount % 5 == 0 {
                         self.availableCredits += 1
                         Settings().availableCredits += 1
                     }
@@ -157,7 +157,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         static let BallColor = "Yellow"
         static let BallSpeed: Float = 1.0
         static let BoxPathName = "Box"
-        static let CourtColor = "Black"
+        static let CourtColor = "Clear"
         static let PaddlePathName = "Paddle"
         static let PaddleColor = "Green"
         static let PaddleSize = CGSize(width: 80.0, height: 20.0)
@@ -213,6 +213,8 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         let creditsTabBarItem = tabBarController!.tabBar.items![3] as! UITabBarItem
         if availableCredits == 0 {
             creditsTabBarItem.badgeValue = nil
+        } else {
+            creditsTabBarItem.badgeValue = "\(availableCredits)"
         }
         super.viewWillAppear(animated)
         //Settings().type stuff set here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -234,10 +236,11 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         paddle.frame.size = paddleSize
         paddle.layer.backgroundColor = UIColor.colorFor(Settings().paddleColor).CGColor
         
-        if Settings().redBlockOn {
+        if Settings().redBlockOn && powerBall == 1 {
             buildCube()
-        } else if transformLayer != nil {
-            transformLayer.removeFromSuperlayer()
+        } else if self.transformLayer != nil {
+            self.transformLayer.removeFromSuperlayer()
+            self.viewForTransformLayer.alpha = 0
         }
         if Settings().soundChoice != soundTrack {
             audioPlayer.pause()
@@ -375,17 +378,17 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         //** create paddle partly out so it gets reset the first time, then only when device is rotated
         if !CGRectContainsRect(gameView.bounds, paddle.frame) {
             paddle.center = CGPoint(x: gameView.bounds.midX, y: (gameView.bounds.maxY - paddle.bounds.height))
-            scoreBoard.center = CGPoint(x: gameView.bounds.midX, y: (gameView.bounds.midY + 80.0))
-            powerBallScoreBoard.center = CGPoint(x: gameView.bounds.midX, y: (gameView.bounds.midY + 110.0))
-            coins.center = CGPoint(x: gameView.bounds.midX - 40.0, y: gameView.bounds.minY + 12.0)
-            coinCountLabel.center = CGPoint(x: gameView.bounds.midX + 40.0, y: (gameView.bounds.minY + 12.0))
+            scoreBoard.center = CGPoint(x: gameView.bounds.midX, y: (gameView.bounds.maxY - 40.0))
+            powerBallScoreBoard.center = CGPoint(x: gameView.bounds.midX, y: (gameView.bounds.midY + 90.0))
+            coins.center = CGPoint(x: (gameView.bounds.midX - 40.0), y: (gameView.bounds.minY + 12.0))
+            coinCountLabel.center = CGPoint(x: (gameView.bounds.midX + 60.0), y: (gameView.bounds.minY + 10.0))
             largeCoin.center = CGPoint(x: gameView.bounds.midX, y: gameView.bounds.midY)
         } else {
             paddle.center = CGPoint(x: paddle.center.x, y: (gameView.bounds.maxY - paddle.bounds.height))
-            scoreBoard.center = CGPoint(x: scoreBoard.center.x, y: (gameView.bounds.midY + 80.0))
-            powerBallScoreBoard.center = CGPoint(x: scoreBoard.center.x, y: (gameView.bounds.midY + 110.0))
+            scoreBoard.center = CGPoint(x: scoreBoard.center.x, y: (gameView.bounds.maxY - 40.0))
+            powerBallScoreBoard.center = CGPoint(x: scoreBoard.center.x, y: (gameView.bounds.midY + 90.0))
             coins.center = CGPoint(x: scoreBoard.center.x - 40.0, y: gameView.bounds.minY + 12.0)
-            coinCountLabel.center = CGPoint(x: scoreBoard.center.x + 40.0, y: (gameView.bounds.minY + 12.0))
+            coinCountLabel.center = CGPoint(x: scoreBoard.center.x + 60.0, y: (gameView.bounds.minY + 10.0))
             largeCoin.center = CGPoint(x: largeCoin.center.x, y: gameView.bounds.midY)
         }
         addPaddleBarrier()
@@ -406,6 +409,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
     func panPaddle(gesture: UIPanGestureRecognizer) {
         switch gesture.state {
         case .Began:
+            self.tabBarController?.tabBar.hidden = true
             //redBlock
             let location = gesture.locationInView(viewForTransformLayer)
             //println(location)
@@ -645,7 +649,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
                 let creditsTabBarItem = tabBarController!.tabBar.items![3] as! UITabBarItem
                 creditsTabBarItem.badgeValue = "\(availableCredits)"
             } else {
-                powerBallScoreBoard.text = "PowerBall Achieved!"
+                powerBallScoreBoard.text = "PowerBall On!"
             }
             powerBallScoreBoard.alpha = 0    //prepare for annimation
             powerBallScoreBoard.center.x = 0
@@ -655,13 +659,15 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
                 }, completion: nil)
             powerBall = 3 //triple score multiplier until removed
             loggedInUser = User.login("japple", password: "foo") //bubble ball
-            self.transformLayer.removeFromSuperlayer() //don't rebuild the cube during powerBall round
+            if Settings().redBlockOn { //don't rebuild the cube during powerBall round
+                self.transformLayer.removeFromSuperlayer()
+                self.viewForTransformLayer.alpha = 0  //hide redBlock
+            }
         } else {
             powerBallScoreBoard.text = ""
             powerBall = 1 //back to regular scoring
             loggedInUser = User.login(uid, password: "foo")
-            self.transformLayer.removeFromSuperlayer()
-            self.buildCube()
+            buildCube()
         }
         
         var title = "Game Over!", message = "Try Again...", cancelButtonTitle = "Restart?"
@@ -701,6 +707,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         if buttonIndex == 0 {
             resetWall()
             scoreBoard.text = "" //clear any lingering bonus score
+            buildCube()
             ballCounter = 0
             cornerRadius = Constants.BrickCornerRadius
             score = 0
@@ -742,6 +749,8 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
     func buildCube() {
         transformLayer = CATransformLayer()
         if Settings().redBlockOn {
+            self.viewForTransformLayer.alpha = 1
+            
             let cr: CGFloat = cornerRadius //from bricks
             let opacity: CGFloat = 0.1
             var layer = sideLayerWithColor(UIColor.redColor().colorWithAlphaComponent(opacity))
@@ -781,10 +790,10 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             transform = CATransform3DRotate(transform, degreesToRadians(90.0), 1.0, 0.0, 0.0)
             layer.transform = transform
             transformLayer.addSublayer(layer)
+            
+            transformLayer.anchorPointZ = sideLength / -2.0
+            viewForTransformLayer.layer.addSublayer(transformLayer)
         }
-        transformLayer.anchorPointZ = sideLength / -2.0
-        viewForTransformLayer.layer.addSublayer(transformLayer)
-        
     }
     
     func sideLayerWithColor(color: UIColor) -> CALayer {

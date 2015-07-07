@@ -817,7 +817,7 @@
                                     <rect key="frame" x="179" y="198" width="33" height="0.0"/>
                                 </variation>
                             </label>
-                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2" minimumValue="1" maximumValue="8" translatesAutoresizingMaskIntoConstraints="NO" id="Pjm-Rq-Uqq">
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2" minimumValue="1" maximumValue="18" translatesAutoresizingMaskIntoConstraints="NO" id="Pjm-Rq-Uqq">
                                 <rect key="frame" x="113" y="241" width="94" height="29"/>
                                 <variation key="heightClass=compact-widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="118" y="57" width="94" height="29"/>

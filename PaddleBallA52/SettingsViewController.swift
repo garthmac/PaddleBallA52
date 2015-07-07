@@ -146,8 +146,13 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
             paddleWidthStepper.value = Double(newValue)
         }
     }
+    let model = UIDevice.currentDevice().model
     @IBAction func paddleWidthChanged(sender: UIStepper) {
-        paddleWidthMultiplier = Int(sender.value)
+        if model.hasPrefix("iPad") {
+            paddleWidthMultiplier = min(Int(sender.value), 18) //test 0
+        } else {
+            paddleWidthMultiplier = min(Int(sender.value), 7) //test 4
+        }
         Settings().paddleWidthMultiplier = paddleWidthMultiplier
     }
     var rows: Int {

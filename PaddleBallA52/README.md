@@ -10,7 +10,7 @@ uses AVAudioPlayer, dynamic behaviours, timer, alert, gestures and class extenti
 
 uses Settings.bundle for secondary settings
 - for Ball.Elasticity, Ball.Friction, 
-- for Paddle.Elasticity, Paddle.Friction, Sound F/X and
+- for Paddle.Elasticity, Paddle.Friction, SoundOn / Tracks and
   optional UserId...entering any id gives a tennis ball
                     ...enter soccer for soccer ball
 - Leader board (fake) added (showing a different top two + user per view)

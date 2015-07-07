@@ -135,9 +135,7 @@ class LeaderViewController: UIViewController { //, UIPickerViewDataSource, UIPic
     }
     func addPlayer1(uid1: String) {
         if let user1 = User.login("soccer", password: "foo") {
-            if profileImageView1!.image == nil {
-                profileImageView1!.image = user1.image
-            }
+            profileImageView1!.image = UIImage(named: String.randomBall())
             userIdLabel1.text = uid1
 //            if let date = user1.highScoreDate {
 //                dateCreatedLabel1?.text = date
@@ -151,9 +149,10 @@ class LeaderViewController: UIViewController { //, UIPickerViewDataSource, UIPic
     }
     func addPlayer2(uid2: String) {
         if let user2 = User.login("madbum", password: "foo") {
-            if profileImageView2!.image == nil {
-                profileImageView2!.image = user2.image
-            }
+//            if profileImageView2!.image == nil {
+//                profileImageView2!.image = user2.image
+//            }
+            profileImageView2!.image = UIImage(named: String.randomBall())
             userIdLabel2.text = uid2
 //            if let date = user2.highScoreDate {
 //                dateCreatedLabel2?.text = date
@@ -305,4 +304,48 @@ private extension String {
     let randomIndex = Int(arc4random_uniform(UInt32(names.count)))
     return names[randomIndex]
     }
+    static func randomBall() -> String {
+        let names2 = ["8ball",
+            "asian",
+            "asian33",
+            "baseball",
+            "basketball",
+            "bully72",
+            "c14",
+            "cd114",
+            "cd115",
+            "cufi100",
+            "dizzy34",
+            "no210",
+            "r21",
+            "ring",
+            "soccer",
+            "soccer206",
+            "star18",
+            "star57",
+            "sun56",
+            "sun94",
+            "sun135",
+            "tennis80",
+            "u148",
+            "u157",
+            "u158",
+            "u191",
+            "u193",
+            "u194",
+            "u195",
+            "u196",
+            "u197",
+            "u199",
+            "u200",
+            "u201",
+            "u202",
+            "u203",
+            "u204",
+            "u205",
+            "u207"]
+        let randomIndex = Int(arc4random_uniform(UInt32(names2.count)))
+        return names2[randomIndex]
+    }
+
 }

@@ -54,8 +54,8 @@
 		889C98901B48E47200ACDA2C /* typing-computer2.png in Resources */ = {isa = PBXBuildFile; fileRef = 889C98891B48E47200ACDA2C /* typing-computer2.png */; };
 		889C98911B48E47200ACDA2C /* typing-computer1.png in Resources */ = {isa = PBXBuildFile; fileRef = 889C988A1B48E47200ACDA2C /* typing-computer1.png */; };
 		889C98921B48E47200ACDA2C /* typing-computer0.png in Resources */ = {isa = PBXBuildFile; fileRef = 889C988B1B48E47200ACDA2C /* typing-computer0.png */; };
-		889C98941B49B29100ACDA2C /* Fireball.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 889C98931B49B29100ACDA2C /* Fireball.jpg */; };
-		889C98961B49B29F00ACDA2C /* Fireball_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 889C98951B49B29F00ACDA2C /* Fireball_2.jpg */; };
+		889C989F1B4B424D00ACDA2C /* Fireball210_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 889C989D1B4B424D00ACDA2C /* Fireball210_2.png */; };
+		889C98A01B4B424D00ACDA2C /* Fireball210_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 889C989E1B4B424D00ACDA2C /* Fireball210_1.png */; };
 		88B46C601B41ED08006A0E54 /* RedBlockViewController.swift in Resources */ = {isa = PBXBuildFile; fileRef = 88B46C5F1B41ED08006A0E54 /* RedBlockViewController.swift */; };
 		88DCAD4B1B4452150079046A /* extension_UIImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 88DCAD4A1B4452150079046A /* extension_UIImage.png */; };
 		88DCAD501B45B76D0079046A /* Phil Wickham-Carry My Soul(Live at RELEVANT).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 88DCAD4F1B45B76D0079046A /* Phil Wickham-Carry My Soul(Live at RELEVANT).mp3 */; };
@@ -142,8 +142,8 @@
 		889C98891B48E47200ACDA2C /* typing-computer2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "typing-computer2.png"; sourceTree = "<group>"; };
 		889C988A1B48E47200ACDA2C /* typing-computer1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "typing-computer1.png"; sourceTree = "<group>"; };
 		889C988B1B48E47200ACDA2C /* typing-computer0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "typing-computer0.png"; sourceTree = "<group>"; };
-		889C98931B49B29100ACDA2C /* Fireball.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Fireball.jpg; sourceTree = "<group>"; };
-		889C98951B49B29F00ACDA2C /* Fireball_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Fireball_2.jpg; sourceTree = "<group>"; };
+		889C989D1B4B424D00ACDA2C /* Fireball210_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Fireball210_2.png; sourceTree = "<group>"; };
+		889C989E1B4B424D00ACDA2C /* Fireball210_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Fireball210_1.png; sourceTree = "<group>"; };
 		88B46C5F1B41ED08006A0E54 /* RedBlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RedBlockViewController.swift; path = PaddleBallA52/RedBlockViewController.swift; sourceTree = "<group>"; };
 		88DCAD4A1B4452150079046A /* extension_UIImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = extension_UIImage.png; sourceTree = "<group>"; };
 		88DCAD4F1B45B76D0079046A /* Phil Wickham-Carry My Soul(Live at RELEVANT).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Phil Wickham-Carry My Soul(Live at RELEVANT).mp3"; sourceTree = "<group>"; };
@@ -239,8 +239,8 @@
 				889C987B1B4778C300ACDA2C /* 1000Credits0-20.png */,
 				889C987C1B4778C300ACDA2C /* 1000Credits1-20.png */,
 				889C987D1B4778C300ACDA2C /* 1000Credits2-20.png */,
-				889C98931B49B29100ACDA2C /* Fireball.jpg */,
-				889C98951B49B29F00ACDA2C /* Fireball_2.jpg */,
+				889C989D1B4B424D00ACDA2C /* Fireball210_2.png */,
+				889C989E1B4B424D00ACDA2C /* Fireball210_1.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -494,6 +494,8 @@
 				889C98801B4778C300ACDA2C /* 1000Credits2-20.png in Resources */,
 				884225761B4355F7003122E3 /* Icon-57@2x.png in Resources */,
 				889C987F1B4778C300ACDA2C /* 1000Credits1-20.png in Resources */,
+				889C989F1B4B424D00ACDA2C /* Fireball210_2.png in Resources */,
+				889C98A01B4B424D00ACDA2C /* Fireball210_1.png in Resources */,
 				88DCAD771B46EA460079046A /* peanuts-anim1.png in Resources */,
 				884225821B4355F7003122E3 /* Icon-Small-29.png in Resources */,
 				889C988F1B48E47200ACDA2C /* typing-computer3.png in Resources */,
@@ -507,12 +509,10 @@
 				884225771B4355F7003122E3 /* Icon-24@2x.png in Resources */,
 				889C987E1B4778C300ACDA2C /* 1000Credits0-20.png in Resources */,
 				881048BF1B3E59D700712C9A /* mackie_swift.png in Resources */,
-				889C98941B49B29100ACDA2C /* Fireball.jpg in Resources */,
 				884225851B435605003122E3 /* iTunesArtwork@2x.png in Resources */,
 				889C98911B48E47200ACDA2C /* typing-computer1.png in Resources */,
 				88DCAD721B46EA460079046A /* peanuts-anim6.png in Resources */,
 				88EBF3351B2798C50090A5A0 /* LICENSE in Resources */,
-				889C98961B49B29F00ACDA2C /* Fireball_2.jpg in Resources */,
 				88DCAD7C1B46EDFF0079046A /* peanuts-anim7.png in Resources */,
 				889C98841B48DFD400ACDA2C /* snoopy1.jpg in Resources */,
 				881048D11B3F314000712C9A /* padel520.jpg in Resources */,

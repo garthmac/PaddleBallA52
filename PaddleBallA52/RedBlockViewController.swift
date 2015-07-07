@@ -8,13 +8,13 @@
 
 import UIKit
 
-func degreesToRadians(degrees: Double) -> CGFloat {
-    return CGFloat(degrees * M_PI / 180.0)
-}
-
-func radiansToDegrees(radians: Double) -> CGFloat {
-    return CGFloat(radians / M_PI * 180.0)
-}
+//func degreesToRadians(degrees: Double) -> CGFloat {
+//    return CGFloat(degrees * M_PI / 180.0)
+//}
+//
+//func radiansToDegrees(radians: Double) -> CGFloat {
+//    return CGFloat(radians / M_PI * 180.0)
+//}
 
 class RedBlockViewController: UIViewController {
     

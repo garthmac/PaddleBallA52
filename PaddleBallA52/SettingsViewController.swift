@@ -59,6 +59,17 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         paddleColorPickerView.delegate = self
         setPurchasedExtras()
     }
+    func setPurchasedExtras() {
+        let achieved = Settings().achieved  //"00000000"
+        let maxSoundTrack = achieved.intAtIndex(1)!
+        if maxSoundTrack > 0 {
+            if let soundTrackControl = self.view.viewWithTag(222) as? UISegmentedControl {
+                for i in 1...maxSoundTrack {
+                    soundTrackControl.setEnabled(true, forSegmentAtIndex: i)
+                }
+            }
+        }
+    }
     var ballColor: String {
         get { return ballColorLabel.text! }
         set {
@@ -218,17 +229,6 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         rows = Settings().rows!
         soundOn = Settings().soundOn
         speed = Settings().speed!
-    }
-    func setPurchasedExtras() {
-        let achieved = Settings().achieved  //"00000000"
-        let maxSoundTrack = achieved.intAtIndex(1)!
-        if maxSoundTrack > 0 {
-            if let soundTrackControl = self.view.viewWithTag(222) as? UISegmentedControl {
-                for i in 1...maxSoundTrack {
-                    soundTrackControl.setEnabled(true, forSegmentAtIndex: i)
-                }
-            }
-        }
     }
 }
 

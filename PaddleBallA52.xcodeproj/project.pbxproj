@@ -56,6 +56,8 @@
 		889C98921B48E47200ACDA2C /* typing-computer0.png in Resources */ = {isa = PBXBuildFile; fileRef = 889C988B1B48E47200ACDA2C /* typing-computer0.png */; };
 		889C989F1B4B424D00ACDA2C /* Fireball210_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 889C989D1B4B424D00ACDA2C /* Fireball210_2.png */; };
 		889C98A01B4B424D00ACDA2C /* Fireball210_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 889C989E1B4B424D00ACDA2C /* Fireball210_1.png */; };
+		889C98A21B4CF9B800ACDA2C /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889C98A11B4CF9B800ACDA2C /* ShopViewController.swift */; };
+		889C98A41B4DA52B00ACDA2C /* pineapple_400.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 889C98A31B4DA52B00ACDA2C /* pineapple_400.jpg */; };
 		88B46C601B41ED08006A0E54 /* RedBlockViewController.swift in Resources */ = {isa = PBXBuildFile; fileRef = 88B46C5F1B41ED08006A0E54 /* RedBlockViewController.swift */; };
 		88DCAD4B1B4452150079046A /* extension_UIImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 88DCAD4A1B4452150079046A /* extension_UIImage.png */; };
 		88DCAD501B45B76D0079046A /* Phil Wickham-Carry My Soul(Live at RELEVANT).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 88DCAD4F1B45B76D0079046A /* Phil Wickham-Carry My Soul(Live at RELEVANT).mp3 */; };
@@ -144,6 +146,8 @@
 		889C988B1B48E47200ACDA2C /* typing-computer0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "typing-computer0.png"; sourceTree = "<group>"; };
 		889C989D1B4B424D00ACDA2C /* Fireball210_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Fireball210_2.png; sourceTree = "<group>"; };
 		889C989E1B4B424D00ACDA2C /* Fireball210_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Fireball210_1.png; sourceTree = "<group>"; };
+		889C98A11B4CF9B800ACDA2C /* ShopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
+		889C98A31B4DA52B00ACDA2C /* pineapple_400.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pineapple_400.jpg; sourceTree = "<group>"; };
 		88B46C5F1B41ED08006A0E54 /* RedBlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RedBlockViewController.swift; path = PaddleBallA52/RedBlockViewController.swift; sourceTree = "<group>"; };
 		88DCAD4A1B4452150079046A /* extension_UIImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = extension_UIImage.png; sourceTree = "<group>"; };
 		88DCAD4F1B45B76D0079046A /* Phil Wickham-Carry My Soul(Live at RELEVANT).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Phil Wickham-Carry My Soul(Live at RELEVANT).mp3"; sourceTree = "<group>"; };
@@ -229,6 +233,7 @@
 				88DCAD6D1B46EA460079046A /* peanuts-anim2.png */,
 				88DCAD6E1B46EA460079046A /* peanuts-anim1.png */,
 				88DCAD6F1B46EA460079046A /* peanuts-anim0.png */,
+				889C98A31B4DA52B00ACDA2C /* pineapple_400.jpg */,
 				889C98851B48E47200ACDA2C /* typing-computer6.png */,
 				889C98861B48E47200ACDA2C /* typing-computer5.png */,
 				889C98871B48E47200ACDA2C /* typing-computer4.png */,
@@ -330,6 +335,7 @@
 				88EBF3331B2798C50090A5A0 /* LICENSE */,
 				88EBF3361B2798D80090A5A0 /* Main.storyboard */,
 				885E94D11B3384FE00432335 /* LeaderViewController.swift */,
+				889C98A11B4CF9B800ACDA2C /* ShopViewController.swift */,
 				885E94D41B34A94900432335 /* ImageViewController.swift */,
 				88EBF3421B2799390090A5A0 /* Settings.bundle */,
 				88EBF3391B27992E0090A5A0 /* Settings.swift */,
@@ -488,6 +494,7 @@
 				881559121B30E19600D60626 /* 1-FloUnitCircle.png in Resources */,
 				88DCAD521B45C37C0079046A /* Phil Wickham - At Your Name (Yahweh, Yahweh).mp3 in Resources */,
 				88EBF3471B2799540090A5A0 /* LaunchScreen.xib in Resources */,
+				889C98A41B4DA52B00ACDA2C /* pineapple_400.jpg in Resources */,
 				8842257A1B4355F7003122E3 /* Icon-86@2x.png in Resources */,
 				88EBF3431B2799390090A5A0 /* Settings.bundle in Resources */,
 				889C98831B48DFD400ACDA2C /* snoopy2.jpg in Resources */,
@@ -536,6 +543,7 @@
 			files = (
 				88EBF3401B27992E0090A5A0 /* BreakoutBehavior.swift in Sources */,
 				885E94D21B3384FE00432335 /* LeaderViewController.swift in Sources */,
+				889C98A21B4CF9B800ACDA2C /* ShopViewController.swift in Sources */,
 				88EBF33F1B27992E0090A5A0 /* User.swift in Sources */,
 				881048B91B3E22F000712C9A /* TrackBall.swift in Sources */,
 				88EBF3131B2798A70090A5A0 /* AppDelegate.swift in Sources */,

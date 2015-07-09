@@ -68,9 +68,187 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2021" y="311"/>
+            <point key="canvasLocation" x="964.5" y="265.5"/>
         </scene>
-        <!--CREDITS-->
+        <!--SHOP-->
+        <scene sceneID="Y8y-h6-cqv">
+            <objects>
+                <viewController id="wR6-8n-lXG" customClass="ShopViewController" customModule="PaddleBallA52" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2jF-ig-udB"/>
+                        <viewControllerLayoutGuide type="bottom" id="JbB-qz-QGC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="LgR-xO-rGd">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" alpha="0.24999999999999967" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pineapple_400.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="R6t-G5-E28">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                            </imageView>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ux-Dr-YYU">
+                                <rect key="frame" x="339" y="319" width="30" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <size key="titleShadowOffset" width="1" height="0.0"/>
+                                <state key="normal" title="Buy">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="buyBallSkin:" destination="wR6-8n-lXG" eventType="touchUpInside" id="STQ-xk-lKO"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IXr-h3-ix0">
+                                <rect key="frame" x="232" y="319" width="30" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <size key="titleShadowOffset" width="1" height="0.0"/>
+                                <state key="normal" title="Buy">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="buyBallSkin:" destination="wR6-8n-lXG" eventType="touchUpInside" id="OhC-ly-J8y"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Spend Wisely" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="53j-GT-mr6">
+                                <rect key="frame" x="199" y="13" width="203" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="109px-Coin_Artwork_-_Super_Mario_3D_World" translatesAutoresizingMaskIntoConstraints="NO" id="YK9-i8-HUS">
+                                <rect key="frame" x="131" y="10" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="465-Si-D5U"/>
+                                    <constraint firstAttribute="width" constant="48" id="wAq-6Z-aYN"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="84px-Coin_Stack_Artwork_-_Super_Mario_3D_World" translatesAutoresizingMaskIntoConstraints="NO" id="DzD-pd-7at">
+                                <rect key="frame" x="422" y="10" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="Pn9-lC-N51"/>
+                                    <constraint firstAttribute="width" constant="48" id="QlS-FT-dW4"/>
+                                </constraints>
+                            </imageView>
+                            <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hpe-Ei-WrE">
+                                <rect key="frame" x="100" y="95" width="400" height="216"/>
+                            </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Ball skins" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yKM-oW-idW">
+                                <rect key="frame" x="207" y="66" width="80" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Ball skins" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rfR-RL-iZJ">
+                                <rect key="frame" x="314" y="66" width="80" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Ball skins" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mzT-bA-e9X">
+                                <rect key="frame" x="420" y="66" width="80" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Ball skins" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hf3-t5-20Y">
+                                <rect key="frame" x="100" y="66" width="80" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xsc-vt-lse">
+                                <rect key="frame" x="117" y="319" width="30" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <size key="titleShadowOffset" width="1" height="0.0"/>
+                                <state key="normal" title="Buy">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="buyBallSkin:" destination="wR6-8n-lXG" eventType="touchUpInside" id="79f-dH-6Bh"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yNw-wM-mNr">
+                                <rect key="frame" x="440" y="319" width="30" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <size key="titleShadowOffset" width="1" height="0.0"/>
+                                <state key="normal" title="Buy">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="buyBallSkin:" destination="wR6-8n-lXG" eventType="touchUpInside" id="NXN-ZV-6da"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="mzT-bA-e9X" firstAttribute="trailing" secondItem="hpe-Ei-WrE" secondAttribute="trailing" id="1ei-xy-kiP"/>
+                            <constraint firstItem="DzD-pd-7at" firstAttribute="leading" secondItem="53j-GT-mr6" secondAttribute="trailing" constant="20" id="1ez-Ta-ZoZ"/>
+                            <constraint firstItem="hpe-Ei-WrE" firstAttribute="top" secondItem="Hf3-t5-20Y" secondAttribute="bottom" constant="8" symbolic="YES" id="1we-Y9-a61"/>
+                            <constraint firstItem="JbB-qz-QGC" firstAttribute="top" secondItem="R6t-G5-E28" secondAttribute="bottom" id="3cR-F9-2E4"/>
+                            <constraint firstItem="Hf3-t5-20Y" firstAttribute="centerX" secondItem="Xsc-vt-lse" secondAttribute="centerX" id="3t6-Ri-e9q"/>
+                            <constraint firstItem="yKM-oW-idW" firstAttribute="centerX" secondItem="IXr-h3-ix0" secondAttribute="centerX" id="5Uc-EZ-16u"/>
+                            <constraint firstItem="yNw-wM-mNr" firstAttribute="top" secondItem="mzT-bA-e9X" secondAttribute="bottom" constant="160" id="5Vv-Tg-kVm"/>
+                            <constraint firstItem="53j-GT-mr6" firstAttribute="leading" secondItem="YK9-i8-HUS" secondAttribute="trailing" constant="20" id="5zh-Of-5Zv"/>
+                            <constraint firstItem="R6t-G5-E28" firstAttribute="leading" secondItem="LgR-xO-rGd" secondAttribute="leadingMargin" constant="-16" id="7kW-xb-6Sb"/>
+                            <constraint firstItem="7ux-Dr-YYU" firstAttribute="centerX" secondItem="rfR-RL-iZJ" secondAttribute="centerX" id="8uA-Rr-y2C"/>
+                            <constraint firstItem="Hf3-t5-20Y" firstAttribute="centerY" secondItem="hpe-Ei-WrE" secondAttribute="centerY" constant="-80" id="9Ar-Iu-EuY"/>
+                            <constraint firstItem="mzT-bA-e9X" firstAttribute="centerY" secondItem="hpe-Ei-WrE" secondAttribute="centerY" constant="-80" id="Ccw-cf-Fv2"/>
+                            <constraint firstItem="Hf3-t5-20Y" firstAttribute="top" secondItem="YK9-i8-HUS" secondAttribute="bottom" constant="8" symbolic="YES" id="DWj-sh-Xo3"/>
+                            <constraint firstItem="DzD-pd-7at" firstAttribute="centerY" secondItem="53j-GT-mr6" secondAttribute="centerY" id="El3-vW-ZUv"/>
+                            <constraint firstItem="mzT-bA-e9X" firstAttribute="centerX" secondItem="yNw-wM-mNr" secondAttribute="centerX" id="Fc0-nc-hOc"/>
+                            <constraint firstItem="mzT-bA-e9X" firstAttribute="leading" secondItem="rfR-RL-iZJ" secondAttribute="trailing" constant="8" symbolic="YES" id="GCq-VM-gxP"/>
+                            <constraint firstItem="Hf3-t5-20Y" firstAttribute="leading" secondItem="hpe-Ei-WrE" secondAttribute="leading" id="HIl-VY-qCW"/>
+                            <constraint firstAttribute="centerX" secondItem="hpe-Ei-WrE" secondAttribute="centerX" id="IPu-Zf-TnT"/>
+                            <constraint firstItem="hpe-Ei-WrE" firstAttribute="centerX" secondItem="R6t-G5-E28" secondAttribute="centerX" id="J8y-DQ-7gM"/>
+                            <constraint firstItem="hpe-Ei-WrE" firstAttribute="centerY" secondItem="yKM-oW-idW" secondAttribute="centerY" constant="80" id="JlK-9h-4qc"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="R6t-G5-E28" secondAttribute="trailing" constant="-16" id="MzN-XN-8rJ"/>
+                            <constraint firstAttribute="centerY" secondItem="R6t-G5-E28" secondAttribute="centerY" id="N0f-bm-IL6"/>
+                            <constraint firstAttribute="centerX" secondItem="R6t-G5-E28" secondAttribute="centerX" id="ORY-R3-igF"/>
+                            <constraint firstItem="JbB-qz-QGC" firstAttribute="top" secondItem="hpe-Ei-WrE" secondAttribute="bottom" constant="60" id="WWb-sK-zMA"/>
+                            <constraint firstAttribute="centerX" secondItem="53j-GT-mr6" secondAttribute="centerX" id="XRm-AQ-ZSK"/>
+                            <constraint firstItem="yKM-oW-idW" firstAttribute="top" secondItem="Hf3-t5-20Y" secondAttribute="top" id="Yr0-JU-K4t"/>
+                            <constraint firstItem="yKM-oW-idW" firstAttribute="top" secondItem="rfR-RL-iZJ" secondAttribute="top" id="Z1X-Pd-cfR"/>
+                            <constraint firstItem="mzT-bA-e9X" firstAttribute="top" secondItem="rfR-RL-iZJ" secondAttribute="top" id="Zgf-Ks-JMc"/>
+                            <constraint firstItem="7ux-Dr-YYU" firstAttribute="top" secondItem="rfR-RL-iZJ" secondAttribute="bottom" constant="160" id="cKN-Ot-Iek"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="mzT-bA-e9X" secondAttribute="trailing" constant="-15" id="cMw-8e-YU0"/>
+                            <constraint firstItem="YK9-i8-HUS" firstAttribute="centerY" secondItem="53j-GT-mr6" secondAttribute="centerY" id="cTS-h6-2Mf"/>
+                            <constraint firstItem="R6t-G5-E28" firstAttribute="leading" secondItem="Hf3-t5-20Y" secondAttribute="trailing" constant="-111" id="ezb-iX-Igk"/>
+                            <constraint firstItem="IXr-h3-ix0" firstAttribute="top" secondItem="yKM-oW-idW" secondAttribute="bottom" constant="160" id="foI-dr-Hej"/>
+                            <constraint firstItem="hpe-Ei-WrE" firstAttribute="centerY" secondItem="rfR-RL-iZJ" secondAttribute="centerY" constant="80" id="ggv-zw-tY7"/>
+                            <constraint firstItem="YK9-i8-HUS" firstAttribute="top" secondItem="2jF-ig-udB" secondAttribute="bottom" constant="8" symbolic="YES" id="lAY-CV-zMw"/>
+                            <constraint firstItem="Hf3-t5-20Y" firstAttribute="leading" secondItem="LgR-xO-rGd" secondAttribute="leadingMargin" constant="-15" id="p18-JV-xXR"/>
+                            <constraint firstItem="hpe-Ei-WrE" firstAttribute="centerX" secondItem="Hf3-t5-20Y" secondAttribute="centerX" id="ppu-Jx-1xg"/>
+                            <constraint firstItem="Xsc-vt-lse" firstAttribute="top" secondItem="Hf3-t5-20Y" secondAttribute="bottom" constant="160" id="rXp-5L-zmA"/>
+                            <constraint firstItem="R6t-G5-E28" firstAttribute="top" secondItem="2jF-ig-udB" secondAttribute="bottom" constant="-20" id="sPW-vq-zlV"/>
+                            <constraint firstItem="hpe-Ei-WrE" firstAttribute="leading" secondItem="LgR-xO-rGd" secondAttribute="leadingMargin" id="v5W-27-Osy"/>
+                            <constraint firstItem="yKM-oW-idW" firstAttribute="leading" secondItem="Hf3-t5-20Y" secondAttribute="trailing" constant="8" symbolic="YES" id="xtj-Kz-cTh"/>
+                            <constraint firstItem="rfR-RL-iZJ" firstAttribute="leading" secondItem="yKM-oW-idW" secondAttribute="trailing" constant="8" symbolic="YES" id="yG1-yb-bfi"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="ezb-iX-Igk"/>
+                                <exclude reference="p18-JV-xXR"/>
+                                <exclude reference="1we-Y9-a61"/>
+                                <exclude reference="J8y-DQ-7gM"/>
+                                <exclude reference="ppu-Jx-1xg"/>
+                                <exclude reference="v5W-27-Osy"/>
+                                <exclude reference="cMw-8e-YU0"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="SHOP" image="Icon-24.png" id="OJi-8c-9zY"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="backdropImageView" destination="R6t-G5-E28" id="XgU-wB-Feh"/>
+                        <outlet property="leftTrophyImageView" destination="YK9-i8-HUS" id="jtF-iw-4zD"/>
+                        <outlet property="rightTrophyImageView" destination="DzD-pd-7at" id="lRD-QT-fme"/>
+                        <outlet property="titleLabel" destination="53j-GT-mr6" id="feb-3K-icA"/>
+                        <outlet property="userPickerView" destination="hpe-Ei-WrE" id="VUr-9o-eYq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vbO-wE-6tQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-789" y="1093"/>
+        </scene>
+        <!--Credits-->
         <scene sceneID="GfL-tN-KC6">
             <objects>
                 <viewController id="yk6-Vi-cBp" sceneMemberID="viewController">
@@ -119,9 +297,11 @@
                                     <constraint firstAttribute="width" constant="176" id="6Km-bS-Kdq"/>
                                     <constraint firstAttribute="width" secondItem="guT-HH-0UT" secondAttribute="height" multiplier="101:41" id="9jb-cW-KwH"/>
                                     <constraint firstAttribute="width" secondItem="guT-HH-0UT" secondAttribute="height" multiplier="179:142" id="fAi-MP-L6V"/>
-                                    <constraint firstAttribute="width" constant="322" id="sZB-zH-Kvj"/>
+                                    <constraint firstAttribute="width" constant="322" id="sZB-zH-Kvj">
+                                        <variation key="heightClass=compact-widthClass=compact" constant="330"/>
+                                    </constraint>
                                 </constraints>
-                                <string key="text">Thanks to Jesus and the team... Shayna - artistic / game analyst / testing Ben - gaming research.      Danae and Michael - testing.                                                                                                    garthmac@juno.com 2015 RedBlock Games</string>
+                                <string key="text">Thank-you Jesus and team... Shayna - artistic analyst/testing,  Ben - gaming research,  Danae, Mike - testing. 2015 RedBlock Games garthmac@juno.com</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -133,7 +313,7 @@
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=compact-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="323" height="80"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="330" height="100"/>
                                 </variation>
                             </textView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="snoopy2.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="GTn-c3-xcr">
@@ -165,7 +345,7 @@
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=compact-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="44" width="46" height="164"/>
+                                    <rect key="frame" x="0.0" y="108" width="81" height="100"/>
                                     <mask key="constraints">
                                         <include reference="g86-FZ-0un"/>
                                         <exclude reference="u3d-uH-nd6"/>
@@ -173,7 +353,7 @@
                                 </variation>
                             </imageView>
                             <imageView userInteractionEnabled="NO" tag="111" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="snoopy-tennis.png" translatesAutoresizingMaskIntoConstraints="NO" id="0qy-Lw-7I9">
-                                <rect key="frame" x="173" y="99" width="276" height="153"/>
+                                <rect key="frame" x="173" y="108" width="276" height="144"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="0qy-Lw-7I9" secondAttribute="height" multiplier="215:142" id="3ce-wX-N77"/>
                                     <constraint firstAttribute="width" secondItem="0qy-Lw-7I9" secondAttribute="height" multiplier="215:142" id="TvY-qu-ZPx"/>
@@ -191,7 +371,7 @@
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=compact-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="136" y="81" width="187" height="145"/>
+                                    <rect key="frame" x="89" y="82" width="234" height="144"/>
                                 </variation>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="snoopy1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="VxH-B0-AlZ">
@@ -432,12 +612,12 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="CREDITS" image="end20" id="8s1-UO-oPB"/>
+                    <tabBarItem key="tabBarItem" title="Credits" image="end20" id="8s1-UO-oPB"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jdK-Ru-dlA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-130.5" y="1093.5"/>
+            <point key="canvasLocation" x="-131" y="1093"/>
         </scene>
         <!--Settings-->
         <scene sceneID="H70-OD-rdT">
@@ -1990,7 +2170,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y7p-dX-cnD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="562" y="1095"/>
+            <point key="canvasLocation" x="528" y="1095"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="YXJ-Ez-tXD">
@@ -2007,11 +2187,12 @@
                         <segue destination="sm4-Cz-Z1Y" kind="relationship" relationship="viewControllers" id="dEr-YV-3Vv"/>
                         <segue destination="lCA-mO-d4U" kind="relationship" relationship="viewControllers" id="bvj-mw-kp7"/>
                         <segue destination="yk6-Vi-cBp" kind="relationship" relationship="viewControllers" id="WTS-vc-DYu"/>
+                        <segue destination="wR6-8n-lXG" kind="relationship" relationship="viewControllers" id="uXx-Ov-3zN"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BNa-6m-fVR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="562" y="311"/>
+            <point key="canvasLocation" x="-471" y="199.5"/>
         </scene>
         <!--Paddle Ball-->
         <scene sceneID="ElX-Pb-qYL">
@@ -2030,7 +2211,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ycc-cH-gwC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1278" y="311"/>
+            <point key="canvasLocation" x="261" y="265.5"/>
         </scene>
         <!--High Score-->
         <scene sceneID="24O-fy-CfO">
@@ -2495,7 +2676,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5kf-jt-nyA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1278" y="1095"/>
+            <point key="canvasLocation" x="1191" y="1095"/>
         </scene>
         <!--Smile!-->
         <scene sceneID="vpp-DB-YdX">
@@ -2574,7 +2755,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UUE-DK-Pq9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="eHq-yv-7a7" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2686" y="1041"/>
+            <point key="canvasLocation" x="1732.5" y="343.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="SMQ-LJ-eYd">
@@ -2592,13 +2773,16 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ad4-5V-u2y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1989" y="984"/>
+            <point key="canvasLocation" x="1890" y="1095"/>
         </scene>
     </scenes>
     <resources>
         <image name="1-FloUnitCircle.png" width="400" height="400"/>
+        <image name="109px-Coin_Artwork_-_Super_Mario_3D_World" width="109" height="120"/>
+        <image name="84px-Coin_Stack_Artwork_-_Super_Mario_3D_World" width="84" height="119"/>
         <image name="Brookes_25_27119b.jpg" width="780" height="520"/>
         <image name="IMG_3562.jpg" width="600" height="800"/>
+        <image name="Icon-24.png" width="24" height="24"/>
         <image name="badge-git-real-5d91905b69d46286cab389797ea81983.png" width="118" height="117"/>
         <image name="breakout" width="25" height="25"/>
         <image name="camera2" width="48" height="35"/>
@@ -2606,6 +2790,7 @@
         <image name="extension_UIImage.png" width="1023" height="192"/>
         <image name="glory.png" width="276" height="182"/>
         <image name="padel520.jpg" width="520" height="200"/>
+        <image name="pineapple_400.jpg" width="292" height="400"/>
         <image name="pointLeft75" width="25" height="25"/>
         <image name="settings" width="25" height="25"/>
         <image name="snoopy-tennis.png" width="567" height="374"/>

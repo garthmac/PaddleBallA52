@@ -112,27 +112,27 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             }
         }
     }
+    var tbvcArray: [UIViewController]?
     func prepareTabBar() {
-        if let vcArray = tabBarController!.viewControllers as? [UIViewController] {
-            let ivc = vcArray[3]    //CREDITS
-            for view in ivc.view.subviews as! [UIView] {
-                if let animatedImageView = view as? UIImageView {
-                    if animatedImageView.tag == 111 {
-                        let images = (0...8).map {
-                            UIImage(named: "peanuts-anim\($0).png") as! AnyObject
-                        }
-                        animatedImageView.animationImages = images
-                        animatedImageView.animationDuration = 9.0
-                        animatedImageView.startAnimating()
+        tbvcArray = tabBarController!.viewControllers as? [UIViewController]
+        let cvc = tbvcArray![3]    //CREDITS
+        for view in cvc.view.subviews as! [UIView] {
+            if let animatedImageView = view as? UIImageView {
+                if animatedImageView.tag == 111 {
+                    let images = (0...8).map {
+                        UIImage(named: "peanuts-anim\($0).png") as! AnyObject
                     }
-                    if animatedImageView.tag == 333 {
-                        let images = (0...6).map {
-                            UIImage(named: "typing-computer\($0).png") as! AnyObject
-                        }
-                        animatedImageView.animationImages = images
-                        animatedImageView.animationDuration = 1.0
-                        animatedImageView.startAnimating()
+                    animatedImageView.animationImages = images
+                    animatedImageView.animationDuration = 9.0
+                    animatedImageView.startAnimating()
+                }
+                if animatedImageView.tag == 333 {
+                    let images = (0...6).map {
+                        UIImage(named: "typing-computer\($0).png") as! AnyObject
                     }
+                    animatedImageView.animationImages = images
+                    animatedImageView.animationDuration = 1.0
+                    animatedImageView.startAnimating()
                 }
             }
         }
@@ -157,7 +157,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         static let BallColor = "Yellow"
         static let BallSpeed: Float = 1.0
         static let BoxPathName = "Box"
-        static let CourtColor = "Clear"
+        static let CourtColor = "Black"
         static let PaddlePathName = "Paddle"
         static let PaddleColor = "Green"
         static let PaddleSize = CGSize(width: 80.0, height: 20.0)
@@ -206,15 +206,15 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         gameView.addGestureRecognizer(swipeRight)
         setUpSwipeMeTextLayer()
         breakout.collisionDelegate = self
-        self.tabBarController?.tabBar.hidden = true
+        self.tabBarController!.tabBar.hidden = true
         levelOne(tier)
     }
     override func viewWillAppear(animated: Bool) {
-        let creditsTabBarItem = tabBarController!.tabBar.items![3] as! UITabBarItem
+        let shopTabBarItem = tabBarController!.tabBar.items![4] as! UITabBarItem
         if availableCredits == 0 {
-            creditsTabBarItem.badgeValue = nil
+            shopTabBarItem.badgeValue = nil
         } else {
-            creditsTabBarItem.badgeValue = "\(availableCredits)"
+            shopTabBarItem.badgeValue = "\(availableCredits)"
         }
         super.viewWillAppear(animated)
         //Settings().type stuff set here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -409,7 +409,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
     func panPaddle(gesture: UIPanGestureRecognizer) {
         switch gesture.state {
         case .Began:
-            self.tabBarController?.tabBar.hidden = true
+            self.tabBarController!.tabBar.hidden = true
             //redBlock
             let location = gesture.locationInView(viewForTransformLayer)
             //println(location)
@@ -436,7 +436,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
     func showTabBar(gesture: UIPinchGestureRecognizer) {
         switch gesture.state {
         case .Ended:
-            self.tabBarController?.tabBar.hidden = false
+            self.tabBarController!.tabBar.hidden = false
         default: break
         }
     }
@@ -488,7 +488,11 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
                 let brick = UIButton(frame: frame) //used to be UIView
                 let test = (row / 2 % 2 == 0) && (column / 2 % 2 == 1)
                 if tier > 1 && row > 0 && test {
-                    brick.layer.contents = UIImage(named: "bom")!.CGImage
+                    if tier == 2 { //start with bom
+                        brick.layer.contents = UIImage(named: "bom")!.CGImage
+                    } else {
+                        brick.layer.contents = UIImage(named: String.randomBom())!.CGImage
+                    }
                 } else {
                 //brick.backgroundColor = Constants.BrickColors[row % Constants.BrickColors.count]
                     prepareBrick(brick)
@@ -641,13 +645,16 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             Settings().highScoreDate = timestamp
         }
         // MARK: - animate PowerBall Achieved!
+        let shopTabBarItem = tabBarController!.tabBar.items![4] as! UITabBarItem
         if ballCounter == 1 {
             let ac = availableCredits
             earnCoin()
             if ac != availableCredits {
                 powerBallScoreBoard.text = "Credit Earned!"
-                let creditsTabBarItem = tabBarController!.tabBar.items![3] as! UITabBarItem
-                creditsTabBarItem.badgeValue = "\(availableCredits)"
+                shopTabBarItem.badgeValue = "\(availableCredits)"
+                if availableCredits > 4 {
+                    self.tabBarController!.tabBar.hidden = false
+                }
             } else {
                 powerBallScoreBoard.text = "PowerBall On!"
             }
@@ -669,7 +676,6 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             loggedInUser = User.login(uid, password: "foo")
             buildCube()
         }
-        
         var title = "Game Over!", message = "Try Again...", cancelButtonTitle = "Restart?"
         if Settings().rows == Constants.MaxRows && bricks.count == 0 {
             title = "Set Complete"
@@ -686,18 +692,22 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         }
         else if NSClassFromString("UIAlertController") != nil && tier > 0 {
             let alertController = UIAlertController(title: "Level Complete!", message: "Leftover Ball Bonus = " + ballBonus.addSeparator, preferredStyle: .Alert)
-            alertController.addAction(UIAlertAction(title: "Continue?", style: .Default, handler: { (action) in
-                self.ballCounter = 0
-                self.tier += 1
-                self.showScore()
-                self.levelOne(self.tier)
-                self.setAutoStartTimer()
+            alertController.addAction(UIAlertAction(title: "Play", style: .Default, handler: { (action) in
+                self.replay()
             }))
-            alertController.addAction(UIAlertAction(title: "Quit?", style: .Destructive, handler: { (action) in
-                exit(0)
+            alertController.addAction(UIAlertAction(title: "Shop...", style: .Cancel, handler: { (action) in
+                self.replay()
+                self.tabBarController!.selectedViewController = self.tbvcArray![4]
             }))
             presentViewController(alertController, animated: true, completion: nil)
         }
+    }
+    func replay() {
+        ballCounter = 0
+        tier += 1
+        showScore()
+        levelOne(self.tier)
+        setAutoStartTimer()
     }
     // MARK: - game over -> restart
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
@@ -879,5 +889,40 @@ private extension Int {
         nf.groupingSeparator = ","
         nf.numberStyle = NSNumberFormatterStyle.DecimalStyle
         return nf.stringFromNumber(self)!
+    }
+}
+
+private extension String {
+    static func randomBom() -> String {
+        let names = ["bom",
+            "trophy75",
+            "pointLeft75",
+            "109px-Coin_Artwork_-_Super_Mario_3D_World",
+            "happyTennisBall160",
+            "no210",
+            "sun135",
+            "u148",
+            "Unknown-28",
+            "Unknown-36",
+            "Unknown-37",
+            "Unknown-38",
+            "Unknown-39",
+            "Unknown-44",
+            "Unknown-76",
+            "Unknown-79",
+            "Unknown-95",
+            "Unknown-104",
+            "Unknown-138",
+            "Unknown-139",
+            "Unknown-141",
+            "Unknown-152",
+            "Unknown-154",
+            "Unknown-173",
+            "Unknown-192",
+            "Unknown-198",
+            "Unknown-219",
+            "Unknown-222"]
+        let randomIndex = Int(arc4random_uniform(UInt32(names.count)))
+        return names[randomIndex]
     }
 }

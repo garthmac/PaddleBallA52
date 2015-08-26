@@ -17,7 +17,7 @@ uses Settings.bundle for secondary settings
   with option to take selfie
 - Comic font added and scoring cleaned up
 
-Xcode 6.3.2 
+Xcode 6.4 
 
 Swift
 

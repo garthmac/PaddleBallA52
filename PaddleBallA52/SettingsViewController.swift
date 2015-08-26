@@ -57,18 +57,45 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         courtColorPickerView.delegate = self
         paddleColorPickerView.dataSource = self
         paddleColorPickerView.delegate = self
+    }
+    //When the view will appear (e.g. when switching back from the settings tab), check if something has changed. Reset the changed property. Remove all existing bricks from the view and destroy them. Remove any balls left. Reset the animator and the breakout behavior. Finally, recreate the bricks with the new settings. To be able to reset the breakout behavior, change it from let to var
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        //Settings().type stuff set here!!!
+        autoStart = Settings().autoStart
+        balls = Settings().balls!
+        ballColor = Settings().ballColor
+        columns = Settings().columns!
+        courtColor = Settings().courtColor
+        difficulty = Settings().difficulty!
+        highScoreOn = Settings().highScoreOn
+        paddleColor = Settings().paddleColor
+        paddleWidthMultiplier = Settings().paddleWidthMultiplier!
+        rows = Settings().rows!
+        soundOn = Settings().soundOn
+        speed = Settings().speed!
         setPurchasedExtras()
     }
     func setPurchasedExtras() {
-        let achieved = Settings().achieved  //"00000000"
-        let maxSoundTrack = achieved.intAtIndex(1)!
-        if maxSoundTrack > 0 {
-            if let soundTrackControl = self.view.viewWithTag(222) as? UISegmentedControl {
-                for i in 1...maxSoundTrack {
-                    soundTrackControl.setEnabled(true, forSegmentAtIndex: i)
+//        let achieved = Settings().achieved  //"00000000"
+//        let maxSoundTrack = achieved.intAtIndex(1)!
+//        if maxSoundTrack > 0 {
+//            if let soundTrackControl = self.view.viewWithTag(222) as? UISegmentedControl {
+//                for i in 1...maxSoundTrack {
+//                    soundTrackControl.setEnabled(true, forSegmentAtIndex: i)
+//                }
+//            }
+//        }
+        println(Settings().myAudios)
+        for str in Settings().myAudios {
+            for i in 0..<ShopViewController().audios.count {
+                if ShopViewController().audios[i] == str {
+                    soundChoiceSegControl.setEnabled(true, forSegmentAtIndex: i)
                 }
             }
         }
+        let paddleBallTabBarItem = tabBarController!.tabBar.items![0] as! UITabBarItem
+        paddleBallTabBarItem.badgeValue = nil
     }
     var ballColor: String {
         get { return ballColorLabel.text! }
@@ -213,22 +240,6 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
     @IBAction func speedChanged(sender: UISlider) {
         speed = sender.value / 100.0
         Settings().speed = speed
-    }
-    //When the view will appear (e.g. when switching back from the settings tab), check if something has changed. Reset the changed property. Remove all existing bricks from the view and destroy them. Remove any balls left. Reset the animator and the breakout behavior. Finally, recreate the bricks with the new settings. To be able to reset the breakout behavior, change it from let to var
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        autoStart = Settings().autoStart
-        balls = Settings().balls!
-        ballColor = Settings().ballColor
-        columns = Settings().columns!
-        courtColor = Settings().courtColor
-        difficulty = Settings().difficulty!
-        highScoreOn = Settings().highScoreOn
-        paddleColor = Settings().paddleColor
-        paddleWidthMultiplier = Settings().paddleWidthMultiplier!
-        rows = Settings().rows!
-        soundOn = Settings().soundOn
-        speed = Settings().speed!
     }
 }
 

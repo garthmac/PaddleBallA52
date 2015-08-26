@@ -141,8 +141,11 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         soundTrack = Settings().soundChoice
         switch soundTrack {
         case 0: path = NSBundle.mainBundle().pathForResource("jazzloop2_70", ofType: "mp3")
-        case 1: path = NSBundle.mainBundle().pathForResource("Phil Wickham-Carry My Soul(Live at RELEVANT)", ofType: "mp3")
-        case 2: path = NSBundle.mainBundle().pathForResource("Phil Wickham - At Your Name (Yahweh, Yahweh)", ofType: "mp3")
+        case 1: path = NSBundle.mainBundle().pathForResource("CYMATICS- Science Vs. Music - Nigel Stanford-2", ofType: "mp3")
+        case 2: path = NSBundle.mainBundle().pathForResource("Phil Wickham-Carry My Soul(Live at RELEVANT)", ofType: "mp3")
+        case 3: path = NSBundle.mainBundle().pathForResource("Marvin Gaye & Tammi Terrell - Ain't No Mountain High Enough", ofType: "mp3")
+        case 4: path = NSBundle.mainBundle().pathForResource("Forrest Gump Soundtrack", ofType: "mp3")
+        case 5: path = NSBundle.mainBundle().pathForResource("Norman Greenbaum - Spirit in the Sky (PSK Remastered)", ofType: "mp3")
         default: path = NSBundle.mainBundle().pathForResource("jazzloop2_70", ofType: "mp3")
         }
         let url = NSURL.fileURLWithPath(path!)
@@ -157,7 +160,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         static let BallColor = "Yellow"
         static let BallSpeed: Float = 1.0
         static let BoxPathName = "Box"
-        static let CourtColor = "Black"
+        static let CourtColor = "Clear"
         static let PaddlePathName = "Paddle"
         static let PaddleColor = "Green"
         static let PaddleSize = CGSize(width: 80.0, height: 20.0)
@@ -209,15 +212,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         self.tabBarController!.tabBar.hidden = true
         levelOne(tier)
     }
-    override func viewWillAppear(animated: Bool) {
-        let shopTabBarItem = tabBarController!.tabBar.items![4] as! UITabBarItem
-        if availableCredits == 0 {
-            shopTabBarItem.badgeValue = nil
-        } else {
-            shopTabBarItem.badgeValue = "\(availableCredits)"
-        }
-        super.viewWillAppear(animated)
-        //Settings().type stuff set here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    func adjustColors() {
         if Settings().courtColor == "Blue" {
             scoreBoard.textColor = UIColor.whiteColor()
             powerBallScoreBoard.textColor = UIColor.yellowColor()
@@ -227,6 +222,17 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             powerBallScoreBoard.textColor = UIColor.blueColor()
             coinCountLabel.textColor = UIColor.blueColor()
         }
+    }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        let shopTabBarItem = tabBarController!.tabBar.items![4] as! UITabBarItem
+        if availableCredits == 0 {
+            shopTabBarItem.badgeValue = nil
+        } else {
+            shopTabBarItem.badgeValue = "\(availableCredits)"
+        }
+        //Settings().type stuff set here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        adjustColors()
         breakout.speed = CGFloat(Settings().speed!)
         breakout.ballBehavior.allowsRotation = Settings().ballRotation
         gameView.layer.backgroundColor = UIColor.colorFor(Settings().courtColor).CGColor
@@ -234,8 +240,11 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         let pw = (CGFloat(Settings().paddleWidthMultiplier!) * Constants.BallSize)
         paddleSize = CGSize(width: pw, height: 20.0)
         paddle.frame.size = paddleSize
-        paddle.layer.backgroundColor = UIColor.colorFor(Settings().paddleColor).CGColor
-        
+        if Settings().myPaddles.isEmpty {
+            paddle.layer.backgroundColor = UIColor.colorFor(Settings().paddleColor).CGColor
+        } else {
+            paddle.layer.contents = UIImage(named: Settings().myPaddles.last!)!.CGImage
+        }
         if Settings().redBlockOn && powerBall == 1 {
             buildCube()
         } else if self.transformLayer != nil {
@@ -325,19 +334,31 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         return nil
     }()
     func createBall() -> UIView {
+        let paddleBallTabBarItem = tabBarController!.tabBar.items![0] as! UITabBarItem
+        if paddleBallTabBarItem.badgeValue != nil {
+            loggedInUser = User.login(paddleBallTabBarItem.badgeValue!, password: "foo") //new ball purchased
+            Settings().purchasedUid = loggedInUser?.login
+            paddleBallTabBarItem.badgeValue = nil
+        }
         let ballSize = CGSize(width: Constants.BallSize, height: Constants.BallSize)
         let ball = UIView(frame: CGRect(origin: CGPoint.zeroPoint, size: ballSize))
         ball.layer.backgroundColor = UIColor.colorFor(Settings().ballColor).CGColor
         if loggedInUser != nil {
+            if loggedInUser!.login != Settings().purchasedUid && powerBall == 1 {
+                loggedInUser = User.login(Settings().purchasedUid!, password: "foo") //keep using new ball
+            }
             ball.layer.contents = loggedInUser!.image!.CGImage
             ball.layer.contentsGravity = kCAGravityCenter
             ball.layer.contentsScale = 2.0
         }
-        ball.layer.cornerRadius = Constants.BallSize / 2.0
-        ball.layer.borderColor = UIColor.blackColor().CGColor
-        ball.layer.borderWidth = 2.0
-        ball.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
-        ball.layer.shadowOpacity = 0.5
+        //println(Settings().purchasedUid)
+        if Settings().purchasedUid!.isEmpty || ( Settings().purchasedUid == "baddie" ) {
+            ball.layer.cornerRadius = Constants.BallSize / 2.0
+            ball.layer.borderColor = UIColor.blackColor().CGColor
+            ball.layer.borderWidth = 2.0
+            ball.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+            ball.layer.shadowOpacity = 0.5
+        }
         return ball
     }
     func placeBall(ball: UIView) {
@@ -706,6 +727,15 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         ballCounter = 0
         tier += 1
         showScore()
+        // change court color
+        if powerBall == 3 {
+            Settings().courtColor = "Black"
+        } else {
+            Settings().courtColor = SettingsViewController().pickerDataSource[Int(arc4random() % 12)]
+        }
+        gameView.layer.backgroundColor = UIColor.colorFor(Settings().courtColor).CGColor
+        adjustColors()
+        // end change court color
         levelOne(self.tier)
         setAutoStartTimer()
     }
@@ -898,7 +928,7 @@ private extension String {
             "trophy75",
             "pointLeft75",
             "109px-Coin_Artwork_-_Super_Mario_3D_World",
-            "happyTennisBall160",
+            "happy160",
             "no210",
             "sun135",
             "u148",

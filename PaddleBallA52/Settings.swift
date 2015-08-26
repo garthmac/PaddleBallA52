@@ -11,6 +11,7 @@ import Foundation
 class Settings {
     
     struct Const {
+        static let AudiosKey = "Settings.Audios" //purchased sound tracks
         static let AchievedKey = "Settings.Binary" //tracks user achieved (earned or bought with In-App purchase) extra balls, audio tracks, balls skins, emojis, redBlock-off, poping targets
         static let AutoStartKey = "Settings.Auto.Start" //allow balls to appear without user interaction:
         static let AvailableCreditsKey = "Settings.Available" //
@@ -25,11 +26,14 @@ class Settings {
         static let HighScoreDateKey = "Settings.High.Score.Date"
         static let HighScoreOnKey = "Settings.High.Score.On" //toggle to reset high score to zero
         static let PaddleColorKey = "Settings.Paddle.Color"
+        static let PaddlesKey = "Settings.Paddles" //purchased Paddles
         static let PaddleWidthMultiplierKey = "Settings.Paddle.Width.Multiplier" //1 thru 4, initially 2 (ball widths)
+        static let PurchasedUidKey = "Settings.Purchased.Ball.Uid"
         static let RedBlockKey = "Settings.RedBlock" //turn that annoying RedBlock off!
         static let RowsKey = "Settings.Rows" //half the # of columns
+        static let SkinsKey = "Settings.Skins" //purchased ball skins
         static let SoundKey = "Settings.Sound" // on/off
-        static let SoundChoiceKey = "Settings.SoundChoice" // 1/2/3
+        static let SoundChoiceKey = "Settings.SoundChoice" // 0/1/2/3/4/5
         static let SpeedKey = "Settings.Ball.Speed" //control the speed of the ball/push:
         static let UserIdKey = "Settings.User.Id"
     }
@@ -82,6 +86,18 @@ class Settings {
         get { return defaults.objectForKey(Const.HighScoreOnKey) as? Bool ?? true }
         set { defaults.setObject(newValue, forKey: Const.HighScoreOnKey) }
     }
+    var myAudios: [String] {
+        get { return defaults.objectForKey(Const.AudiosKey) as? [String] ?? ["audio52"]}
+        set { defaults.setObject(newValue, forKey: Const.AudiosKey) }
+    }
+    var myPaddles: [String] {
+        get { return defaults.objectForKey(Const.PaddlesKey) as? [String] ?? ["tennis80"]}
+        set { defaults.setObject(newValue, forKey: Const.PaddlesKey) }
+    }
+    var mySkins: [String] {
+        get { return defaults.objectForKey(Const.SkinsKey) as? [String] ?? ["tennis"]}
+        set { defaults.setObject(newValue, forKey: Const.SkinsKey) }
+    }
     var paddleColor: String {
         get { return defaults.objectForKey(Const.PaddleColorKey) as? String ?? "Cyan" }
         set { defaults.setObject(newValue, forKey: Const.PaddleColorKey) }
@@ -89,6 +105,10 @@ class Settings {
     var paddleWidthMultiplier: Int? {
         get { return defaults.objectForKey(Const.PaddleWidthMultiplierKey) as? Int }
         set { defaults.setObject(newValue, forKey: Const.PaddleWidthMultiplierKey) }
+    }
+    var purchasedUid: String? {
+        get { return defaults.objectForKey(Const.PurchasedUidKey) as? String ?? "" }
+        set { defaults.setObject(newValue, forKey: Const.PurchasedUidKey) }
     }
     var rows: Int? {
         get { return defaults.objectForKey(Const.RowsKey) as? Int }

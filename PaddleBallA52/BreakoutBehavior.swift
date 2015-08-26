@@ -29,16 +29,36 @@ class BreakoutBehavior: UIDynamicBehavior {
     lazy var ballBehavior: UIDynamicItemBehavior = {
         let lazilyCreatedBallBehavior = UIDynamicItemBehavior()
         lazilyCreatedBallBehavior.allowsRotation = true
-        lazilyCreatedBallBehavior.elasticity = CGFloat(NSUserDefaults.standardUserDefaults().floatForKey("Ball.Elasticity"))
-        lazilyCreatedBallBehavior.friction = CGFloat(NSUserDefaults.standardUserDefaults().floatForKey("Ball.Friction"))
+        let elasticity = CGFloat(NSUserDefaults.standardUserDefaults().floatForKey("Ball.Elasticity"))
+        if elasticity != 0 {
+            lazilyCreatedBallBehavior.elasticity = elasticity
+        } else {
+            lazilyCreatedBallBehavior.elasticity = 1.15
+        }
+        let friction = CGFloat(NSUserDefaults.standardUserDefaults().floatForKey("Ball.Friction"))
+        if friction != 0 {
+            lazilyCreatedBallBehavior.friction = friction
+        } else {
+            lazilyCreatedBallBehavior.friction = 10.0
+        }
         lazilyCreatedBallBehavior.resistance = 0.0
         return lazilyCreatedBallBehavior
         }()
     lazy var paddleBehavior: UIDynamicItemBehavior = {
         let lazilyCreatedPaddleBehavior = UIDynamicItemBehavior()
         lazilyCreatedPaddleBehavior.allowsRotation = false
-        lazilyCreatedPaddleBehavior.elasticity = CGFloat(NSUserDefaults.standardUserDefaults().floatForKey("Paddle.Elasticity"))
-        lazilyCreatedPaddleBehavior.friction = CGFloat(NSUserDefaults.standardUserDefaults().floatForKey("Paddle.Friction"))
+        let elasticity = CGFloat(NSUserDefaults.standardUserDefaults().floatForKey("Paddle.Elasticity"))
+        if elasticity != 0 {
+            lazilyCreatedPaddleBehavior.elasticity = elasticity
+        } else {
+            lazilyCreatedPaddleBehavior.elasticity = 1.15
+        }
+        let friction = CGFloat(NSUserDefaults.standardUserDefaults().floatForKey("Paddle.Friction"))
+        if friction != 0 {
+            lazilyCreatedPaddleBehavior.friction = friction
+        } else {
+            lazilyCreatedPaddleBehavior.friction = 10.0
+        }
         lazilyCreatedPaddleBehavior.resistance = 0.0
         return lazilyCreatedPaddleBehavior
         }()

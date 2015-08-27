@@ -7,7 +7,7 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>64C8AC14-F3EA-417E-BED0-3832FD9B8671</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>PaddleBallA52</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>61307E8DC0317A0BCACAA12BD063DBF5E17FA43D</key>
@@ -16,7 +16,7 @@
 		<string>https://github.com/garthmac/PaddleBallA52.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>PaddleBallA52.xcodeproj/project.xcworkspace</string>
+	<string>PaddleBallA52.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>61307E8DC0317A0BCACAA12BD063DBF5E17FA43D</key>

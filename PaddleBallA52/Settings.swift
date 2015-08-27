@@ -103,7 +103,7 @@ class Settings {
         set { defaults.setObject(newValue, forKey: Const.PaddleColorKey) }
     }
     var paddleWidthMultiplier: Int? {
-        get { return defaults.objectForKey(Const.PaddleWidthMultiplierKey) as? Int }
+        get { return defaults.objectForKey(Const.PaddleWidthMultiplierKey) as? Int ?? 2 }
         set { defaults.setObject(newValue, forKey: Const.PaddleWidthMultiplierKey) }
     }
     var purchasedUid: String? {

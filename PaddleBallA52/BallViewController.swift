@@ -49,7 +49,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         return scoreBoard
         }()
     lazy var animator: UIDynamicAnimator = { UIDynamicAnimator(referenceView: self.gameView) }()
-    var paddleWidthMultiplier = 2
+    var paddleWidthMultiplier = Settings().paddleWidthMultiplier
     var paddleSize = Constants.PaddleSize
     
     //To start balls automatically, add a timer which periodically checks, if there is a ball (or the maximum number of balls) and push them if necessary.
@@ -57,7 +57,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
     private var audioPlayer: AVAudioPlayer!
     private var path: String! = ""
     private var soundTrack = 0
-    private var availableCredits = Settings().availableCredits
+    private var availableCredits = 0
     // MARK: - get coins!
     lazy var coins: UIImageView = {
         let size = CGSize(width: 42.0, height: 20.0)
@@ -195,7 +195,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         prepareTabBar()
         self.hidesBottomBarWhenPushed = true
         animator.addBehavior(breakout)
-        Settings(defaultColumns: Constants.BrickColumns, defaultRows: Constants.BrickColumns / 2, defaultBalls: 1, defaultDifficulty: 1, defaultSpeed: Constants.BallSpeed, defaultBallColor: Constants.BallColor, defaultCourtColor: Constants.CourtColor, defaultPaddleColor: Constants.PaddleColor, defaultPaddleWidthMultiplier: paddleWidthMultiplier)
+        Settings(defaultColumns: Constants.BrickColumns, defaultRows: Constants.BrickColumns / 2, defaultBalls: 1, defaultDifficulty: 1, defaultSpeed: Constants.BallSpeed, defaultBallColor: Constants.BallColor, defaultCourtColor: Constants.CourtColor, defaultPaddleColor: Constants.PaddleColor, defaultPaddleWidthMultiplier: paddleWidthMultiplier!)
         gameView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "pushBall:"))
         gameView.layer.backgroundColor = UIColor.colorFor(Settings().courtColor).CGColor
         //The pan gesture handles most movement. However in the heat of the game it might be necessary to move faster-that’s what the left and right swipe gestures r4
@@ -225,7 +225,10 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        let settingsTabBarItem = tabBarController!.tabBar.items![1] as! UITabBarItem
+        settingsTabBarItem.badgeValue = nil  //reset for paddle purchaces
         let shopTabBarItem = tabBarController!.tabBar.items![4] as! UITabBarItem
+        availableCredits = Settings().availableCredits
         if availableCredits == 0 {
             shopTabBarItem.badgeValue = nil
         } else {
@@ -240,7 +243,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         let pw = (CGFloat(Settings().paddleWidthMultiplier!) * Constants.BallSize)
         paddleSize = CGSize(width: pw, height: 20.0)
         paddle.frame.size = paddleSize
-        if Settings().myPaddles.isEmpty {
+        if Settings().myPaddles.count == 1 {
             paddle.layer.backgroundColor = UIColor.colorFor(Settings().paddleColor).CGColor
         } else {
             paddle.layer.contents = UIImage(named: Settings().myPaddles.last!)!.CGImage
@@ -677,7 +680,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
                     self.tabBarController!.tabBar.hidden = false
                 }
             } else {
-                powerBallScoreBoard.text = "PowerBall On!"
+                powerBallScoreBoard.text = "PowerBall 3X!"
             }
             powerBallScoreBoard.alpha = 0    //prepare for annimation
             powerBallScoreBoard.center.x = 0
@@ -718,7 +721,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             }))
             alertController.addAction(UIAlertAction(title: "Shop...", style: .Cancel, handler: { (action) in
                 self.replay()
-                self.tabBarController!.selectedViewController = self.tbvcArray![4]
+                self.tabBarController!.selectedIndex = 4
             }))
             presentViewController(alertController, animated: true, completion: nil)
         }

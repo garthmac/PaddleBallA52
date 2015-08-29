@@ -79,14 +79,23 @@ struct User {
             User(name: "Johny", company: "Apple", highScore: "10,222", highScoreDate: "2015-04-01", login: "u207", password: "foo"),
             User(name: "Madison", company: "World", highScore: "18,222", highScoreDate: "2015-05-11", login: "starDavid", password: "foo"),
             User(name: "John", company: "Stanford", highScore: "999", highScoreDate: "2015-06-20", login: "dizzy2", password: "foo"),
-            User(name: "Bad", company: "Criminals, Inc.", highScore: "6,666", highScoreDate: "2015-06-06", login: "fireball1", password: "foo"),
-            User(name: "Good", company: "Rescue, Inc.", highScore: "8,888", highScoreDate: "2015-06-21", login: "fireball2", password: "foo"),
-            User(name: "Johny", company: "Apple", highScore: "10,222", highScoreDate: "2015-04-01", login: "Unknown-52", password: "foo"),
-            User(name: "Madison", company: "World", highScore: "18,222", highScoreDate: "2015-05-11", login: "Unknown-66", password: "foo"),
-            User(name: "John", company: "Stanford", highScore: "999", highScoreDate: "2015-06-20", login: "Unknown-90", password: "foo"),
-            User(name: "Bad", company: "Criminals, Inc.", highScore: "6,666", highScoreDate: "2015-06-06", login: "Unknown-96", password: "foo"),
-            User(name: "Good", company: "Rescue, Inc.", highScore: "8,888", highScoreDate: "2015-06-21", login: "Unknown-125", password: "foo"),
-            User(name: "Johny", company: "Apple", highScore: "10,222", highScoreDate: "2015-04-01", login: "Unknown-190", password: "foo")
+//            User(name: "Bad", company: "Criminals, Inc.", highScore: "6,666", highScoreDate: "2015-06-06", login: "fireball1", password: "foo"),
+//            User(name: "Good", company: "Rescue, Inc.", highScore: "8,888", highScoreDate: "2015-06-21", login: "fireball2", password: "foo"),
+            User(name: "Johny", company: "Apple", highScore: "10,222", highScoreDate: "2015-04-01", login: "audio78", password: "foo"),
+            User(name: "Madison", company: "World", highScore: "18,222", highScoreDate: "2015-05-11", login: "audio66", password: "foo"),
+            User(name: "John", company: "Stanford", highScore: "999", highScoreDate: "2015-06-20", login: "audio90", password: "foo"),
+            User(name: "Bad", company: "Criminals, Inc.", highScore: "6,666", highScoreDate: "2015-06-06", login: "audio96", password: "foo"),
+            User(name: "Good", company: "Rescue, Inc.", highScore: "8,888", highScoreDate: "2015-06-21", login: "audio125", password: "foo"),
+            User(name: "Johny", company: "Apple", highScore: "10,222", highScoreDate: "2015-04-01", login: "audio190", password: "foo"),
+            User(name: "Madison", company: "World", highScore: "18,222", highScoreDate: "2015-05-11", login: "u5", password: "foo"),
+            User(name: "John", company: "Stanford", highScore: "999", highScoreDate: "2015-06-20", login: "u6", password: "foo"),
+            User(name: "Bad", company: "Criminals, Inc.", highScore: "6,666", highScoreDate: "2015-06-06", login: "u70", password: "foo"),
+            User(name: "Good", company: "Rescue, Inc.", highScore: "8,888", highScoreDate: "2015-06-21", login: "u73", password: "foo"),
+            User(name: "Johny", company: "Apple", highScore: "10,222", highScoreDate: "2015-04-01", login: "u75", password: "foo"),
+            User(name: "Madison", company: "World", highScore: "18,222", highScoreDate: "2015-05-11", login: "u117", password: "foo"),
+            User(name: "John", company: "Stanford", highScore: "999", highScoreDate: "2015-06-20", login: "u120", password: "foo"),
+            User(name: "Bad", company: "Criminals, Inc.", highScore: "6,666", highScoreDate: "2015-06-06", login: "u225", password: "foo"),
+            User(name: "Good", company: "Rescue, Inc.", highScore: "8,888", highScoreDate: "2015-06-21", login: "u77", password: "foo")
             ] {
             theDatabase[user.login] = user
         }

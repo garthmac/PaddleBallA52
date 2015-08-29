@@ -28,6 +28,7 @@ class Settings {
         static let PaddleColorKey = "Settings.Paddle.Color"
         static let PaddlesKey = "Settings.Paddles" //purchased Paddles
         static let PaddleWidthMultiplierKey = "Settings.Paddle.Width.Multiplier" //1 thru 4, initially 2 (ball widths)
+        static let PaddleWidthUnlockStepperKey = "Settings.Paddle.Width.Unlock.Stepper" //enable stepper once u purchace max paddle width
         static let PurchasedUidKey = "Settings.Purchased.Ball.Uid"
         static let RedBlockKey = "Settings.RedBlock" //turn that annoying RedBlock off!
         static let RowsKey = "Settings.Rows" //half the # of columns
@@ -87,7 +88,7 @@ class Settings {
         set { defaults.setObject(newValue, forKey: Const.HighScoreOnKey) }
     }
     var myAudios: [String] {
-        get { return defaults.objectForKey(Const.AudiosKey) as? [String] ?? ["audio52"]}
+        get { return defaults.objectForKey(Const.AudiosKey) as? [String] ?? ["u78"]}
         set { defaults.setObject(newValue, forKey: Const.AudiosKey) }
     }
     var myPaddles: [String] {
@@ -105,6 +106,10 @@ class Settings {
     var paddleWidthMultiplier: Int? {
         get { return defaults.objectForKey(Const.PaddleWidthMultiplierKey) as? Int ?? 2 }
         set { defaults.setObject(newValue, forKey: Const.PaddleWidthMultiplierKey) }
+    }
+    var paddleWidthUnlockStepper: Bool {
+        get { return defaults.objectForKey(Const.PaddleWidthUnlockStepperKey) as? Bool ?? false }
+        set { defaults.setObject(newValue, forKey: Const.PaddleWidthUnlockStepperKey) }
     }
     var purchasedUid: String? {
         get { return defaults.objectForKey(Const.PurchasedUidKey) as? String ?? "" }

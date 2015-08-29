@@ -71,6 +71,7 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         highScoreOn = Settings().highScoreOn
         paddleColor = Settings().paddleColor
         paddleWidthMultiplier = Settings().paddleWidthMultiplier!
+        paddleWidthStepper.enabled = Settings().paddleWidthUnlockStepper
         rows = Settings().rows!
         soundOn = Settings().soundOn
         speed = Settings().speed!
@@ -86,7 +87,6 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
 //                }
 //            }
 //        }
-        println(Settings().myAudios)
         for str in Settings().myAudios {
             for i in 0..<ShopViewController().audios.count {
                 if ShopViewController().audios[i] == str {
@@ -94,7 +94,7 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
                 }
             }
         }
-        let paddleBallTabBarItem = tabBarController!.tabBar.items![0] as! UITabBarItem
+        let paddleBallTabBarItem = tabBarController!.tabBar.items![1] as! UITabBarItem
         paddleBallTabBarItem.badgeValue = nil
     }
     var ballColor: String {
@@ -187,7 +187,7 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
     let model = UIDevice.currentDevice().model
     @IBAction func paddleWidthChanged(sender: UIStepper) {
         if model.hasPrefix("iPad") {
-            paddleWidthMultiplier = min(Int(sender.value * 2), 10) //test 0
+            paddleWidthMultiplier = min(Int(sender.value), 10) //test 0
         } else {
             paddleWidthMultiplier = min(Int(sender.value), 5) //test 4
         }

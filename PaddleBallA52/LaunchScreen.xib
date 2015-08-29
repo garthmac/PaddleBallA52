@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -12,13 +12,13 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2015 Garth MacKenzie. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
-                    <rect key="frame" x="20" y="439" width="441" height="21"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="  Copyright (c) 2015 Garth MacKenzie. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
+                    <rect key="frame" x="20" y="376" width="441" height="94"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="paddle1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Bpe-26-A4w">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="paddle1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Bpe-26-A4w">
                     <rect key="frame" x="50" y="113" width="380" height="255"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="215" id="2ug-gA-39i"/>
@@ -31,13 +31,18 @@
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="2ug-gA-39i"/>
+                            <exclude reference="5Pr-IC-AUl"/>
+                            <exclude reference="WEH-ic-sG3"/>
                             <exclude reference="afT-0k-UI9"/>
                             <exclude reference="bfl-RN-E8N"/>
                         </mask>
                     </variation>
                 </imageView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paddle Tennis" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="kId-c2-rCX">
-                    <rect key="frame" x="20" y="50" width="441" height="43"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paddle Pong Tennis" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="kId-c2-rCX">
+                    <rect key="frame" x="76" y="20" width="329" height="70"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="70" id="Qd2-tW-TmY"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -45,17 +50,20 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="8ie-xW-0ye" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Bpe-26-A4w" secondAttribute="bottom" constant="8" symbolic="YES" id="5Wc-B3-6FF"/>
+                <constraint firstItem="Bpe-26-A4w" firstAttribute="leading" relation="lessThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="5I5-fP-E8e"/>
+                <constraint firstItem="8ie-xW-0ye" firstAttribute="top" relation="lessThanOrEqual" secondItem="Bpe-26-A4w" secondAttribute="bottom" constant="8" symbolic="YES" id="5Wc-B3-6FF"/>
                 <constraint firstItem="kId-c2-rCX" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="bottom" multiplier="1/3" constant="1" id="5cJ-9S-tgC"/>
+                <constraint firstAttribute="centerY" secondItem="Bpe-26-A4w" secondAttribute="centerY" id="5y4-4q-8rE"/>
+                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="Bpe-26-A4w" secondAttribute="trailing" constant="20" symbolic="YES" id="9MM-OS-wHL"/>
                 <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="Bpe-26-A4w" secondAttribute="trailing" constant="50" id="GiW-eW-tFH"/>
-                <constraint firstItem="Bpe-26-A4w" firstAttribute="top" secondItem="kId-c2-rCX" secondAttribute="bottom" constant="20" id="H3i-5W-Kf4"/>
+                <constraint firstItem="Bpe-26-A4w" firstAttribute="top" relation="lessThanOrEqual" secondItem="kId-c2-rCX" secondAttribute="bottom" constant="8" symbolic="YES" id="H3i-5W-Kf4"/>
                 <constraint firstAttribute="centerX" secondItem="kId-c2-rCX" secondAttribute="centerX" id="Koa-jz-hwk"/>
-                <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="Kzo-t9-V3l"/>
+                <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="10" id="Kzo-t9-V3l"/>
                 <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="MfP-vx-nX0"/>
                 <constraint firstAttribute="centerX" secondItem="Bpe-26-A4w" secondAttribute="centerX" id="Qrq-iC-oPb"/>
                 <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="ZEH-qu-HZ9"/>
-                <constraint firstItem="kId-c2-rCX" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" symbolic="YES" id="e7C-dA-uY4"/>
-                <constraint firstItem="kId-c2-rCX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="fvb-Df-36g"/>
+                <constraint firstItem="kId-c2-rCX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" symbolic="YES" id="e7C-dA-uY4"/>
+                <constraint firstItem="kId-c2-rCX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="fvb-Df-36g"/>
                 <constraint firstAttribute="centerY" secondItem="Bpe-26-A4w" secondAttribute="centerY" id="l7K-gc-PHP"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -63,6 +71,8 @@
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="5cJ-9S-tgC"/>
+                    <exclude reference="GiW-eW-tFH"/>
+                    <exclude reference="l7K-gc-PHP"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="548" y="455"/>

@@ -16,6 +16,8 @@ class ShopViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     @IBOutlet weak var rightTrophyImageView: UIImageView!
     @IBOutlet weak var userPickerView: UIPickerView!
     //MARK: - UIPickerViewDataSource
+    let model = UIDevice.currentDevice().model
+    
     private var pickerDataSource: [UIImage] { // a computed property instead of func
         get {
             return (0..<self.ballSkins.count).map {
@@ -50,6 +52,11 @@ class ShopViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     }
     private var pickerDataSource4: [UIImage] { // a computed property instead of func
         get {
+            if model.hasPrefix("iPad") {
+                return (0..<self.iPadPaddleWidths.count).map {
+                    UIImage(named: self.iPadPaddleWidths[$0])!
+                }
+            }
             return (0..<self.paddleWidths.count).map {
                 UIImage(named: self.paddleWidths[$0])!
             }
@@ -131,14 +138,24 @@ class ShopViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         }
         if component == 4 {
             selectedPaddleWidth4 = pickerDataSource4[row]
-            selectedLogin4 = paddleWidths[row]
+            if model.hasPrefix("iPad") {
+                selectedLogin4 = iPadPaddleWidths[row]
+            } else {
+                selectedLogin4 = paddleWidths[row]
+            }
         }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         titleLabel.font = UIFont(name: "ComicSansMS-Bold", size: 28.0)
         userPickerView.dataSource = self
+        if userPickerView.selectedRowInComponent(2) == 0 {
+            userPickerView.selectRow(1, inComponent: 2, animated: true)
+        }
         userPickerView.delegate = self
+        if userPickerView.selectedRowInComponent(4) == 0 {
+            userPickerView.selectRow(2, inComponent: 4, animated: true)
+        }
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -147,14 +164,14 @@ class ShopViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     var availableCredits = Settings().availableCredits
     func prepareForPurchase() {
         self.tabBarController?.tabBar.hidden = false
-        let shopTabBarItem = tabBarController!.tabBar.items![4] as! UITabBarItem
+        let shopTabBarItem = tabBarController!.tabBar.items![0] as! UITabBarItem
         if let ac = shopTabBarItem.badgeValue {
             if ac.toInt()! > 0 { //everything costs 10 credits or $1
                 availableCredits = ac.toInt()!
             }
         }
         if availableCredits < 10 {
-            let alert = UIAlertView(title: "You have \(availableCredits) Credits!", message: "Need at least 10, Try Again...", delegate: self, cancelButtonTitle: "Cancel")
+            let alert = UIAlertView(title: "You have \(availableCredits) Credits!", message: "Need at least 10 to buy...", delegate: self, cancelButtonTitle: "Cancel")
             alert.addButtonWithTitle("Use Credit Card")
             alert.dismissWithClickedButtonIndex(alert.firstOtherButtonIndex, animated: true)
             alert.show()
@@ -166,7 +183,7 @@ class ShopViewController: UIViewController, UIPickerViewDataSource, UIPickerView
             //use credit card
             availableCredits += 51
             Settings().availableCredits = availableCredits
-            (tabBarController!.tabBar.items![4] as! UITabBarItem).badgeValue = String(availableCredits)
+            (tabBarController!.tabBar.items![0] as! UITabBarItem).badgeValue = String(availableCredits)
             prepareForPurchase()
         }
         if buttonIndex == 0 {
@@ -179,7 +196,7 @@ class ShopViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         case 0: //println(sender.tag)
             checkout("Deduct 10 coins for selected Ball skin?", sender: sender)
         case 1: //println(sender.tag)
-            let paddleBallTabBarItem = tabBarController!.tabBar.items![0] as! UITabBarItem
+            let paddleBallTabBarItem = tabBarController!.tabBar.items![1] as! UITabBarItem
             if let login = self.selectedLogin1 {
                 let loggedInUser = User.login(login, password: "foo") //SWAP ball out to other owned ball
                 paddleBallTabBarItem.badgeValue = login
@@ -195,16 +212,6 @@ class ShopViewController: UIViewController, UIPickerViewDataSource, UIPickerView
             checkout("Deduct " + String(minimumPWCredits()) + " coins for selected Paddle Width Multipler?", sender: sender)
         default: break
         }
-    }
-    func minimumPWCredits() -> Int {
-        var minimumCredits = 10
-        for i in 0..<paddleWidths.count {
-            if paddleWidths[i] == self.selectedLogin4! {
-                minimumCredits = i * 10
-                return minimumCredits
-            }
-        }
-        return 10
     }
     func checkout(message: String, sender: UIButton) {
         if NSClassFromString("UIAlertController") != nil {
@@ -222,7 +229,7 @@ class ShopViewController: UIViewController, UIPickerViewDataSource, UIPickerView
             case 0: //add selected ball skin to game
                 if availableCredits > 9 {
                     availableCredits -= 10
-                    let shopTabBarItem = tabBarController!.tabBar.items![4] as! UITabBarItem
+                    let shopTabBarItem = tabBarController!.tabBar.items![0] as! UITabBarItem
                     shopTabBarItem.badgeValue = availableCredits.description
                     Settings().availableCredits = availableCredits
                     if self.selectedLogin == nil {
@@ -230,7 +237,7 @@ class ShopViewController: UIViewController, UIPickerViewDataSource, UIPickerView
                     }
                     userPickerView.reloadAllComponents()               //refresh pickerDataSource1
                     let loggedInUser = User.login(self.selectedLogin!, password: "foo") //new ball
-                    let paddleBallTabBarItem = tabBarController!.tabBar.items![0] as! UITabBarItem
+                    let paddleBallTabBarItem = tabBarController!.tabBar.items![1] as! UITabBarItem
                     paddleBallTabBarItem.badgeValue = self.selectedLogin!
                     Settings().mySkins.append(self.selectedLogin!)
                 } else {
@@ -241,12 +248,15 @@ class ShopViewController: UIViewController, UIPickerViewDataSource, UIPickerView
             case 2: //add selected sound track to game
                 if availableCredits > 9 {
                     availableCredits -= 10
-                    let shopTabBarItem = tabBarController!.tabBar.items![4] as! UITabBarItem
+                    let shopTabBarItem = tabBarController!.tabBar.items![0] as! UITabBarItem
                     shopTabBarItem.badgeValue = availableCredits.description
                     Settings().availableCredits = availableCredits
+                    if self.selectedLogin2 == nil {
+                        pickerView(userPickerView, didSelectRow: 1, inComponent: 2)
+                    }
                     let loggedInUser = User.login(self.selectedLogin2!, password: "foo") //new audio
-                    let paddleBallTabBarItem = tabBarController!.tabBar.items![0] as! UITabBarItem
-                    paddleBallTabBarItem.badgeValue = self.selectedLogin2!
+                    let settingsTabBarItem = tabBarController!.tabBar.items![2] as! UITabBarItem
+                    settingsTabBarItem.badgeValue = self.selectedLogin2!
                     for i in 0..<audios.count {
                         if audios[i] == self.selectedLogin2! {
                             Settings().soundChoice = i
@@ -260,14 +270,14 @@ class ShopViewController: UIViewController, UIPickerViewDataSource, UIPickerView
             case 3: //add selected paddle to game
                 if availableCredits > 9 {
                     availableCredits -= 10
-                    let shopTabBarItem = tabBarController!.tabBar.items![4] as! UITabBarItem
+                    let shopTabBarItem = tabBarController!.tabBar.items![0] as! UITabBarItem
                     shopTabBarItem.badgeValue = availableCredits.description
                     Settings().availableCredits = availableCredits
                     if self.selectedLogin3 == nil {
                         pickerView(userPickerView, didSelectRow: 0, inComponent: 3)
                     }
                     let loggedInUser = User.login(self.selectedLogin3!, password: "foo") //new Paddle
-                    let settingsTabBarItem = tabBarController!.tabBar.items![1] as! UITabBarItem
+                    let settingsTabBarItem = tabBarController!.tabBar.items![2] as! UITabBarItem
                     settingsTabBarItem.badgeValue = self.selectedLogin3!
                     for i in 0..<paddles.count {
                         if paddles[i] == self.selectedLogin3! {
@@ -279,30 +289,55 @@ class ShopViewController: UIViewController, UIPickerViewDataSource, UIPickerView
                 }
                 //println(sender.tag)
             case 4: //adjust paddle to selected paddleWidth
-                if availableCredits > self.minimumPWCredits() {
-                    availableCredits -= self.minimumPWCredits()
-                    let shopTabBarItem = tabBarController!.tabBar.items![4] as! UITabBarItem
+                let minPWC = self.minimumPWCredits()
+                if availableCredits > minPWC {
+                    availableCredits -= minPWC
+                    let shopTabBarItem = tabBarController!.tabBar.items![0] as! UITabBarItem
                     shopTabBarItem.badgeValue = availableCredits.description
                     Settings().availableCredits = availableCredits
-                    if self.selectedLogin4 == nil {
-                        pickerView(userPickerView, didSelectRow: 1, inComponent: 4) //no zero allowed- use 1 as minimum
-                    }
                     let loggedInUser = User.login(self.selectedLogin4!, password: "foo") //new PaddleWidth
-                    let settingsTabBarItem = tabBarController!.tabBar.items![1] as! UITabBarItem
+                    let settingsTabBarItem = tabBarController!.tabBar.items![2] as! UITabBarItem
                     settingsTabBarItem.badgeValue = self.selectedLogin4!
-                    for i in 0..<paddleWidths.count {
-                        if paddleWidths[i] == self.selectedLogin4! {
+                    for i in 0..<iPadPaddleWidths.count {
+                        if iPadPaddleWidths[i] == self.selectedLogin4! {
                             Settings().paddleWidthMultiplier = i
                         }
                     }
+                    if model.hasPrefix("iPad") {
+                        if Settings().paddleWidthMultiplier! == 10 { //enable once u purchace max paddle width
+                            Settings().paddleWidthUnlockStepper = true
+                        }
+                    } else {
+                        if Settings().paddleWidthMultiplier! == 5 {
+                            Settings().paddleWidthUnlockStepper = true
+                        }
+                    }
                 } else {
-                    prepareForPurchase()
+                    if availableCredits < minPWC {
+                        let alert = UIAlertView(title: "You have \(availableCredits) Credits!", message: "Need \(self.minimumPWCredits())...", delegate: self, cancelButtonTitle: "Cancel")
+                        alert.addButtonWithTitle("Use Credit Card")
+                        alert.dismissWithClickedButtonIndex(alert.firstOtherButtonIndex, animated: true)
+                        alert.show()
+                    }
                 }
                 //println(sender.tag)
             default: break
         }
     }
-    let audios = ["audio52",
+    func minimumPWCredits() -> Int {
+        if self.selectedLogin4 == nil {
+            pickerView(userPickerView, didSelectRow: 2, inComponent: 4) //no zero width allowed- use 1 as minimum
+        }
+        var minimumCredits = 10
+        for i in 0..<iPadPaddleWidths.count {
+            if iPadPaddleWidths[i] == self.selectedLogin4! {
+                minimumCredits = i * 10
+                return minimumCredits
+            }
+        }
+        return 10
+    }
+    let audios = ["audio78",
         "audio66",
         "audio90",
         "audio96",
@@ -320,8 +355,6 @@ class ShopViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         "cufi100",
         "dizzy2",
         "dizzy34",
-        "fireball1",
-        "fireball2",
         "happy160",
         "r21",
         "ring",
@@ -352,8 +385,6 @@ class ShopViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     let paddles = ["asian33",
         "dizzy2",
         "dizzy34",
-        "fireball1",
-        "fireball2",
         "happy160",
         "r21",
         "ring",
@@ -362,6 +393,8 @@ class ShopViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         "star57",
         "sun56",
         "sun94",
+        "u5",
+        "u6",
         "u191",
         "u193",
         "u194",
@@ -381,30 +414,41 @@ class ShopViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         "no210",
         "sun135",
         "u148",
-        "Unknown-28",
-        "Unknown-36",
-        "Unknown-37",
-        "Unknown-38",
-        "Unknown-39",
-        "Unknown-44",
-        "Unknown-76",
-        "Unknown-79",
-        "Unknown-95",
-        "Unknown-104",
-        "Unknown-138",
-        "Unknown-139",
-        "Unknown-141",
-        "Unknown-152",
-        "Unknown-154",
-        "Unknown-173",
-        "Unknown-192",
-        "Unknown-198",
-        "Unknown-219",
-        "Unknown-222"]
-    let paddleWidths = ["audio52b",
-        "audio66b",
-        "audio90b",
-        "audio96b",
-        "audio125b",
-        "audio190b"]
+        "u28",
+        "u36",
+        "u37",
+        "u38",
+        "u39",
+        "u44",
+        "u76",
+        "u79",
+        "u95",
+        "u104",
+        "u138",
+        "u139",
+        "u141",
+        "u152",
+        "u154",
+        "u173",
+        "u192",
+        "u198",
+        "u219",
+        "u222"]
+    let paddleWidths = ["u52b",
+        "u66b",
+        "u90b",
+        "u96b",
+        "u125b",
+        "u190b"]
+    let iPadPaddleWidths = ["u52b",
+        "u66b",
+        "u90b",
+        "u96b",
+        "u125b",
+        "u190b",
+        "u209b",
+        "u223b",
+        "u3b",
+        "u7b",
+        "u149b"]
 }

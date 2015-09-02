@@ -12,7 +12,7 @@
 		</dict>
 		<dict>
 			<key>DefaultValue</key>
-			<real>1.15</real>
+			<real>1.05</real>
 			<key>Key</key>
 			<string>Ball.Elasticity</string>
 			<key>MaximumValue</key>
@@ -56,7 +56,7 @@
 		</dict>
 		<dict>
 			<key>DefaultValue</key>
-			<real>1.15</real>
+			<real>1.1</real>
 			<key>Key</key>
 			<string>Paddle.Elasticity</string>
 			<key>MaximumValue</key>

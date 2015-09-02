@@ -22,9 +22,11 @@ class Settings {
         static let ColumnsKey = "Settings.Columns"
         static let CourtColorKey = "Settings.Court.Color"
         static let DifficultyKey = "Settings.Difficulty" //chooses if the last row of bricks should be “black” and thus need two collisions to be destroyed:
+        static let EndLevelBonusKey = "Settings.End.Level.Bonus" //awarded for each 10,000 points earned
         static let HighScoreKey = "Settings.High.Score"
         static let HighScoreDateKey = "Settings.High.Score.Date"
         static let HighScoreOnKey = "Settings.High.Score.On" //toggle to reset high score to zero
+        static let HintIndexKey = "Settings.Hint.Index"
         static let PaddleColorKey = "Settings.Paddle.Color"
         static let PaddlesKey = "Settings.Paddles" //purchased Paddles
         static let PaddleWidthMultiplierKey = "Settings.Paddle.Width.Multiplier" //1 thru 4, initially 2 (ball widths)
@@ -48,7 +50,7 @@ class Settings {
         set { defaults.setObject(newValue, forKey: Const.AutoStartKey) }
     }
     var availableCredits: Int {
-        get { return defaults.objectForKey(Const.AvailableCreditsKey) as? Int ?? 0 }
+        get { return defaults.objectForKey(Const.AvailableCreditsKey) as? Int ?? 5 }
         set { defaults.setObject(newValue, forKey: Const.AvailableCreditsKey) }
     }
     var ballColor: String {
@@ -59,21 +61,25 @@ class Settings {
         get { return defaults.objectForKey(Const.BallRotationKey) as? Bool ?? true }
         set { defaults.setObject(newValue, forKey: Const.BallRotationKey) }
     }
-    var balls: Int? {
-        get { return defaults.objectForKey(Const.BallsKey) as? Int }
+    var balls: Int {
+        get { return defaults.objectForKey(Const.BallsKey) as? Int ?? 1 }
         set { defaults.setObject(newValue, forKey: Const.BallsKey) }
     }
-    var columns: Int? {
-        get { return defaults.objectForKey(Const.ColumnsKey) as? Int }
+    var columns: Int {
+        get { return defaults.objectForKey(Const.ColumnsKey) as? Int ?? 4 }
         set { defaults.setObject(newValue, forKey: Const.ColumnsKey) }
     }
     var courtColor: String {
-        get { return defaults.objectForKey(Const.CourtColorKey) as? String ?? "Purple" }
+        get { return defaults.objectForKey(Const.CourtColorKey) as? String ?? "Clear" }
         set { defaults.setObject(newValue, forKey: Const.CourtColorKey) }
     }
-    var difficulty: Int? {
-        get { return defaults.objectForKey(Const.DifficultyKey) as? Int }
+    var difficulty: Int {
+        get { return defaults.objectForKey(Const.DifficultyKey) as? Int ?? 1 }
         set { defaults.setObject(newValue, forKey: Const.DifficultyKey) }
+    }
+    var endLevelBonus: Int {
+        get { return defaults.objectForKey(Const.EndLevelBonusKey) as? Int ?? 0 }
+        set { defaults.setObject(newValue, forKey: Const.EndLevelBonusKey) }
     }
     var highScore: Int {
         get { return defaults.objectForKey(Const.HighScoreKey) as? Int ?? 0 }
@@ -87,12 +93,16 @@ class Settings {
         get { return defaults.objectForKey(Const.HighScoreOnKey) as? Bool ?? true }
         set { defaults.setObject(newValue, forKey: Const.HighScoreOnKey) }
     }
+    var lastHint: Int {
+        get { return defaults.objectForKey(Const.HintIndexKey) as? Int ?? 0 }
+        set { defaults.setObject(newValue, forKey: Const.HintIndexKey) }
+    }
     var myAudios: [String] {
-        get { return defaults.objectForKey(Const.AudiosKey) as? [String] ?? ["u78"]}
+        get { return defaults.objectForKey(Const.AudiosKey) as? [String] ?? ["audio78"]}
         set { defaults.setObject(newValue, forKey: Const.AudiosKey) }
     }
     var myPaddles: [String] {
-        get { return defaults.objectForKey(Const.PaddlesKey) as? [String] ?? ["tennis80"]}
+        get { return defaults.objectForKey(Const.PaddlesKey) as? [String] ?? ["asian33"]}
         set { defaults.setObject(newValue, forKey: Const.PaddlesKey) }
     }
     var mySkins: [String] {
@@ -100,10 +110,10 @@ class Settings {
         set { defaults.setObject(newValue, forKey: Const.SkinsKey) }
     }
     var paddleColor: String {
-        get { return defaults.objectForKey(Const.PaddleColorKey) as? String ?? "Cyan" }
+        get { return defaults.objectForKey(Const.PaddleColorKey) as? String ?? "Green" }
         set { defaults.setObject(newValue, forKey: Const.PaddleColorKey) }
     }
-    var paddleWidthMultiplier: Int? {
+    var paddleWidthMultiplier: Int {
         get { return defaults.objectForKey(Const.PaddleWidthMultiplierKey) as? Int ?? 2 }
         set { defaults.setObject(newValue, forKey: Const.PaddleWidthMultiplierKey) }
     }
@@ -115,8 +125,8 @@ class Settings {
         get { return defaults.objectForKey(Const.PurchasedUidKey) as? String ?? "" }
         set { defaults.setObject(newValue, forKey: Const.PurchasedUidKey) }
     }
-    var rows: Int? {
-        get { return defaults.objectForKey(Const.RowsKey) as? Int }
+    var rows: Int {
+        get { return defaults.objectForKey(Const.RowsKey) as? Int ?? 2 }
         set { defaults.setObject(newValue, forKey: Const.RowsKey) }
     }
     var redBlockOn: Bool {
@@ -131,7 +141,7 @@ class Settings {
         get { return defaults.objectForKey(Const.SoundKey) as? Bool ?? true }
         set { defaults.setObject(newValue, forKey: Const.SoundKey) }
     }
-    var speed: Float? {
+    var speed: Float {
         get { return defaults.objectForKey(Const.SpeedKey) as? Float ?? 1.0 }
         set { defaults.setObject(newValue, forKey: Const.SpeedKey) }
     }

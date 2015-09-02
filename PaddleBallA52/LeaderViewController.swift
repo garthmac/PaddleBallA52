@@ -28,42 +28,7 @@ class LeaderViewController: UIViewController { //, UIPickerViewDataSource, UIPic
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var rightTrophyImageView: UIImageView!
     @IBOutlet weak var gitImageView: UIImageView!
-//    @IBOutlet weak var userPickerView: UIPickerView!
-//    //MARK: - UIPickerViewDataSource
-//    private var pickerDataSource: [String] { // a computed property instead of func
-//        get {
-//            var array = [String]()
-//            let u0 = self.highScoreLabel.text
-//            array.append(u0!)
-//            let u1 = self.highScoreLabel1.text
-//            array.append(u1!)
-//            let u2 = self.highScoreLabel2.text
-//            array.append(u2!)
-//            return array
-//        }
-//        set { self.pickerDataSource = newValue }
-//    }
-//    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int { return 1 } //number of wheels in the picker
-//    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-//        return pickerDataSource.count
-//    }
-//    //MARK: - UIPickerViewDelegate
-//    func pickerView(titleForRow row: Int, forComponent component: Int) -> String! {
-//        return pickerDataSource[row]
-//    }
-//    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        if profileImageView.tag == row { // 0
-//            highScoreLabel.text = pickerDataSource[row] }
-//        if profileImageView1.tag == row { // 1
-//            highScoreLabel1.text = pickerDataSource[row] }
-//        if profileImageView2.tag == row { // 2
-//            highScoreLabel2.text = pickerDataSource[row] }
-//    }
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        userPickerView.dataSource = self
-//        userPickerView.delegate = self
-//    }
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         titleLabel.font = UIFont(name: "ComicSansMS-Bold", size: 36.0)

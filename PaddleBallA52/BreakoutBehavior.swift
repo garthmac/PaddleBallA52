@@ -33,7 +33,7 @@ class BreakoutBehavior: UIDynamicBehavior {
         if elasticity != 0 {
             lazilyCreatedBallBehavior.elasticity = elasticity
         } else {
-            lazilyCreatedBallBehavior.elasticity = 1.0
+            lazilyCreatedBallBehavior.elasticity = 1.05
         }
         let friction = CGFloat(NSUserDefaults.standardUserDefaults().floatForKey("Ball.Friction"))
         if friction != 0 {
@@ -51,7 +51,7 @@ class BreakoutBehavior: UIDynamicBehavior {
         if elasticity != 0 {
             lazilyCreatedPaddleBehavior.elasticity = elasticity
         } else {
-            lazilyCreatedPaddleBehavior.elasticity = 1.15
+            lazilyCreatedPaddleBehavior.elasticity = 1.1
         }
         let friction = CGFloat(NSUserDefaults.standardUserDefaults().floatForKey("Paddle.Friction"))
         if friction != 0 {

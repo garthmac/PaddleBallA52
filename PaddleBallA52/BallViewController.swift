@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+let model = UIDevice.currentDevice().model
 
 class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudioPlayerDelegate {
 
@@ -56,7 +57,10 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
     private var audioPlayer: AVAudioPlayer!
     private var path: String! = ""
     private var soundTrack = 0
-    private var availableCredits = 0
+    private var availableCredits: Int { // a computed property instead of func
+        get { return Settings().availableCredits }
+        set { Settings().availableCredits = newValue }
+    }
     // MARK: - get coins!
     lazy var coins: UIImageView = {
         let size = CGSize(width: 42.0, height: 20.0)
@@ -78,37 +82,36 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         return coin
         }()
     func earnCoin() {
-        if ballCounter == 1 { //"PowerBall Achieved!"
-            //prepare for annimation
-            largeCoin.image = UIImage(named: "1000CreditsSWars1.png")
-            largeCoin.alpha = 1
-            largeCoin.center.y = gameView.bounds.minY //move off screen but alpha = 1
-            UIView.animateWithDuration(3.0, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: nil, animations: {
+        //prepare for annimation
+        largeCoin.image = UIImage(named: "1000CreditsSWars1.png")
+        largeCoin.alpha = 1
+        largeCoin.center.y = gameView.bounds.minY //move off screen but alpha = 1
+        UIView.animateWithDuration(3.0, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: nil, animations: {
+            self.resetPaddleAndScoreBoard()
+            self.largeCoin.alpha = 0
+            }, completion: nil)
+        //prepare for annimation
+        coinCountLabel.alpha = 0
+        coinCountLabel.center.y = gameView.bounds.maxY //move off screen
+        let images = (0...2).map {
+            UIImage(named: "1000Credits\($0)-20.png") as! AnyObject
+        }
+        if let image = images[min(coinCount, 2)] as? UIImage {
+            coins.image = image
+            coins.alpha = 0
+            coins.center.y = gameView.bounds.maxY //move off screen
+            self.coinCount += 1
+            if self.coinCount % 3 == 0 {
+                self.availableCredits += 1
+                let shopTabBarItem = tabBarController!.tabBar.items![0] as! UITabBarItem
+                shopTabBarItem.badgeValue = "\(self.availableCredits)"
+            }
+            UIView.animateWithDuration(4.0, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: nil, animations: {
+                self.coinCountLabel.text = self.coinCount.addSeparator
                 self.resetPaddleAndScoreBoard()
-                self.largeCoin.alpha = 0
+                self.coins.alpha = 1
+                self.coinCountLabel.alpha = 1
                 }, completion: nil)
-            //prepare for annimation
-            coinCountLabel.alpha = 0
-            coinCountLabel.center.y = gameView.bounds.maxY //move off screen
-            let images = (0...2).map {
-                UIImage(named: "1000Credits\($0)-20.png") as! AnyObject
-            }
-            if let image = images[min(coinCount, 2)] as? UIImage {
-                coins.image = image
-                coins.alpha = 0
-                coins.center.y = gameView.bounds.maxY //move off screen
-                UIView.animateWithDuration(4.0, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: nil, animations: {
-                    self.coinCount += 1
-                    if self.coinCount % 3 == 0 {
-                        self.availableCredits += 1
-                        Settings().availableCredits += 1
-                    }
-                    self.coinCountLabel.text = self.coinCount.addSeparator
-                    self.resetPaddleAndScoreBoard()
-                    self.coins.alpha = 1
-                    self.coinCountLabel.alpha = 1
-                    }, completion: nil)
-            }
         }
     }
     var tbvcArray: [UIViewController]?
@@ -145,6 +148,11 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         case 3: path = NSBundle.mainBundle().pathForResource("Hudson - Chained", ofType: "mp3")
         case 4: path = NSBundle.mainBundle().pathForResource("Forrest Gump Soundtrack", ofType: "mp3")
         case 5: path = NSBundle.mainBundle().pathForResource("Titanic Soundtrack - Rose", ofType: "mp3")
+        case 6: path = NSBundle.mainBundle().pathForResource("Diana Ross - Ain't No Mountain High Enough 1981", ofType: "mp3")
+        case 7: path = NSBundle.mainBundle().pathForResource("Phil Wickham - This Is Amazing Grace", ofType: "mp3")
+        case 8: path = NSBundle.mainBundle().pathForResource("Hillsong United - No Other Name - Oceans (Where Feet May Fail)", ofType: "mp3")
+        case 9: path = NSBundle.mainBundle().pathForResource("Phil Wickham - At Your Name (Yahweh, Yahweh)", ofType: "mp3")
+        case 10: path = NSBundle.mainBundle().pathForResource("Yusuf Islam - Peace Train - OUTSTANDING!-2", ofType: "mp3")
         default: path = NSBundle.mainBundle().pathForResource("jazzloop2_70", ofType: "mp3")
         }
         let url = NSURL.fileURLWithPath(path!)
@@ -164,7 +172,6 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         static let PaddleCornerRadius: CGFloat = 5.0
         static let PaddlePathName = "Paddle"
         static let PaddleSize = CGSize(width: 80.0, height: 20.0)
-        static let PaddleWidthMultiplier = 2
         static let BrickColumns = 4
         static let BrickCornerRadius: CGFloat = 15.0
         static let BrickTotalWidth: CGFloat = 1.0
@@ -190,12 +197,13 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        Settings().endLevelBonus = 0
         //printFonts()
         prepareAudios()
         prepareTabBar()
         self.hidesBottomBarWhenPushed = true
         animator.addBehavior(breakout)
-        Settings(defaultColumns: Constants.BrickColumns, defaultRows: Constants.BrickColumns / 2, defaultBalls: 1, defaultDifficulty: 1, defaultSpeed: Constants.BallSpeed, defaultBallColor: Constants.BallColor, defaultCourtColor: Constants.CourtColor, defaultPaddleColor: Constants.PaddleColor, defaultPaddleWidthMultiplier: Constants.PaddleWidthMultiplier)
+        Settings(defaultColumns: Constants.BrickColumns, defaultRows: Constants.BrickColumns / 2, defaultBalls: 1, defaultDifficulty: 1, defaultSpeed: Constants.BallSpeed, defaultBallColor: Constants.BallColor, defaultCourtColor: Constants.CourtColor, defaultPaddleColor: Constants.PaddleColor, defaultPaddleWidthMultiplier: Settings().paddleWidthMultiplier)
         gameView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "pushBall:"))
         gameView.layer.backgroundColor = UIColor.colorFor(Settings().courtColor).CGColor
         //The pan gesture handles most movement. However in the heat of the game it might be necessary to move faster-that’s what the left and right swipe gestures r4
@@ -228,7 +236,6 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         let settingsTabBarItem = tabBarController!.tabBar.items![2] as! UITabBarItem
         settingsTabBarItem.badgeValue = nil  //reset for paddle purchaces
         let shopTabBarItem = tabBarController!.tabBar.items![0] as! UITabBarItem
-        availableCredits = Settings().availableCredits
         if availableCredits == 0 {
             shopTabBarItem.badgeValue = nil
         } else {
@@ -236,10 +243,10 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         }
         //Settings().type stuff set here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         adjustColors()
-        breakout.speed = CGFloat(Settings().speed!)
+        breakout.speed = CGFloat(Settings().speed)
         breakout.ballBehavior.allowsRotation = Settings().ballRotation
         gameView.layer.backgroundColor = UIColor.colorFor(Settings().courtColor).CGColor
-        let pw = Settings().paddleWidthMultiplier!
+        let pw = Settings().paddleWidthMultiplier
         paddleSize = CGSize(width: (CGFloat(pw) * Constants.BallSize), height: 20.0)
         paddle.frame.size = paddleSize
         if Settings().myPaddles.count == 1 {
@@ -289,6 +296,9 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         super.viewWillDisappear(animated)
         autoStartTimer?.invalidate()
         autoStartTimer = nil
+        if Settings().soundOn {
+            audioPlayer.pause()
+        }
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -315,7 +325,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
     }
     //When the timer fires – and there are not “enough” balls, create a new one, place it, add it to the behavior and push it:
     func fireAutoStart(timer: NSTimer) {
-        if breakout.balls.count < Settings().balls {
+        if Constants.MaxBalls + 1 > ballCounter {
             let ball = createBall()
             placeBall(ball)
             breakout.addBall(ball)
@@ -361,6 +371,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             ball.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
             ball.layer.shadowOpacity = 0.5
         }
+        ballCounter += 1
         return ball
     }
     func placeBall(ball: UIView) {
@@ -369,14 +380,13 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         center.y -= paddleSize.height/2 + Constants.BallSize/2
         ball.center = center
     }
-    private var ballCounter: Int = 0
+    private var ballCounter = 0
     func pushBall(gesture: UITapGestureRecognizer) { //*** lots happening here!
         if gesture.state == .Ended {
-            if ballCounter > Constants.MaxBalls {
+            if ballCounter > Constants.MaxBalls && breakout.balls.count == 0 {
                 levelFinished()
             } else if breakout.balls.count < Settings().balls {
                 let ball = createBall()
-                ballCounter += 1
                 placeBall(ball)
                 breakout.addBall(ball)
             }
@@ -400,19 +410,22 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
     func resetPaddleAndScoreBoard() {
         //** create paddle partly out so it gets reset the first time, then only when device is rotated
         if !CGRectContainsRect(gameView.bounds, paddle.frame) {
-            paddle.center = CGPoint(x: gameView.bounds.midX, y: (gameView.bounds.maxY - paddle.bounds.height))
-            scoreBoard.center = CGPoint(x: gameView.bounds.midX, y: (gameView.bounds.maxY - 40.0))
-            powerBallScoreBoard.center = CGPoint(x: gameView.bounds.midX, y: (gameView.bounds.midY + 90.0))
-            coins.center = CGPoint(x: (gameView.bounds.midX - 40.0), y: (gameView.bounds.minY + 12.0))
-            coinCountLabel.center = CGPoint(x: (gameView.bounds.midX + 60.0), y: (gameView.bounds.minY + 10.0))
-            largeCoin.center = CGPoint(x: gameView.bounds.midX, y: gameView.bounds.midY)
+            let midx = gameView.bounds.midX
+            //println("not ContainsRect of paddle")
+            paddle.center = CGPoint(x: midx, y: (gameView.bounds.maxY - paddle.bounds.height))
+            scoreBoard.center = CGPoint(x: midx, y: (gameView.bounds.maxY - 40.0))
+            powerBallScoreBoard.center = CGPoint(x: midx, y: (gameView.bounds.midY + 90.0))
+            coins.center = CGPoint(x: (midx - 40.0), y: (gameView.bounds.minY + 12.0))
+            coinCountLabel.center = CGPoint(x: (midx + 60.0), y: (gameView.bounds.minY + 10.0))
+            largeCoin.center = CGPoint(x: midx, y: gameView.bounds.midY)
         } else {
-            paddle.center = CGPoint(x: paddle.center.x, y: (gameView.bounds.maxY - paddle.bounds.height))
-            scoreBoard.center = CGPoint(x: scoreBoard.center.x, y: (gameView.bounds.maxY - 40.0))
-            powerBallScoreBoard.center = CGPoint(x: scoreBoard.center.x, y: (gameView.bounds.midY + 90.0))
-            coins.center = CGPoint(x: scoreBoard.center.x - 40.0, y: gameView.bounds.minY + 12.0)
-            coinCountLabel.center = CGPoint(x: scoreBoard.center.x + 60.0, y: (gameView.bounds.minY + 10.0))
-            largeCoin.center = CGPoint(x: largeCoin.center.x, y: gameView.bounds.midY)
+            let midx = gameView.bounds.midX
+            paddle.center = CGPoint(x: midx, y: (gameView.bounds.maxY - paddle.bounds.height))
+            scoreBoard.center = CGPoint(x: midx, y: (gameView.bounds.maxY - 40.0))
+            powerBallScoreBoard.center = CGPoint(x: midx, y: (gameView.bounds.midY + 90.0))
+            coins.center = CGPoint(x: midx - 40.0, y: gameView.bounds.minY + 12.0)
+            coinCountLabel.center = CGPoint(x: midx + 60.0, y: (gameView.bounds.minY + 10.0))
+            largeCoin.center = CGPoint(x: midx, y: gameView.bounds.midY)
         }
         addPaddleBarrier()
     }
@@ -477,34 +490,34 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         default: break
         }
     }
-    let model = UIDevice.currentDevice().model
+    
     var adjust: CGFloat = 1.2
     // MARK: - levelOne
     func levelOne(tier: Int) {
         if bricks.count > 0 { return }
         if tier > 1 {
-            if Settings().columns! < Settings().rows! * 2 {
-                if Settings().columns! < 16 {
-                    Settings().columns! += 1
+            if Settings().columns < Settings().rows * 2 {
+                if Settings().columns < 16 {
+                    Settings().columns += 1
                 }
             } else {
-                if Settings().rows! < Constants.MaxRows {
-                    Settings().rows! += 1
+                if Settings().rows < Constants.MaxRows {
+                    Settings().rows += 1
                 }
             }
         }
-        var deltaX = Constants.BrickTotalWidth / CGFloat(Settings().columns!)
-        var deltaY = Constants.BrickTotalHeight / CGFloat(Settings().rows!)
+        var deltaX = Constants.BrickTotalWidth / CGFloat(Settings().columns)
+        var deltaY = Constants.BrickTotalHeight / CGFloat(Settings().rows)
         //adjust height of brick wall at lower levels
-        if Settings().rows! < 4 {
+        if Settings().rows < 4 {
             deltaY = deltaY / adjust  //shorten
             deltaX = deltaX / adjust  //narrow
         } else {
             adjust = 1.0
         }
         var frame = CGRect(origin: CGPointZero, size: CGSize(width: deltaX, height: deltaY))
-        for row in 0..<Settings().rows! {
-            for column in 0..<Settings().columns! {
+        for row in 0..<Settings().rows {
+            for column in 0..<Settings().columns {
                 frame.origin.x = deltaX * CGFloat(column)
                 frame.origin.y = deltaY * CGFloat(row) + Constants.BrickTopSpacing
                 let brick = UIButton(frame: frame) //used to be UIView
@@ -528,7 +541,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
                 var action: BrickAction = nil
                 //Add the “black” row only when the difficulty “hard” has been chosen:
                 if Settings().difficulty == 1 {
-                    if row + 1 == Settings().rows! {
+                    if row + 1 == Settings().rows {
                         brick.backgroundColor = UIColor.blackColor()
                         action = { index in
                             if brick.backgroundColor != UIColor.blackColor() {
@@ -539,13 +552,13 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
                         }
                     }
                 }
-                bricks[row * Settings().columns! + column] = Brick(relativeFrame: frame, view: brick, action: action)
+                bricks[row * Settings().columns + column] = Brick(relativeFrame: frame, view: brick, action: action)
             }
         }
     }
     func prepareBrick(brick: UIButton) {
         brick.backgroundColor = UIColor.random
-        if model.hasPrefix("iPad") || Settings().columns! < 10 { //can't read values on iPhone
+        if model.hasPrefix("iPad") || Settings().columns < 10 { //can't read values on iPhone
             brick.setTitleColor(UIColor.blackColor(), forState: .Normal) //hides well
             brick.setTitle("\(UIColor.scoreForColor(brick.backgroundColor!))", forState: .Normal)
             brick.titleLabel!.font = UIFont(name: "ComicSansMS", size: 12.0)
@@ -625,23 +638,23 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         showBonusScore(false)    }
     var bonusScore = 0
     func bonus() { //hit a bom
-        bonusScore = Int(1000 / Settings().paddleWidthMultiplier!) * powerBall
+        bonusScore = Int(1000 / Settings().paddleWidthMultiplier) * powerBall
         showBonusScore(true)
         score += bonusScore
         bonusScore = 0
     }
     func showBonusScore(isBonus: Bool) {
-        scoreBoard.alpha = 0    //prepare for annimation
-        scoreBoard.center.y = 0
         if isBonus {
+            scoreBoard.alpha = 0    //prepare for annimation
+            scoreBoard.center.y = 0
             scoreBoard.text = "Bonus!   " + bonusScore.addSeparator
+            UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0.0, options: nil, animations: {
+                self.resetPaddleAndScoreBoard()
+                self.scoreBoard.alpha = 1
+                }, completion: nil)
         } else {
             scoreBoard.text = msg + score.addSeparator
         }
-        UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0.0, options: nil, animations: {
-                self.resetPaddleAndScoreBoard()
-                self.scoreBoard.alpha = 1
-            }, completion: nil)
     }
     let today = NSDate()
     private var timestamp: String { // a computed property instead of func
@@ -656,28 +669,19 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
     var powerBall = 1 //normal multiplier
     //remove the timer when a game has finished, and start it again afterwards...
     func levelFinished() {
-        autoStartTimer?.invalidate()
-        autoStartTimer = nil
         for ball in breakout.balls {
             breakout.removeBall(ball)
         }
-        let ballBonus = 2000 * (Constants.MaxBalls + 1 - ballCounter) / Settings().paddleWidthMultiplier!
+        let ballBonus = 2000 * (Constants.MaxBalls + 1 - ballCounter) / Settings().paddleWidthMultiplier
         score += ballBonus
         if newHighScoreAchieved {
             Settings().highScore = score
             Settings().highScoreDate = timestamp
         }
         // MARK: - animate PowerBall Achieved!
-        let shopTabBarItem = tabBarController!.tabBar.items![0] as! UITabBarItem
         if ballCounter == 1 {
-            let ac = availableCredits
             earnCoin()
-            if ac != availableCredits {
-                powerBallScoreBoard.text = "Credit Earned!"
-                shopTabBarItem.badgeValue = "\(availableCredits)"
-            } else {
-                powerBallScoreBoard.text = "PowerBall 3X!"
-            }
+            powerBallScoreBoard.text = "PowerBall 3X!"
             powerBallScoreBoard.alpha = 0    //prepare for annimation
             powerBallScoreBoard.center.x = 0
             UIView.animateWithDuration(4.0, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: nil, animations: {
@@ -695,6 +699,35 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             powerBall = 1 //back to regular scoring
             loggedInUser = User.login(uid, password: "foo")
             buildCube()
+        }
+        var shopCredit = ( (self.coinCount % 3 == 0) && self.coinCount >= 3 )
+        if shopCredit || score > 10000 {  //levelFinished post bonus/pre continue...can be with powerBall msg
+            if shopCredit { //3rd coin
+                scoreBoard.text = "+1 SHOP Credit"
+            }
+            if score > 10000 {
+                var testForBonus = score/10000
+                if testForBonus > Settings().endLevelBonus {
+                    earnCoin()  //annimated
+                    if !(self.coinCount % 3 == 0) { //only show if new coin wasn't 3rd coin
+                        scoreBoard.text = "10k COIN added"
+                    } //side effect...score is annimated on a Game Over!
+                }
+            }
+            scoreBoard.font = UIFont(name: "ComicSansMS-Bold", size: 30.0)    //prepare for annimation
+            scoreBoard.textColor = UIColor.redColor()
+            UIView.animateWithDuration(4.0, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: nil, animations: {
+                self.scoreBoard.center = CGPoint(x: self.scoreBoard.center.x, y: (self.gameView.bounds.midY - (self.gameView.bounds.midY / 2.0) ) )
+                }, completion: { (success) -> Void in
+                    Settings().endLevelBonus += 1
+                    UIView.animateWithDuration(2.5, animations: {
+                        self.resetPaddleAndScoreBoard()
+                        self.scoreBoard.alpha = 0  //disappear
+                        }, completion: { (success) -> Void in
+                            self.scoreBoard.font = UIFont(name: "ComicSansMS-Bold", size: 18.0)
+                            self.scoreBoard.alpha = 1
+                    })
+            })
         }
         var title = "Game Over!", message = "Try Again...", cancelButtonTitle = "Restart?"
         if Settings().rows == Constants.MaxRows && bricks.count == 0 {
@@ -735,8 +768,10 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         gameView.layer.backgroundColor = UIColor.colorFor(Settings().courtColor).CGColor
         adjustColors()
         // end change court color
+        if !Settings().autoStart {
+            autoStartTimer?.invalidate()
+        }
         levelOne(self.tier)
-        setAutoStartTimer()
     }
     // MARK: - game over -> restart
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
@@ -749,12 +784,14 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             buildCube()
             ballCounter = 0
             cornerRadius = Constants.BrickCornerRadius
+            Settings().endLevelBonus = 0
             score = 0
             tier = 1
-            //don't reset colors or paddleWidth if user changed them!
-            Settings(defaultColumns: Constants.BrickColumns, defaultRows: Constants.BrickColumns / 2, defaultBalls: 1, defaultDifficulty: 1, defaultSpeed: Constants.BallSpeed, defaultBallColor: Settings().ballColor, defaultCourtColor: Settings().courtColor, defaultPaddleColor: Settings().paddleColor, defaultPaddleWidthMultiplier: Settings().paddleWidthMultiplier!)
+            //don't reset ball or paddle colors or paddleWidth if user changed them!
+            Settings(defaultColumns: Constants.BrickColumns, defaultRows: Constants.BrickColumns / 2, defaultBalls: 1, defaultDifficulty: 1, defaultSpeed: Constants.BallSpeed, defaultBallColor: Settings().ballColor, defaultCourtColor: Constants.CourtColor, defaultPaddleColor: Settings().paddleColor, defaultPaddleWidthMultiplier: Settings().paddleWidthMultiplier)
+            gameView.layer.backgroundColor = UIColor.colorFor(Settings().courtColor).CGColor
+            adjustColors()
             levelOne(tier)
-            setAutoStartTimer()
         }
     }
     
@@ -864,20 +901,24 @@ private extension UIColor {
         }
     }
     class func scoreForColor(sel: UIColor) -> Int {
-        let pwm = Settings().paddleWidthMultiplier!
+        let pwm = Double(Settings().paddleWidthMultiplier)
+        var numerator = 1.0
+        if model.hasPrefix("iPad") {
+            numerator = 2.0
+        }
         switch sel {
-        case UIColor.greenColor(): return (8 / pwm * 4)
-        case UIColor.blueColor(): return (8 / pwm * 8)
-        case UIColor.orangeColor(): return (8 / pwm * 12)
-        case UIColor.redColor(): return (8 / pwm * 16)
-        case UIColor.purpleColor(): return (8 / pwm * 20)
-        case UIColor.yellowColor(): return (8 / pwm * 24)
-        case UIColor.brownColor(): return (8 / pwm * 28)
-        case UIColor.darkGrayColor(): return (8 / pwm * 32)
-        case UIColor.lightGrayColor(): return (8 / pwm * 36)
-        case UIColor.cyanColor(): return (8 / pwm * 40)
-        case UIColor.whiteColor(): return (8 / pwm * 44)
-        case UIColor.clearColor(): return (8 / pwm * 48)
+        case UIColor.greenColor(): return Int(round(5 * numerator / pwm))
+        case UIColor.blueColor(): return Int(round(10 * numerator / pwm))
+        case UIColor.orangeColor(): return Int(round(15 * numerator / pwm))
+        case UIColor.redColor(): return Int(round(20 * numerator / pwm))
+        case UIColor.purpleColor(): return Int(round(25 * numerator / pwm))
+        case UIColor.yellowColor(): return Int(round(30 * numerator / pwm))
+        case UIColor.brownColor(): return Int(round(35 * numerator / pwm))
+        case UIColor.darkGrayColor(): return Int(round(40 * numerator / pwm))
+        case UIColor.lightGrayColor(): return Int(round(45 * numerator / pwm))
+        case UIColor.cyanColor(): return Int(round(50 * numerator / pwm))
+        case UIColor.whiteColor(): return Int(round(55 * numerator / pwm))
+        case UIColor.clearColor(): return Int(round(60 * numerator / pwm))
         default: return 0
         }
     }

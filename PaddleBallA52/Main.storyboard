@@ -82,11 +82,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" alpha="0.24999999999999967" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pineapple_400.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="R6t-G5-E28">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                            </imageView>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ux-Dr-YYU">
-                                <rect key="frame" x="288" y="95" width="30" height="30"/>
+                                <rect key="frame" x="288" y="95" width="54" height="30"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <size key="titleShadowOffset" width="1" height="0.0"/>
-                                <state key="normal" title="Buy">
+                                <state key="normal" title="Try/Buy">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -94,10 +97,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IXr-h3-ix0">
-                                <rect key="frame" x="191" y="95" width="40" height="30"/>
+                                <rect key="frame" x="191" y="95" width="39" height="30"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <size key="titleShadowOffset" width="1" height="0.0"/>
-                                <state key="normal" title="Swap">
+                                <state key="normal" title="FREE">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -105,7 +108,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Spend Wisely" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="53j-GT-mr6">
-                                <rect key="frame" x="199" y="13" width="203" height="41"/>
+                                <rect key="frame" x="187" y="13" width="180" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -183,7 +186,10 @@
                                 </connections>
                             </button>
                             <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hpe-Ei-WrE">
-                                <rect key="frame" x="100" y="133" width="400" height="216"/>
+                                <rect key="frame" x="51" y="143" width="500" height="162"/>
+                            </pickerView>
+                            <pickerView hidden="YES" tag="1" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m8l-9U-epx">
+                                <rect key="frame" x="51" y="313" width="500" height="162"/>
                             </pickerView>
                             <button opaque="NO" tag="3" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dQR-iN-Gnd">
                                 <rect key="frame" x="385" y="95" width="30" height="30"/>
@@ -196,15 +202,28 @@
                                     <action selector="buySelection:" destination="wR6-8n-lXG" eventType="touchUpInside" id="Pd1-Ou-s9Z"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" alpha="0.24999999999999967" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pineapple_400.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="R6t-G5-E28">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
-                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gV1-D0-yde">
+                                <rect key="frame" x="363" y="10" width="59" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="1lg-1Q-dy9"/>
+                                    <constraint firstAttribute="width" constant="48" id="YOK-cc-EGS"/>
+                                </constraints>
+                                <state key="normal" image="helpful160.png">
+                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="help:" destination="wR6-8n-lXG" eventType="touchUpInside" id="nGg-dc-dTZ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="m8l-9U-epx" firstAttribute="centerX" secondItem="hpe-Ei-WrE" secondAttribute="centerX" id="03g-Hp-T0w"/>
                             <constraint firstItem="mzT-bA-e9X" firstAttribute="trailing" secondItem="hpe-Ei-WrE" secondAttribute="trailing" id="1ei-xy-kiP"/>
                             <constraint firstItem="DzD-pd-7at" firstAttribute="leading" secondItem="53j-GT-mr6" secondAttribute="trailing" constant="20" id="1ez-Ta-ZoZ"/>
                             <constraint firstItem="hpe-Ei-WrE" firstAttribute="top" secondItem="Hf3-t5-20Y" secondAttribute="bottom" constant="8" symbolic="YES" id="1we-Y9-a61"/>
+                            <constraint firstItem="DzD-pd-7at" firstAttribute="leading" secondItem="gV1-D0-yde" secondAttribute="trailing" constant="8" symbolic="YES" id="2SN-yr-Zi5"/>
                             <constraint firstItem="JbB-qz-QGC" firstAttribute="top" secondItem="R6t-G5-E28" secondAttribute="bottom" id="3Fb-SW-G9f"/>
                             <constraint firstItem="JbB-qz-QGC" firstAttribute="top" secondItem="R6t-G5-E28" secondAttribute="bottom" id="3cR-F9-2E4"/>
                             <constraint firstItem="rfR-RL-iZJ" firstAttribute="centerX" secondItem="hpe-Ei-WrE" secondAttribute="centerX" id="3n7-uV-TQv"/>
@@ -212,13 +231,15 @@
                             <constraint firstItem="yKM-oW-idW" firstAttribute="centerX" secondItem="IXr-h3-ix0" secondAttribute="centerX" id="5Uc-EZ-16u"/>
                             <constraint firstItem="yNw-wM-mNr" firstAttribute="top" secondItem="mzT-bA-e9X" secondAttribute="bottom" constant="8" symbolic="YES" id="5Vv-Tg-kVm"/>
                             <constraint firstItem="dQR-iN-Gnd" firstAttribute="top" secondItem="yq0-vO-HsG" secondAttribute="bottom" constant="8" symbolic="YES" id="5t2-A6-tQf"/>
-                            <constraint firstItem="53j-GT-mr6" firstAttribute="leading" secondItem="YK9-i8-HUS" secondAttribute="trailing" constant="20" id="5zh-Of-5Zv"/>
+                            <constraint firstItem="53j-GT-mr6" firstAttribute="leading" secondItem="YK9-i8-HUS" secondAttribute="trailing" constant="8" symbolic="YES" id="5zh-Of-5Zv"/>
+                            <constraint firstItem="gV1-D0-yde" firstAttribute="centerY" secondItem="DzD-pd-7at" secondAttribute="centerY" id="6OC-w8-IPM"/>
                             <constraint firstItem="R6t-G5-E28" firstAttribute="leading" secondItem="LgR-xO-rGd" secondAttribute="leadingMargin" constant="-16" id="7kW-xb-6Sb"/>
                             <constraint firstItem="Hf3-t5-20Y" firstAttribute="leading" secondItem="hpe-Ei-WrE" secondAttribute="leading" id="7qS-AI-F3J"/>
                             <constraint firstItem="7ux-Dr-YYU" firstAttribute="centerX" secondItem="rfR-RL-iZJ" secondAttribute="centerX" id="8uA-Rr-y2C"/>
                             <constraint firstItem="Hf3-t5-20Y" firstAttribute="centerY" secondItem="hpe-Ei-WrE" secondAttribute="centerY" constant="-80" id="9Ar-Iu-EuY"/>
                             <constraint firstItem="yNw-wM-mNr" firstAttribute="bottom" secondItem="dQR-iN-Gnd" secondAttribute="bottom" id="9Ww-07-IgU"/>
                             <constraint firstItem="7ux-Dr-YYU" firstAttribute="centerY" secondItem="IXr-h3-ix0" secondAttribute="centerY" id="9mO-eB-Pvv"/>
+                            <constraint firstItem="m8l-9U-epx" firstAttribute="trailing" secondItem="hpe-Ei-WrE" secondAttribute="trailing" id="9wi-pB-fRC"/>
                             <constraint firstItem="R6t-G5-E28" firstAttribute="top" secondItem="2jF-ig-udB" secondAttribute="bottom" constant="-20" id="Ag8-Rl-Ngf"/>
                             <constraint firstItem="mzT-bA-e9X" firstAttribute="centerY" secondItem="hpe-Ei-WrE" secondAttribute="centerY" constant="-80" id="Ccw-cf-Fv2"/>
                             <constraint firstItem="Hf3-t5-20Y" firstAttribute="top" secondItem="YK9-i8-HUS" secondAttribute="bottom" constant="8" symbolic="YES" id="DWj-sh-Xo3"/>
@@ -237,6 +258,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="R6t-G5-E28" secondAttribute="trailing" constant="-16" id="MzN-XN-8rJ"/>
                             <constraint firstAttribute="centerY" secondItem="R6t-G5-E28" secondAttribute="centerY" id="N0f-bm-IL6"/>
                             <constraint firstAttribute="centerX" secondItem="R6t-G5-E28" secondAttribute="centerX" id="ORY-R3-igF"/>
+                            <constraint firstItem="m8l-9U-epx" firstAttribute="top" secondItem="hpe-Ei-WrE" secondAttribute="bottom" constant="8" symbolic="YES" id="SIO-pi-Bo1"/>
                             <constraint firstItem="rfR-RL-iZJ" firstAttribute="width" secondItem="Hf3-t5-20Y" secondAttribute="width" id="Sx3-j2-1fh"/>
                             <constraint firstItem="yKM-oW-idW" firstAttribute="width" secondItem="Hf3-t5-20Y" secondAttribute="width" id="T98-xN-43j"/>
                             <constraint firstAttribute="trailingMargin" secondItem="mzT-bA-e9X" secondAttribute="trailing" constant="-16" id="UES-n8-boh"/>
@@ -256,6 +278,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="mzT-bA-e9X" secondAttribute="trailing" constant="-15" id="cMw-8e-YU0"/>
                             <constraint firstItem="YK9-i8-HUS" firstAttribute="centerY" secondItem="53j-GT-mr6" secondAttribute="centerY" id="cTS-h6-2Mf"/>
                             <constraint firstItem="mzT-bA-e9X" firstAttribute="leading" secondItem="yq0-vO-HsG" secondAttribute="trailing" constant="8" symbolic="YES" id="eQu-SC-k0o"/>
+                            <constraint firstItem="m8l-9U-epx" firstAttribute="leading" secondItem="hpe-Ei-WrE" secondAttribute="leading" id="ezP-xO-x7n"/>
                             <constraint firstItem="R6t-G5-E28" firstAttribute="leading" secondItem="Hf3-t5-20Y" secondAttribute="trailing" constant="-111" id="ezb-iX-Igk"/>
                             <constraint firstItem="IXr-h3-ix0" firstAttribute="top" secondItem="yKM-oW-idW" secondAttribute="bottom" constant="8" symbolic="YES" id="foI-dr-Hej"/>
                             <constraint firstItem="7ux-Dr-YYU" firstAttribute="bottom" secondItem="IXr-h3-ix0" secondAttribute="bottom" id="fr9-wi-MLk"/>
@@ -275,6 +298,7 @@
                             <constraint firstItem="hpe-Ei-WrE" firstAttribute="leading" secondItem="LgR-xO-rGd" secondAttribute="leadingMargin" id="v5W-27-Osy"/>
                             <constraint firstItem="yKM-oW-idW" firstAttribute="leading" secondItem="Hf3-t5-20Y" secondAttribute="trailing" constant="8" symbolic="YES" id="xtj-Kz-cTh"/>
                             <constraint firstItem="rfR-RL-iZJ" firstAttribute="leading" secondItem="yKM-oW-idW" secondAttribute="trailing" constant="8" symbolic="YES" id="yG1-yb-bfi"/>
+                            <constraint firstItem="gV1-D0-yde" firstAttribute="leading" secondItem="53j-GT-mr6" secondAttribute="trailing" constant="8" symbolic="YES" id="yjS-Mh-Sax"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -299,6 +323,7 @@
                                 <exclude reference="fr9-wi-MLk"/>
                                 <exclude reference="hd7-mM-tvQ"/>
                                 <exclude reference="5t2-A6-tQf"/>
+                                <exclude reference="1ez-Ta-ZoZ"/>
                                 <exclude reference="1ei-xy-kiP"/>
                                 <exclude reference="Ccw-cf-Fv2"/>
                                 <exclude reference="GCq-VM-gxP"/>
@@ -316,6 +341,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="backdropImageView" destination="R6t-G5-E28" id="XgU-wB-Feh"/>
+                        <outlet property="helpPickerView" destination="m8l-9U-epx" id="h7c-Qz-wm1"/>
                         <outlet property="leftTrophyImageView" destination="YK9-i8-HUS" id="jtF-iw-4zD"/>
                         <outlet property="rightTrophyImageView" destination="DzD-pd-7at" id="lRD-QT-fme"/>
                         <outlet property="titleLabel" destination="53j-GT-mr6" id="feb-3K-icA"/>
@@ -1455,6 +1481,7 @@
                             <constraint firstItem="mfl-Ev-OpO" firstAttribute="leading" secondItem="yRU-MR-HPC" secondAttribute="leading" id="CVc-lj-5bK"/>
                             <constraint firstItem="XWH-O6-7QN" firstAttribute="top" relation="greaterThanOrEqual" secondItem="HGG-DI-HYc" secondAttribute="bottom" constant="8" symbolic="YES" id="CZY-ho-u8Y"/>
                             <constraint firstItem="3hz-su-2Gc" firstAttribute="leading" secondItem="HGG-DI-HYc" secondAttribute="trailing" constant="8" symbolic="YES" id="CaP-Gu-MVo"/>
+                            <constraint firstItem="FkI-Sa-cnN" firstAttribute="trailing" secondItem="k1Z-XU-OVq" secondAttribute="trailing" id="CbM-Ut-2Bt"/>
                             <constraint firstItem="HGG-DI-HYc" firstAttribute="leading" secondItem="uut-pF-nbb" secondAttribute="leading" id="CoC-VO-UEt"/>
                             <constraint firstItem="o1b-iy-YoY" firstAttribute="top" secondItem="nLI-wY-W1G" secondAttribute="bottom" constant="8" symbolic="YES" id="Cr2-5Z-tZz"/>
                             <constraint firstItem="4sv-3P-hd0" firstAttribute="leading" secondItem="3d5-91-ILd" secondAttribute="leading" id="Dok-lf-8dr"/>
@@ -2020,6 +2047,7 @@
                                 <exclude reference="WYG-YX-rqX"/>
                                 <exclude reference="7Xs-E3-IXy"/>
                                 <exclude reference="BD8-5D-Rhh"/>
+                                <exclude reference="cOH-c3-XOT"/>
                                 <exclude reference="fx2-Pw-oRt"/>
                                 <exclude reference="1Ny-TU-kJd"/>
                                 <exclude reference="1ab-B8-8Tz"/>
@@ -2896,6 +2924,7 @@
         <image name="end20" width="37" height="20"/>
         <image name="extension_UIImage.png" width="1023" height="192"/>
         <image name="glory.png" width="276" height="182"/>
+        <image name="helpful160.png" width="160" height="160"/>
         <image name="padel520.jpg" width="520" height="200"/>
         <image name="pineapple_400.jpg" width="292" height="400"/>
         <image name="pointLeft75" width="25" height="25"/>

@@ -63,18 +63,18 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         super.viewWillAppear(animated)
         //Settings().type stuff set here!!!
         autoStart = Settings().autoStart
-        balls = Settings().balls!
+        balls = Settings().balls
         ballColor = Settings().ballColor
-        columns = Settings().columns!
+        columns = Settings().columns
         courtColor = Settings().courtColor
-        difficulty = Settings().difficulty!
+        difficulty = Settings().difficulty
         highScoreOn = Settings().highScoreOn
         paddleColor = Settings().paddleColor
-        paddleWidthMultiplier = Settings().paddleWidthMultiplier!
+        paddleWidthMultiplier = Settings().paddleWidthMultiplier
         paddleWidthStepper.enabled = Settings().paddleWidthUnlockStepper
-        rows = Settings().rows!
+        rows = Settings().rows
         soundOn = Settings().soundOn
-        speed = Settings().speed!
+        speed = Settings().speed
         setPurchasedExtras()
     }
     func setPurchasedExtras() {
@@ -88,7 +88,7 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
 //            }
 //        }
         for str in Settings().myAudios {
-            for i in 0..<ShopViewController().audios.count {
+            for i in 0..<ShopViewController().audios.count - 5 { //5 extra songs
                 if ShopViewController().audios[i] == str {
                     soundChoiceSegControl.setEnabled(true, forSegmentAtIndex: i)
                 }

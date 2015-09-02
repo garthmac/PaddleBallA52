@@ -10,6 +10,12 @@
 		715FA4791B90074900203CE1 /* 1000CreditsSWars1.png in Resources */ = {isa = PBXBuildFile; fileRef = 715FA4781B90074900203CE1 /* 1000CreditsSWars1.png */; };
 		715FA47B1B91702600203CE1 /* Hudson - Chained.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 715FA47A1B91702600203CE1 /* Hudson - Chained.mp3 */; };
 		715FA47D1B91707200203CE1 /* Titanic Soundtrack - Rose.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 715FA47C1B91707200203CE1 /* Titanic Soundtrack - Rose.mp3 */; };
+		715FA4871B94EBB800203CE1 /* helpful160.png in Resources */ = {isa = PBXBuildFile; fileRef = 715FA4861B94EBB800203CE1 /* helpful160.png */; };
+		715FA4891B96248600203CE1 /* Diana Ross - Ain't No Mountain High Enough 1981.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 715FA4881B96248600203CE1 /* Diana Ross - Ain't No Mountain High Enough 1981.mp3 */; };
+		715FA4921B96254100203CE1 /* Phil Wickham - At Your Name (Yahweh, Yahweh).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 715FA48F1B96254100203CE1 /* Phil Wickham - At Your Name (Yahweh, Yahweh).mp3 */; };
+		715FA4971B96439F00203CE1 /* Yusuf Islam - Peace Train - OUTSTANDING!-2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 715FA4961B96439F00203CE1 /* Yusuf Islam - Peace Train - OUTSTANDING!-2.mp3 */; };
+		715FA49B1B9647EF00203CE1 /* Hillsong United - No Other Name - Oceans (Where Feet May Fail).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 715FA49A1B9647EF00203CE1 /* Hillsong United - No Other Name - Oceans (Where Feet May Fail).mp3 */; };
+		715FA49F1B9649C400203CE1 /* Phil Wickham - This Is Amazing Grace.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 715FA49E1B9649C400203CE1 /* Phil Wickham - This Is Amazing Grace.mp3 */; };
 		71A025AA1B8D5DA4002CE122 /* Forrest Gump Soundtrack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 71A025A91B8D5DA4002CE122 /* Forrest Gump Soundtrack.mp3 */; };
 		71A6E2E91B8AA0DE000AA949 /* CYMATICS- Science Vs. Music - Nigel Stanford-2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 71A6E2E81B8AA0DE000AA949 /* CYMATICS- Science Vs. Music - Nigel Stanford-2.mp3 */; };
 		881048B91B3E22F000712C9A /* TrackBall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881048B81B3E22F000712C9A /* TrackBall.swift */; };
@@ -103,6 +109,12 @@
 		715FA4781B90074900203CE1 /* 1000CreditsSWars1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1000CreditsSWars1.png; sourceTree = "<group>"; };
 		715FA47A1B91702600203CE1 /* Hudson - Chained.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Hudson - Chained.mp3"; sourceTree = "<group>"; };
 		715FA47C1B91707200203CE1 /* Titanic Soundtrack - Rose.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Titanic Soundtrack - Rose.mp3"; sourceTree = "<group>"; };
+		715FA4861B94EBB800203CE1 /* helpful160.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = helpful160.png; sourceTree = "<group>"; };
+		715FA4881B96248600203CE1 /* Diana Ross - Ain't No Mountain High Enough 1981.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Diana Ross - Ain't No Mountain High Enough 1981.mp3"; sourceTree = "<group>"; };
+		715FA48F1B96254100203CE1 /* Phil Wickham - At Your Name (Yahweh, Yahweh).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Phil Wickham - At Your Name (Yahweh, Yahweh).mp3"; sourceTree = "<group>"; };
+		715FA4961B96439F00203CE1 /* Yusuf Islam - Peace Train - OUTSTANDING!-2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Yusuf Islam - Peace Train - OUTSTANDING!-2.mp3"; sourceTree = "<group>"; };
+		715FA49A1B9647EF00203CE1 /* Hillsong United - No Other Name - Oceans (Where Feet May Fail).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Hillsong United - No Other Name - Oceans (Where Feet May Fail).mp3"; sourceTree = "<group>"; };
+		715FA49E1B9649C400203CE1 /* Phil Wickham - This Is Amazing Grace.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Phil Wickham - This Is Amazing Grace.mp3"; sourceTree = "<group>"; };
 		71A025A91B8D5DA4002CE122 /* Forrest Gump Soundtrack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Forrest Gump Soundtrack.mp3"; sourceTree = "<group>"; };
 		71A6E2E81B8AA0DE000AA949 /* CYMATICS- Science Vs. Music - Nigel Stanford-2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "CYMATICS- Science Vs. Music - Nigel Stanford-2.mp3"; sourceTree = "<group>"; };
 		881048B81B3E22F000712C9A /* TrackBall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackBall.swift; path = PaddleBallA52/TrackBall.swift; sourceTree = "<group>"; };
@@ -222,6 +234,7 @@
 				881048CA1B3F09A900712C9A /* IMG_3562.jpg */,
 				881048C81B3E6E4600712C9A /* badge-git-real-5d91905b69d46286cab389797ea81983.png */,
 				881048C51B3E663C00712C9A /* glory.png */,
+				715FA4861B94EBB800203CE1 /* helpful160.png */,
 				881048BE1B3E59D700712C9A /* mackie_swift.png */,
 				881559111B30E19600D60626 /* 1-FloUnitCircle.png */,
 				715FA4781B90074900203CE1 /* 1000CreditsSWars1.png */,
@@ -262,6 +275,11 @@
 				715FA47A1B91702600203CE1 /* Hudson - Chained.mp3 */,
 				71A025A91B8D5DA4002CE122 /* Forrest Gump Soundtrack.mp3 */,
 				715FA47C1B91707200203CE1 /* Titanic Soundtrack - Rose.mp3 */,
+				715FA4881B96248600203CE1 /* Diana Ross - Ain't No Mountain High Enough 1981.mp3 */,
+				715FA49E1B9649C400203CE1 /* Phil Wickham - This Is Amazing Grace.mp3 */,
+				715FA49A1B9647EF00203CE1 /* Hillsong United - No Other Name - Oceans (Where Feet May Fail).mp3 */,
+				715FA4961B96439F00203CE1 /* Yusuf Islam - Peace Train - OUTSTANDING!-2.mp3 */,
+				715FA48F1B96254100203CE1 /* Phil Wickham - At Your Name (Yahweh, Yahweh).mp3 */,
 			);
 			name = Audio;
 			sourceTree = "<group>";
@@ -465,9 +483,12 @@
 			files = (
 				884225801B4355F7003122E3 /* Icon-76.png in Resources */,
 				884225751B4355F7003122E3 /* Icon-57.png in Resources */,
+				715FA49B1B9647EF00203CE1 /* Hillsong United - No Other Name - Oceans (Where Feet May Fail).mp3 in Resources */,
 				715FA47D1B91707200203CE1 /* Titanic Soundtrack - Rose.mp3 in Resources */,
 				889C988E1B48E47200ACDA2C /* typing-computer4.png in Resources */,
+				715FA49F1B9649C400203CE1 /* Phil Wickham - This Is Amazing Grace.mp3 in Resources */,
 				71A025AA1B8D5DA4002CE122 /* Forrest Gump Soundtrack.mp3 in Resources */,
+				715FA4891B96248600203CE1 /* Diana Ross - Ain't No Mountain High Enough 1981.mp3 in Resources */,
 				884225811B4355F7003122E3 /* Icon-76@2x.png in Resources */,
 				88B46C601B41ED08006A0E54 /* RedBlockViewController.swift in Resources */,
 				8842257F1B4355F7003122E3 /* Icon-72@2x.png in Resources */,
@@ -511,6 +532,7 @@
 				884225761B4355F7003122E3 /* Icon-57@2x.png in Resources */,
 				889C987F1B4778C300ACDA2C /* 1000Credits1-20.png in Resources */,
 				88DCAD771B46EA460079046A /* peanuts-anim1.png in Resources */,
+				715FA4971B96439F00203CE1 /* Yusuf Islam - Peace Train - OUTSTANDING!-2.mp3 in Resources */,
 				884225821B4355F7003122E3 /* Icon-Small-29.png in Resources */,
 				889C988F1B48E47200ACDA2C /* typing-computer3.png in Resources */,
 				889C98921B48E47200ACDA2C /* typing-computer0.png in Resources */,
@@ -524,10 +546,12 @@
 				889C987E1B4778C300ACDA2C /* 1000Credits0-20.png in Resources */,
 				881048BF1B3E59D700712C9A /* mackie_swift.png in Resources */,
 				884225851B435605003122E3 /* iTunesArtwork@2x.png in Resources */,
+				715FA4871B94EBB800203CE1 /* helpful160.png in Resources */,
 				715FA47B1B91702600203CE1 /* Hudson - Chained.mp3 in Resources */,
 				889C98911B48E47200ACDA2C /* typing-computer1.png in Resources */,
 				88DCAD721B46EA460079046A /* peanuts-anim6.png in Resources */,
 				88EBF3351B2798C50090A5A0 /* LICENSE in Resources */,
+				715FA4921B96254100203CE1 /* Phil Wickham - At Your Name (Yahweh, Yahweh).mp3 in Resources */,
 				88DCAD7C1B46EDFF0079046A /* peanuts-anim7.png in Resources */,
 				889C98841B48DFD400ACDA2C /* snoopy1.jpg in Resources */,
 				881048D11B3F314000712C9A /* padel520.jpg in Resources */,

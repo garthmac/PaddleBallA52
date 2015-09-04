@@ -102,7 +102,7 @@ class Settings {
         set { defaults.setObject(newValue, forKey: Const.AudiosKey) }
     }
     var myPaddles: [String] {
-        get { return defaults.objectForKey(Const.PaddlesKey) as? [String] ?? ["asian33"]}
+        get { return defaults.objectForKey(Const.PaddlesKey) as? [String] ?? ["dizzy2"]}
         set { defaults.setObject(newValue, forKey: Const.PaddlesKey) }
     }
     var mySkins: [String] {

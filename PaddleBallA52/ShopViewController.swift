@@ -193,6 +193,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         helpPickerView.selectRow(Settings().lastHint, inComponent: 0, animated: true)
+        userPickerView.selectRow(4, inComponent: 0, animated: true)
         userPickerView.selectRow(Settings().soundChoice, inComponent: 2, animated: true)
         if let index = find(paddles, Settings().myPaddles.last!) {
             userPickerView.selectRow(index, inComponent: 3, animated: true)
@@ -295,7 +296,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
             alertController.addAction(UIAlertAction(title: "Pay now!", style: UIAlertActionStyle.Default, handler: { (action) in
                 self.buy(sender)
             }))
-            if sender.tag == 2 {
+            if sender.tag == 2 {  //audio
                 if self.selectedLogin2 == nil {
                     pickerView(userPickerView, didSelectRow: 0, inComponent: 2)
                 }
@@ -305,7 +306,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
                         let autoStartTimer =  NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: "fireAutoStart:", userInfo: nil, repeats: false)
                     }
                 }
-                alertController.addAction(UIAlertAction(title: "Listen...", style: UIAlertActionStyle.Cancel, handler: { (action) in
+                alertController.addAction(UIAlertAction(title: "Sample 1st ...", style: UIAlertActionStyle.Cancel, handler: { (action) in
                     self.audioPlayer?.pause()
                     self.prepareAudios()
                     if Settings().soundOn {
@@ -379,10 +380,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
                     settingsTabBarItem.badgeValue = self.selectedLogin3!
                     for i in 0..<paddles.count {
                         if paddles[i] == self.selectedLogin3! {
-                            let results = Settings().myPaddles.filter { el in el == self.selectedLogin3! }
-                            if results.isEmpty {
-                                Settings().myPaddles.append(self.selectedLogin3!)
-                            }
+                            Settings().myPaddles.append(self.selectedLogin3!)
                         }
                     }
                 } else {

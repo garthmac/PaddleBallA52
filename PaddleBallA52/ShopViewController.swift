@@ -12,19 +12,37 @@ import AVFoundation
 class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     
     @IBOutlet var backdropImageView: UIImageView!
-    @IBOutlet weak var leftTrophyImageView: UIImageView!
+//    @IBOutlet weak var leftTrophyImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var rightTrophyImageView: UIImageView!
     @IBOutlet weak var userPickerView: UIPickerView!
     @IBOutlet weak var helpPickerView: UIPickerView!
+    @IBOutlet weak var creditsPickerView: UIPickerView!
+    @IBOutlet weak var buyCreditsButton: UIButton!
     
     //MARK: - UIPickerViewDataSource
     let model = UIDevice.currentDevice().model
-    @IBAction func help(sender: UIButton) {
+    @IBAction func showHelpAction(sender: UIButton) {
         if helpPickerView.hidden {
+            creditsPickerView.hidden = true
+            buyCreditsButton.hidden = true
+            userPickerView.selectRow(Settings().soundChoice, inComponent: 2, animated: false)
             helpPickerView.hidden = false
         } else {
             helpPickerView.hidden = true
+        }
+    }
+    @IBAction func showBuyCreditsAction(sender: UIButton) {
+        if creditsPickerView.hidden {
+            helpPickerView.hidden = true
+            creditsPickerView.hidden = false
+            buyCreditsButton.hidden = false
+            userPickerView.selectRow(audios.count - 1, inComponent: 2, animated: false)
+            creditsPickerView.selectRow(3, inComponent: 0, animated: true)
+        } else {
+            creditsPickerView.hidden = true
+            buyCreditsButton.hidden = true
+            userPickerView.selectRow(Settings().soundChoice, inComponent: 2, animated: false)
         }
     }
     var pickerDataSourceHelp: [UIButton] { // a computed property instead of func
@@ -39,6 +57,17 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
             }
         }
         set { self.pickerDataSourceHelp = newValue }
+    }
+    var pickerDataSourceCredits: [UIButton] { // a computed property instead of func
+        get {
+            return (0..<self.buyCredits.count).map {
+                let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.backdropImageView.bounds.width, height: 40))
+                button.setTitle(self.buyCredits[$0], forState: .Normal)
+                button.setTitleColor(UIColor.blackColor(), forState: .Normal)
+                return button
+            }
+        }
+        set { self.pickerDataSourceCredits = newValue }
     }
     private var pickerDataSource: [UIImage] { // a computed property instead of func
         get {
@@ -87,9 +116,11 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
     }
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         if pickerView.tag == 1 { return 1 }
+        if pickerView.tag == 2 { return 1 }
         return 5 } //number of wheels in the picker
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView.tag == 1 { return pickerDataSourceHelp.count }
+        if pickerView.tag == 2 { return pickerDataSourceCredits.count }
         if component == 0 {
             return pickerDataSource.count
         }
@@ -111,10 +142,12 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
     }
     func pickerView(pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
         if pickerView.tag == 1 { return backdropImageView.bounds.width }
+        if pickerView.tag == 2 { return backdropImageView.bounds.width }
         return backdropImageView.bounds.width / 5.25
     }
     func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView {
         if pickerView.tag == 1 { return pickerDataSourceHelp[row] }
+        if pickerView.tag == 2 { return pickerDataSourceCredits[row] }
         var iv = UIImageView(image: pickerDataSource[row])  //use worst case(largest) pickerDataSource3 as default
         if component == 0 {
             iv.bounds = CGRect(x: 0, y: 0, width: 65, height: 65)
@@ -138,6 +171,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         return iv
     }
     var selectedHintIndex = Settings().lastHint
+    var selectedCreditIndex = 0
     var selectedBallSkin: UIImage?
     var selectedLogin: String?
     var selectedBallSkin1: UIImage?
@@ -152,6 +186,9 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         if pickerView.tag == 1 {
             selectedHintIndex = row
             Settings().lastHint = selectedHintIndex
+        }
+        if pickerView.tag == 2 {
+            selectedCreditIndex = row
         }
         if component == 0 {
             selectedBallSkin = pickerDataSource[row]
@@ -189,12 +226,15 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         userPickerView.delegate = self
         helpPickerView.dataSource = self
         helpPickerView.delegate = self
+        creditsPickerView.dataSource = self
+        creditsPickerView.delegate = self
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         helpPickerView.selectRow(Settings().lastHint, inComponent: 0, animated: true)
         userPickerView.selectRow(4, inComponent: 0, animated: true)
-        userPickerView.selectRow(Settings().soundChoice, inComponent: 2, animated: true)
+        //userPickerView.selectRow(Settings().soundChoice, inComponent: 2, animated: true)  //move to buy()
+        showBuyCreditsAction(UIButton())
         if let index = find(paddles, Settings().myPaddles.last!) {
             userPickerView.selectRow(index, inComponent: 3, animated: true)
         }
@@ -206,8 +246,8 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         let shopTabBarItem = tabBarController!.tabBar.items![0] as! UITabBarItem
         shopTabBarItem.badgeValue = "\(availableCredits)"   //everything costs 10 credits or $1
         if availableCredits < 10 {
-            let alert = UIAlertView(title: "You have \(availableCredits) Credits!", message: "Play to earn at least 10 or buy 10/$ ...", delegate: self, cancelButtonTitle: "Cancel")
-            alert.addButtonWithTitle("Use Credit Card")
+            let alert = UIAlertView(title: "You have \(availableCredits) Credits!", message: "Play to earn at least 10 Credits or \n\n ...Buy Credits", delegate: self, cancelButtonTitle: "OK")
+            //alert.addButtonWithTitle("Use Credit Card")
             alert.dismissWithClickedButtonIndex(alert.firstOtherButtonIndex, animated: true)
             alert.show()
         }
@@ -220,15 +260,16 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
         if buttonIndex == 1 {
             //use credit card
-            availableCredits += 51
-            (tabBarController!.tabBar.items![0] as! UITabBarItem).badgeValue = String(availableCredits)
-            prepareForPurchase()
+//            availableCredits += 51
+//            (tabBarController!.tabBar.items![0] as! UITabBarItem).badgeValue = String(availableCredits)
+//            prepareForPurchase()
         }
         if buttonIndex == 0 {
             //canceled...show tab bar
             self.tabBarController?.tabBar.hidden = false
         }
     }
+    //MARK - Action buySelection
     @IBAction func buySelection(sender: UIButton) {
         switch sender.tag {
         case 0: //println(sender.tag)
@@ -249,7 +290,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         case 4: //println(sender.tag)
             let cost = minimumPWCredits()
             let msg = "Deduct " + String(cost) + " coins for selected Paddle Width Multipler?"
-            let msg2 = " \n \n...Settings will now be UNLOCKED for future (PdWd) adjustments"
+            let msg2 = " \n \n...Settings will be UNLOCKED for future (PdWd) adjustments"
             if model.hasPrefix("iPad") {
                 if cost == 100 {
                     return checkout(msg + msg2, sender: sender)
@@ -260,6 +301,8 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
                 }
             }
             checkout(msg, sender: sender)
+        case 5: //println(sender.tag)
+            checkout("Add \(chosenNumberOfCredits()) game Credits?", sender: sender)
         default: break
         }
     }
@@ -294,7 +337,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         if NSClassFromString("UIAlertController") != nil {
             let alertController = UIAlertController(title: "Checkout", message: message, preferredStyle: .Alert)
             alertController.addAction(UIAlertAction(title: "Pay now!", style: UIAlertActionStyle.Default, handler: { (action) in
-                self.buy(sender)
+                self.buy(sender)  //this is the main use
             }))
             if sender.tag == 2 {  //audio
                 if self.selectedLogin2 == nil {
@@ -324,101 +367,115 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
     }
     func buy(sender: UIButton) {
         switch sender.tag {
-            case 0: //add selected ball skin to game
-                if availableCredits > 9 {
-                    availableCredits -= 10
+        case 0: //add selected ball skin to game
+            if availableCredits > 9 {
+                availableCredits -= 10
+                let shopTabBarItem = tabBarController!.tabBar.items![0] as! UITabBarItem
+                shopTabBarItem.badgeValue = availableCredits.description
+                Settings().availableCredits = availableCredits
+                if self.selectedLogin == nil {
+                    pickerView(userPickerView, didSelectRow: 0, inComponent: 0)
+                }
+                let loggedInUser = User.login(self.selectedLogin!, password: "foo") //new ball
+                let paddleBallTabBarItem = tabBarController!.tabBar.items![1] as! UITabBarItem
+                paddleBallTabBarItem.badgeValue = self.selectedLogin!
+                let results = Settings().mySkins.filter { el in el == self.selectedLogin! }
+                if results.isEmpty {
+                    Settings().mySkins.append(self.selectedLogin!)
+                }
+                userPickerView.reloadAllComponents()  //refresh pickerDataSource1
+            } else {
+                prepareForPurchase()
+            }
+            //println(sender.tag)
+        case 1: println(sender.tag)
+        case 2: //add selected sound track to game
+            if availableCredits > 9 {
+                availableCredits -= 10
+                let shopTabBarItem = tabBarController!.tabBar.items![0] as! UITabBarItem
+                shopTabBarItem.badgeValue = availableCredits.description
+                let loggedInUser = User.login(self.selectedLogin2!, password: "foo") //new audio
+                let settingsTabBarItem = tabBarController!.tabBar.items![2] as! UITabBarItem
+                settingsTabBarItem.badgeValue = self.selectedLogin2!
+                for i in 0..<audios.count {
+                    if audios[i] == self.selectedLogin2! {
+                        Settings().soundChoice = i
+                        let results = Settings().myAudios.filter { el in el == self.selectedLogin2! }
+                        if results.isEmpty {
+                            Settings().myAudios.append(self.selectedLogin2!)
+                        }
+                    }
+                }
+            } else {
+                prepareForPurchase()
+            }
+            //println(sender.tag)
+        case 3: //add selected paddle to game
+            if availableCredits > 9 {
+                availableCredits -= 10
+                let shopTabBarItem = tabBarController!.tabBar.items![0] as! UITabBarItem
+                shopTabBarItem.badgeValue = availableCredits.description
+                if self.selectedLogin3 == nil {
+                    pickerView(userPickerView, didSelectRow: 0, inComponent: 3)
+                }
+                let loggedInUser = User.login(self.selectedLogin3!, password: "foo") //new Paddle
+                let settingsTabBarItem = tabBarController!.tabBar.items![2] as! UITabBarItem
+                settingsTabBarItem.badgeValue = self.selectedLogin3!
+                for i in 0..<paddles.count {
+                    if paddles[i] == self.selectedLogin3! {
+                        Settings().myPaddles.append(self.selectedLogin3!)
+                    }
+                }
+            } else {
+                prepareForPurchase()
+            }
+            //println(sender.tag)
+        case 4: //adjust paddle to selected paddleWidth
+            let minPWC = self.minimumPWCredits()
+            if availableCredits >= minPWC {
+                availableCredits -= minPWC
+                let shopTabBarItem = tabBarController!.tabBar.items![0] as! UITabBarItem
+                shopTabBarItem.badgeValue = availableCredits.description
+                let loggedInUser = User.login(self.selectedLogin4!, password: "foo") //new PaddleWidth
+                let settingsTabBarItem = tabBarController!.tabBar.items![2] as! UITabBarItem
+                settingsTabBarItem.badgeValue = self.selectedLogin4!
+                for i in 0..<iPadPaddleWidths.count {
+                    if iPadPaddleWidths[i] == self.selectedLogin4! {
+                        Settings().paddleWidthMultiplier = max(1, i)
+                    }
+                }
+                if model.hasPrefix("iPad") {
+                    if Settings().paddleWidthMultiplier == 10 { //enable once u purchace max paddle width
+                        Settings().paddleWidthUnlockStepper = true
+                    }
+                } else {
+                    if Settings().paddleWidthMultiplier == 5 {
+                        Settings().paddleWidthUnlockStepper = true
+                    }
+                }
+            } else {
+                if availableCredits < minPWC {
+                    let alert = UIAlertView(title: "You have \(availableCredits) Credits!", message: "(you need \(self.minimumPWCredits()))...before buying...", delegate: self, cancelButtonTitle: "OK")
+                    //alert.addButtonWithTitle("Top up Credit Card")
+                    alert.dismissWithClickedButtonIndex(alert.firstOtherButtonIndex, animated: true)
+                    alert.show()
+                }
+            }
+            //println(sender.tag)
+        case 5: //add selected credits to game
+            if availableCredits > -1 {
+                if purchase() {
+                    let settingsTabBarItem = tabBarController!.tabBar.items![2] as! UITabBarItem
+                    settingsTabBarItem.badgeValue = self.selectedCreditIndex.description
+                    availableCredits += chosenNumberOfCredits()
                     let shopTabBarItem = tabBarController!.tabBar.items![0] as! UITabBarItem
                     shopTabBarItem.badgeValue = availableCredits.description
                     Settings().availableCredits = availableCredits
-                    if self.selectedLogin == nil {
-                        pickerView(userPickerView, didSelectRow: 0, inComponent: 0)
-                    }
-                    let loggedInUser = User.login(self.selectedLogin!, password: "foo") //new ball
-                    let paddleBallTabBarItem = tabBarController!.tabBar.items![1] as! UITabBarItem
-                    paddleBallTabBarItem.badgeValue = self.selectedLogin!
-                    let results = Settings().mySkins.filter { el in el == self.selectedLogin! }
-                    if results.isEmpty {
-                        Settings().mySkins.append(self.selectedLogin!)
-                    }
-                    userPickerView.reloadAllComponents()               //refresh pickerDataSource1
-                } else {
-                    prepareForPurchase()
                 }
-                //println(sender.tag)
-            case 1: println(sender.tag)
-            case 2: //add selected sound track to game
-                if availableCredits > 9 {
-                    availableCredits -= 10
-                    let shopTabBarItem = tabBarController!.tabBar.items![0] as! UITabBarItem
-                    shopTabBarItem.badgeValue = availableCredits.description
-                    let loggedInUser = User.login(self.selectedLogin2!, password: "foo") //new audio
-                    let settingsTabBarItem = tabBarController!.tabBar.items![2] as! UITabBarItem
-                    settingsTabBarItem.badgeValue = self.selectedLogin2!
-                    for i in 0..<audios.count {
-                        if audios[i] == self.selectedLogin2! {
-                            Settings().soundChoice = i
-                            let results = Settings().myAudios.filter { el in el == self.selectedLogin2! }
-                            if results.isEmpty {
-                                Settings().myAudios.append(self.selectedLogin2!)
-                            }
-                        }
-                    }
-                } else {
-                    prepareForPurchase()
-                }
-                //println(sender.tag)
-            case 3: //add selected paddle to game
-                if availableCredits > 9 {
-                    availableCredits -= 10
-                    let shopTabBarItem = tabBarController!.tabBar.items![0] as! UITabBarItem
-                    shopTabBarItem.badgeValue = availableCredits.description
-                    if self.selectedLogin3 == nil {
-                        pickerView(userPickerView, didSelectRow: 0, inComponent: 3)
-                    }
-                    let loggedInUser = User.login(self.selectedLogin3!, password: "foo") //new Paddle
-                    let settingsTabBarItem = tabBarController!.tabBar.items![2] as! UITabBarItem
-                    settingsTabBarItem.badgeValue = self.selectedLogin3!
-                    for i in 0..<paddles.count {
-                        if paddles[i] == self.selectedLogin3! {
-                            Settings().myPaddles.append(self.selectedLogin3!)
-                        }
-                    }
-                } else {
-                    prepareForPurchase()
-                }
-                //println(sender.tag)
-            case 4: //adjust paddle to selected paddleWidth
-                let minPWC = self.minimumPWCredits()
-                if availableCredits >= minPWC {
-                    availableCredits -= minPWC
-                    let shopTabBarItem = tabBarController!.tabBar.items![0] as! UITabBarItem
-                    shopTabBarItem.badgeValue = availableCredits.description
-                    let loggedInUser = User.login(self.selectedLogin4!, password: "foo") //new PaddleWidth
-                    let settingsTabBarItem = tabBarController!.tabBar.items![2] as! UITabBarItem
-                    settingsTabBarItem.badgeValue = self.selectedLogin4!
-                    for i in 0..<iPadPaddleWidths.count {
-                        if iPadPaddleWidths[i] == self.selectedLogin4! {
-                            Settings().paddleWidthMultiplier = max(1, i)
-                        }
-                    }
-                    if model.hasPrefix("iPad") {
-                        if Settings().paddleWidthMultiplier == 10 { //enable once u purchace max paddle width
-                            Settings().paddleWidthUnlockStepper = true
-                        }
-                    } else {
-                        if Settings().paddleWidthMultiplier == 5 {
-                            Settings().paddleWidthUnlockStepper = true
-                        }
-                    }
-                } else {
-                    if availableCredits < minPWC {
-                        let alert = UIAlertView(title: "You have \(availableCredits) Credits!", message: "(you need \(self.minimumPWCredits()))...before buying...", delegate: self, cancelButtonTitle: "Cancel")
-                        alert.addButtonWithTitle("Top up Credit Card")
-                        alert.dismissWithClickedButtonIndex(alert.firstOtherButtonIndex, animated: true)
-                        alert.show()
-                    }
-                }
-                //println(sender.tag)
+            } else {
+                prepareForPurchase()
+            }
+            //println(sender.tag)
             default: break
         }
     }
@@ -434,6 +491,32 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
             }
         }
         return 10
+    }
+    func chosenNumberOfCredits() -> Int {
+        if self.selectedCreditIndex == 0 {
+            pickerView(creditsPickerView, didSelectRow: 0, inComponent: 0)
+        }
+        var paidCredits = 10
+        let credits = [10, 40, 70, 150, 350, 1000, 2500]
+        for i in 0..<buyCredits.count {
+            if i == self.selectedCreditIndex {
+                paidCredits = credits[i]
+                return paidCredits
+            }
+        }
+        return 10
+    }
+    func transactionResult(amount: Double) ->Bool {
+        return true
+    }
+    func purchase() -> Bool {
+        var amount = 0.00
+        if buyCreditsButton.hidden == false {
+            var credits = chosenNumberOfCredits()
+            let cost = [10: 0.99, 40: 2.99, 70: 4.99, 150: 9.99, 350: 19.99, 1000: 49.99, 2500: 99.99]
+            amount = cost[credits]!
+        }
+        return transactionResult(amount)
     }
     let audios = ["audio78",
         "audio66",
@@ -505,32 +588,40 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         "vector160",
         "wheel160",
         "wheelOf160"]
-    let hints = ["Tap [Paddle Ball] tab at bottom of screen to begin game!",
-        "Gently slide paddle left/right and tap to launch ball",
+    let buyCredits = ["  $0.99  ⇢    10 Credits",
+        "  $2.99  ⇢   40 Credits",
+        "  $4.99  ⇢   70 Credits",
+        "  $9.99  ⇢  150 Credits",
+        " $19.99  ⇢  350 Credits",
+        " $49.99  ⇢ 1000 Credits",
+        " $99.99  ⇢ 2500 Credits"]
+    let hints = ["Touch [Paddle Ball] 2nd tab at bottom of screen to begin game!",
+        "Gently slide paddle left/right...touch screen to launch ball",
         "Once ball is in play, additional taps will change it's speed and direction",
-        "You only get 4 balls to clear each level",
+        "You only get 4 balls to clear each level and continue",
+        "After lose of 4th ball, if you have 10 credits, option to buy a Let Serve ball",
         "POWER BALL is achieved by clearing any level with only one ball",
-        "Destroy bom(s)/emoji(s) etc. for BONUS points",
-        "Pinch [Paddle Ball] game screen to allow navigation to other tabs",
-        "Go to [SHOP] tab to buy ball or paddleSkins, audioTracks and/or paddleWidths",
+        "Destroy bom(s)/emoji(s) etc. for BONUS points...affected by paddle width",
+        "On [Paddle Ball] game screen, pinch to allow navigation to other tabs",
+        "Go to [SHOP] tab to Buy Credits for ballSkins, paddleSkins, audioTracks, paddleWidths",
         "Gain COINS by earning POWER BALL...(they will appear at top of screen)",
-        "Earn TRIPLE points during POWER BALL activated levels!",
+        "Earn TRIPLE points while playing POWER BALL 3X activated levels!",
         "Gain free COIN for each 10,000 points earned! (awarded after each level)",
         "Accumulated Credits appear as red badge on [SHOP] tab",
-        "A [SHOP] tab CREDIT is awarded after every accumulation of 3 COINS!",
-        "Use credit Card to buy game CREDITS at a cost of $1 per 10 Credits",
+        "A [SHOP] tab CREDIT is awarded after every accumulation of 3 Coins!",
+        "Buy CREDITS at a cost of $1 per 10 Credits...better deal if you buy more",
         "Personalized ball skins cost $0.99 or 10 Credits each",
         "Personalized audio tracks cost $0.99 or 10 Credits each",
         "Personalized paddle skins cost $0.99 or 10 Credits each",
         "Paddle widths cost $0.99 or 10 Credits per width multiplier",
-        "Once maximum paddle width is bought, [Settings] PdWd is unlocked for all future play",
+        "Buy maximum paddle width and [Settings] PdWd is unlocked for all future play",
         "A wider Paddle increases the easiness of the game",
         "Gently pan RED BLOCK on game screen for distractaction...no tap ;-)",
-        "Once a ball is bought, it will be available in the FREE mySkins wheel",
-        "See [Settings] tab for additional optional game customizations eg. color choices, switches and sliders",
-        "Once finished shopping, tap [Paddle Ball] tab to return to game!",
+        "Once a ballSkin is bought, it will be available in the FREE mySkins wheel",
+        "Touch [Settings] tab for additional customizations eg. color choices, switches and sliders",
+        "Once finished shopping, touch [Paddle Ball] tab to return to game!",
         "Add your UserId or game handle (to appear in the Leaders list) in iPhone>Settings>RedBlockPaddleBall",
-        "Go to [High Score] tab to take your picture for the Leader Board (top camera)",
+        "Touch [High Score] tab, touch upper camera button to take your picture for the Leader Board",
         "See Snoopy serve (and program the computer) in [Credits] screen"]
     let paddles = ["asian33",
         "dizzy2",

@@ -41,10 +41,10 @@ class Settings {
         static let UserIdKey = "Settings.User.Id"
     }
     let defaults = NSUserDefaults.standardUserDefaults()
-    var achieved: String {
-        get { return defaults.objectForKey(Const.AchievedKey) as? String ?? "00000000" } //02.. tracks tested and enabled in svc...AchievedKey -tracks user achieved (earned or bought with In-App purchase) (1)extra balls, (2)audio tracks, (3)ball skins, (4)emojis, (5)redBlock-off, (6)poping targets
-        set { defaults.setObject(newValue, forKey: Const.AchievedKey) }
-    }
+//    var achieved: String {
+//        get { return defaults.objectForKey(Const.AchievedKey) as? String ?? "00000000" } //02.. tracks tested and enabled in svc...AchievedKey -tracks user achieved (earned or bought with In-App purchase) (1)extra balls, (2)audio tracks, (3)ball skins, (4)emojis, (5)redBlock-off, (6)poping targets
+//        set { defaults.setObject(newValue, forKey: Const.AchievedKey) }
+//    }
     var autoStart: Bool {
         get { return defaults.objectForKey(Const.AutoStartKey) as? Bool ?? false }
         set { defaults.setObject(newValue, forKey: Const.AutoStartKey) }

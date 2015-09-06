@@ -27,6 +27,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
             creditsPickerView.hidden = true
             buyCreditsButton.hidden = true
             userPickerView.selectRow(Settings().soundChoice, inComponent: 2, animated: false)
+            pickerView(userPickerView, didSelectRow: Settings().soundChoice, inComponent: 2)
             helpPickerView.hidden = false
         } else {
             helpPickerView.hidden = true
@@ -38,11 +39,14 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
             creditsPickerView.hidden = false
             buyCreditsButton.hidden = false
             userPickerView.selectRow(audios.count - 1, inComponent: 2, animated: false)
+            pickerView(userPickerView, didSelectRow: audios.count - 1, inComponent: 2)
             creditsPickerView.selectRow(3, inComponent: 0, animated: true)
+            pickerView(creditsPickerView, didSelectRow: 3, inComponent: 0)
         } else {
             creditsPickerView.hidden = true
             buyCreditsButton.hidden = true
             userPickerView.selectRow(Settings().soundChoice, inComponent: 2, animated: false)
+            pickerView(userPickerView, didSelectRow: Settings().soundChoice, inComponent: 2)
         }
     }
     var pickerDataSourceHelp: [UIButton] { // a computed property instead of func
@@ -219,6 +223,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         get { return Settings().availableCredits }
         set { Settings().availableCredits = newValue }
         }
+    //MARK: - view lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         titleLabel.font = UIFont(name: "ComicSansMS-Bold", size: 28.0)
@@ -228,12 +233,22 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         helpPickerView.delegate = self
         creditsPickerView.dataSource = self
         creditsPickerView.delegate = self
+        for aView in view.subviews as! [UIView] {
+            if let button = aView as? UIButton {
+                if (0...7).contains(button.tag) {
+                    button.layer.cornerRadius = 15.0
+                    button.layer.borderWidth = 1.0
+                    button.layer.borderColor = UIColor.blueColor().CGColor
+                }
+            }
+        }
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         helpPickerView.selectRow(Settings().lastHint, inComponent: 0, animated: true)
         userPickerView.selectRow(4, inComponent: 0, animated: true)
-        //userPickerView.selectRow(Settings().soundChoice, inComponent: 2, animated: true)  //move to buy()
+        pickerView(userPickerView, didSelectRow: 4, inComponent: 0)
+        //userPickerView.selectRow(Settings().soundChoice, inComponent: 2, animated: true)  //move below
         showBuyCreditsAction(UIButton())
         if let index = find(paddles, Settings().myPaddles.last!) {
             userPickerView.selectRow(index, inComponent: 3, animated: true)
@@ -269,14 +284,14 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
             self.tabBarController?.tabBar.hidden = false
         }
     }
-    //MARK - Action buySelection
+    //MARK: - Action buySelection
     @IBAction func buySelection(sender: UIButton) {
         switch sender.tag {
         case 0: //println(sender.tag)
             checkout("Deduct 10 coins for selected Ball skin?", sender: sender)
         case 1: //println(sender.tag)
             let paddleBallTabBarItem = tabBarController!.tabBar.items![1] as! UITabBarItem
-            if let login = self.selectedLogin1 {
+            if let login = self.selectedLogin1 { //can only happen if the wheel is spun
                 let loggedInUser = User.login(login, password: "foo") //SWAP ball out to other owned ball
                 paddleBallTabBarItem.badgeValue = login
             } else {
@@ -322,6 +337,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         case 8: path = NSBundle.mainBundle().pathForResource("Hillsong United - No Other Name - Oceans (Where Feet May Fail)", ofType: "mp3")
         case 9: path = NSBundle.mainBundle().pathForResource("Phil Wickham - At Your Name (Yahweh, Yahweh)", ofType: "mp3")
         case 10: path = NSBundle.mainBundle().pathForResource("Yusuf Islam - Peace Train - OUTSTANDING!-2", ofType: "mp3")
+        case 11: path = NSBundle.mainBundle().pathForResource("Titans Spirit(Remember The Titans)-Trevor Rabin", ofType: "mp3")
         default: path = NSBundle.mainBundle().pathForResource("jazzloop2_70", ofType: "mp3")
         }
         let url = NSURL.fileURLWithPath(path!)
@@ -339,10 +355,10 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
             alertController.addAction(UIAlertAction(title: "Pay now!", style: UIAlertActionStyle.Default, handler: { (action) in
                 self.buy(sender)  //this is the main use
             }))
-            if sender.tag == 2 {  //audio
-                if self.selectedLogin2 == nil {
-                    pickerView(userPickerView, didSelectRow: 0, inComponent: 2)
-                }
+            if sender.tag == 2 {  //audio...moved to showBuyCreditsAction(...
+//                if self.selectedLogin2 == nil {  //see actions at top
+//                    pickerView(userPickerView, didSelectRow: audios.count - 1, inComponent: 2)
+//                }
                 for i in 0..<audios.count {
                     if audios[i] == self.selectedLogin2! {
                         soundTrack = i
@@ -373,9 +389,9 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
                 let shopTabBarItem = tabBarController!.tabBar.items![0] as! UITabBarItem
                 shopTabBarItem.badgeValue = availableCredits.description
                 Settings().availableCredits = availableCredits
-                if self.selectedLogin == nil {
-                    pickerView(userPickerView, didSelectRow: 0, inComponent: 0)
-                }
+//                if self.selectedLogin == nil {
+//                    pickerView(userPickerView, didSelectRow: 0, inComponent: 0)
+//                }
                 let loggedInUser = User.login(self.selectedLogin!, password: "foo") //new ball
                 let paddleBallTabBarItem = tabBarController!.tabBar.items![1] as! UITabBarItem
                 paddleBallTabBarItem.badgeValue = self.selectedLogin!
@@ -416,7 +432,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
                 let shopTabBarItem = tabBarController!.tabBar.items![0] as! UITabBarItem
                 shopTabBarItem.badgeValue = availableCredits.description
                 if self.selectedLogin3 == nil {
-                    pickerView(userPickerView, didSelectRow: 0, inComponent: 3)
+                    pickerView(userPickerView, didSelectRow: 1, inComponent: 3)  //dizzy2
                 }
                 let loggedInUser = User.login(self.selectedLogin3!, password: "foo") //new Paddle
                 let settingsTabBarItem = tabBarController!.tabBar.items![2] as! UITabBarItem
@@ -528,7 +544,8 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         "audio223",
         "audio3",
         "audio7",
-        "audio149"]
+        "audio149",
+        "audio77"]
     let ballSkins = ["12Citroen160",
         "15Toyota160",
         "8ball",

@@ -87,9 +87,9 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
 //                }
 //            }
 //        }
-        for str in Settings().myAudios {
-            for i in 0..<ShopViewController().audios.count - 5 { //5 extra songs
-                if ShopViewController().audios[i] == str {
+        for string in Settings().myAudios {
+            for i in 0...5 { //6 extra songs
+                if ShopViewController().audios[i] == string {
                     soundChoiceSegControl.setEnabled(true, forSegmentAtIndex: i)
                 }
             }

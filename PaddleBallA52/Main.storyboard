@@ -86,10 +86,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                             </imageView>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ux-Dr-YYU">
-                                <rect key="frame" x="288" y="95" width="54" height="30"/>
+                                <rect key="frame" x="261" y="95" width="80" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="0Ti-57-uPb"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <size key="titleShadowOffset" width="1" height="0.0"/>
-                                <state key="normal" title="Try/Buy">
+                                <state key="normal" title="Try / Buy">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -97,7 +100,10 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" tag="5" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sbo-f5-M3L">
-                                <rect key="frame" x="274" y="293" width="82" height="30"/>
+                                <rect key="frame" x="251" y="293" width="100" height="27"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="eDe-eN-iIj"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <size key="titleShadowOffset" width="1" height="0.0"/>
                                 <state key="normal" title="Buy Credits">
@@ -108,7 +114,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IXr-h3-ix0">
-                                <rect key="frame" x="191" y="95" width="39" height="30"/>
+                                <rect key="frame" x="176" y="95" width="55" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="8rf-kw-5U7"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <size key="titleShadowOffset" width="1" height="0.0"/>
                                 <state key="normal" title="FREE">
@@ -170,7 +179,10 @@
                                 </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xsc-vt-lse">
-                                <rect key="frame" x="86" y="95" width="30" height="30"/>
+                                <rect key="frame" x="82" y="95" width="40" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="qwp-Xl-ZuA"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <size key="titleShadowOffset" width="1" height="0.0"/>
                                 <state key="normal" title="Buy"/>
@@ -179,7 +191,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="4" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yNw-wM-mNr">
-                                <rect key="frame" x="477" y="95" width="30" height="30"/>
+                                <rect key="frame" x="481" y="95" width="30" height="30"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <size key="titleShadowOffset" width="1" height="0.0"/>
                                 <state key="normal" title="Buy">
@@ -196,7 +208,7 @@
                                 <rect key="frame" x="51" y="381" width="500" height="162"/>
                             </pickerView>
                             <button opaque="NO" tag="3" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dQR-iN-Gnd">
-                                <rect key="frame" x="385" y="95" width="30" height="30"/>
+                                <rect key="frame" x="384" y="95" width="30" height="30"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <size key="titleShadowOffset" width="1" height="0.0"/>
                                 <state key="normal" title="Buy">
@@ -206,28 +218,26 @@
                                     <action selector="buySelection:" destination="wR6-8n-lXG" eventType="touchUpInside" id="Pd1-Ou-s9Z"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gV1-D0-yde">
+                            <button opaque="NO" tag="7" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gV1-D0-yde">
                                 <rect key="frame" x="363" y="10" width="59" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="1lg-1Q-dy9"/>
                                     <constraint firstAttribute="width" constant="48" id="YOK-cc-EGS"/>
                                 </constraints>
                                 <state key="normal" image="helpful160.png">
-                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="showHelpAction:" destination="wR6-8n-lXG" eventType="touchUpInside" id="IPB-8y-fY4"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mUr-T5-jFW">
+                            <button opaque="NO" tag="6" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mUr-T5-jFW">
                                 <rect key="frame" x="133" y="10" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="Mnp-p7-LyH"/>
                                     <constraint firstAttribute="height" constant="48" id="sJx-AV-Ky4"/>
                                 </constraints>
                                 <state key="normal" image="109px-Coin_Artwork_-_Super_Mario_3D_World">
-                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -265,6 +275,7 @@
                             <constraint firstItem="R6t-G5-E28" firstAttribute="top" secondItem="2jF-ig-udB" secondAttribute="bottom" constant="-20" id="Ag8-Rl-Ngf"/>
                             <constraint firstItem="53j-GT-mr6" firstAttribute="leading" secondItem="mUr-T5-jFW" secondAttribute="trailing" constant="8" symbolic="YES" id="B79-Rm-9OW"/>
                             <constraint firstItem="mzT-bA-e9X" firstAttribute="centerY" secondItem="hpe-Ei-WrE" secondAttribute="centerY" constant="-80" id="Ccw-cf-Fv2"/>
+                            <constraint firstItem="dQR-iN-Gnd" firstAttribute="width" secondItem="Xsc-vt-lse" secondAttribute="width" id="EAj-yP-2dC"/>
                             <constraint firstItem="Hf3-t5-20Y" firstAttribute="leading" secondItem="LgR-xO-rGd" secondAttribute="leadingMargin" constant="-16" id="EeE-Oj-QTI"/>
                             <constraint firstItem="DzD-pd-7at" firstAttribute="centerY" secondItem="53j-GT-mr6" secondAttribute="centerY" id="El3-vW-ZUv"/>
                             <constraint firstItem="mzT-bA-e9X" firstAttribute="centerX" secondItem="yNw-wM-mNr" secondAttribute="centerX" id="Fc0-nc-hOc"/>
@@ -290,6 +301,7 @@
                             <constraint firstItem="hpe-Ei-WrE" firstAttribute="trailing" secondItem="cWq-cg-opc" secondAttribute="trailing" id="Tpn-2M-89K"/>
                             <constraint firstAttribute="trailingMargin" secondItem="mzT-bA-e9X" secondAttribute="trailing" constant="-16" id="UES-n8-boh"/>
                             <constraint firstItem="rfR-RL-iZJ" firstAttribute="leading" secondItem="yKM-oW-idW" secondAttribute="trailing" constant="8" symbolic="YES" id="UsF-eK-2el"/>
+                            <constraint firstItem="yNw-wM-mNr" firstAttribute="width" secondItem="Xsc-vt-lse" secondAttribute="width" id="UsL-St-7m4"/>
                             <constraint firstItem="JbB-qz-QGC" firstAttribute="top" relation="greaterThanOrEqual" secondItem="hpe-Ei-WrE" secondAttribute="bottom" constant="30" id="WWb-sK-zMA"/>
                             <constraint firstItem="dQR-iN-Gnd" firstAttribute="centerX" secondItem="yq0-vO-HsG" secondAttribute="centerX" id="XAW-je-VrZ"/>
                             <constraint firstItem="yNw-wM-mNr" firstAttribute="centerY" secondItem="dQR-iN-Gnd" secondAttribute="centerY" id="XNN-Y8-ivZ"/>
@@ -300,6 +312,7 @@
                             <constraint firstItem="Hf3-t5-20Y" firstAttribute="width" secondItem="yq0-vO-HsG" secondAttribute="width" id="Z1z-Bd-y9T"/>
                             <constraint firstItem="R6t-G5-E28" firstAttribute="trailing" secondItem="LgR-xO-rGd" secondAttribute="trailingMargin" constant="16" id="ZI6-yH-c20"/>
                             <constraint firstItem="mzT-bA-e9X" firstAttribute="top" secondItem="rfR-RL-iZJ" secondAttribute="top" id="Zgf-Ks-JMc"/>
+                            <constraint firstItem="7ux-Dr-YYU" firstAttribute="width" secondItem="IXr-h3-ix0" secondAttribute="width" id="ar9-ig-ZNX"/>
                             <constraint firstItem="yq0-vO-HsG" firstAttribute="top" secondItem="rfR-RL-iZJ" secondAttribute="top" id="bTt-B0-0cd"/>
                             <constraint firstItem="7ux-Dr-YYU" firstAttribute="top" secondItem="rfR-RL-iZJ" secondAttribute="bottom" constant="8" symbolic="YES" id="cKN-Ot-Iek"/>
                             <constraint firstAttribute="trailingMargin" secondItem="mzT-bA-e9X" secondAttribute="trailing" constant="-15" id="cMw-8e-YU0"/>
@@ -350,6 +363,7 @@
                                 <exclude reference="v5W-27-Osy"/>
                                 <exclude reference="xtj-Kz-cTh"/>
                                 <exclude reference="yG1-yb-bfi"/>
+                                <exclude reference="ar9-ig-ZNX"/>
                                 <exclude reference="cKN-Ot-Iek"/>
                                 <exclude reference="fr9-wi-MLk"/>
                                 <exclude reference="hd7-mM-tvQ"/>
@@ -561,7 +575,7 @@
                                     <rect key="frame" x="0.0" y="341" width="384" height="10"/>
                                 </variation>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="padel520.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Jfv-de-PEv">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="paddle520.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Jfv-de-PEv">
                                 <rect key="frame" x="401" y="260" width="520" height="165"/>
                                 <variation key="heightClass=compact-widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="245" y="226" width="155" height="82"/>
@@ -2640,7 +2654,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="padel520.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ueg-1F-lg6">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="paddle520.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ueg-1F-lg6">
                                 <rect key="frame" x="16" y="472" width="568" height="71"/>
                             </imageView>
                         </subviews>
@@ -2959,7 +2973,7 @@
         <image name="extension_UIImage.png" width="1023" height="192"/>
         <image name="glory.png" width="276" height="182"/>
         <image name="helpful160.png" width="160" height="160"/>
-        <image name="padel520.jpg" width="520" height="200"/>
+        <image name="paddle520.jpg" width="520" height="200"/>
         <image name="pineapple_400.jpg" width="292" height="400"/>
         <image name="pointLeft75" width="25" height="25"/>
         <image name="settings" width="25" height="25"/>

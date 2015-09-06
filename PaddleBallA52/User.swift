@@ -80,7 +80,7 @@ struct User {
             User(name: "Madison", company: "World", highScore: "18,222", highScoreDate: "2015-05-11", login: "starDavid", password: "foo"),
             User(name: "John", company: "Stanford", highScore: "999", highScoreDate: "2015-06-20", login: "dizzy2", password: "foo"),
             User(name: "Bad", company: "Criminals, Inc.", highScore: "6,666", highScoreDate: "2015-06-06", login: "wheel160", password: "foo"),
-            User(name: "Good", company: "Rescue, Inc.", highScore: "8,888", highScoreDate: "2015-06-21", login: "wheelOf160", password: "foo"),
+            User(name: "Good", company: "Rescue, Inc.", highScore: "8,888", highScoreDate: "2015-06-21", login: "audio77", password: "foo"),
             User(name: "Johny", company: "Apple", highScore: "10,222", highScoreDate: "2015-04-01", login: "audio78", password: "foo"),
             User(name: "Madison", company: "World", highScore: "18,222", highScoreDate: "2015-05-11", login: "audio66", password: "foo"),
             User(name: "John", company: "Stanford", highScore: "999", highScoreDate: "2015-06-20", login: "audio90", password: "foo"),
@@ -120,7 +120,8 @@ struct User {
             User(name: "Good", company: "Rescue, Inc.", highScore: "8,888", highScoreDate: "2015-06-21", login: "bicycle160", password: "foo"),
             User(name: "Johny", company: "Apple", highScore: "10,222", highScoreDate: "2015-04-01", login: "art160", password: "foo"),
             User(name: "Madison", company: "World", highScore: "18,222", highScoreDate: "2015-05-11", login: "15Toyota160", password: "foo"),
-            User(name: "John", company: "Stanford", highScore: "999", highScoreDate: "2015-06-20", login: "12Citroen160", password: "foo")
+            User(name: "John", company: "Stanford", highScore: "999", highScoreDate: "2015-06-20", login: "12Citroen160", password: "foo"),
+            User(name: "Bad", company: "Criminals, Inc.", highScore: "6,666", highScoreDate: "2015-06-06", login: "wheelOf160", password: "foo")
             ] {
             theDatabase[user.login] = user
         }

@@ -16,6 +16,7 @@
 		715FA4971B96439F00203CE1 /* Yusuf Islam - Peace Train - OUTSTANDING!-2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 715FA4961B96439F00203CE1 /* Yusuf Islam - Peace Train - OUTSTANDING!-2.mp3 */; };
 		715FA49B1B9647EF00203CE1 /* Hillsong United - No Other Name - Oceans (Where Feet May Fail).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 715FA49A1B9647EF00203CE1 /* Hillsong United - No Other Name - Oceans (Where Feet May Fail).mp3 */; };
 		715FA49F1B9649C400203CE1 /* Phil Wickham - This Is Amazing Grace.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 715FA49E1B9649C400203CE1 /* Phil Wickham - This Is Amazing Grace.mp3 */; };
+		715FA4B01B9B59B500203CE1 /* Titans Spirit(Remember The Titans)-Trevor Rabin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 715FA4AF1B9B59B500203CE1 /* Titans Spirit(Remember The Titans)-Trevor Rabin.mp3 */; };
 		71A025AA1B8D5DA4002CE122 /* Forrest Gump Soundtrack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 71A025A91B8D5DA4002CE122 /* Forrest Gump Soundtrack.mp3 */; };
 		71A6E2E91B8AA0DE000AA949 /* CYMATICS- Science Vs. Music - Nigel Stanford-2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 71A6E2E81B8AA0DE000AA949 /* CYMATICS- Science Vs. Music - Nigel Stanford-2.mp3 */; };
 		881048B91B3E22F000712C9A /* TrackBall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881048B81B3E22F000712C9A /* TrackBall.swift */; };
@@ -24,7 +25,7 @@
 		881048C91B3E6E4600712C9A /* badge-git-real-5d91905b69d46286cab389797ea81983.png in Resources */ = {isa = PBXBuildFile; fileRef = 881048C81B3E6E4600712C9A /* badge-git-real-5d91905b69d46286cab389797ea81983.png */; };
 		881048CB1B3F09A900712C9A /* IMG_3562.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 881048CA1B3F09A900712C9A /* IMG_3562.jpg */; };
 		881048CF1B3F253000712C9A /* snoopy-tennis.png in Resources */ = {isa = PBXBuildFile; fileRef = 881048CE1B3F253000712C9A /* snoopy-tennis.png */; };
-		881048D11B3F314000712C9A /* padel520.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 881048D01B3F314000712C9A /* padel520.jpg */; };
+		881048D11B3F314000712C9A /* paddle520.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 881048D01B3F314000712C9A /* paddle520.jpg */; };
 		881559121B30E19600D60626 /* 1-FloUnitCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 881559111B30E19600D60626 /* 1-FloUnitCircle.png */; };
 		884225701B4355F7003122E3 /* Icon-29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8842255C1B4355F7003122E3 /* Icon-29@2x.png */; };
 		884225711B4355F7003122E3 /* Icon-29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8842255D1B4355F7003122E3 /* Icon-29@3x.png */; };
@@ -115,6 +116,7 @@
 		715FA4961B96439F00203CE1 /* Yusuf Islam - Peace Train - OUTSTANDING!-2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Yusuf Islam - Peace Train - OUTSTANDING!-2.mp3"; sourceTree = "<group>"; };
 		715FA49A1B9647EF00203CE1 /* Hillsong United - No Other Name - Oceans (Where Feet May Fail).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Hillsong United - No Other Name - Oceans (Where Feet May Fail).mp3"; sourceTree = "<group>"; };
 		715FA49E1B9649C400203CE1 /* Phil Wickham - This Is Amazing Grace.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Phil Wickham - This Is Amazing Grace.mp3"; sourceTree = "<group>"; };
+		715FA4AF1B9B59B500203CE1 /* Titans Spirit(Remember The Titans)-Trevor Rabin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Titans Spirit(Remember The Titans)-Trevor Rabin.mp3"; sourceTree = "<group>"; };
 		71A025A91B8D5DA4002CE122 /* Forrest Gump Soundtrack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Forrest Gump Soundtrack.mp3"; sourceTree = "<group>"; };
 		71A6E2E81B8AA0DE000AA949 /* CYMATICS- Science Vs. Music - Nigel Stanford-2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "CYMATICS- Science Vs. Music - Nigel Stanford-2.mp3"; sourceTree = "<group>"; };
 		881048B81B3E22F000712C9A /* TrackBall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackBall.swift; path = PaddleBallA52/TrackBall.swift; sourceTree = "<group>"; };
@@ -123,7 +125,7 @@
 		881048C81B3E6E4600712C9A /* badge-git-real-5d91905b69d46286cab389797ea81983.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "badge-git-real-5d91905b69d46286cab389797ea81983.png"; sourceTree = "<group>"; };
 		881048CA1B3F09A900712C9A /* IMG_3562.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_3562.jpg; sourceTree = "<group>"; };
 		881048CE1B3F253000712C9A /* snoopy-tennis.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "snoopy-tennis.png"; sourceTree = "<group>"; };
-		881048D01B3F314000712C9A /* padel520.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = padel520.jpg; sourceTree = "<group>"; };
+		881048D01B3F314000712C9A /* paddle520.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = paddle520.jpg; sourceTree = "<group>"; };
 		881559111B30E19600D60626 /* 1-FloUnitCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1-FloUnitCircle.png"; sourceTree = "<group>"; };
 		8842255C1B4355F7003122E3 /* Icon-29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-29@2x.png"; path = "../../BouncerL13/BouncerL13/Assets/Icons/Icon-29@2x.png"; sourceTree = "<group>"; };
 		8842255D1B4355F7003122E3 /* Icon-29@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-29@3x.png"; path = "../../BouncerL13/BouncerL13/Assets/Icons/Icon-29@3x.png"; sourceTree = "<group>"; };
@@ -228,20 +230,20 @@
 		881559141B30ED5500D60626 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				88EBF34A1B2799DF0090A5A0 /* paddle1.jpg */,
-				881048D01B3F314000712C9A /* padel520.jpg */,
-				885E94E11B39FCA200432335 /* Brookes_25_27119b.jpg */,
-				881048CA1B3F09A900712C9A /* IMG_3562.jpg */,
+				881559111B30E19600D60626 /* 1-FloUnitCircle.png */,
+				715FA4781B90074900203CE1 /* 1000CreditsSWars1.png */,
+				889C987B1B4778C300ACDA2C /* 1000Credits0-20.png */,
+				889C987C1B4778C300ACDA2C /* 1000Credits1-20.png */,
+				889C987D1B4778C300ACDA2C /* 1000Credits2-20.png */,
 				881048C81B3E6E4600712C9A /* badge-git-real-5d91905b69d46286cab389797ea81983.png */,
+				885E94E11B39FCA200432335 /* Brookes_25_27119b.jpg */,
+				88DCAD4A1B4452150079046A /* extension_UIImage.png */,
+				881048CA1B3F09A900712C9A /* IMG_3562.jpg */,
 				881048C51B3E663C00712C9A /* glory.png */,
 				715FA4861B94EBB800203CE1 /* helpful160.png */,
 				881048BE1B3E59D700712C9A /* mackie_swift.png */,
-				881559111B30E19600D60626 /* 1-FloUnitCircle.png */,
-				715FA4781B90074900203CE1 /* 1000CreditsSWars1.png */,
-				88DCAD4A1B4452150079046A /* extension_UIImage.png */,
-				889C98811B48DFD400ACDA2C /* snoopy2.jpg */,
-				889C98821B48DFD400ACDA2C /* snoopy1.jpg */,
-				881048CE1B3F253000712C9A /* snoopy-tennis.png */,
+				88EBF34A1B2799DF0090A5A0 /* paddle1.jpg */,
+				881048D01B3F314000712C9A /* paddle520.jpg */,
 				88DCAD791B46EDFF0079046A /* peanuts-anim8.png */,
 				88DCAD7A1B46EDFF0079046A /* peanuts-anim7.png */,
 				88DCAD691B46EA460079046A /* peanuts-anim6.png */,
@@ -252,6 +254,9 @@
 				88DCAD6E1B46EA460079046A /* peanuts-anim1.png */,
 				88DCAD6F1B46EA460079046A /* peanuts-anim0.png */,
 				889C98A31B4DA52B00ACDA2C /* pineapple_400.jpg */,
+				889C98811B48DFD400ACDA2C /* snoopy2.jpg */,
+				889C98821B48DFD400ACDA2C /* snoopy1.jpg */,
+				881048CE1B3F253000712C9A /* snoopy-tennis.png */,
 				889C98851B48E47200ACDA2C /* typing-computer6.png */,
 				889C98861B48E47200ACDA2C /* typing-computer5.png */,
 				889C98871B48E47200ACDA2C /* typing-computer4.png */,
@@ -259,9 +264,6 @@
 				889C98891B48E47200ACDA2C /* typing-computer2.png */,
 				889C988A1B48E47200ACDA2C /* typing-computer1.png */,
 				889C988B1B48E47200ACDA2C /* typing-computer0.png */,
-				889C987B1B4778C300ACDA2C /* 1000Credits0-20.png */,
-				889C987C1B4778C300ACDA2C /* 1000Credits1-20.png */,
-				889C987D1B4778C300ACDA2C /* 1000Credits2-20.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -280,6 +282,7 @@
 				715FA49A1B9647EF00203CE1 /* Hillsong United - No Other Name - Oceans (Where Feet May Fail).mp3 */,
 				715FA4961B96439F00203CE1 /* Yusuf Islam - Peace Train - OUTSTANDING!-2.mp3 */,
 				715FA48F1B96254100203CE1 /* Phil Wickham - At Your Name (Yahweh, Yahweh).mp3 */,
+				715FA4AF1B9B59B500203CE1 /* Titans Spirit(Remember The Titans)-Trevor Rabin.mp3 */,
 			);
 			name = Audio;
 			sourceTree = "<group>";
@@ -539,6 +542,7 @@
 				884225731B4355F7003122E3 /* Icon-50.png in Resources */,
 				881048CF1B3F253000712C9A /* snoopy-tennis.png in Resources */,
 				889C98901B48E47200ACDA2C /* typing-computer2.png in Resources */,
+				715FA4B01B9B59B500203CE1 /* Titans Spirit(Remember The Titans)-Trevor Rabin.mp3 in Resources */,
 				8842257E1B4355F7003122E3 /* Icon-72.png in Resources */,
 				8842257C1B4355F7003122E3 /* Icon-60@2x.png in Resources */,
 				881048CB1B3F09A900712C9A /* IMG_3562.jpg in Resources */,
@@ -554,7 +558,7 @@
 				715FA4921B96254100203CE1 /* Phil Wickham - At Your Name (Yahweh, Yahweh).mp3 in Resources */,
 				88DCAD7C1B46EDFF0079046A /* peanuts-anim7.png in Resources */,
 				889C98841B48DFD400ACDA2C /* snoopy1.jpg in Resources */,
-				881048D11B3F314000712C9A /* padel520.jpg in Resources */,
+				881048D11B3F314000712C9A /* paddle520.jpg in Resources */,
 				8842257D1B4355F7003122E3 /* Icon-60@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

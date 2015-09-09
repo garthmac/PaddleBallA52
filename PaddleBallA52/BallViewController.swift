@@ -24,8 +24,6 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
     private var breakout = BreakoutBehavior()
     private var cornerRadius = Constants.BrickCornerRadius
     // MARK: - scoring
-    private var tier: Int = 1
-    private var failedTier = 0
     private var msg: String { // a computed property instead of func
         get { if self.newHighScoreAchieved {
                 Settings().highScore = self.score
@@ -91,6 +89,9 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         return coin
         }()
     func earnCoin() {
+        if self.coinCount++ % 3 == 0 {  //move first because of annimation delay
+            self.availableCredits += 1
+        }
         //prepare for annimation
         largeCoin.image = UIImage(named: "1000CreditsSWars1.png")
         largeCoin.alpha = 1
@@ -105,45 +106,16 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         let images = (0...2).map {
             UIImage(named: "1000Credits\($0)-20.png") as! AnyObject
         }
-        if let image = images[min(coinCount, 2)] as? UIImage {
+        if let image = images[min(coinCount - 1, 2)] as? UIImage {
             coins.image = image
             coins.alpha = 0
             coins.center.y = gameView.bounds.maxY //move off screen
-            self.coinCount += 1
-            if self.coinCount % 3 == 0 {
-                self.availableCredits += 1
-            }
             UIView.animateWithDuration(4.0, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: nil, animations: {
                 self.coinCountLabel.text = self.coinCount.addSeparator
                 self.resetPaddleAndScoreBoard()
                 self.coins.alpha = 1
                 self.coinCountLabel.alpha = 1
                 }, completion: nil)
-        }
-    }
-    var tbvcArray: [UIViewController]?
-    func prepareTabBar() {
-        tbvcArray = tabBarController!.viewControllers as? [UIViewController]
-        let cvc = tbvcArray![4]    //CREDITS
-        for view in cvc.view.subviews as! [UIView] {
-            if let animatedImageView = view as? UIImageView {
-                if animatedImageView.tag == 111 {
-                    let images = (0...8).map {
-                        UIImage(named: "peanuts-anim\($0).png") as! AnyObject
-                    }
-                    animatedImageView.animationImages = images
-                    animatedImageView.animationDuration = 9.0
-                    animatedImageView.startAnimating()
-                }
-                if animatedImageView.tag == 333 {
-                    let images = (0...6).map {
-                        UIImage(named: "typing-computer\($0).png") as! AnyObject
-                    }
-                    animatedImageView.animationImages = images
-                    animatedImageView.animationDuration = 1.0
-                    animatedImageView.startAnimating()
-                }
-            }
         }
     }
     func prepareAudios() {
@@ -168,6 +140,8 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         audioPlayer.numberOfLoops = 99 //-1 means continuous
         audioPlayer.prepareToPlay()
     }
+    private var tier: Int = 1
+    private var failedTier = 0
     // MARK: - Constants
     struct Constants {
         static let BallSize: CGFloat = 40.0
@@ -207,12 +181,11 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         Settings().endLevelBonus = 0
         //printFonts()
         prepareAudios()
-        prepareTabBar()
         self.hidesBottomBarWhenPushed = true
         animator.addBehavior(breakout)
         Settings(defaultColumns: Constants.BrickColumns, defaultRows: Constants.BrickColumns / 2, defaultBalls: 1, defaultDifficulty: 1, defaultSpeed: ballSpeed, defaultBallColor: Settings().ballColor, defaultCourtColor: Settings().courtColor, defaultPaddleColor: Settings().paddleColor, defaultPaddleWidthMultiplier: Settings().paddleWidthMultiplier)
+        changeCourtColor()
         gameView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "pushBall:"))
-        gameView.layer.backgroundColor = UIColor.colorFor(Settings().courtColor).CGColor
         //The pan gesture handles most movement. However in the heat of the game it might be necessary to move faster-that’s what the left and right swipe gestures r4
         gameView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "panPaddle:"))
         gameView.addGestureRecognizer(UIPinchGestureRecognizer(target: self, action: "showTabBar:"))
@@ -249,10 +222,9 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             shopTabBarItem.badgeValue = "\(availableCredits)"
         }
         //Settings().type stuff set here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        adjustColors()
+        changeCourtColor()
         breakout.speed = CGFloat(Settings().speed)
         breakout.ballBehavior.allowsRotation = Settings().ballRotation
-        gameView.layer.backgroundColor = UIColor.colorFor(Settings().courtColor).CGColor
         let pw = Settings().paddleWidthMultiplier
         paddleSize = CGSize(width: (CGFloat(pw) * Constants.BallSize), height: 20.0)
         paddle.frame.size = paddleSize
@@ -330,7 +302,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
     }
     //When the timer fires – and there are not “enough” balls, create a new one, place it, add it to the behavior and push it:
     func fireAutoStart(timer: NSTimer) {
-        if (Constants.MaxBalls + 1 + extraBall) > ballCounter {
+        if (Constants.MaxBalls + extraBall) >= ballCounter {
             let ball = createBall()
             placeBall(ball)
             breakout.addBall(ball)
@@ -344,38 +316,35 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         return "baddie"
         }()
     // MARK: - ball
-    lazy var loggedInUser: User? = {
-        if let user = User.login(self.uid, password: "foo") {
-            return user
-        }
-        return nil
+    lazy var loggedInUser: User = {
+        return User.login(self.uid, password: "foo")
     }()
     func createBall() -> UIView {
         let paddleBallTabBarItem = tabBarController!.tabBar.items![1] as! UITabBarItem
         if paddleBallTabBarItem.badgeValue != nil {
             loggedInUser = User.login(paddleBallTabBarItem.badgeValue!, password: "foo") //new ball purchased
-            Settings().purchasedUid = loggedInUser?.login
+            Settings().purchasedUid = loggedInUser.login
             paddleBallTabBarItem.badgeValue = nil
         }
         let ballSize = CGSize(width: Constants.BallSize, height: Constants.BallSize)
         let ball = UIView(frame: CGRect(origin: CGPoint.zeroPoint, size: ballSize))
-        ball.layer.backgroundColor = UIColor.colorFor(Settings().ballColor).CGColor
-        if loggedInUser != nil {
-            if loggedInUser!.login != Settings().purchasedUid && powerBall == 1 {
-                loggedInUser = User.login(Settings().purchasedUid!, password: "foo") //keep using new ball
-            }
-            ball.layer.contents = loggedInUser!.image!.CGImage
+        if loggedInUser.login != Settings().purchasedUid && powerBall == 1 {
+            loggedInUser = User.login(Settings().purchasedUid!, password: "foo") //keep using new ball
+        } else if powerBall == 3 {
+            ball.layer.backgroundColor = UIColor.colorFor(Settings().ballColor).CGColor
             ball.layer.contentsGravity = kCAGravityCenter
-            ball.layer.contentsScale = 2.0
         }
+        ball.layer.contents = loggedInUser.image!.CGImage
+        ball.layer.contentsScale = 2.0
         //println(Settings().purchasedUid)
         if Settings().purchasedUid!.isEmpty || ( Settings().purchasedUid == "baddie" ) {
-            ball.layer.cornerRadius = Constants.BallSize / 2.0
+            ball.layer.backgroundColor = UIColor.colorFor(Settings().ballColor).CGColor
             ball.layer.borderColor = UIColor.blackColor().CGColor
             ball.layer.borderWidth = 2.0
-            ball.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
-            ball.layer.shadowOpacity = 0.5
         }
+        ball.layer.cornerRadius = Constants.BallSize / 2.0
+        ball.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+        ball.layer.shadowOpacity = 0.5
         ballCounter += 1
         return ball
     }
@@ -389,12 +358,11 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
     private var extraBall = 0
     func pushBall(gesture: UITapGestureRecognizer) { //*** lots happening here!
         if gesture.state == .Ended {
-            if (ballCounter > (Constants.MaxBalls + extraBall)) &&
-                    (breakout.balls.count == 0 || (ballCounter - (Constants.MaxBalls + extraBall)) > 1) {  //multiple balls at ounce only
+            if ((ballCounter > (Constants.MaxBalls + extraBall)) && breakout.balls.count == 0) ||
+                    (ballCounter - (Constants.MaxBalls + extraBall) > 1) {  //multiple balls at ounce only
                 levelFinished()
             } else if breakout.balls.count < Settings().balls &&
-                    (ballCounter < (Constants.MaxBalls + extraBall + 1)) {  //multiple balls at ounce only
-                extraBall = 0
+                    (ballCounter <= (Constants.MaxBalls + extraBall)) {  //multiple balls at ounce only
                 let ball = createBall()
                 placeBall(ball)
                 breakout.addBall(ball)
@@ -566,7 +534,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         }
     }
     func prepareBrick(brick: UIButton) {
-        if tier <= 14 || tier > 28 {
+        if tier <= 14 || (tier % 2 == 0) {
             brick.backgroundColor = UIColor.random
             if model.hasPrefix("iPad") || Settings().columns < 10 { //can't read values on iPhone
                 brick.setTitleColor(UIColor.blackColor(), forState: .Normal) //hides well
@@ -625,7 +593,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             brick.view.transform = CGAffineTransformMakeScale(-1, 1)
             if brick.view.backgroundColor == nil { //bom image
                 trans = UIViewAnimationOptions.TransitionCrossDissolve
-                self.bonus(Int(1000 / Settings().paddleWidthMultiplier) * powerBall)
+                self.bonus(Int(500 / Settings().paddleWidthMultiplier) * powerBall)
             } else {
                 self.score += UIColor.scoreForColor(brick.view.backgroundColor!) * self.powerBall
                 self.showScore()
@@ -687,8 +655,8 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             breakout.removeBall(ball)
         }
         let leftover = Constants.MaxBalls + 1 - ballCounter  //penalty for extraBall
-        let ballBonus = 2000 * leftover / Settings().paddleWidthMultiplier
-        //bonus(ballBonus)  //unused ball bonus
+        let ballBonus = 500 * leftover / Settings().paddleWidthMultiplier * powerBall
+        //bonus(ballBonus)  //unused ball bonus - don't use because of annimation
         score += ballBonus
         showScore()  //will be annimated in next step
         if newHighScoreAchieved {
@@ -717,7 +685,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             loggedInUser = User.login(uid, password: "foo")
             buildCube()
         }
-        if powerBall == 3 || score > 10000 {  //levelFinished post bonus/pre continue...will be over powerBall msg
+        if powerBall == 3 || score > 10000 {  //levelFinished post bonus/pre continue...above powerBall msg
             if powerBall == 3 && self.coinCount % 3 == 0 { //3rd coin
                 scoreBoard.text = "+1 SHOP Credit"
             }
@@ -728,7 +696,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
                         Settings().endLevelBonus += 1
                         earnCoin()  //annimated
                         if powerBall == 1 { //only show if new coin wasn't 3rd coin
-                            scoreBoard.text = "10k COIN added"
+                            scoreBoard.text = "+10k COIN added"
                         }
                     }
                 }  //side effect...existing score is annimated if +=10k not reached and shop credit not attained
@@ -748,7 +716,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             })
         }
         var title = "Game Over!", message = "Try Again...", cancelButtonTitle = "Restart?"
-        if Settings().rows == Constants.MaxRows && bricks.count == 0 {
+        if (tier % 14) == 0 && bricks.count == 0 {
             title = "Set Complete"
             if score > Constants.MaxScore {  //game extension
                 message = "You Won!!!"
@@ -759,29 +727,34 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             }
         }
         // MARK: - game over -> restart
-        if Settings().rows == Constants.MaxRows || (ballCounter > Constants.MaxBalls && bricks.count != 0) {  // level 14,28, 42... is complete OR level Unfinished
-            if Settings().rows != Constants.MaxRows {
+        if (self.tier % 14) == 0 ||   // level 14,28, 42... Set complete
+                (ballCounter > Constants.MaxBalls && bricks.count != 0) {  // OR level Unfinished
+            if (ballCounter > Constants.MaxBalls && bricks.count != 0) {
                 failedTier = tier
             }
             if NSClassFromString("UIAlertController") != nil {
                 let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-                alertController.addAction(UIAlertAction(title: cancelButtonTitle, style: .Default, handler: { (action) in
+                alertController.addAction(UIAlertAction(title: cancelButtonTitle, style: .Default, handler: { (action) in  //cancelButtonTitle = "Restart..." or "Next Set..."
                     self.resetWall()
                     self.scoreBoard.text = "" //clear any lingering bonus score
                     self.buildCube()
                     self.ballCounter = 0
+                    self.extraBall = 0
                     self.cornerRadius = Constants.BrickCornerRadius
-                    if (self.tier % 14) != 0 && self.score < Constants.MaxScore {  //game extension
+                    if (self.tier % 14) == 0 && self.score < Constants.MaxScore {  //game extension
+                        self.tier += 1
+                    } else {
                         Settings().endLevelBonus = 0
+                        self.coinCount = 0
                         self.score = 0
                         self.tier = 1
-                    } else {
-                        self.tier += 1
                     }
                     //don't reset ball or paddle colors or paddleWidth if user changed them!
                     Settings(defaultColumns: Constants.BrickColumns, defaultRows: Constants.BrickColumns / 2, defaultBalls: 1, defaultDifficulty: 1, defaultSpeed: self.ballSpeed, defaultBallColor: Settings().ballColor, defaultCourtColor: Constants.CourtColor, defaultPaddleColor: Settings().paddleColor, defaultPaddleWidthMultiplier: Settings().paddleWidthMultiplier)
-                    self.gameView.layer.backgroundColor = UIColor.colorFor(Settings().courtColor).CGColor
-                    self.adjustColors()
+                    self.changeCourtColor()
+                    if !Settings().autoStart {
+                        self.autoStartTimer?.invalidate()
+                    }
                     self.levelOne(self.tier)
                 }))
                 alertController.addAction(UIAlertAction(title: "Quit", style: .Cancel, handler: { (action) in
@@ -791,12 +764,13 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
                     alertController.addAction(UIAlertAction(title: "Buy Extra Ball NOW!", style: .Default, handler: { (action) in
                         self.extraBall += 1
                         self.availableCredits -= 10
+                        self.resetPaddleAndScoreBoard()
                     }))
                 }
                 presentViewController(alertController, animated: true, completion: nil)
             }
         }
-        else if NSClassFromString("UIAlertController") != nil {
+        else {
             failedTier = 0
             let alertController = UIAlertController(title: "Level Complete!", message: "\(leftover) Leftover Balls \n\n Bonus = " + ballBonus.addSeparator, preferredStyle: .Alert)
             alertController.addAction(UIAlertAction(title: "Play", style: .Default, handler: { (action) in
@@ -811,33 +785,31 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
     }
     func replay() {
         ballCounter = 0
+        extraBall = 0
         if failedTier > 0 {
             tier = failedTier
         } else {
             tier += 1
         }
         showScore()
-        // change court color
+        changeCourtColor()
+        if !Settings().autoStart {
+            autoStartTimer?.invalidate()
+        }
+        levelOne(self.tier)
+    }
+    func changeCourtColor() {
         if powerBall == 3 {
             Settings().courtColor = "Black"
         } else {
             if tier <= 14 {
                 Settings().courtColor = Constants.CourtColor
             } else {  //game extension
-                if tier <= 28 {
-                    Settings().courtColor = "Blue"
-                } else {
-                    Settings().courtColor = SettingsViewController().pickerDataSource[Int(arc4random() % 12)]
-                }
+                Settings().courtColor = SettingsViewController().pickerDataSource[tier % 7]
             }
         }
         gameView.layer.backgroundColor = UIColor.colorFor(Settings().courtColor).CGColor
         adjustColors()
-        // end change court color
-        if !Settings().autoStart {
-            autoStartTimer?.invalidate()
-        }
-        levelOne(self.tier)
     }
     func degreesToRadians(degrees: Double) -> CGFloat {
         return CGFloat(degrees * M_PI / 180.0)
@@ -928,19 +900,21 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
 // MARK: - extensions
 private extension UIColor {
     class var randomImage: UIColor {  //game extension
-        switch arc4random() % 12 {
+        switch arc4random() % 14 {
         case 0: return UIColor(patternImage: UIImage(named: "pineapple_400.jpg")!)
         case 1: return UIColor(patternImage: UIImage(named: "extension_UIImage.png")!)
         case 2: return UIColor(patternImage: UIImage(named: "IMG_3562.jpg")!)
         case 3: return UIColor(patternImage: UIImage(named: "glory.png")!)
         case 4: return UIColor(patternImage: UIImage(named: "paddle1.jpg")!)
         case 5: return UIColor(patternImage: UIImage(named: "paddle520.jpg")!)
-        case 6: return UIColor(patternImage: UIImage(named: "snoopy1.jpg")!)
-        case 7: return UIColor(patternImage: UIImage(named: (String.randomBom() + ".png"))!)
-        case 8: return UIColor(patternImage: UIImage(named: (String.randomBom() + ".png"))!)
-        case 9: return UIColor(patternImage: UIImage(named: "snoopy2.jpg")!)
-        case 10: return UIColor(patternImage: UIImage(named: "badge-git-real-5d91905b69d46286cab389797ea81983.png")!)
-        case 11: return UIColor(patternImage: UIImage(named: "Icon-60@3x.png")!)
+        case 6: return UIColor(patternImage: UIImage(named: "pointLeft75.png")!)
+        case 7: return UIColor(patternImage: UIImage(named: "audio77.png")!)
+        case 8: return UIColor(patternImage: UIImage(named: "Icon-60@3x.png")!)
+        case 9: return UIColor(patternImage: UIImage(named: "u73.png")!)
+        case 10: return UIColor(patternImage: UIImage(named: "84px-Coin_Stack.png")!)
+        case 11: return UIColor(patternImage: UIImage(named: "back.png")!)
+        case 12: return UIColor(patternImage: UIImage(named: "tiles.png")!)
+        case 13: return UIColor(patternImage: UIImage(named: "u190b.png")!)
         default: return UIColor.clearColor()
         }
     }
@@ -986,7 +960,7 @@ private extension UIColor {
             if model.hasPrefix("iPad") {
                 numerator = 2.0
             }
-            var int = 5 * (Double(arc4random() % 12) + 1)
+            var int = 5 * (Double(arc4random() % 14) + 1)
             return Int(round(int * numerator / pwm))
         }
     }
@@ -1035,7 +1009,7 @@ private extension String {
         let names = ["bom",
             "trophy75",
             "pointLeft75",
-            "109px-Coin_Artwork_-_Super_Mario_3D_World",
+            "109px-Coin",
             "happy160",
             "no210",
             "sun135",

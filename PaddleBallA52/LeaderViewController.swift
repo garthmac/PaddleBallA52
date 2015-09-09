@@ -71,64 +71,53 @@ class LeaderViewController: UIViewController { //, UIPickerViewDataSource, UIPic
             Settings().highScore = 0
             profileImageView!.image = nil
         }
-        if let loggedInUser = User.login(uid, password: "foo") { //if uid not valid -> User.login "baddie"
-            if profileImageView!.image == nil {
-                profileImageView!.image = loggedInUser.image
-            }
-            userIdLabel.font = UIFont(name: "ComicSansMS-Bold", size: 17.0)
-            userIdLabel.text = uid
-            if let date1 = formatter.dateFromString(loggedInUser.highScoreDate!) {
-                let settingsDate = Settings().highScoreDate!
-                if !settingsDate.isEmpty {
-                    if let date2 = formatter.dateFromString(Settings().highScoreDate!) {
-                        let dateString = formatter.stringFromDate(date1.laterDate(date2))
-                        dateCreatedLabel.text = dateString
-                    }
-                }
-                else {
-                    dateCreatedLabel.text = formatter.stringFromDate(date1)
+        let loggedInUser = User.login(uid, password: "foo")  //if uid not valid -> User.login "baddie"
+        if profileImageView!.image == nil {
+            profileImageView!.image = loggedInUser.image
+        }
+        userIdLabel.font = UIFont(name: "ComicSansMS-Bold", size: 17.0)
+        userIdLabel.text = uid
+        if let date1 = formatter.dateFromString(loggedInUser.highScoreDate!) {
+            let settingsDate = Settings().highScoreDate!
+            if !settingsDate.isEmpty {
+                if let date2 = formatter.dateFromString(Settings().highScoreDate!) {
+                    let dateString = formatter.stringFromDate(date1.laterDate(date2))
+                    dateCreatedLabel.text = dateString
                 }
             }
             else {
-                timestamp(dateCreatedLabel)
+                dateCreatedLabel.text = formatter.stringFromDate(date1)
             }
-            highScoreLabel.text = Settings().highScore.addSeparator
-            highScoreLabel.textColor = UIColor.blueColor()
         }
+        else {
+            timestamp(dateCreatedLabel)
+        }
+        highScoreLabel.text = Settings().highScore.addSeparator
+        highScoreLabel.textColor = UIColor.blueColor()
         addPlayer1(anyUnusedPlayerName())
         addPlayer2(anyUnusedPlayerName())
     }
     func addPlayer1(uid1: String) {
-        if let user1 = User.login("soccer", password: "foo") {
-            profileImageView1!.image = UIImage(named: String.randomBall())
-            userIdLabel1.text = uid1
-//            if let date = user1.highScoreDate {
-//                dateCreatedLabel1?.text = date
-//            } else {
-//                dateCreatedLabel1.text = formatter.stringFromDate(date)
-//            }
-            dateCreatedLabel1.text = formatter.stringFromDate(today)
-            highScoreLabel1.text = Int.random(100000).addSeparator  //user1.highScore
-            highScoreLabel1.textColor = UIColor.blueColor()
-        }
+        let user1 = User.login("soccer", password: "foo")
+        profileImageView1!.image = UIImage(named: String.randomBall())
+        userIdLabel1.text = uid1
+        dateCreatedLabel1.text = formatter.stringFromDate(today)
+        highScoreLabel1.text = Int.random(100000).addSeparator  //user1.highScore
+        highScoreLabel1.textColor = UIColor.blueColor()
     }
     func addPlayer2(uid2: String) {
-        if let user2 = User.login("madbum", password: "foo") {
-//            if profileImageView2!.image == nil {
-//                profileImageView2!.image = user2.image
-//            }
-            profileImageView2!.image = UIImage(named: String.randomBall())
-            userIdLabel2.text = uid2
+        let user2 = User.login("madbum", password: "foo")
+        profileImageView2!.image = UIImage(named: String.randomBall())
+        userIdLabel2.text = uid2
 //            if let date = user2.highScoreDate {
 //                dateCreatedLabel2?.text = date
 //            } else {
 //                //timestamp(dateCreatedLabel2)
 //                dateCreatedLabel2.text = formatter.stringFromDate(date)
 //            }
-            dateCreatedLabel2.text = formatter.stringFromDate(today.dateByAddingTimeInterval(-60*60*24))
-            highScoreLabel2.text = Int.random(100000).addSeparator  //user2.highScore
-            highScoreLabel2.textColor = UIColor.blueColor()
-        }
+        dateCreatedLabel2.text = formatter.stringFromDate(today.dateByAddingTimeInterval(-60*60*24))
+        highScoreLabel2.text = Int.random(100000).addSeparator  //user2.highScore
+        highScoreLabel2.textColor = UIColor.blueColor()
     }
     // MARK: - Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -304,7 +293,6 @@ private extension String {
             "u202",
             "u203",
             "u204",
-            "u205",
             "u207"]
         let randomIndex = Int(arc4random_uniform(UInt32(names2.count)))
         return names2[randomIndex]

@@ -152,7 +152,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
     func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView {
         if pickerView.tag == 1 { return pickerDataSourceHelp[row] }
         if pickerView.tag == 2 { return pickerDataSourceCredits[row] }
-        var iv = UIImageView(image: pickerDataSource[row])  //use worst case(largest) pickerDataSource3 as default
+        var iv = UIImageView(image: pickerDataSource[row])  //use worst case(largest) pickerDataSource as default
         if component == 0 {
             iv.bounds = CGRect(x: 0, y: 0, width: 65, height: 65)
         }
@@ -189,26 +189,26 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView.tag == 1 {
             selectedHintIndex = row
-            Settings().lastHint = selectedHintIndex
+            return Settings().lastHint = selectedHintIndex
         }
         if pickerView.tag == 2 {
-            selectedCreditIndex = row
+            return selectedCreditIndex = row
         }
         if component == 0 {
             selectedBallSkin = pickerDataSource[row]
-            selectedLogin = ballSkins[row]
+            return selectedLogin = ballSkins[row]
         }
         if component == 1 {
             selectedBallSkin1 = pickerDataSource1[row]
-            selectedLogin1 = Settings().mySkins[row]
+            return selectedLogin1 = Settings().mySkins[row]
         }
         if component == 2 {
             selectedAudio2 = pickerDataSource2[row]
-            selectedLogin2 = audios[row]
+            return selectedLogin2 = audios[row]
         }
         if component == 3 {
             selectedPaddle3 = pickerDataSource3[row]
-            selectedLogin3 = paddles[row]
+            return selectedLogin3 = paddles[row]
         }
         if component == 4 {
             selectedPaddleWidth4 = pickerDataSource4[row]
@@ -219,6 +219,31 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
             }
         }
     }
+    var tbvcArray: [UIViewController]?
+    func prepareTabBar() {
+        tbvcArray = tabBarController!.viewControllers as? [UIViewController]
+        let cvc = tbvcArray![4]    //CREDITS
+        for view in cvc.view.subviews as! [UIView] {
+            if let animatedImageView = view as? UIImageView {
+                if animatedImageView.tag == 111 {
+                    let images = (0...8).map {
+                        UIImage(named: "peanuts-anim\($0).png") as! AnyObject
+                    }
+                    animatedImageView.animationImages = images
+                    animatedImageView.animationDuration = 9.0
+                    animatedImageView.startAnimating()
+                }
+                if animatedImageView.tag == 333 {
+                    let images = (0...6).map {
+                        UIImage(named: "typing-computer\($0).png") as! AnyObject
+                    }
+                    animatedImageView.animationImages = images
+                    animatedImageView.animationDuration = 1.0
+                    animatedImageView.startAnimating()
+                }
+            }
+        }
+    }
     private var availableCredits: Int { // a computed property instead of func
         get { return Settings().availableCredits }
         set { Settings().availableCredits = newValue }
@@ -226,6 +251,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
     //MARK: - view lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        prepareTabBar()
         titleLabel.font = UIFont(name: "ComicSansMS-Bold", size: 28.0)
         userPickerView.dataSource = self
         userPickerView.delegate = self
@@ -243,13 +269,27 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
             }
         }
     }
+    func updateMySkins(withSkin: String) {
+        if Settings().mySkins.count > 1 {
+            if let index = find(ballSkins, withSkin) {
+                self.selectedLogin1 = ballSkins[index]
+                if let index1 = find(Settings().mySkins, self.selectedLogin1!) {
+                    userPickerView.selectRow(index1, inComponent: 1, animated: true)
+                    pickerView(userPickerView, didSelectRow: index1, inComponent: 1)
+                }
+            }
+        } else {
+            userPickerView.selectRow(0, inComponent: 1, animated: true)
+            pickerView(userPickerView, didSelectRow: 0, inComponent: 1)
+        }
+    }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         helpPickerView.selectRow(Settings().lastHint, inComponent: 0, animated: true)
-        userPickerView.selectRow(4, inComponent: 0, animated: true)
-        pickerView(userPickerView, didSelectRow: 4, inComponent: 0)
-        //userPickerView.selectRow(Settings().soundChoice, inComponent: 2, animated: true)  //move below
-        showBuyCreditsAction(UIButton())
+        userPickerView.selectRow(28, inComponent: 0, animated: true)
+        pickerView(userPickerView, didSelectRow: 28, inComponent: 0)
+        updateMySkins(Settings().purchasedUid!)
+        showBuyCreditsAction(UIButton())  //selectRow(Settings().soundChoice
         if let index = find(paddles, Settings().myPaddles.last!) {
             userPickerView.selectRow(index, inComponent: 3, animated: true)
         }
@@ -362,7 +402,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
                 for i in 0..<audios.count {
                     if audios[i] == self.selectedLogin2! {
                         soundTrack = i
-                        let autoStartTimer =  NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: "fireAutoStart:", userInfo: nil, repeats: false)
+                        let autoStartTimer =  NSTimer.scheduledTimerWithTimeInterval(7.0, target: self, selector: "fireAutoStart:", userInfo: nil, repeats: false)
                     }
                 }
                 alertController.addAction(UIAlertAction(title: "Sample 1st ...", style: UIAlertActionStyle.Cancel, handler: { (action) in
@@ -389,9 +429,6 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
                 let shopTabBarItem = tabBarController!.tabBar.items![0] as! UITabBarItem
                 shopTabBarItem.badgeValue = availableCredits.description
                 Settings().availableCredits = availableCredits
-//                if self.selectedLogin == nil {
-//                    pickerView(userPickerView, didSelectRow: 0, inComponent: 0)
-//                }
                 let loggedInUser = User.login(self.selectedLogin!, password: "foo") //new ball
                 let paddleBallTabBarItem = tabBarController!.tabBar.items![1] as! UITabBarItem
                 paddleBallTabBarItem.badgeValue = self.selectedLogin!
@@ -400,6 +437,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
                     Settings().mySkins.append(self.selectedLogin!)
                 }
                 userPickerView.reloadAllComponents()  //refresh pickerDataSource1
+                updateMySkins(self.selectedLogin!)
             } else {
                 prepareForPurchase()
             }
@@ -546,9 +584,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         "audio7",
         "audio149",
         "audio77"]
-    let ballSkins = ["12Citroen160",
-        "15Toyota160",
-        "8ball",
+    let ballSkins = ["8ball",
         "asian",
         "art160",
         "asian33",
@@ -561,7 +597,9 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         "c14",
         "cd114",
         "cd115",
+        "citroen160",
         "cool160",
+        "cool275",
         "cufi100",
         "cvision160",
         "dizzy2",
@@ -571,6 +609,10 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         "gold160",
         "happy160",
         "orangeW160",
+        "pickle178",
+        "pickle180",
+        "pickle190",
+        "pink130",
         "prowheel160",
         "radios160",
         "r21",
@@ -586,6 +628,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         "sun56",
         "sun94",
         "tennis80",
+        "toyota160",
         "u157",
         "u158",
         "u191",
@@ -600,9 +643,9 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         "u202",
         "u203",
         "u204",
-        "u205",
         "u207",
         "vector160",
+        "vector300",
         "wheel160",
         "wheelOf160"]
     let buyCredits = ["  $0.99  ⇢    10 Credits",
@@ -636,14 +679,23 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         "Gently pan RED BLOCK on game screen for distractaction...no tap ;-)",
         "Once a ballSkin is bought, it will be available in the FREE mySkins wheel",
         "Touch [Settings] tab for additional customizations eg. color choices, switches and sliders",
+        "Ball Color only affects the default tennis ball not ballSkins",
         "Once finished shopping, touch [Paddle Ball] tab to return to game!",
         "Add your UserId or game handle (to appear in the Leaders list) in iPhone>Settings>RedBlockPaddleBall",
         "Touch [High Score] tab, touch upper camera button to take your picture for the Leader Board",
         "See Snoopy serve (and program the computer) in [Credits] screen"]
     let paddles = ["asian33",
-        "dizzy2",
+        "arrow300",
+        "back",
+        "ball283",
+        "butterfly",
+        "color265",
         "dizzy34",
         "happy160",
+        "image210",
+        "ok128",
+        "pointLeft75",
+        "no210",
         "r21",
         "ring",
         "starDavid",
@@ -651,27 +703,12 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         "star57",
         "sun56",
         "sun94",
+        "sun135",
+        "tiles",
+        "timthum",
+        "trophy75",
         "u5",
         "u6",
-        "u191",
-        "u193",
-        "u194",
-        "u195",
-        "u196",
-        "u197",
-        "u199",
-        "u200",
-        "u201",
-        "u202",
-        "u203",
-        "u204",
-        "u205",
-        "u207",
-        "trophy75",
-        "pointLeft75",
-        "no210",
-        "sun135",
-        "u148",
         "u28",
         "u36",
         "u37",
@@ -685,13 +722,20 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         "u138",
         "u139",
         "u141",
+        "u148",
         "u152",
         "u154",
         "u173",
         "u192",
+        "u195",
+        "u196",
         "u198",
+        "u201",
+        "u203",
         "u219",
-        "u222"]
+        "u222",
+        "vector",
+        "dizzy2"]
     let paddleWidths = ["u52b",
         "u66b",
         "u90b",

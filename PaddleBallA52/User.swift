@@ -25,7 +25,7 @@ struct User {
         self.password = password
     }
     
-    static func login(login: String, password: String) -> User? {
+    static func login(login: String, password: String) -> User {
         if let user = database[login] {
             if user.password == password {
             return user
@@ -75,7 +75,7 @@ struct User {
             User(name: "Madison", company: "World", highScore: "18,222", highScoreDate: "2015-05-11", login: "u202", password: "foo"),
             User(name: "John", company: "Stanford", highScore: "999", highScoreDate: "2015-06-20", login: "u203", password: "foo"),
             User(name: "Bad", company: "Criminals, Inc.", highScore: "6,666", highScoreDate: "2015-06-06", login: "u204", password: "foo"),
-            User(name: "Good", company: "Rescue, Inc.", highScore: "8,888", highScoreDate: "2015-06-21", login: "u205", password: "foo"),
+            User(name: "Good", company: "Rescue, Inc.", highScore: "8,888", highScoreDate: "2015-06-21", login: "vector300", password: "foo"),
             User(name: "Johny", company: "Apple", highScore: "10,222", highScoreDate: "2015-04-01", login: "u207", password: "foo"),
             User(name: "Madison", company: "World", highScore: "18,222", highScoreDate: "2015-05-11", login: "starDavid", password: "foo"),
             User(name: "John", company: "Stanford", highScore: "999", highScoreDate: "2015-06-20", login: "dizzy2", password: "foo"),
@@ -119,9 +119,22 @@ struct User {
             User(name: "Bad", company: "Criminals, Inc.", highScore: "6,666", highScoreDate: "2015-06-06", login: "blue160", password: "foo"),
             User(name: "Good", company: "Rescue, Inc.", highScore: "8,888", highScoreDate: "2015-06-21", login: "bicycle160", password: "foo"),
             User(name: "Johny", company: "Apple", highScore: "10,222", highScoreDate: "2015-04-01", login: "art160", password: "foo"),
-            User(name: "Madison", company: "World", highScore: "18,222", highScoreDate: "2015-05-11", login: "15Toyota160", password: "foo"),
-            User(name: "John", company: "Stanford", highScore: "999", highScoreDate: "2015-06-20", login: "12Citroen160", password: "foo"),
-            User(name: "Bad", company: "Criminals, Inc.", highScore: "6,666", highScoreDate: "2015-06-06", login: "wheelOf160", password: "foo")
+            User(name: "Madison", company: "World", highScore: "18,222", highScoreDate: "2015-05-11", login: "toyota160", password: "foo"),
+            User(name: "John", company: "Stanford", highScore: "999", highScoreDate: "2015-06-20", login: "citroen160", password: "foo"),
+            User(name: "Bad", company: "Criminals, Inc.", highScore: "6,666", highScoreDate: "2015-06-06", login: "wheelOf160", password: "foo"),
+            User(name: "Good", company: "Rescue, Inc.", highScore: "8,888", highScoreDate: "2015-06-21", login: "pickle178", password: "foo"),
+            User(name: "Johny", company: "Apple", highScore: "10,222", highScoreDate: "2015-04-01", login: "pickle180", password: "foo"),
+            User(name: "Madison", company: "World", highScore: "18,222", highScoreDate: "2015-05-11", login: "pickle190", password: "foo"),
+            User(name: "John", company: "Stanford", highScore: "999", highScoreDate: "2015-06-20", login: "pink130", password: "foo"),
+            User(name: "Bad", company: "Criminals, Inc.", highScore: "6,666", highScoreDate: "2015-06-06", login: "arrow300", password: "foo"),
+            User(name: "Good", company: "Rescue, Inc.", highScore: "8,888", highScoreDate: "2015-06-21", login: "ball283", password: "foo"),
+            User(name: "Johny", company: "Apple", highScore: "10,222", highScoreDate: "2015-04-01", login: "butterfly", password: "foo"),
+            User(name: "Madison", company: "World", highScore: "18,222", highScoreDate: "2015-05-11", login: "color265", password: "foo"),
+            User(name: "John", company: "Stanford", highScore: "999", highScoreDate: "2015-06-20", login: "cool275", password: "foo"),
+            User(name: "Bad", company: "Criminals, Inc.", highScore: "6,666", highScoreDate: "2015-06-06", login: "image210", password: "foo"),
+            User(name: "Good", company: "Rescue, Inc.", highScore: "8,888", highScoreDate: "2015-06-21", login: "ok128", password: "foo"),
+            User(name: "Johny", company: "Apple", highScore: "10,222", highScoreDate: "2015-04-01", login: "timthum", password: "foo"),
+            User(name: "Madison", company: "World", highScore: "18,222", highScoreDate: "2015-05-11", login: "back", password: "foo")
             ] {
             theDatabase[user.login] = user
         }

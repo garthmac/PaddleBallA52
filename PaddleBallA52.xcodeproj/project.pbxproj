@@ -70,7 +70,6 @@
 		889C98A41B4DA52B00ACDA2C /* pineapple_400.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 889C98A31B4DA52B00ACDA2C /* pineapple_400.jpg */; };
 		88B46C601B41ED08006A0E54 /* RedBlockViewController.swift in Resources */ = {isa = PBXBuildFile; fileRef = 88B46C5F1B41ED08006A0E54 /* RedBlockViewController.swift */; };
 		88DCAD4B1B4452150079046A /* extension_UIImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 88DCAD4A1B4452150079046A /* extension_UIImage.png */; };
-		88DCAD501B45B76D0079046A /* Phil Wickham-Carry My Soul(Live at RELEVANT).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 88DCAD4F1B45B76D0079046A /* Phil Wickham-Carry My Soul(Live at RELEVANT).mp3 */; };
 		88DCAD721B46EA460079046A /* peanuts-anim6.png in Resources */ = {isa = PBXBuildFile; fileRef = 88DCAD691B46EA460079046A /* peanuts-anim6.png */; };
 		88DCAD731B46EA460079046A /* peanuts-anim5.png in Resources */ = {isa = PBXBuildFile; fileRef = 88DCAD6A1B46EA460079046A /* peanuts-anim5.png */; };
 		88DCAD741B46EA460079046A /* peanuts-anim4.png in Resources */ = {isa = PBXBuildFile; fileRef = 88DCAD6B1B46EA460079046A /* peanuts-anim4.png */; };
@@ -169,7 +168,6 @@
 		889C98A31B4DA52B00ACDA2C /* pineapple_400.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pineapple_400.jpg; sourceTree = "<group>"; };
 		88B46C5F1B41ED08006A0E54 /* RedBlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RedBlockViewController.swift; path = PaddleBallA52/RedBlockViewController.swift; sourceTree = "<group>"; };
 		88DCAD4A1B4452150079046A /* extension_UIImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = extension_UIImage.png; sourceTree = "<group>"; };
-		88DCAD4F1B45B76D0079046A /* Phil Wickham-Carry My Soul(Live at RELEVANT).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Phil Wickham-Carry My Soul(Live at RELEVANT).mp3"; sourceTree = "<group>"; };
 		88DCAD691B46EA460079046A /* peanuts-anim6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "peanuts-anim6.png"; sourceTree = "<group>"; };
 		88DCAD6A1B46EA460079046A /* peanuts-anim5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "peanuts-anim5.png"; sourceTree = "<group>"; };
 		88DCAD6B1B46EA460079046A /* peanuts-anim4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "peanuts-anim4.png"; sourceTree = "<group>"; };
@@ -273,7 +271,6 @@
 			children = (
 				88EBF3441B2799540090A5A0 /* jazzloop2_70.mp3 */,
 				71A6E2E81B8AA0DE000AA949 /* CYMATICS- Science Vs. Music - Nigel Stanford-2.mp3 */,
-				88DCAD4F1B45B76D0079046A /* Phil Wickham-Carry My Soul(Live at RELEVANT).mp3 */,
 				715FA47A1B91702600203CE1 /* Hudson - Chained.mp3 */,
 				71A025A91B8D5DA4002CE122 /* Forrest Gump Soundtrack.mp3 */,
 				715FA47C1B91707200203CE1 /* Titanic Soundtrack - Rose.mp3 */,
@@ -501,7 +498,6 @@
 				885E94EF1B3A0C2400432335 /* Comic Sans MS.ttf in Resources */,
 				884225721B4355F7003122E3 /* Icon-40@2x.png in Resources */,
 				884225791B4355F7003122E3 /* Icon-44@2x.png in Resources */,
-				88DCAD501B45B76D0079046A /* Phil Wickham-Carry My Soul(Live at RELEVANT).mp3 in Resources */,
 				88DCAD741B46EA460079046A /* peanuts-anim4.png in Resources */,
 				88DCAD4B1B4452150079046A /* extension_UIImage.png in Resources */,
 				885E94EE1B3A0C1E00432335 /* Comic Sans MS Bold.ttf in Resources */,

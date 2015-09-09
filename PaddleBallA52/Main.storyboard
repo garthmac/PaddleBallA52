@@ -133,7 +133,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="84px-Coin_Stack_Artwork_-_Super_Mario_3D_World" translatesAutoresizingMaskIntoConstraints="NO" id="DzD-pd-7at">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="84px-Coin_Stack" translatesAutoresizingMaskIntoConstraints="NO" id="DzD-pd-7at">
                                 <rect key="frame" x="422" y="10" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="Pn9-lC-N51"/>
@@ -237,7 +237,7 @@
                                     <constraint firstAttribute="width" constant="48" id="Mnp-p7-LyH"/>
                                     <constraint firstAttribute="height" constant="48" id="sJx-AV-Ky4"/>
                                 </constraints>
-                                <state key="normal" image="109px-Coin_Artwork_-_Super_Mario_3D_World">
+                                <state key="normal" image="109px-Coin">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -2961,8 +2961,8 @@
     </scenes>
     <resources>
         <image name="1-FloUnitCircle.png" width="400" height="400"/>
-        <image name="109px-Coin_Artwork_-_Super_Mario_3D_World" width="109" height="120"/>
-        <image name="84px-Coin_Stack_Artwork_-_Super_Mario_3D_World" width="84" height="119"/>
+        <image name="109px-Coin" width="109" height="120"/>
+        <image name="84px-Coin_Stack" width="84" height="119"/>
         <image name="Brookes_25_27119b.jpg" width="780" height="520"/>
         <image name="IMG_3562.jpg" width="600" height="800"/>
         <image name="Icon-24.png" width="24" height="24"/>

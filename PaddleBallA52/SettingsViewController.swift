@@ -35,7 +35,7 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
     @IBOutlet weak var speedSlider: UISlider!
     
     //MARK: - UIPickerViewDataSource
-    var pickerDataSource = ["Green", "Blue", "Orange", "Red", "Purple", "Yellow", "Brown", "DarkGray", "LightGray", "Cyan", "White", "Clear", "Black"]
+    var pickerDataSource = ["Brown", "Yellow", "Cyan", "Blue", "Green", "Red", "Purple", "Orange", "DarkGray", "LightGray", "White", "Black", "Clear"]
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int { return 1 } //number of wheels in the picker
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return pickerDataSource.count

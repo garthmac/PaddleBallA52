@@ -40,9 +40,9 @@ Phil Wickham songs and other soundtracks:
 https://www.youtube.com/
 
 png images:
-https://news.google.com
+http://www.123freevectors.com/
 
 youtube clip converter:
 http://www.clipconverter.cc
 
-special thanks to Standford online cs193
+special thanks to Standford online and Paul Hegarty

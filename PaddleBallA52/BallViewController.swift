@@ -175,6 +175,11 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             println("Font Names = [\(names)]")
         }
     }
+    // MARK: emitterLayerViewController
+    var emitterLayerViewController: CAEmitterLayerViewController!
+    var emitterLayer: CAEmitterLayer {
+        return emitterLayerViewController.emitterLayer
+    }
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -184,7 +189,9 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         self.hidesBottomBarWhenPushed = true
         animator.addBehavior(breakout)
         Settings(defaultColumns: Constants.BrickColumns, defaultRows: Constants.BrickColumns / 2, defaultBalls: 1, defaultDifficulty: 1, defaultSpeed: ballSpeed, defaultBallColor: Settings().ballColor, defaultCourtColor: Settings().courtColor, defaultPaddleColor: Settings().paddleColor, defaultPaddleWidthMultiplier: Settings().paddleWidthMultiplier)
-        changeCourtColor()
+        emitterLayerViewController = CAEmitterLayerViewController()
+        emitterLayer.renderMode = kCAEmitterLayerAdditive
+        emitterLayerViewController.viewForEmitterLayer = powerBallScoreBoard  //changeCourtColor
         gameView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "pushBall:"))
         //The pan gesture handles most movement. However in the heat of the game it might be necessary to move faster-that’s what the left and right swipe gestures r4
         gameView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "panPaddle:"))
@@ -799,9 +806,15 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         levelOne(self.tier)
     }
     func changeCourtColor() {
+        emitterLayerViewController.setUpEmitterCell()
+        emitterLayerViewController.resetEmitterCells()
+        emitterLayerViewController.setUpEmitterLayer()
+        emitterLayerViewController.viewForEmitterLayer?.layer.addSublayer(emitterLayer)
         if powerBall == 3 {
             Settings().courtColor = "Black"
+            emitterLayerViewController.viewForEmitterLayer?.alpha = 1
         } else {
+            emitterLayerViewController.viewForEmitterLayer?.alpha = 0
             if tier <= 14 {
                 Settings().courtColor = Constants.CourtColor
             } else {  //game extension

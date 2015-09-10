@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		714B2C7D1BA118AA0056D6CF /* CAEmitterLayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714B2C7C1BA118AA0056D6CF /* CAEmitterLayerViewController.swift */; };
 		715FA4791B90074900203CE1 /* 1000CreditsSWars1.png in Resources */ = {isa = PBXBuildFile; fileRef = 715FA4781B90074900203CE1 /* 1000CreditsSWars1.png */; };
 		715FA47B1B91702600203CE1 /* Hudson - Chained.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 715FA47A1B91702600203CE1 /* Hudson - Chained.mp3 */; };
 		715FA47D1B91707200203CE1 /* Titanic Soundtrack - Rose.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 715FA47C1B91707200203CE1 /* Titanic Soundtrack - Rose.mp3 */; };
@@ -106,6 +107,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		714B2C7C1BA118AA0056D6CF /* CAEmitterLayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAEmitterLayerViewController.swift; sourceTree = "<group>"; };
 		715FA4781B90074900203CE1 /* 1000CreditsSWars1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1000CreditsSWars1.png; sourceTree = "<group>"; };
 		715FA47A1B91702600203CE1 /* Hudson - Chained.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Hudson - Chained.mp3"; sourceTree = "<group>"; };
 		715FA47C1B91707200203CE1 /* Titanic Soundtrack - Rose.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Titanic Soundtrack - Rose.mp3"; sourceTree = "<group>"; };
@@ -366,6 +368,7 @@
 				88EBF34D1B27A5B70090A5A0 /* SettingsViewController.swift */,
 				88EBF33B1B27992E0090A5A0 /* BreakoutBehavior.swift */,
 				88EBF33C1B27992E0090A5A0 /* BallViewController.swift */,
+				714B2C7C1BA118AA0056D6CF /* CAEmitterLayerViewController.swift */,
 				88EBF3481B2799B00090A5A0 /* Images.xcassets */,
 				88EBF3451B2799540090A5A0 /* LaunchScreen.xib */,
 				88EBF3111B2798A70090A5A0 /* Info.plist */,
@@ -578,6 +581,7 @@
 				889C98A21B4CF9B800ACDA2C /* ShopViewController.swift in Sources */,
 				88EBF33F1B27992E0090A5A0 /* User.swift in Sources */,
 				881048B91B3E22F000712C9A /* TrackBall.swift in Sources */,
+				714B2C7D1BA118AA0056D6CF /* CAEmitterLayerViewController.swift in Sources */,
 				88EBF3131B2798A70090A5A0 /* AppDelegate.swift in Sources */,
 				88EBF3411B27992E0090A5A0 /* BallViewController.swift in Sources */,
 				88EBF33E1B27992E0090A5A0 /* Settings.swift in Sources */,

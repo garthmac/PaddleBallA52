@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 
 class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
-    
+
     @IBOutlet var backdropImageView: UIImageView!
 //    @IBOutlet weak var leftTrophyImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -252,7 +252,6 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareTabBar()
-        titleLabel.font = UIFont(name: "ComicSansMS-Bold", size: 28.0)
         userPickerView.dataSource = self
         userPickerView.delegate = self
         helpPickerView.dataSource = self
@@ -311,19 +310,6 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         super.viewWillDisappear(true)
         self.audioPlayer?.pause()
     }
-    // MARK: - not enough credits
-    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
-        if buttonIndex == 1 {
-            //use credit card
-//            availableCredits += 51
-//            (tabBarController!.tabBar.items![0] as! UITabBarItem).badgeValue = String(availableCredits)
-//            prepareForPurchase()
-        }
-        if buttonIndex == 0 {
-            //canceled...show tab bar
-            self.tabBarController?.tabBar.hidden = false
-        }
-    }
     //MARK: - Action buySelection
     @IBAction func buySelection(sender: UIButton) {
         switch sender.tag {
@@ -372,12 +358,11 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         case 3: path = NSBundle.mainBundle().pathForResource("Hudson - Chained", ofType: "mp3")
         case 4: path = NSBundle.mainBundle().pathForResource("Forrest Gump Soundtrack", ofType: "mp3")
         case 5: path = NSBundle.mainBundle().pathForResource("Titanic Soundtrack - Rose", ofType: "mp3")
-        case 6: path = NSBundle.mainBundle().pathForResource("Diana Ross - Ain't No Mountain High Enough 1981", ofType: "mp3")
-        case 7: path = NSBundle.mainBundle().pathForResource("Phil Wickham - This Is Amazing Grace", ofType: "mp3")
-        case 8: path = NSBundle.mainBundle().pathForResource("Hillsong United - No Other Name - Oceans (Where Feet May Fail)", ofType: "mp3")
-        case 9: path = NSBundle.mainBundle().pathForResource("Phil Wickham - At Your Name (Yahweh, Yahweh)", ofType: "mp3")
-        case 10: path = NSBundle.mainBundle().pathForResource("Yusuf Islam - Peace Train - OUTSTANDING!-2", ofType: "mp3")
-        case 11: path = NSBundle.mainBundle().pathForResource("Titans Spirit(Remember The Titans)-Trevor Rabin", ofType: "mp3")
+        case 6: path = NSBundle.mainBundle().pathForResource("Phil Wickham - This Is Amazing Grace", ofType: "mp3")
+        case 7: path = NSBundle.mainBundle().pathForResource("Hillsong United - No Other Name - Oceans (Where Feet May Fail)", ofType: "mp3")
+        case 8: path = NSBundle.mainBundle().pathForResource("Phil Wickham - At Your Name (Yahweh, Yahweh)", ofType: "mp3")
+        case 9: path = NSBundle.mainBundle().pathForResource("Yusuf Islam - Peace Train - OUTSTANDING!-2", ofType: "mp3")
+        case 10: path = NSBundle.mainBundle().pathForResource("Titans Spirit(Remember The Titans)-Trevor Rabin", ofType: "mp3")
         default: path = NSBundle.mainBundle().pathForResource("jazzloop2_70", ofType: "mp3")
         }
         let url = NSURL.fileURLWithPath(path!)
@@ -572,7 +557,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         }
         return transactionResult(amount)
     }
-    let audios = ["audio78",
+    let audios = ["audio77",
         "audio66",
         "audio90",
         "audio96",
@@ -582,8 +567,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         "audio223",
         "audio3",
         "audio7",
-        "audio149",
-        "audio77"]
+        "audio78"]
     let ballSkins = ["8ball",
         "asian",
         "art160",
@@ -690,6 +674,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         "ball283",
         "butterfly",
         "color265",
+        "cyan158",
         "dizzy34",
         "happy160",
         "image210",
@@ -705,7 +690,6 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         "sun94",
         "sun135",
         "tiles",
-        "timthum",
         "trophy75",
         "u5",
         "u6",

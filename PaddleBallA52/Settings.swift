@@ -98,7 +98,7 @@ class Settings {
         set { defaults.setObject(newValue, forKey: Const.HintIndexKey) }
     }
     var myAudios: [String] {
-        get { return defaults.objectForKey(Const.AudiosKey) as? [String] ?? ["audio78"]}
+        get { return defaults.objectForKey(Const.AudiosKey) as? [String] ?? ["audio77"]}
         set { defaults.setObject(newValue, forKey: Const.AudiosKey) }
     }
     var myPaddles: [String] {

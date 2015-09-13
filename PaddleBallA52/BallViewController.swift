@@ -127,11 +127,11 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         case 3: path = NSBundle.mainBundle().pathForResource("Hudson - Chained", ofType: "mp3")
         case 4: path = NSBundle.mainBundle().pathForResource("Forrest Gump Soundtrack", ofType: "mp3")
         case 5: path = NSBundle.mainBundle().pathForResource("Titanic Soundtrack - Rose", ofType: "mp3")
-        case 6: path = NSBundle.mainBundle().pathForResource("Diana Ross - Ain't No Mountain High Enough 1981", ofType: "mp3")
-        case 7: path = NSBundle.mainBundle().pathForResource("Phil Wickham - This Is Amazing Grace", ofType: "mp3")
-        case 8: path = NSBundle.mainBundle().pathForResource("Hillsong United - No Other Name - Oceans (Where Feet May Fail)", ofType: "mp3")
-        case 9: path = NSBundle.mainBundle().pathForResource("Phil Wickham - At Your Name (Yahweh, Yahweh)", ofType: "mp3")
-        case 10: path = NSBundle.mainBundle().pathForResource("Yusuf Islam - Peace Train - OUTSTANDING!-2", ofType: "mp3")
+        case 6: path = NSBundle.mainBundle().pathForResource("Phil Wickham - This Is Amazing Grace", ofType: "mp3")
+        case 7: path = NSBundle.mainBundle().pathForResource("Hillsong United - No Other Name - Oceans (Where Feet May Fail)", ofType: "mp3")
+        case 8: path = NSBundle.mainBundle().pathForResource("Phil Wickham - At Your Name (Yahweh, Yahweh)", ofType: "mp3")
+        case 9: path = NSBundle.mainBundle().pathForResource("Yusuf Islam - Peace Train - OUTSTANDING!-2", ofType: "mp3")
+        case 10: path = NSBundle.mainBundle().pathForResource("Titans Spirit(Remember The Titans)-Trevor Rabin", ofType: "mp3")
         default: path = NSBundle.mainBundle().pathForResource("jazzloop2_70", ofType: "mp3")
         }
         let url = NSURL.fileURLWithPath(path!)
@@ -812,7 +812,11 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         emitterLayerViewController.viewForEmitterLayer?.layer.addSublayer(emitterLayer)
         if powerBall == 3 {
             Settings().courtColor = "Black"
-            emitterLayerViewController.viewForEmitterLayer?.alpha = 1
+            if Settings().redBlockOn && !model.hasPrefix("iPad") {
+                emitterLayerViewController.viewForEmitterLayer?.alpha = 1
+            } else {
+                emitterLayerViewController.viewForEmitterLayer?.alpha = 0
+            }
         } else {
             emitterLayerViewController.viewForEmitterLayer?.alpha = 0
             if tier <= 14 {
@@ -859,38 +863,38 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             let cr: CGFloat = cornerRadius //from bricks
             let opacity: CGFloat = 0.1
             var layer = sideLayerWithColor(UIColor.redColor().colorWithAlphaComponent(opacity))
-            layer.cornerRadius = cr
+            layer.cornerRadius = cr * 1.2
             layer.addSublayer(swipeMeTextLayer) //Red Block
             transformLayer.addSublayer(layer)
             
             layer = sideLayerWithColor(UIColor.random.colorWithAlphaComponent(opacity))
-            layer.cornerRadius = cr
+            layer.cornerRadius = cr * 1.2
             var transform = CATransform3DMakeTranslation(sideLength / 2.0, 0.0, sideLength / -2.0)
             transform = CATransform3DRotate(transform, degreesToRadians(90.0), 0.0, 1.0, 0.0)
             layer.transform = transform
             transformLayer.addSublayer(layer)
             
             layer = sideLayerWithColor(UIColor.random.colorWithAlphaComponent(opacity))
-            layer.cornerRadius = cr
+            layer.cornerRadius = cr * 1.2
             layer.transform = CATransform3DMakeTranslation(0.0, 0.0, -sideLength)
             transformLayer.addSublayer(layer)
             
             layer = sideLayerWithColor(UIColor.random.colorWithAlphaComponent(opacity))
-            layer.cornerRadius = cr
+            layer.cornerRadius = cr * 1.2
             transform = CATransform3DMakeTranslation(sideLength / -2.0, 0.0, sideLength / -2.0)
             transform = CATransform3DRotate(transform, degreesToRadians(90.0), 0.0, 1.0, 0.0)
             layer.transform = transform
             transformLayer.addSublayer(layer)
             
             layer = sideLayerWithColor(UIColor.random.colorWithAlphaComponent(opacity))
-            layer.cornerRadius = cr
+            layer.cornerRadius = cr * 1.2
             transform = CATransform3DMakeTranslation(0.0, sideLength / -2.0, sideLength / -2.0)
             transform = CATransform3DRotate(transform, degreesToRadians(90.0), 1.0, 0.0, 0.0)
             layer.transform = transform
             transformLayer.addSublayer(layer)
             
             layer = sideLayerWithColor(UIColor.random.colorWithAlphaComponent(opacity))
-            layer.cornerRadius = cr
+            layer.cornerRadius = cr * 1.2
             transform = CATransform3DMakeTranslation(0.0, sideLength / 2.0, sideLength / -2.0)
             transform = CATransform3DRotate(transform, degreesToRadians(90.0), 1.0, 0.0, 0.0)
             layer.transform = transform
@@ -921,13 +925,13 @@ private extension UIColor {
         case 4: return UIColor(patternImage: UIImage(named: "paddle1.jpg")!)
         case 5: return UIColor(patternImage: UIImage(named: "paddle520.jpg")!)
         case 6: return UIColor(patternImage: UIImage(named: "pointLeft75.png")!)
-        case 7: return UIColor(patternImage: UIImage(named: "audio77.png")!)
+        case 7: return UIColor(patternImage: UIImage(named: "u29ID.png")!)
         case 8: return UIColor(patternImage: UIImage(named: "Icon-60@3x.png")!)
-        case 9: return UIColor(patternImage: UIImage(named: "u73.png")!)
+        case 9: return UIColor(patternImage: UIImage(named: "u212Bar.png")!)
         case 10: return UIColor(patternImage: UIImage(named: "84px-Coin_Stack.png")!)
         case 11: return UIColor(patternImage: UIImage(named: "back.png")!)
         case 12: return UIColor(patternImage: UIImage(named: "tiles.png")!)
-        case 13: return UIColor(patternImage: UIImage(named: "u190b.png")!)
+        case 13: return UIColor(patternImage: UIImage(named: "cyan158.png")!)
         default: return UIColor.clearColor()
         }
     }

@@ -72,6 +72,7 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         paddleColor = Settings().paddleColor
         paddleWidthMultiplier = Settings().paddleWidthMultiplier
         paddleWidthStepper.enabled = Settings().paddleWidthUnlockStepper
+        redBlockOn = Settings().redBlockOn
         rows = Settings().rows
         soundOn = Settings().soundOn
         speed = Settings().speed
@@ -88,7 +89,7 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
 //            }
 //        }
         for string in Settings().myAudios {
-            for i in 0...5 { //6 extra songs
+            for i in 0..<ShopViewController().audios.count {
                 if ShopViewController().audios[i] == string {
                     soundChoiceSegControl.setEnabled(true, forSegmentAtIndex: i)
                 }

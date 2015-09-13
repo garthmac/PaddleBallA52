@@ -8,9 +8,55 @@
 
 import UIKit
 import AssetsLibrary
+import GameKit
 
-class LeaderViewController: UIViewController { //, UIPickerViewDataSource, UIPickerViewDelegate {
+class LeaderViewController: UIViewController, GKGameCenterControllerDelegate {
  
+    //send high score to leaderboard
+    func saveHighscore(score: Int) {
+        //check if user is signed in
+        if GKLocalPlayer.localPlayer().authenticated {
+            var scoreReporter = GKScore(leaderboardIdentifier: "Test_Leaderboard") //leaderboard id here
+            scoreReporter.value = Int64(score)
+            var scoreArray: [GKScore] = [scoreReporter]
+            GKScore.reportScores(scoreArray, withCompletionHandler: {(error : NSError!) -> Void in
+                if error != nil {
+                    println("error posting scoreArray to Game Center")
+                } else {
+                    self.showLeader()
+                }
+            })
+        }
+    }
+    //shows leaderboard screen
+    func showLeader() {
+        var vc = self.view?.window?.rootViewController
+        var gc = GKGameCenterViewController()
+        gc.gameCenterDelegate = self
+        vc?.presentViewController(gc, animated: true, completion: nil)
+    }
+    //hides leaderboard screen
+    func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController!) {
+        gameCenterViewController.dismissViewControllerAnimated(true, completion: nil)
+    }
+    //initiate gamecenter
+    func authenticateLocalPlayer() {
+        var localPlayer = GKLocalPlayer.localPlayer()
+        localPlayer.authenticateHandler = {(viewController, error) -> Void in
+            if (viewController != nil) {  //sign in or welcome back to GC
+                self.presentViewController(viewController, animated: true, completion: nil)
+            } else {
+                println((GKLocalPlayer.localPlayer().authenticated))
+            }
+        }
+    }
+    @IBAction func gameCenter(sender: UIButton) {
+        saveHighscore(Settings().highScore)
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        authenticateLocalPlayer()
+    }
     @IBOutlet weak var dateCreatedLabel: UILabel!
     @IBOutlet weak var dateCreatedLabel1: UILabel!
     @IBOutlet weak var dateCreatedLabel2: UILabel!
@@ -31,7 +77,17 @@ class LeaderViewController: UIViewController { //, UIPickerViewDataSource, UIPic
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        titleLabel.font = UIFont(name: "ComicSansMS-Bold", size: 36.0)
+        for aView in view.subviews as! [UIView] {
+            if let button = aView as? UIButton {
+                for i in [0, 3] {
+                    if i == button.tag {
+                        button.layer.cornerRadius = 15.0
+                        button.layer.borderWidth = 1.0
+                        button.layer.borderColor = UIColor.blueColor().CGColor
+                    }
+                }
+            }
+        }
         addPlayers()
     }
     let formatter: NSDateFormatter = {
@@ -131,7 +187,6 @@ class LeaderViewController: UIViewController { //, UIPickerViewDataSource, UIPic
                     if buttonImageView.tag == 1 {
                         ivc.tag = 1
                     }
-
                     if buttonImageView.tag == 2 {
                         ivc.tag = 2
                     }
@@ -148,6 +203,7 @@ class LeaderViewController: UIViewController { //, UIPickerViewDataSource, UIPic
             }
         }
     }
+    
 }
 
 // User can't itself have anything UI-related

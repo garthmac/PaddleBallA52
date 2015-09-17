@@ -11,12 +11,86 @@ import AssetsLibrary
 import GameKit
 
 class LeaderViewController: UIViewController, GKGameCenterControllerDelegate {
- 
-    //send high score to leaderboard
+    
+    // Game Center
+    let gameCenterPlayer=GKLocalPlayer.localPlayer()
+    var canUseGameCenter:Bool = false {
+        didSet { if canUseGameCenter == true {// load prev. achievments form Game Center
+            gameCenterLoadAchievements()}
+        }}
+    var gameCenterAchievements=[String:GKAchievement]()//    //send high score to leaderboard
+    // MARK: Game Center
+    // load prev achievement granted to the player
+    func gameCenterLoadAchievements(){
+        // load all prev. achievements for GameCenter for the user so progress can be added
+        var allAchievements=[GKAchievement]()
+        
+        GKAchievement.loadAchievementsWithCompletionHandler({ (allAchievements, error:NSError!) -> Void in
+            if error != nil{
+                println("Game Center: could not load achievements, error: \(error)")
+            } else {
+                for anAchievement in allAchievements  {
+                    if let oneAchievement = anAchievement as? GKAchievement {
+                        self.gameCenterAchievements[oneAchievement.identifier]=oneAchievement}
+                }
+            }
+        })
+    }
+    // add progress to an achievement
+    func gameCenterAddProgressToAnAchievement(progress:Double,achievementID:String) {
+        if canUseGameCenter == true { // only update progress if user opt-in to use Game Center
+            // lookup if prev progress is logged for this achievement = achievement is already known (and loaded) from Game Center for this user
+            var lookupAchievement:GKAchievement? = gameCenterAchievements[achievementID]
+            
+            if let achievement = lookupAchievement {
+                // found the achievement with the given achievementID, check if it already 100% done
+                if achievement.percentComplete != 100 {
+                    // set new progress
+                    achievement.percentComplete = progress
+                    if progress == 100.0  {achievement.showsCompletionBanner=true}  // show banner only if achievement is fully granted (progress is 100%)
+                    
+                    // try to report the progress to the Game Center
+                    GKAchievement.reportAchievements([achievement], withCompletionHandler:  {(var error:NSError!) -> Void in
+                        if error != nil {
+                            println("Couldn't save achievement (\(achievementID)) progress to \(progress) %")
+                        }
+                    })
+                }
+                else {// achievemnt already granted, nothing to do
+                    println("DEBUG: Achievement (\(achievementID)) already granted")}
+            } else { // never added  progress for this achievement, create achievement now, recall to add progress
+                println("No achievement with ID (\(achievementID)) was found, no progress for this one was recoreded yet. Create achievement now.")
+                gameCenterAchievements[achievementID] = GKAchievement(identifier: achievementID)
+                // recursive recall this func now that the achievement exist
+                gameCenterAddProgressToAnAchievement(progress, achievementID: achievementID)
+            }
+        }
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        gameCenterPlayer.authenticateHandler={(var gameCenterVC:UIViewController!, var gameCenterError:NSError!) -> Void in
+            if gameCenterVC != nil {
+                //showAuthenticationDialogWhenReasonable: is an example method name. Create your own method that displays an authentication view when appropriate for your app.
+                //showAuthenticationDialogWhenReasonable(gameCenterVC!)
+                self.presentViewController(gameCenterVC, animated: true, completion: { () -> Void in
+                    // no idea
+                })
+            }
+            else if self.gameCenterPlayer.authenticated == true {
+                self.canUseGameCenter = true
+            } else  {
+                self.canUseGameCenter = false
+            }
+            
+            if gameCenterError != nil
+            { println("Game Center error: \(gameCenterError)")}
+        }
+    }
     func saveHighscore(score: Int) {
         //check if user is signed in
-        if GKLocalPlayer.localPlayer().authenticated {
-            var scoreReporter = GKScore(leaderboardIdentifier: "Test_Leaderboard") //leaderboard id here
+        if gameCenterPlayer.authenticated {
+            var scoreReporter = GKScore(leaderboardIdentifier: "55468916") //leaderboard id here
             scoreReporter.value = Int64(score)
             var scoreArray: [GKScore] = [scoreReporter]
             GKScore.reportScores(scoreArray, withCompletionHandler: {(error : NSError!) -> Void in
@@ -33,30 +107,30 @@ class LeaderViewController: UIViewController, GKGameCenterControllerDelegate {
         var vc = self.view?.window?.rootViewController
         var gc = GKGameCenterViewController()
         gc.gameCenterDelegate = self
-        vc?.presentViewController(gc, animated: true, completion: nil)
+        vc!.presentViewController(gc, animated: true, completion: nil)
     }
     //hides leaderboard screen
     func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController!) {
         gameCenterViewController.dismissViewControllerAnimated(true, completion: nil)
     }
     //initiate gamecenter
-    func authenticateLocalPlayer() {
-        var localPlayer = GKLocalPlayer.localPlayer()
-        localPlayer.authenticateHandler = {(viewController, error) -> Void in
-            if (viewController != nil) {  //sign in or welcome back to GC
-                self.presentViewController(viewController, animated: true, completion: nil)
-            } else {
-                println((GKLocalPlayer.localPlayer().authenticated))
-            }
-        }
-    }
+//    func authenticateLocalPlayer() {
+//        var localPlayer = GKLocalPlayer.localPlayer()
+//        localPlayer.authenticateHandler = {(viewController, error) -> Void in
+//            if (viewController != nil) {  //sign in or welcome back to GC
+//                self.presentViewController(viewController, animated: true, completion: nil)
+//            } else {
+//                println((GKLocalPlayer.localPlayer().authenticated))
+//            }
+//        }
+//    }
     @IBAction func gameCenter(sender: UIButton) {
         saveHighscore(Settings().highScore)
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        authenticateLocalPlayer()
-    }
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        authenticateLocalPlayer()
+//    }
     @IBOutlet weak var dateCreatedLabel: UILabel!
     @IBOutlet weak var dateCreatedLabel1: UILabel!
     @IBOutlet weak var dateCreatedLabel2: UILabel!

@@ -42,12 +42,13 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
             pickerView(userPickerView, didSelectRow: audios.count - 1, inComponent: 2)
             creditsPickerView.selectRow(3, inComponent: 0, animated: true)
             pickerView(creditsPickerView, didSelectRow: 3, inComponent: 0)
-        } else {
-            creditsPickerView.hidden = true
-            buyCreditsButton.hidden = true
-            userPickerView.selectRow(Settings().soundChoice, inComponent: 2, animated: false)
-            pickerView(userPickerView, didSelectRow: Settings().soundChoice, inComponent: 2)
         }
+//        else {
+//            creditsPickerView.hidden = true
+//            buyCreditsButton.hidden = true
+//            userPickerView.selectRow(Settings().soundChoice, inComponent: 2, animated: false)
+//            pickerView(userPickerView, didSelectRow: Settings().soundChoice, inComponent: 2)
+//        }
     }
     var pickerDataSourceHelp: [UIButton] { // a computed property instead of func
         get {
@@ -64,9 +65,9 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
     }
     var pickerDataSourceCredits: [UIButton] { // a computed property instead of func
         get {
-            return (0..<self.buyCredits.count).map {
+            return (0..<self.creditOptions.count).map {
                 let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.backdropImageView.bounds.width, height: 40))
-                button.setTitle(self.buyCredits[$0], forState: .Normal)
+                button.setTitle(self.creditOptions[$0], forState: .Normal)
                 button.setTitleColor(UIColor.blackColor(), forState: .Normal)
                 return button
             }
@@ -248,6 +249,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         get { return Settings().availableCredits }
         set { Settings().availableCredits = newValue }
         }
+    let helper = IAPHelper()
     //MARK: - view lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -267,6 +269,16 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
                 }
             }
         }
+        helper.setIAPs()
+//        helper.requestProductsWithCompletionHandler({ (success, products) -> Void in
+//            if success {
+//                println(products)
+//            } else {
+//                let alert = UIAlertController(title: "Error", message: "Cannot retrieve IAP products list right now.", preferredStyle: .Alert)
+//                alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+//                self.presentViewController(alert, animated: true, completion: nil)
+//            }
+//        })
     }
     func updateMySkins(withSkin: String) {
         if Settings().mySkins.count > 1 {
@@ -504,12 +516,8 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         case 5: //add selected credits to game
             if availableCredits > -1 {
                 if purchase() {
-                    let settingsTabBarItem = tabBarController!.tabBar.items![2] as! UITabBarItem
-                    settingsTabBarItem.badgeValue = self.selectedCreditIndex.description
-                    availableCredits += chosenNumberOfCredits()
                     let shopTabBarItem = tabBarController!.tabBar.items![0] as! UITabBarItem
-                    shopTabBarItem.badgeValue = availableCredits.description
-                    Settings().availableCredits = availableCredits
+                    shopTabBarItem.badgeValue = Settings().availableCredits.description
                 }
             } else {
                 prepareForPurchase()
@@ -537,7 +545,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         }
         var paidCredits = 10
         let credits = [10, 40, 70, 150, 350, 1000, 2500]
-        for i in 0..<buyCredits.count {
+        for i in 0..<creditOptions.count {
             if i == self.selectedCreditIndex {
                 paidCredits = credits[i]
                 return paidCredits
@@ -545,17 +553,18 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         }
         return 10
     }
-    func transactionResult(amount: Double) ->Bool {
-        return true
-    }
     func purchase() -> Bool {
         var amount = 0.00
         if buyCreditsButton.hidden == false {
             var credits = chosenNumberOfCredits()
             let cost = [10: 0.99, 40: 2.99, 70: 4.99, 150: 9.99, 350: 19.99, 1000: 49.99, 2500: 99.99]
             amount = cost[credits]!
+            println(amount)
+            helper.pay4Credits(credits)
+            return true
+        } else {
+            return false
         }
-        return transactionResult(amount)
     }
     let audios = ["audio77",
         "audio66",
@@ -632,7 +641,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         "vector300",
         "wheel160",
         "wheelOf160"]
-    let buyCredits = ["  $0.99  ⇢    10 Credits",
+    let creditOptions = ["  $0.99  ⇢    10 Credits",
         "  $2.99  ⇢   40 Credits",
         "  $4.99  ⇢   70 Credits",
         "  $9.99  ⇢  150 Credits",
@@ -667,6 +676,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         "Once finished shopping, touch [Paddle Ball] tab to return to game!",
         "Add your UserId or game handle (to appear in the Leaders list) in iPhone>Settings>RedBlockPaddleBall",
         "Touch [High Score] tab, touch upper camera button to take your picture for the Leader Board",
+        "From [High Score] tab, touch button at top right for Apple's Game Center",
         "See Snoopy serve (and program the computer) in [Credits] screen"]
     let paddles = ["asian33",
         "arrow300",

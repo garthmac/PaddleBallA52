@@ -2913,9 +2913,6 @@
                                 <exclude reference="KAB-8w-Xvz"/>
                                 <exclude reference="8tW-Ht-Ksb"/>
                                 <exclude reference="rEI-gg-RPR"/>
-                                <exclude reference="1Ph-2S-7EQ"/>
-                                <exclude reference="Hfc-2X-oPC"/>
-                                <exclude reference="fft-fz-8pl"/>
                                 <exclude reference="G1m-Vp-AbO"/>
                                 <exclude reference="bWR-ko-QBH"/>
                                 <exclude reference="klZ-Vj-res"/>
@@ -2929,6 +2926,9 @@
                                 <exclude reference="5Jb-dr-vfm"/>
                                 <exclude reference="KYL-0b-08c"/>
                                 <exclude reference="ahp-vj-9Q0"/>
+                                <exclude reference="1Ph-2S-7EQ"/>
+                                <exclude reference="Hfc-2X-oPC"/>
+                                <exclude reference="fft-fz-8pl"/>
                                 <exclude reference="dbu-gN-A3L"/>
                                 <exclude reference="Azb-ho-06o"/>
                                 <exclude reference="K5m-Ih-Tph"/>

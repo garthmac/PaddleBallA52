@@ -92,19 +92,19 @@ class CAEmitterLayerViewController: UIViewController {
   
   // MARK: - Triggered actions
   
-  override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-    if let touch = touches.first as? UITouch {
-        let location = touch.locationInView(viewForEmitterLayer)
-        emitterLayer.emitterPosition = location
-    }
-  }
-  
-    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
-        if let touch = touches.first as? UITouch {
-            let location = touch.locationInView(viewForEmitterLayer)
-            emitterLayer.emitterPosition = location
-    }
-  }
+//  override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+//    if let touch = touches.first as? UITouch {
+//        let location = touch.locationInView(viewForEmitterLayer)
+//        emitterLayer.emitterPosition = location
+//    }
+//  }
+//  
+//    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
+//        if let touch = touches.first as? UITouch {
+//            let location = touch.locationInView(viewForEmitterLayer)
+//            emitterLayer.emitterPosition = location
+//    }
+//  }
   
   // MARK: - Helpers
   

@@ -9,12 +9,16 @@
 /* Begin PBXBuildFile section */
 		714B2C7D1BA118AA0056D6CF /* CAEmitterLayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714B2C7C1BA118AA0056D6CF /* CAEmitterLayerViewController.swift */; };
 		714B2C881BA372DB0056D6CF /* IMG_0134.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 714B2C801BA372DB0056D6CF /* IMG_0134.jpg */; };
-		714B2C891BA372DB0056D6CF /* IMG_0135.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 714B2C811BA372DB0056D6CF /* IMG_0135.jpg */; };
 		714B2C8C1BA372DB0056D6CF /* IMG_0139.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 714B2C841BA372DB0056D6CF /* IMG_0139.jpg */; };
 		714B2C931BA373830056D6CF /* IMG_0122.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 714B2C901BA373830056D6CF /* IMG_0122.jpg */; };
-		714B2C951BA4EDF50056D6CF /* IMG_0133.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 714B2C941BA4EDF50056D6CF /* IMG_0133.jpg */; };
 		714B2C991BA51C660056D6CF /* gameCenter.png in Resources */ = {isa = PBXBuildFile; fileRef = 714B2C981BA51C660056D6CF /* gameCenter.png */; };
-		714B2C9B1BA5288F0056D6CF /* IMG_0151.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 714B2C9A1BA5288F0056D6CF /* IMG_0151.jpg */; };
+		714B2CCC1BA659BA0056D6CF /* Phil Wickham-Carry My Soul(Live at RELEVANT).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 714B2CCB1BA659BA0056D6CF /* Phil Wickham-Carry My Soul(Live at RELEVANT).mp3 */; };
+		714B2CD21BA674200056D6CF /* IMG_0172.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 714B2CD11BA674200056D6CF /* IMG_0172.jpg */; };
+		714B2CD61BA687860056D6CF /* IMG_0138.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 714B2CD51BA687860056D6CF /* IMG_0138.jpg */; };
+		714B2CD81BA691350056D6CF /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 714B2CD71BA691350056D6CF /* iTunesArtwork@2x.png */; };
+		714B2CDA1BA7A7040056D6CF /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 714B2CD91BA7A7040056D6CF /* GameKit.framework */; };
+		714B2CDC1BA7A7100056D6CF /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 714B2CDB1BA7A7100056D6CF /* StoreKit.framework */; };
+		714B2CDE1BA7C4CB0056D6CF /* IAPHelperX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714B2CDD1BA7C4CB0056D6CF /* IAPHelperX.swift */; };
 		715FA4791B90074900203CE1 /* 1000CreditsSWars1.png in Resources */ = {isa = PBXBuildFile; fileRef = 715FA4781B90074900203CE1 /* 1000CreditsSWars1.png */; };
 		715FA47B1B91702600203CE1 /* Hudson - Chained.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 715FA47A1B91702600203CE1 /* Hudson - Chained.mp3 */; };
 		715FA47D1B91707200203CE1 /* Titanic Soundtrack - Rose.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 715FA47C1B91707200203CE1 /* Titanic Soundtrack - Rose.mp3 */; };
@@ -24,6 +28,7 @@
 		715FA49B1B9647EF00203CE1 /* Hillsong United - No Other Name - Oceans (Where Feet May Fail).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 715FA49A1B9647EF00203CE1 /* Hillsong United - No Other Name - Oceans (Where Feet May Fail).mp3 */; };
 		715FA49F1B9649C400203CE1 /* Phil Wickham - This Is Amazing Grace.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 715FA49E1B9649C400203CE1 /* Phil Wickham - This Is Amazing Grace.mp3 */; };
 		715FA4B01B9B59B500203CE1 /* Titans Spirit(Remember The Titans)-Trevor Rabin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 715FA4AF1B9B59B500203CE1 /* Titans Spirit(Remember The Titans)-Trevor Rabin.mp3 */; };
+		71654E551BAA08960092E9E6 /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71654E541BAA08960092E9E6 /* IAPHelper.swift */; };
 		71A025AA1B8D5DA4002CE122 /* Forrest Gump Soundtrack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 71A025A91B8D5DA4002CE122 /* Forrest Gump Soundtrack.mp3 */; };
 		71A6E2E91B8AA0DE000AA949 /* CYMATICS- Science Vs. Music - Nigel Stanford-2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 71A6E2E81B8AA0DE000AA949 /* CYMATICS- Science Vs. Music - Nigel Stanford-2.mp3 */; };
 		881048B91B3E22F000712C9A /* TrackBall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881048B81B3E22F000712C9A /* TrackBall.swift */; };
@@ -54,7 +59,6 @@
 		884225811B4355F7003122E3 /* Icon-76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8842256D1B4355F7003122E3 /* Icon-76@2x.png */; };
 		884225821B4355F7003122E3 /* Icon-Small-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 8842256E1B4355F7003122E3 /* Icon-Small-29.png */; };
 		884225831B4355F7003122E3 /* Icon-Small-40.png in Resources */ = {isa = PBXBuildFile; fileRef = 8842256F1B4355F7003122E3 /* Icon-Small-40.png */; };
-		884225851B435605003122E3 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 884225841B435605003122E3 /* iTunesArtwork@2x.png */; };
 		885E94D21B3384FE00432335 /* LeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885E94D11B3384FE00432335 /* LeaderViewController.swift */; };
 		885E94D31B33957F00432335 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88EBF3481B2799B00090A5A0 /* Images.xcassets */; };
 		885E94D51B34A94900432335 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885E94D41B34A94900432335 /* ImageViewController.swift */; };
@@ -115,12 +119,16 @@
 /* Begin PBXFileReference section */
 		714B2C7C1BA118AA0056D6CF /* CAEmitterLayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAEmitterLayerViewController.swift; sourceTree = "<group>"; };
 		714B2C801BA372DB0056D6CF /* IMG_0134.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_0134.jpg; sourceTree = "<group>"; };
-		714B2C811BA372DB0056D6CF /* IMG_0135.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_0135.jpg; sourceTree = "<group>"; };
 		714B2C841BA372DB0056D6CF /* IMG_0139.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_0139.jpg; sourceTree = "<group>"; };
 		714B2C901BA373830056D6CF /* IMG_0122.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_0122.jpg; sourceTree = "<group>"; };
-		714B2C941BA4EDF50056D6CF /* IMG_0133.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_0133.jpg; sourceTree = "<group>"; };
 		714B2C981BA51C660056D6CF /* gameCenter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gameCenter.png; sourceTree = "<group>"; };
-		714B2C9A1BA5288F0056D6CF /* IMG_0151.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_0151.jpg; sourceTree = "<group>"; };
+		714B2CCB1BA659BA0056D6CF /* Phil Wickham-Carry My Soul(Live at RELEVANT).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Phil Wickham-Carry My Soul(Live at RELEVANT).mp3"; sourceTree = "<group>"; };
+		714B2CD11BA674200056D6CF /* IMG_0172.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_0172.jpg; sourceTree = "<group>"; };
+		714B2CD51BA687860056D6CF /* IMG_0138.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_0138.jpg; sourceTree = "<group>"; };
+		714B2CD71BA691350056D6CF /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
+		714B2CD91BA7A7040056D6CF /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		714B2CDB1BA7A7100056D6CF /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		714B2CDD1BA7C4CB0056D6CF /* IAPHelperX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelperX.swift; sourceTree = "<group>"; };
 		715FA4781B90074900203CE1 /* 1000CreditsSWars1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1000CreditsSWars1.png; sourceTree = "<group>"; };
 		715FA47A1B91702600203CE1 /* Hudson - Chained.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Hudson - Chained.mp3"; sourceTree = "<group>"; };
 		715FA47C1B91707200203CE1 /* Titanic Soundtrack - Rose.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Titanic Soundtrack - Rose.mp3"; sourceTree = "<group>"; };
@@ -130,6 +138,7 @@
 		715FA49A1B9647EF00203CE1 /* Hillsong United - No Other Name - Oceans (Where Feet May Fail).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Hillsong United - No Other Name - Oceans (Where Feet May Fail).mp3"; sourceTree = "<group>"; };
 		715FA49E1B9649C400203CE1 /* Phil Wickham - This Is Amazing Grace.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Phil Wickham - This Is Amazing Grace.mp3"; sourceTree = "<group>"; };
 		715FA4AF1B9B59B500203CE1 /* Titans Spirit(Remember The Titans)-Trevor Rabin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Titans Spirit(Remember The Titans)-Trevor Rabin.mp3"; sourceTree = "<group>"; };
+		71654E541BAA08960092E9E6 /* IAPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		71A025A91B8D5DA4002CE122 /* Forrest Gump Soundtrack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Forrest Gump Soundtrack.mp3"; sourceTree = "<group>"; };
 		71A6E2E81B8AA0DE000AA949 /* CYMATICS- Science Vs. Music - Nigel Stanford-2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "CYMATICS- Science Vs. Music - Nigel Stanford-2.mp3"; sourceTree = "<group>"; };
 		881048B81B3E22F000712C9A /* TrackBall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackBall.swift; path = PaddleBallA52/TrackBall.swift; sourceTree = "<group>"; };
@@ -160,7 +169,6 @@
 		8842256D1B4355F7003122E3 /* Icon-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-76@2x.png"; path = "../../BouncerL13/BouncerL13/Assets/Icons/Icon-76@2x.png"; sourceTree = "<group>"; };
 		8842256E1B4355F7003122E3 /* Icon-Small-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small-29.png"; path = "../../BouncerL13/BouncerL13/Assets/Icons/Icon-Small-29.png"; sourceTree = "<group>"; };
 		8842256F1B4355F7003122E3 /* Icon-Small-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small-40.png"; path = "../../BouncerL13/BouncerL13/Assets/Icons/Icon-Small-40.png"; sourceTree = "<group>"; };
-		884225841B435605003122E3 /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iTunesArtwork@2x.png"; path = "../../BouncerL13/BouncerL13/Assets/iTunesArtwork@2x.png"; sourceTree = "<group>"; };
 		885E94D11B3384FE00432335 /* LeaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaderViewController.swift; sourceTree = "<group>"; };
 		885E94D41B34A94900432335 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		885E94E11B39FCA200432335 /* Brookes_25_27119b.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Brookes_25_27119b.jpg; sourceTree = "<group>"; };
@@ -217,6 +225,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				714B2CDA1BA7A7040056D6CF /* GameKit.framework in Frameworks */,
+				714B2CDC1BA7A7100056D6CF /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,13 +296,14 @@
 			children = (
 				88EBF3441B2799540090A5A0 /* jazzloop2_70.mp3 */,
 				71A6E2E81B8AA0DE000AA949 /* CYMATICS- Science Vs. Music - Nigel Stanford-2.mp3 */,
+				714B2CCB1BA659BA0056D6CF /* Phil Wickham-Carry My Soul(Live at RELEVANT).mp3 */,
 				715FA47A1B91702600203CE1 /* Hudson - Chained.mp3 */,
 				71A025A91B8D5DA4002CE122 /* Forrest Gump Soundtrack.mp3 */,
 				715FA47C1B91707200203CE1 /* Titanic Soundtrack - Rose.mp3 */,
 				715FA49E1B9649C400203CE1 /* Phil Wickham - This Is Amazing Grace.mp3 */,
 				715FA49A1B9647EF00203CE1 /* Hillsong United - No Other Name - Oceans (Where Feet May Fail).mp3 */,
-				715FA4961B96439F00203CE1 /* Yusuf Islam - Peace Train - OUTSTANDING!-2.mp3 */,
 				715FA48F1B96254100203CE1 /* Phil Wickham - At Your Name (Yahweh, Yahweh).mp3 */,
+				715FA4961B96439F00203CE1 /* Yusuf Islam - Peace Train - OUTSTANDING!-2.mp3 */,
 				715FA4AF1B9B59B500203CE1 /* Titans Spirit(Remember The Titans)-Trevor Rabin.mp3 */,
 			);
 			name = Audio;
@@ -303,7 +314,7 @@
 			children = (
 				881559151B30ED9400D60626 /* Audio */,
 				881559131B30ECFE00D60626 /* Fonts */,
-				884225841B435605003122E3 /* iTunesArtwork@2x.png */,
+				714B2CD71BA691350056D6CF /* iTunesArtwork@2x.png */,
 				8842255B1B4355B5003122E3 /* Icons */,
 				881559141B30ED5500D60626 /* Images */,
 				884225861B435623003122E3 /* Screenshots */,
@@ -314,8 +325,10 @@
 		8842255B1B4355B5003122E3 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				8842256E1B4355F7003122E3 /* Icon-Small-29.png */,
 				8842255C1B4355F7003122E3 /* Icon-29@2x.png */,
 				8842255D1B4355F7003122E3 /* Icon-29@3x.png */,
+				8842256F1B4355F7003122E3 /* Icon-Small-40.png */,
 				8842255E1B4355F7003122E3 /* Icon-40@2x.png */,
 				8842255F1B4355F7003122E3 /* Icon-50.png */,
 				884225601B4355F7003122E3 /* Icon-50@2x.png */,
@@ -332,8 +345,6 @@
 				8842256B1B4355F7003122E3 /* Icon-72@2x.png */,
 				8842256C1B4355F7003122E3 /* Icon-76.png */,
 				8842256D1B4355F7003122E3 /* Icon-76@2x.png */,
-				8842256E1B4355F7003122E3 /* Icon-Small-29.png */,
-				8842256F1B4355F7003122E3 /* Icon-Small-40.png */,
 			);
 			name = Icons;
 			sourceTree = "<group>";
@@ -341,12 +352,11 @@
 		884225861B435623003122E3 /* Screenshots */ = {
 			isa = PBXGroup;
 			children = (
-				714B2C901BA373830056D6CF /* IMG_0122.jpg */,
-				714B2C941BA4EDF50056D6CF /* IMG_0133.jpg */,
-				714B2C801BA372DB0056D6CF /* IMG_0134.jpg */,
-				714B2C811BA372DB0056D6CF /* IMG_0135.jpg */,
 				714B2C841BA372DB0056D6CF /* IMG_0139.jpg */,
-				714B2C9A1BA5288F0056D6CF /* IMG_0151.jpg */,
+				714B2C901BA373830056D6CF /* IMG_0122.jpg */,
+				714B2CD51BA687860056D6CF /* IMG_0138.jpg */,
+				714B2C801BA372DB0056D6CF /* IMG_0134.jpg */,
+				714B2CD11BA674200056D6CF /* IMG_0172.jpg */,
 			);
 			name = Screenshots;
 			sourceTree = "<group>";
@@ -354,6 +364,8 @@
 		88EBF3041B2798A70090A5A0 = {
 			isa = PBXGroup;
 			children = (
+				714B2CDB1BA7A7100056D6CF /* StoreKit.framework */,
+				714B2CD91BA7A7040056D6CF /* GameKit.framework */,
 				88B46C5F1B41ED08006A0E54 /* RedBlockViewController.swift */,
 				881048B81B3E22F000712C9A /* TrackBall.swift */,
 				88EBF33A1B27992E0090A5A0 /* User.swift */,
@@ -380,6 +392,8 @@
 				88EBF3361B2798D80090A5A0 /* Main.storyboard */,
 				885E94D11B3384FE00432335 /* LeaderViewController.swift */,
 				889C98A11B4CF9B800ACDA2C /* ShopViewController.swift */,
+				714B2CDD1BA7C4CB0056D6CF /* IAPHelperX.swift */,
+				71654E541BAA08960092E9E6 /* IAPHelper.swift */,
 				885E94D41B34A94900432335 /* ImageViewController.swift */,
 				88EBF3421B2799390090A5A0 /* Settings.bundle */,
 				88EBF3391B27992E0090A5A0 /* Settings.swift */,
@@ -471,6 +485,14 @@
 					88EBF30C1B2798A70090A5A0 = {
 						CreatedOnToolsVersion = 6.3.2;
 						DevelopmentTeam = 7P9362E76E;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+						};
 					};
 					88EBF3211B2798A70090A5A0 = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -505,11 +527,13 @@
 				884225801B4355F7003122E3 /* Icon-76.png in Resources */,
 				884225751B4355F7003122E3 /* Icon-57.png in Resources */,
 				715FA49B1B9647EF00203CE1 /* Hillsong United - No Other Name - Oceans (Where Feet May Fail).mp3 in Resources */,
+				714B2CCC1BA659BA0056D6CF /* Phil Wickham-Carry My Soul(Live at RELEVANT).mp3 in Resources */,
 				715FA47D1B91707200203CE1 /* Titanic Soundtrack - Rose.mp3 in Resources */,
 				889C988E1B48E47200ACDA2C /* typing-computer4.png in Resources */,
 				715FA49F1B9649C400203CE1 /* Phil Wickham - This Is Amazing Grace.mp3 in Resources */,
 				71A025AA1B8D5DA4002CE122 /* Forrest Gump Soundtrack.mp3 in Resources */,
 				884225811B4355F7003122E3 /* Icon-76@2x.png in Resources */,
+				714B2CD21BA674200056D6CF /* IMG_0172.jpg in Resources */,
 				88B46C601B41ED08006A0E54 /* RedBlockViewController.swift in Resources */,
 				8842257F1B4355F7003122E3 /* Icon-72@2x.png in Resources */,
 				88DCAD751B46EA460079046A /* peanuts-anim3.png in Resources */,
@@ -519,6 +543,7 @@
 				884225721B4355F7003122E3 /* Icon-40@2x.png in Resources */,
 				884225791B4355F7003122E3 /* Icon-44@2x.png in Resources */,
 				88DCAD741B46EA460079046A /* peanuts-anim4.png in Resources */,
+				714B2CD61BA687860056D6CF /* IMG_0138.jpg in Resources */,
 				88DCAD4B1B4452150079046A /* extension_UIImage.png in Resources */,
 				885E94EE1B3A0C1E00432335 /* Comic Sans MS Bold.ttf in Resources */,
 				885E94D31B33957F00432335 /* Images.xcassets in Resources */,
@@ -530,7 +555,6 @@
 				884225741B4355F7003122E3 /* Icon-50@2x.png in Resources */,
 				88DCAD761B46EA460079046A /* peanuts-anim2.png in Resources */,
 				88F640D31B320BAA00896127 /* paddle1.jpg in Resources */,
-				714B2C9B1BA5288F0056D6CF /* IMG_0151.jpg in Resources */,
 				714B2C881BA372DB0056D6CF /* IMG_0134.jpg in Resources */,
 				889C988C1B48E47200ACDA2C /* typing-computer6.png in Resources */,
 				884225711B4355F7003122E3 /* Icon-29@3x.png in Resources */,
@@ -548,8 +572,8 @@
 				889C98A41B4DA52B00ACDA2C /* pineapple_400.jpg in Resources */,
 				8842257A1B4355F7003122E3 /* Icon-86@2x.png in Resources */,
 				88EBF3431B2799390090A5A0 /* Settings.bundle in Resources */,
-				714B2C951BA4EDF50056D6CF /* IMG_0133.jpg in Resources */,
 				889C98831B48DFD400ACDA2C /* snoopy2.jpg in Resources */,
+				714B2CD81BA691350056D6CF /* iTunesArtwork@2x.png in Resources */,
 				71A6E2E91B8AA0DE000AA949 /* CYMATICS- Science Vs. Music - Nigel Stanford-2.mp3 in Resources */,
 				889C98801B4778C300ACDA2C /* 1000Credits2-20.png in Resources */,
 				884225761B4355F7003122E3 /* Icon-57@2x.png in Resources */,
@@ -570,11 +594,9 @@
 				889C987E1B4778C300ACDA2C /* 1000Credits0-20.png in Resources */,
 				714B2C8C1BA372DB0056D6CF /* IMG_0139.jpg in Resources */,
 				881048BF1B3E59D700712C9A /* mackie_swift.png in Resources */,
-				884225851B435605003122E3 /* iTunesArtwork@2x.png in Resources */,
 				715FA4871B94EBB800203CE1 /* helpful160.png in Resources */,
 				715FA47B1B91702600203CE1 /* Hudson - Chained.mp3 in Resources */,
 				889C98911B48E47200ACDA2C /* typing-computer1.png in Resources */,
-				714B2C891BA372DB0056D6CF /* IMG_0135.jpg in Resources */,
 				88DCAD721B46EA460079046A /* peanuts-anim6.png in Resources */,
 				714B2C991BA51C660056D6CF /* gameCenter.png in Resources */,
 				88EBF3351B2798C50090A5A0 /* LICENSE in Resources */,
@@ -604,9 +626,11 @@
 				885E94D21B3384FE00432335 /* LeaderViewController.swift in Sources */,
 				889C98A21B4CF9B800ACDA2C /* ShopViewController.swift in Sources */,
 				88EBF33F1B27992E0090A5A0 /* User.swift in Sources */,
+				714B2CDE1BA7C4CB0056D6CF /* IAPHelperX.swift in Sources */,
 				881048B91B3E22F000712C9A /* TrackBall.swift in Sources */,
 				714B2C7D1BA118AA0056D6CF /* CAEmitterLayerViewController.swift in Sources */,
 				88EBF3131B2798A70090A5A0 /* AppDelegate.swift in Sources */,
+				71654E551BAA08960092E9E6 /* IAPHelper.swift in Sources */,
 				88EBF3411B27992E0090A5A0 /* BallViewController.swift in Sources */,
 				88EBF33E1B27992E0090A5A0 /* Settings.swift in Sources */,
 				885E94D51B34A94900432335 /* ImageViewController.swift in Sources */,
@@ -723,9 +747,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PaddleBallA52/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "4e2cad12-337a-4d71-abb7-0bfac3ed3dab";
 			};
 			name = Debug;
 		};
@@ -733,10 +759,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: GARTH MACKENZIE (7P9362E76E)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: GARTH MACKENZIE (7P9362E76E)";
 				INFOPLIST_FILE = PaddleBallA52/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "4e2cad12-337a-4d71-abb7-0bfac3ed3dab";
 			};
 			name = Release;
 		};

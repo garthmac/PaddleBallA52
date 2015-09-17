@@ -188,7 +188,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         prepareAudios()
         self.hidesBottomBarWhenPushed = true
         animator.addBehavior(breakout)
-        Settings(defaultColumns: Constants.BrickColumns, defaultRows: Constants.BrickColumns / 2, defaultBalls: 1, defaultDifficulty: 1, defaultSpeed: ballSpeed, defaultBallColor: Settings().ballColor, defaultCourtColor: Settings().courtColor, defaultPaddleColor: Settings().paddleColor, defaultPaddleWidthMultiplier: Settings().paddleWidthMultiplier)
+        Settings(defaultColumns: Constants.BrickColumns, defaultRows: Constants.BrickColumns / 2, defaultBalls: Settings().balls, defaultDifficulty: Settings().difficulty, defaultSpeed: ballSpeed, defaultBallColor: Settings().ballColor, defaultCourtColor: Settings().courtColor, defaultPaddleColor: Settings().paddleColor, defaultPaddleWidthMultiplier: Settings().paddleWidthMultiplier)
         emitterLayerViewController = CAEmitterLayerViewController()
         emitterLayer.renderMode = kCAEmitterLayerAdditive
         emitterLayerViewController.viewForEmitterLayer = powerBallScoreBoard  //changeCourtColor
@@ -757,7 +757,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
                         self.tier = 1
                     }
                     //don't reset ball or paddle colors or paddleWidth if user changed them!
-                    Settings(defaultColumns: Constants.BrickColumns, defaultRows: Constants.BrickColumns / 2, defaultBalls: 1, defaultDifficulty: 1, defaultSpeed: self.ballSpeed, defaultBallColor: Settings().ballColor, defaultCourtColor: Constants.CourtColor, defaultPaddleColor: Settings().paddleColor, defaultPaddleWidthMultiplier: Settings().paddleWidthMultiplier)
+                    Settings(defaultColumns: Constants.BrickColumns, defaultRows: Constants.BrickColumns / 2, defaultBalls: Settings().balls, defaultDifficulty: Settings().difficulty, defaultSpeed: self.ballSpeed, defaultBallColor: Settings().ballColor, defaultCourtColor: Settings().courtColor, defaultPaddleColor: Settings().paddleColor, defaultPaddleWidthMultiplier: Settings().paddleWidthMultiplier)
                     self.changeCourtColor()
                     if !Settings().autoStart {
                         self.autoStartTimer?.invalidate()
@@ -811,7 +811,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         emitterLayerViewController.setUpEmitterLayer()
         emitterLayerViewController.viewForEmitterLayer?.layer.addSublayer(emitterLayer)
         if powerBall == 3 {
-            Settings().courtColor = "Black"
+            gameView.layer.backgroundColor = UIColor.blackColor().CGColor
             if Settings().redBlockOn && !model.hasPrefix("iPad") {
                 emitterLayerViewController.viewForEmitterLayer?.alpha = 1
             } else {
@@ -819,13 +819,11 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             }
         } else {
             emitterLayerViewController.viewForEmitterLayer?.alpha = 0
-            if tier <= 14 {
-                Settings().courtColor = Constants.CourtColor
-            } else {  //game extension
+            if tier > 14 {  //game extension
                 Settings().courtColor = SettingsViewController().pickerDataSource[tier % 7]
             }
+            gameView.layer.backgroundColor = UIColor.colorFor(Settings().courtColor).CGColor
         }
-        gameView.layer.backgroundColor = UIColor.colorFor(Settings().courtColor).CGColor
         adjustColors()
     }
     func degreesToRadians(degrees: Double) -> CGFloat {

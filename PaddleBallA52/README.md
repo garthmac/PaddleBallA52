@@ -1,7 +1,7 @@
 # PaddleBallA5
 
 uses segue to Tab View for primary user settings
-uses AVAudioPlayer, dynamic behaviours, timer, alert, gestures and class extentions
+uses AVAudioPlayer, dynamic behaviors, timer, alert, gestures and class extentions
 - pinch gesture gives Tab view for many additional settings such as number of rows, 
   number of columns (vs paddle width)
   Also +balls, ball speed slider, autoRotate ball switch, ball autoStart switch, 
@@ -45,4 +45,4 @@ http://www.123freevectors.com/
 youtube clip converter:
 http://www.clipconverter.cc
 
-special thanks to Standford online and Paul Hegarty
+special thanks to Stanford online and Paul Hegarty youtube videos

@@ -30,7 +30,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
             pickerView(userPickerView, didSelectRow: Settings().soundChoice, inComponent: 2)
             helpPickerView.hidden = false
         } else {
-            helpPickerView.hidden = true
+            showBuyCreditsAction(sender)
         }
     }
     @IBAction func showBuyCreditsAction(sender: UIButton) {
@@ -150,7 +150,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         if pickerView.tag == 2 { return backdropImageView.bounds.width }
         return backdropImageView.bounds.width / 5.25
     }
-    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView {
+    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
         if pickerView.tag == 1 { return pickerDataSourceHelp[row] }
         if pickerView.tag == 2 { return pickerDataSourceCredits[row] }
         var iv = UIImageView(image: pickerDataSource[row])  //use worst case(largest) pickerDataSource as default
@@ -222,13 +222,13 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
     }
     var tbvcArray: [UIViewController]?
     func prepareTabBar() {
-        tbvcArray = tabBarController!.viewControllers as? [UIViewController]
+        tbvcArray = tabBarController!.viewControllers
         let cvc = tbvcArray![4]    //CREDITS
-        for view in cvc.view.subviews as! [UIView] {
+        for view in cvc.view.subviews {
             if let animatedImageView = view as? UIImageView {
                 if animatedImageView.tag == 111 {
                     let images = (0...8).map {
-                        UIImage(named: "peanuts-anim\($0).png") as! AnyObject
+                        UIImage(named: "peanuts-anim\($0).png")!
                     }
                     animatedImageView.animationImages = images
                     animatedImageView.animationDuration = 9.0
@@ -236,7 +236,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
                 }
                 if animatedImageView.tag == 333 {
                     let images = (0...6).map {
-                        UIImage(named: "typing-computer\($0).png") as! AnyObject
+                        UIImage(named: "typing-computer\($0).png")!
                     }
                     animatedImageView.animationImages = images
                     animatedImageView.animationDuration = 1.0
@@ -260,7 +260,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         helpPickerView.delegate = self
         creditsPickerView.dataSource = self
         creditsPickerView.delegate = self
-        for aView in view.subviews as! [UIView] {
+        for aView in view.subviews {
             if let button = aView as? UIButton {
                 if (0...7).contains(button.tag) {
                     button.layer.cornerRadius = 15.0
@@ -269,22 +269,12 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
                 }
             }
         }
-        helper.setIAPs()
-//        helper.requestProductsWithCompletionHandler({ (success, products) -> Void in
-//            if success {
-//                println(products)
-//            } else {
-//                let alert = UIAlertController(title: "Error", message: "Cannot retrieve IAP products list right now.", preferredStyle: .Alert)
-//                alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-//                self.presentViewController(alert, animated: true, completion: nil)
-//            }
-//        })
     }
     func updateMySkins(withSkin: String) {
         if Settings().mySkins.count > 1 {
-            if let index = find(ballSkins, withSkin) {
+            if let index = ballSkins.indexOf(withSkin) {
                 self.selectedLogin1 = ballSkins[index]
-                if let index1 = find(Settings().mySkins, self.selectedLogin1!) {
+                if let index1 = Settings().mySkins.indexOf((self.selectedLogin1!)) {
                     userPickerView.selectRow(index1, inComponent: 1, animated: true)
                     pickerView(userPickerView, didSelectRow: index1, inComponent: 1)
                 }
@@ -301,7 +291,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         pickerView(userPickerView, didSelectRow: 28, inComponent: 0)
         updateMySkins(Settings().purchasedUid!)
         showBuyCreditsAction(UIButton())  //selectRow(Settings().soundChoice
-        if let index = find(paddles, Settings().myPaddles.last!) {
+        if let index = paddles.indexOf((Settings().myPaddles.last!)) {
             userPickerView.selectRow(index, inComponent: 3, animated: true)
         }
         userPickerView.selectRow(Settings().paddleWidthMultiplier, inComponent: 4, animated: true)
@@ -309,14 +299,17 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
     }
     func prepareForPurchase() {
         self.tabBarController?.tabBar.hidden = false
-        let shopTabBarItem = tabBarController!.tabBar.items![0] as! UITabBarItem
+        let shopTabBarItem = tabBarController!.tabBar.items![0] 
         shopTabBarItem.badgeValue = "\(availableCredits)"   //everything costs 10 credits or $1
+    }
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         if availableCredits < 10 {
-            let alert = UIAlertView(title: "You have \(availableCredits) Credits!", message: "Play to earn at least 10 Credits or \n\n ...Buy Credits", delegate: self, cancelButtonTitle: "OK")
-            //alert.addButtonWithTitle("Use Credit Card")
-            alert.dismissWithClickedButtonIndex(alert.firstOtherButtonIndex, animated: true)
-            alert.show()
+            let alert = UIAlertController(title: "You have \(availableCredits) Credits!", message: "Play to earn at least 10 Credits or \n\n ...Buy Credits", preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            presentViewController(alert, animated: true, completion: nil)
         }
+        helper.setIAPs()
     }
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(true)
@@ -328,9 +321,10 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         case 0: //println(sender.tag)
             checkout("Deduct 10 coins for selected Ball skin?", sender: sender)
         case 1: //println(sender.tag)
-            let paddleBallTabBarItem = tabBarController!.tabBar.items![1] as! UITabBarItem
+            let paddleBallTabBarItem = tabBarController!.tabBar.items![1] 
             if let login = self.selectedLogin1 { //can only happen if the wheel is spun
                 let loggedInUser = User.login(login, password: "foo") //SWAP ball out to other owned ball
+                print(loggedInUser)
                 paddleBallTabBarItem.badgeValue = login
             } else {
                 paddleBallTabBarItem.badgeValue = "tennis"
@@ -378,7 +372,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         default: path = NSBundle.mainBundle().pathForResource("jazzloop2_70", ofType: "mp3")
         }
         let url = NSURL.fileURLWithPath(path!)
-        audioPlayer = AVAudioPlayer(contentsOfURL: url, error: nil)
+        audioPlayer = try? AVAudioPlayer(contentsOfURL: url)
         audioPlayer.delegate = self
         audioPlayer.numberOfLoops = 0 //0 means play once
         audioPlayer.prepareToPlay()
@@ -400,6 +394,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
                     if audios[i] == self.selectedLogin2! {
                         soundTrack = i
                         let autoStartTimer =  NSTimer.scheduledTimerWithTimeInterval(7.0, target: self, selector: "fireAutoStart:", userInfo: nil, repeats: false)
+                        autoStartTimer
                     }
                 }
                 alertController.addAction(UIAlertAction(title: "Sample 1st ...", style: UIAlertActionStyle.Cancel, handler: { (action) in
@@ -423,11 +418,12 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         case 0: //add selected ball skin to game
             if availableCredits > 9 {
                 availableCredits -= 10
-                let shopTabBarItem = tabBarController!.tabBar.items![0] as! UITabBarItem
+                let shopTabBarItem = tabBarController!.tabBar.items![0] 
                 shopTabBarItem.badgeValue = availableCredits.description
                 Settings().availableCredits = availableCredits
                 let loggedInUser = User.login(self.selectedLogin!, password: "foo") //new ball
-                let paddleBallTabBarItem = tabBarController!.tabBar.items![1] as! UITabBarItem
+                print(loggedInUser)
+                let paddleBallTabBarItem = tabBarController!.tabBar.items![1] 
                 paddleBallTabBarItem.badgeValue = self.selectedLogin!
                 let results = Settings().mySkins.filter { el in el == self.selectedLogin! }
                 if results.isEmpty {
@@ -439,14 +435,15 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
                 prepareForPurchase()
             }
             //println(sender.tag)
-        case 1: println(sender.tag)
+        case 1: print(sender.tag)
         case 2: //add selected sound track to game
             if availableCredits > 9 {
                 availableCredits -= 10
-                let shopTabBarItem = tabBarController!.tabBar.items![0] as! UITabBarItem
+                let shopTabBarItem = tabBarController!.tabBar.items![0] 
                 shopTabBarItem.badgeValue = availableCredits.description
                 let loggedInUser = User.login(self.selectedLogin2!, password: "foo") //new audio
-                let settingsTabBarItem = tabBarController!.tabBar.items![2] as! UITabBarItem
+                print(loggedInUser)
+                let settingsTabBarItem = tabBarController!.tabBar.items![2]
                 settingsTabBarItem.badgeValue = self.selectedLogin2!
                 for i in 0..<audios.count {
                     if audios[i] == self.selectedLogin2! {
@@ -464,13 +461,14 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         case 3: //add selected paddle to game
             if availableCredits > 9 {
                 availableCredits -= 10
-                let shopTabBarItem = tabBarController!.tabBar.items![0] as! UITabBarItem
+                let shopTabBarItem = tabBarController!.tabBar.items![0] 
                 shopTabBarItem.badgeValue = availableCredits.description
                 if self.selectedLogin3 == nil {
                     pickerView(userPickerView, didSelectRow: 1, inComponent: 3)  //dizzy2
                 }
                 let loggedInUser = User.login(self.selectedLogin3!, password: "foo") //new Paddle
-                let settingsTabBarItem = tabBarController!.tabBar.items![2] as! UITabBarItem
+                print(loggedInUser)
+                let settingsTabBarItem = tabBarController!.tabBar.items![2] 
                 settingsTabBarItem.badgeValue = self.selectedLogin3!
                 for i in 0..<paddles.count {
                     if paddles[i] == self.selectedLogin3! {
@@ -485,10 +483,11 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
             let minPWC = self.minimumPWCredits()
             if availableCredits >= minPWC {
                 availableCredits -= minPWC
-                let shopTabBarItem = tabBarController!.tabBar.items![0] as! UITabBarItem
+                let shopTabBarItem = tabBarController!.tabBar.items![0] 
                 shopTabBarItem.badgeValue = availableCredits.description
                 let loggedInUser = User.login(self.selectedLogin4!, password: "foo") //new PaddleWidth
-                let settingsTabBarItem = tabBarController!.tabBar.items![2] as! UITabBarItem
+                print(loggedInUser)
+                let settingsTabBarItem = tabBarController!.tabBar.items![2]
                 settingsTabBarItem.badgeValue = self.selectedLogin4!
                 for i in 0..<iPadPaddleWidths.count {
                     if iPadPaddleWidths[i] == self.selectedLogin4! {
@@ -506,17 +505,16 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
                 }
             } else {
                 if availableCredits < minPWC {
-                    let alert = UIAlertView(title: "You have \(availableCredits) Credits!", message: "(you need \(self.minimumPWCredits()))...before buying...", delegate: self, cancelButtonTitle: "OK")
-                    //alert.addButtonWithTitle("Top up Credit Card")
-                    alert.dismissWithClickedButtonIndex(alert.firstOtherButtonIndex, animated: true)
-                    alert.show()
+                    let alert = UIAlertController(title: "You have \(availableCredits) Credits!", message: "(you need \(self.minimumPWCredits()))...before buying...", preferredStyle: .Alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                    presentViewController(alert, animated: true, completion: nil)
                 }
             }
             //println(sender.tag)
         case 5: //add selected credits to game
             if availableCredits > -1 {
                 if purchase() {
-                    let shopTabBarItem = tabBarController!.tabBar.items![0] as! UITabBarItem
+                    let shopTabBarItem = tabBarController!.tabBar.items![0] 
                     shopTabBarItem.badgeValue = Settings().availableCredits.description
                 }
             } else {
@@ -556,10 +554,10 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
     func purchase() -> Bool {
         var amount = 0.00
         if buyCreditsButton.hidden == false {
-            var credits = chosenNumberOfCredits()
+            let credits = chosenNumberOfCredits()
             let cost = [10: 0.99, 40: 2.99, 70: 4.99, 150: 9.99, 350: 19.99, 1000: 49.99, 2500: 99.99]
             amount = cost[credits]!
-            println(amount)
+            print(amount)
             helper.pay4Credits(credits)
             return true
         } else {

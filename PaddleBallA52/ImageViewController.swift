@@ -24,22 +24,22 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
     // MARK: Image/Camera
     var tag: Int = 0
     var imageView = UIImageView()
-    @IBOutlet weak var imageViewContainer: UIView! {
-        didSet { imageViewContainer.addSubview(imageView) } }
+//    @IBOutlet weak var imageViewContainer: UIView! {
+//        didSet { imageViewContainer.addSubview(imageView) } }
     
     @IBAction func takePhoto() {
         if UIImagePickerController.isSourceTypeAvailable(.Camera) {
             let picker = UIImagePickerController()
             picker.sourceType = .Camera
             //if video check media types
-            picker.mediaTypes = [kUTTypeImage]
+            picker.mediaTypes = [kUTTypeImage as String]
             picker.delegate = self
             picker.allowsEditing = true
             presentViewController(picker, animated: true, completion: nil)
         }
     }
     // MARK: UIImagePickerControllerDelegate, UINavigationControllerDelegate
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         var image = info[UIImagePickerControllerEditedImage] as? UIImage
         if image == nil {
             image = info[UIImagePickerControllerOriginalImage] as? UIImage
@@ -54,15 +54,21 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
     }
 
     @IBAction func savePhoto(sender: UIBarButtonItem) {
-        if let imageData = UIImageJPEGRepresentation(image, 1.0) {
-            let library = ALAssetsLibrary()
-            library.writeImageDataToSavedPhotosAlbum(imageData, metadata: nil, completionBlock: nil)
+        if image != nil {
+            if let imageData = UIImageJPEGRepresentation(image!, 1.0) {
+                let library = ALAssetsLibrary()
+                library.writeImageDataToSavedPhotosAlbum(imageData, metadata: nil, completionBlock: nil)
+            }
+        } else {
+            let alert = UIAlertController(title: "You have not taken your photo yet!", message: "First, press Camera button...\n\n...then Back button to return", preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            presentViewController(alert, animated: true, completion: nil)
         }
     }
 
-    @IBAction func back(sender: AnyObject) {
-        presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
-    }
+//    @IBAction func back(sender: AnyObject) {
+//        presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+//    }
     
     func makeRoomForImage() {
         var extraHeight: CGFloat = 0

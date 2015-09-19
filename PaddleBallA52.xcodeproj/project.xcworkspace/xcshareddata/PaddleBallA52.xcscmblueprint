@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "AA221AACFCA1A4A850DDB52B9D3ED18EEE102468",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "AA221AACFCA1A4A850DDB52B9D3ED18EEE102468" : 0,
+    "61307E8DC0317A0BCACAA12BD063DBF5E17FA43D" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "64C8AC14-F3EA-417E-BED0-3832FD9B8671",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "AA221AACFCA1A4A850DDB52B9D3ED18EEE102468" : "PaddleBallA52",
+    "61307E8DC0317A0BCACAA12BD063DBF5E17FA43D" : "BouncerL13"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "PaddleBallA52",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "PaddleBallA52.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/garthmac\/BouncerL13.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "61307E8DC0317A0BCACAA12BD063DBF5E17FA43D"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/garthmac\/PaddleBallA52.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "AA221AACFCA1A4A850DDB52B9D3ED18EEE102468"
+    }
+  ]
+}

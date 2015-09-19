@@ -41,7 +41,7 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         return pickerDataSource.count
     }
     //MARK: - UIPickerViewDelegate
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return pickerDataSource[row]
     }
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -95,7 +95,7 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
                 }
             }
         }
-        let paddleBallTabBarItem = tabBarController!.tabBar.items![1] as! UITabBarItem
+        let paddleBallTabBarItem = tabBarController!.tabBar.items![1] 
         paddleBallTabBarItem.badgeValue = nil
     }
     var ballColor: String {
@@ -127,7 +127,7 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         Settings().autoStart = autoStart
     }
     var balls: Int {
-        get { return ballsLabel.text!.toInt()! }
+        get { return Int(ballsLabel.text!)! }
         set {
             ballsLabel.text = "\(newValue)"
             ballStepper.value = Double(newValue)
@@ -145,7 +145,7 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         Settings().ballRotation = ballRotation
     }
     var columns: Int {
-        get { return columnsLabel.text!.toInt()! }
+        get { return Int(columnsLabel.text!)! }
         set {
             columnsLabel.text = "\(newValue)"
             columnSlider.value = Float(newValue)
@@ -179,7 +179,7 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         Settings().highScoreOn = highScoreOn
     }
     var paddleWidthMultiplier: Int {
-        get { return paddleWidthLabel.text!.toInt()! }
+        get { return Int(paddleWidthLabel.text!)! }
         set {
             paddleWidthLabel.text = "\(newValue)"
             paddleWidthStepper.value = Double(newValue)
@@ -195,7 +195,7 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         Settings().paddleWidthMultiplier = paddleWidthMultiplier
     }
     var rows: Int {
-        get { return rowsLabel.text!.toInt()! }
+        get { return Int(rowsLabel.text!)! }
         set {
             rowsLabel.text = "\(newValue)"
             rowSlider.value = Float(newValue)
@@ -247,7 +247,7 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
 private extension String {
     func charAtIndex(index: Int) -> Character? {   //myString.characterAtIndex(0)!
         var cur = 0
-        for char in self {
+        for char in self.characters {
             if cur == index {
                 return char
             }
@@ -257,9 +257,9 @@ private extension String {
     }
     func intAtIndex(index: Int) -> Int? {   //"010".intAtIndex(1)! == 1
         var cur = 0
-        for char in self {
+        for char in self.characters {
             if cur == index {
-                return String(char).toInt()
+                return Int(String(char))
             }
             cur++
         }

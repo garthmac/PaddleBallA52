@@ -18,7 +18,6 @@
 		714B2CD81BA691350056D6CF /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 714B2CD71BA691350056D6CF /* iTunesArtwork@2x.png */; };
 		714B2CDA1BA7A7040056D6CF /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 714B2CD91BA7A7040056D6CF /* GameKit.framework */; };
 		714B2CDC1BA7A7100056D6CF /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 714B2CDB1BA7A7100056D6CF /* StoreKit.framework */; };
-		714B2CDE1BA7C4CB0056D6CF /* IAPHelperX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714B2CDD1BA7C4CB0056D6CF /* IAPHelperX.swift */; };
 		715FA4791B90074900203CE1 /* 1000CreditsSWars1.png in Resources */ = {isa = PBXBuildFile; fileRef = 715FA4781B90074900203CE1 /* 1000CreditsSWars1.png */; };
 		715FA47B1B91702600203CE1 /* Hudson - Chained.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 715FA47A1B91702600203CE1 /* Hudson - Chained.mp3 */; };
 		715FA47D1B91707200203CE1 /* Titanic Soundtrack - Rose.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 715FA47C1B91707200203CE1 /* Titanic Soundtrack - Rose.mp3 */; };
@@ -79,7 +78,6 @@
 		889C98921B48E47200ACDA2C /* typing-computer0.png in Resources */ = {isa = PBXBuildFile; fileRef = 889C988B1B48E47200ACDA2C /* typing-computer0.png */; };
 		889C98A21B4CF9B800ACDA2C /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889C98A11B4CF9B800ACDA2C /* ShopViewController.swift */; };
 		889C98A41B4DA52B00ACDA2C /* pineapple_400.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 889C98A31B4DA52B00ACDA2C /* pineapple_400.jpg */; };
-		88B46C601B41ED08006A0E54 /* RedBlockViewController.swift in Resources */ = {isa = PBXBuildFile; fileRef = 88B46C5F1B41ED08006A0E54 /* RedBlockViewController.swift */; };
 		88DCAD4B1B4452150079046A /* extension_UIImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 88DCAD4A1B4452150079046A /* extension_UIImage.png */; };
 		88DCAD721B46EA460079046A /* peanuts-anim6.png in Resources */ = {isa = PBXBuildFile; fileRef = 88DCAD691B46EA460079046A /* peanuts-anim6.png */; };
 		88DCAD731B46EA460079046A /* peanuts-anim5.png in Resources */ = {isa = PBXBuildFile; fileRef = 88DCAD6A1B46EA460079046A /* peanuts-anim5.png */; };
@@ -128,7 +126,6 @@
 		714B2CD71BA691350056D6CF /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
 		714B2CD91BA7A7040056D6CF /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		714B2CDB1BA7A7100056D6CF /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		714B2CDD1BA7C4CB0056D6CF /* IAPHelperX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelperX.swift; sourceTree = "<group>"; };
 		715FA4781B90074900203CE1 /* 1000CreditsSWars1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1000CreditsSWars1.png; sourceTree = "<group>"; };
 		715FA47A1B91702600203CE1 /* Hudson - Chained.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Hudson - Chained.mp3"; sourceTree = "<group>"; };
 		715FA47C1B91707200203CE1 /* Titanic Soundtrack - Rose.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Titanic Soundtrack - Rose.mp3"; sourceTree = "<group>"; };
@@ -188,7 +185,6 @@
 		889C988B1B48E47200ACDA2C /* typing-computer0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "typing-computer0.png"; sourceTree = "<group>"; };
 		889C98A11B4CF9B800ACDA2C /* ShopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		889C98A31B4DA52B00ACDA2C /* pineapple_400.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pineapple_400.jpg; sourceTree = "<group>"; };
-		88B46C5F1B41ED08006A0E54 /* RedBlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RedBlockViewController.swift; path = PaddleBallA52/RedBlockViewController.swift; sourceTree = "<group>"; };
 		88DCAD4A1B4452150079046A /* extension_UIImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = extension_UIImage.png; sourceTree = "<group>"; };
 		88DCAD691B46EA460079046A /* peanuts-anim6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "peanuts-anim6.png"; sourceTree = "<group>"; };
 		88DCAD6A1B46EA460079046A /* peanuts-anim5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "peanuts-anim5.png"; sourceTree = "<group>"; };
@@ -366,7 +362,6 @@
 			children = (
 				714B2CDB1BA7A7100056D6CF /* StoreKit.framework */,
 				714B2CD91BA7A7040056D6CF /* GameKit.framework */,
-				88B46C5F1B41ED08006A0E54 /* RedBlockViewController.swift */,
 				881048B81B3E22F000712C9A /* TrackBall.swift */,
 				88EBF33A1B27992E0090A5A0 /* User.swift */,
 				88EBF30F1B2798A70090A5A0 /* PaddleBallA52 */,
@@ -392,7 +387,6 @@
 				88EBF3361B2798D80090A5A0 /* Main.storyboard */,
 				885E94D11B3384FE00432335 /* LeaderViewController.swift */,
 				889C98A11B4CF9B800ACDA2C /* ShopViewController.swift */,
-				714B2CDD1BA7C4CB0056D6CF /* IAPHelperX.swift */,
 				71654E541BAA08960092E9E6 /* IAPHelper.swift */,
 				885E94D41B34A94900432335 /* ImageViewController.swift */,
 				88EBF3421B2799390090A5A0 /* Settings.bundle */,
@@ -479,7 +473,9 @@
 		88EBF3051B2798A70090A5A0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Garth MacKenzie";
 				TargetAttributes = {
 					88EBF30C1B2798A70090A5A0 = {
@@ -534,7 +530,6 @@
 				71A025AA1B8D5DA4002CE122 /* Forrest Gump Soundtrack.mp3 in Resources */,
 				884225811B4355F7003122E3 /* Icon-76@2x.png in Resources */,
 				714B2CD21BA674200056D6CF /* IMG_0172.jpg in Resources */,
-				88B46C601B41ED08006A0E54 /* RedBlockViewController.swift in Resources */,
 				8842257F1B4355F7003122E3 /* Icon-72@2x.png in Resources */,
 				88DCAD751B46EA460079046A /* peanuts-anim3.png in Resources */,
 				88DCAD781B46EA460079046A /* peanuts-anim0.png in Resources */,
@@ -626,7 +621,6 @@
 				885E94D21B3384FE00432335 /* LeaderViewController.swift in Sources */,
 				889C98A21B4CF9B800ACDA2C /* ShopViewController.swift in Sources */,
 				88EBF33F1B27992E0090A5A0 /* User.swift in Sources */,
-				714B2CDE1BA7C4CB0056D6CF /* IAPHelperX.swift in Sources */,
 				881048B91B3E22F000712C9A /* TrackBall.swift in Sources */,
 				714B2C7D1BA118AA0056D6CF /* CAEmitterLayerViewController.swift in Sources */,
 				88EBF3131B2798A70090A5A0 /* AppDelegate.swift in Sources */,
@@ -674,11 +668,13 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -720,6 +716,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				COPY_PHASE_STRIP = NO;
@@ -746,12 +743,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				INFOPLIST_FILE = PaddleBallA52/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.garthmackenzie.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4e2cad12-337a-4d71-abb7-0bfac3ed3dab";
+				PROVISIONING_PROFILE = "95552603-12a8-4c1c-8c19-c6ce3142cf3a";
 			};
 			name = Debug;
 		};
@@ -759,12 +758,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: GARTH MACKENZIE (7P9362E76E)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: GARTH MACKENZIE (7P9362E76E)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				INFOPLIST_FILE = PaddleBallA52/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.garthmackenzie.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4e2cad12-337a-4d71-abb7-0bfac3ed3dab";
+				PROVISIONING_PROFILE = "95552603-12a8-4c1c-8c19-c6ce3142cf3a";
 			};
 			name = Release;
 		};
@@ -782,6 +783,7 @@
 				);
 				INFOPLIST_FILE = PaddleBallA52Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.garthmackenzie.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PaddleBallA52.app/PaddleBallA52";
 			};
@@ -797,6 +799,7 @@
 				);
 				INFOPLIST_FILE = PaddleBallA52Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.garthmackenzie.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PaddleBallA52.app/PaddleBallA52";
 			};

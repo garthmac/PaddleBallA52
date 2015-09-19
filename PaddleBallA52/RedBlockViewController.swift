@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Garth MacKenzie. All rights reserved.
 //
 
-import UIKit
+//import UIKit
 
 //func degreesToRadians(degrees: Double) -> CGFloat {
 //    return CGFloat(degrees * M_PI / 180.0)
@@ -16,8 +16,8 @@ import UIKit
 //    return CGFloat(radians / M_PI * 180.0)
 //}
 
-class RedBlockViewController: UIViewController {
-    
+//class RedBlockViewController: UIViewController {
+
 //    @IBOutlet weak var boxTappedLabel: UILabel!
 //    @IBOutlet weak var viewForTransformLayer: UIView!
 //    @IBOutlet var colorAlphaSwitches: [UISwitch]!
@@ -193,5 +193,5 @@ class RedBlockViewController: UIViewController {
 //        return color
 //    }
     
-}
+//}
 

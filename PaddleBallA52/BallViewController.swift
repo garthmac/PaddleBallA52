@@ -140,7 +140,10 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         audioPlayer.numberOfLoops = 99 //-1 means continuous
         audioPlayer.prepareToPlay()
     }
-    private var tier: Int = 1
+    private var tier: Int { // a computed property instead of func
+        get { return Settings().tier }
+        set { Settings().tier = newValue }
+    }
     private var failedTier = 0
     // MARK: - Constants
     struct Constants {
@@ -188,7 +191,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         prepareAudios()
         self.hidesBottomBarWhenPushed = true
         animator.addBehavior(breakout)
-        Settings(defaultColumns: Constants.BrickColumns, defaultRows: Constants.BrickColumns / 2, defaultBalls: Settings().balls, defaultDifficulty: Settings().difficulty, defaultSpeed: ballSpeed, defaultBallColor: Settings().ballColor, defaultCourtColor: Settings().courtColor, defaultPaddleColor: Settings().paddleColor, defaultPaddleWidthMultiplier: Settings().paddleWidthMultiplier)
+        Settings(defaultColumns: Constants.BrickColumns, defaultRows: Constants.BrickColumns / 2, defaultBalls: Settings().balls, defaultDifficulty: Settings().difficulty, defaultSpeed: ballSpeed, defaultBallColor: Settings().ballColor, defaultCourtColor: Settings().courtColor, defaultPaddleColor: Settings().paddleColor, defaultPaddleWidthMultiplier: Settings().paddleWidthMultiplier, defaultTier: 1)
         emitterLayerViewController = CAEmitterLayerViewController()
         emitterLayer.renderMode = kCAEmitterLayerAdditive
         emitterLayerViewController.viewForEmitterLayer = powerBallScoreBoard  //changeCourtColor
@@ -554,8 +557,8 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
     }
     func changeBrickColor(timer: NSTimer) { //only if overlayed with black
         if let brick = timer.userInfo as? UIButton {
-            UIView.animateWithDuration(0.5, animations: { () -> Void in
-                self.prepareBrick(brick)
+            UIView.animateWithDuration(0.5, animations: { [weak self] in
+                self!.prepareBrick(brick)
                 }, completion: nil)
         }
     }
@@ -607,12 +610,12 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             }
             UIView.transitionWithView(brick.view, duration: 0.3, options: trans, animations: {
                 brick.view.alpha = 0.8
-                }, completion: { (success) -> Void in
-                    self.breakout.addBrick(brick.view)
+                }, completion: { [weak self] (success) -> Void in
+                    self!.breakout.addBrick(brick.view)
                     UIView.animateWithDuration(1.5, animations: {  //1.0
                         brick.view.alpha = 0.0  //disappear
-                        }, completion: { (success) -> Void in
-                            self.breakout.removeBrick(brick.view)
+                        }, completion: { [weak self] (success) -> Void in
+                            self!.breakout.removeBrick(brick.view)
                             brick.view.removeFromSuperview()
                     })
             })
@@ -712,13 +715,13 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             scoreBoard.textColor = UIColor.redColor()
             UIView.animateWithDuration(2.0, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0, options: [], animations: {
                 self.scoreBoard.center = CGPoint(x: self.scoreBoard.center.x, y: (self.gameView.bounds.midY - (self.gameView.bounds.midY / 2.0) ) )
-                }, completion: { (success) -> Void in
+                }, completion: { [weak self] (success) -> Void in
                     UIView.animateWithDuration(2.5, animations: {
-                        self.resetPaddleAndScoreBoard()
-                        self.scoreBoard.alpha = 0  //disappear
-                        }, completion: { (success) -> Void in
-                            self.scoreBoard.font = UIFont(name: "ComicSansMS-Bold", size: 18.0)
-                            self.scoreBoard.alpha = 1
+                        self!.resetPaddleAndScoreBoard()
+                        self!.scoreBoard.alpha = 0  //disappear
+                        }, completion: { [weak self] (success) -> Void in
+                            self!.scoreBoard.font = UIFont(name: "ComicSansMS-Bold", size: 18.0)
+                            self!.scoreBoard.alpha = 1
                     })
             })
         }
@@ -757,7 +760,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
                         self.tier = 1
                     }
                     //don't reset ball or paddle colors or paddleWidth if user changed them!
-                    Settings(defaultColumns: Constants.BrickColumns, defaultRows: Constants.BrickColumns / 2, defaultBalls: Settings().balls, defaultDifficulty: Settings().difficulty, defaultSpeed: self.ballSpeed, defaultBallColor: Settings().ballColor, defaultCourtColor: Settings().courtColor, defaultPaddleColor: Settings().paddleColor, defaultPaddleWidthMultiplier: Settings().paddleWidthMultiplier)
+                    Settings(defaultColumns: Constants.BrickColumns, defaultRows: Constants.BrickColumns / 2, defaultBalls: Settings().balls, defaultDifficulty: Settings().difficulty, defaultSpeed: self.ballSpeed, defaultBallColor: Settings().ballColor, defaultCourtColor: Settings().courtColor, defaultPaddleColor: Settings().paddleColor, defaultPaddleWidthMultiplier: Settings().paddleWidthMultiplier, defaultTier: self.tier)
                     self.changeCourtColor()
                     if !Settings().autoStart {
                         self.autoStartTimer?.invalidate()

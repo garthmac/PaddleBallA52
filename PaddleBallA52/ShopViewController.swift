@@ -123,7 +123,9 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         if pickerView.tag == 1 { return pickerDataSourceHelp.count }
         if pickerView.tag == 2 { return pickerDataSourceCredits.count }
         if component == 0 {
-            return pickerDataSource.count
+            if doneLoad {
+                return pickerDataSource.count
+            } else { return 0 }
         }
         if component == 1 {
             return pickerDataSource1.count
@@ -254,6 +256,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         set { Settings().availableCredits = newValue }
         }
     let helper = IAPHelper()
+    var doneLoad = false
     //MARK: - view lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -264,17 +267,21 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
             self!.ballImages = (0..<self!.ballSkins.count).map {
                 UIImage(named: self!.ballSkins[$0])!
             }
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                print("This is run on the main queue, after the previous code in outer block")
+            dispatch_async(dispatch_get_main_queue(), { [weak self] in
+                print("This is run on the main queue, after backgroundQueue code in outer closure")
+                self!.doneLoad = true
+                self!.userPickerView.reloadComponent(0)
+                self!.userPickerView.selectRow(26, inComponent: 0, animated: true)
+                self!.pickerView(self!.userPickerView, didSelectRow: 26, inComponent: 0)
             })
         })
-        prepareTabBar()
-        userPickerView.dataSource = self
         userPickerView.delegate = self
-        helpPickerView.dataSource = self
+        userPickerView.dataSource = self
         helpPickerView.delegate = self
-        creditsPickerView.dataSource = self
+        helpPickerView.dataSource = self
         creditsPickerView.delegate = self
+        creditsPickerView.dataSource = self
+        prepareTabBar()
         for aView in view.subviews {
             if let button = aView as? UIButton {
                 if (0...7).contains(button.tag) {
@@ -310,21 +317,19 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
             userPickerView.selectRow(index, inComponent: 3, animated: true)
         }
         userPickerView.selectRow(Settings().paddleWidthMultiplier, inComponent: 4, animated: true)
+        prepareForPurchase()
     }
     func prepareForPurchase() {
         self.tabBarController?.tabBar.hidden = false
         let shopTabBarItem = tabBarController!.tabBar.items![0] 
         shopTabBarItem.badgeValue = "\(availableCredits)"   //everything costs 10 credits or $1
-        if availableCredits < 10 {
-            let alert = UIAlertController(title: "You have \(availableCredits) Credits!", message: "Play to earn at least 10 Credits or \n\n ...Buy Credits", preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-            presentViewController(alert, animated: true, completion: nil)
-        }
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        if helper.list.isEmpty {
-            prepareForPurchase()
+        if helper.list.isEmpty && availableCredits < 10 {
+            let alert = UIAlertController(title: "You have \(availableCredits) Credits!", message: "Play to earn at least 10 Credits or \n\n ...Buy Credits", preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            presentViewController(alert, animated: true, completion: nil)
         }
         helper.setIAPs()
     }

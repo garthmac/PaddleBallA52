@@ -20,24 +20,24 @@ class LeaderViewController: UIViewController, GKGameCenterControllerDelegate {
             }
         }
     }
-    var gameCenterAchievements=[String:GKAchievement]()//    //send high score to leaderboard
+    var gameCenterAchievements=[String:GKAchievement]() //dictionary...send high score to leaderboard
     // MARK: Game Center
     // load prev achievement granted to the player
     func gameCenterLoadAchievements(){
         // load all prev. achievements for GameCenter for the user so progress can be added
-        GKAchievement.loadAchievementsWithCompletionHandler({ (allAchievements, error) -> Void in
+        GKAchievement.loadAchievementsWithCompletionHandler( { [weak self] (allAchievements, error) -> Void in
             if error != nil {
                 print("Game Center: could not load achievements, error: \(error)")
             } else {
                 for anAchievement in allAchievements!  {
                     let oneAchievement = anAchievement
-                    self.gameCenterAchievements[oneAchievement.identifier!]=oneAchievement
+                    self!.gameCenterAchievements[oneAchievement.identifier!]=oneAchievement
                 }
             }
         })
     }
     // add progress to an achievement
-    func gameCenterAddProgressToAnAchievement(progress:Double,achievementID:String) {
+    func gameCenterAddProgressToAnAchievement(progress:Double, achievementID:String) {
         if canUseGameCenter == true { // only update progress if user opt-in to use Game Center
             // lookup if prev progress is logged for this achievement = achievement is already known (and loaded) from Game Center for this user
             let lookupAchievement:GKAchievement? = gameCenterAchievements[achievementID]
@@ -46,9 +46,9 @@ class LeaderViewController: UIViewController, GKGameCenterControllerDelegate {
                 if achievement.percentComplete != 100 {
                     // set new progress
                     achievement.percentComplete = progress
-                    if progress == 100.0  {achievement.showsCompletionBanner=true}  // show banner only if achievement is fully granted (progress is 100%)
+                    if progress == 100.0  { achievement.showsCompletionBanner=true }  // show banner only if achievement is fully granted (progress is 100%)
                     // try to report the progress to the Game Center
-                    GKAchievement.reportAchievements([achievement], withCompletionHandler:  {(error) -> Void in
+                    GKAchievement.reportAchievements([achievement], withCompletionHandler: { (error) -> Void in
                         if error != nil {
                             print("Couldn't save achievement (\(achievementID)) progress to \(progress) %")
                         }
@@ -100,11 +100,11 @@ class LeaderViewController: UIViewController, GKGameCenterControllerDelegate {
             let scoreReporter = GKScore(leaderboardIdentifier: "com.garthmackenzie.PaddleBallA52.leaderboard1") //leaderboard id here
             scoreReporter.value = Int64(score)
             let scoreArray: [GKScore] = [scoreReporter]
-            GKScore.reportScores(scoreArray, withCompletionHandler: {(error) -> Void in
+            GKScore.reportScores(scoreArray, withCompletionHandler: { [weak self] (error) -> Void in
                 if error != nil {
                     print("error posting scoreArray to Game Center")
                 } else {
-                    self.showLeader()
+                    self!.showLeader()
                 }
             })
         }
@@ -121,9 +121,28 @@ class LeaderViewController: UIViewController, GKGameCenterControllerDelegate {
         gameCenterViewController.dismissViewControllerAnimated(true, completion: nil)
     }
     @IBAction func gameCenter(sender: UIButton) {
-        saveHighscore(Settings().highScore)
+        saveHighscore(Settings().highScore)  //showLeader()
+        if canUseGameCenter {
+            gameCenterLoadAchievements()
+            var percent = (Double(Settings().highScore) / 100000.0)
+            print(percent)
+            gameCenterAddProgressToAnAchievement(percent, achievementID: "com.garthmackenzie.PaddleBallA52.100kPoints")
+            percent = (Double(Settings().highScore) / 200000.0)
+            gameCenterAddProgressToAnAchievement(percent, achievementID: "com.garthmackenzie.PaddleBallA52.200kPoints")
+            percent = (Double(Settings().highScore) / 300000.0)
+            gameCenterAddProgressToAnAchievement(percent, achievementID: "com.garthmackenzie.PaddleBallA52.300kPoints")
+            percent = (Double(Settings().highScore) / 400000.0)
+            gameCenterAddProgressToAnAchievement(percent, achievementID: "com.garthmackenzie.PaddleBallA52.400kPoints")
+            percent = (Double(Settings().highScore) / 500000.0)
+            gameCenterAddProgressToAnAchievement(percent, achievementID: "com.garthmackenzie.PaddleBallA52.500kPoints")
+            percent = (Double(Settings().highScore) / 1000000.0)
+            gameCenterAddProgressToAnAchievement(percent, achievementID: "com.garthmackenzie.PaddleBallA52.999kPoints")
+            percent = (Double(Settings().tier) / 30.0)
+            gameCenterAddProgressToAnAchievement(percent, achievementID: "com.garthmackenzie.PaddleBallA52.level.30")
+            percent = (Double(Settings().tier) / 60.0)
+            gameCenterAddProgressToAnAchievement(percent, achievementID: "com.garthmackenzie.PaddleBallA52.level.60")
+        }
     }
-    
     @IBOutlet weak var dateCreatedLabel: UILabel!
     @IBOutlet weak var dateCreatedLabel1: UILabel!
     @IBOutlet weak var dateCreatedLabel2: UILabel!

@@ -38,6 +38,7 @@ class Settings {
         static let SoundKey = "Settings.Sound" // on/off
         static let SoundChoiceKey = "Settings.SoundChoice" // 0/1/2/3/4/5
         static let SpeedKey = "Settings.Ball.Speed" //control the speed of the ball/push:
+        static let TierKey = "Settings.Level"
         static let UserIdKey = "Settings.User.Id"
     }
     let defaults = NSUserDefaults.standardUserDefaults()
@@ -145,6 +146,10 @@ class Settings {
         get { return defaults.objectForKey(Const.SpeedKey) as? Float ?? 1.0 }
         set { defaults.setObject(newValue, forKey: Const.SpeedKey) }
     }
+    var tier: Int {
+        get { return defaults.objectForKey(Const.TierKey) as? Int ?? 1 }
+        set { defaults.setObject(newValue, forKey: Const.TierKey) }
+    }
     var uid: String? {
         get { return defaults.objectForKey(Const.UserIdKey) as? String ?? "" }
         set { defaults.setObject(newValue, forKey: Const.UserIdKey) }
@@ -157,7 +162,7 @@ class Settings {
         }
     }
     //Instead of the optional variables I could have added the default values in this new class. But there are already a number of “default” values in the view controller, and I did not want to spread them to different parts of the code. Instead I added a convenience initializer to provide default values to the settings class:
-    convenience init(defaultColumns: Int, defaultRows: Int, defaultBalls: Int, defaultDifficulty: Int, defaultSpeed: Float, defaultBallColor: String, defaultCourtColor: String, defaultPaddleColor: String, defaultPaddleWidthMultiplier: Int) {
+    convenience init(defaultColumns: Int, defaultRows: Int, defaultBalls: Int, defaultDifficulty: Int, defaultSpeed: Float, defaultBallColor: String, defaultCourtColor: String, defaultPaddleColor: String, defaultPaddleWidthMultiplier: Int, defaultTier: Int) {
         self.init()
         columns = defaultColumns
         rows = defaultRows
@@ -168,6 +173,7 @@ class Settings {
         courtColor = defaultCourtColor
         paddleColor = defaultPaddleColor
         paddleWidthMultiplier = defaultPaddleWidthMultiplier
+        tier = defaultTier
     }
     
 }

@@ -28,6 +28,9 @@
 		715FA49F1B9649C400203CE1 /* Phil Wickham - This Is Amazing Grace.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 715FA49E1B9649C400203CE1 /* Phil Wickham - This Is Amazing Grace.mp3 */; };
 		715FA4B01B9B59B500203CE1 /* Titans Spirit(Remember The Titans)-Trevor Rabin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 715FA4AF1B9B59B500203CE1 /* Titans Spirit(Remember The Titans)-Trevor Rabin.mp3 */; };
 		71654E551BAA08960092E9E6 /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71654E541BAA08960092E9E6 /* IAPHelper.swift */; };
+		71754B2C1BAE88BF00B490C5 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71754B2B1BAE88BF00B490C5 /* Images-2.xcassets */; settings = {ASSET_TAGS = (); }; };
+		71754B2E1BAFDB1100B490C5 /* snoopy3.png in Resources */ = {isa = PBXBuildFile; fileRef = 71754B2D1BAFDB1100B490C5 /* snoopy3.png */; settings = {ASSET_TAGS = (); }; };
+		71754B301BAFDBB300B490C5 /* snoopy4.png in Resources */ = {isa = PBXBuildFile; fileRef = 71754B2F1BAFDBB300B490C5 /* snoopy4.png */; settings = {ASSET_TAGS = (); }; };
 		71A025AA1B8D5DA4002CE122 /* Forrest Gump Soundtrack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 71A025A91B8D5DA4002CE122 /* Forrest Gump Soundtrack.mp3 */; };
 		71A6E2E91B8AA0DE000AA949 /* CYMATICS- Science Vs. Music - Nigel Stanford-2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 71A6E2E81B8AA0DE000AA949 /* CYMATICS- Science Vs. Music - Nigel Stanford-2.mp3 */; };
 		881048B91B3E22F000712C9A /* TrackBall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881048B81B3E22F000712C9A /* TrackBall.swift */; };
@@ -136,9 +139,12 @@
 		715FA49E1B9649C400203CE1 /* Phil Wickham - This Is Amazing Grace.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Phil Wickham - This Is Amazing Grace.mp3"; sourceTree = "<group>"; };
 		715FA4AF1B9B59B500203CE1 /* Titans Spirit(Remember The Titans)-Trevor Rabin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Titans Spirit(Remember The Titans)-Trevor Rabin.mp3"; sourceTree = "<group>"; };
 		71654E541BAA08960092E9E6 /* IAPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
+		71754B2B1BAE88BF00B490C5 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
+		71754B2D1BAFDB1100B490C5 /* snoopy3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = snoopy3.png; sourceTree = "<group>"; };
+		71754B2F1BAFDBB300B490C5 /* snoopy4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = snoopy4.png; sourceTree = "<group>"; };
 		71A025A91B8D5DA4002CE122 /* Forrest Gump Soundtrack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Forrest Gump Soundtrack.mp3"; sourceTree = "<group>"; };
 		71A6E2E81B8AA0DE000AA949 /* CYMATICS- Science Vs. Music - Nigel Stanford-2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "CYMATICS- Science Vs. Music - Nigel Stanford-2.mp3"; sourceTree = "<group>"; };
-		881048B81B3E22F000712C9A /* TrackBall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackBall.swift; path = PaddleBallA52/TrackBall.swift; sourceTree = "<group>"; };
+		881048B81B3E22F000712C9A /* TrackBall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackBall.swift; sourceTree = "<group>"; };
 		881048BE1B3E59D700712C9A /* mackie_swift.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mackie_swift.png; sourceTree = "<group>"; };
 		881048C51B3E663C00712C9A /* glory.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glory.png; sourceTree = "<group>"; };
 		881048C81B3E6E4600712C9A /* badge-git-real-5d91905b69d46286cab389797ea81983.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "badge-git-real-5d91905b69d46286cab389797ea81983.png"; sourceTree = "<group>"; };
@@ -205,7 +211,7 @@
 		88EBF3331B2798C50090A5A0 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		88EBF3361B2798D80090A5A0 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		88EBF3391B27992E0090A5A0 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
-		88EBF33A1B27992E0090A5A0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = PaddleBallA52/User.swift; sourceTree = "<group>"; };
+		88EBF33A1B27992E0090A5A0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		88EBF33B1B27992E0090A5A0 /* BreakoutBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BreakoutBehavior.swift; sourceTree = "<group>"; };
 		88EBF33C1B27992E0090A5A0 /* BallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BallViewController.swift; sourceTree = "<group>"; };
 		88EBF3421B2799390090A5A0 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -273,8 +279,10 @@
 				88DCAD6E1B46EA460079046A /* peanuts-anim1.png */,
 				88DCAD6F1B46EA460079046A /* peanuts-anim0.png */,
 				889C98A31B4DA52B00ACDA2C /* pineapple_400.jpg */,
-				889C98811B48DFD400ACDA2C /* snoopy2.jpg */,
 				889C98821B48DFD400ACDA2C /* snoopy1.jpg */,
+				889C98811B48DFD400ACDA2C /* snoopy2.jpg */,
+				71754B2D1BAFDB1100B490C5 /* snoopy3.png */,
+				71754B2F1BAFDBB300B490C5 /* snoopy4.png */,
 				881048CE1B3F253000712C9A /* snoopy-tennis.png */,
 				889C98851B48E47200ACDA2C /* typing-computer6.png */,
 				889C98861B48E47200ACDA2C /* typing-computer5.png */,
@@ -308,9 +316,9 @@
 		8842255A1B435556003122E3 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				714B2CD71BA691350056D6CF /* iTunesArtwork@2x.png */,
 				881559151B30ED9400D60626 /* Audio */,
 				881559131B30ECFE00D60626 /* Fonts */,
-				714B2CD71BA691350056D6CF /* iTunesArtwork@2x.png */,
 				8842255B1B4355B5003122E3 /* Icons */,
 				881559141B30ED5500D60626 /* Images */,
 				884225861B435623003122E3 /* Screenshots */,
@@ -362,8 +370,6 @@
 			children = (
 				714B2CDB1BA7A7100056D6CF /* StoreKit.framework */,
 				714B2CD91BA7A7040056D6CF /* GameKit.framework */,
-				881048B81B3E22F000712C9A /* TrackBall.swift */,
-				88EBF33A1B27992E0090A5A0 /* User.swift */,
 				88EBF30F1B2798A70090A5A0 /* PaddleBallA52 */,
 				88EBF3251B2798A70090A5A0 /* PaddleBallA52Tests */,
 				88EBF30E1B2798A70090A5A0 /* Products */,
@@ -384,6 +390,9 @@
 			children = (
 				88EBF3321B2798C50090A5A0 /* README.md */,
 				88EBF3331B2798C50090A5A0 /* LICENSE */,
+				88EBF3121B2798A70090A5A0 /* AppDelegate.swift */,
+				881048B81B3E22F000712C9A /* TrackBall.swift */,
+				88EBF33A1B27992E0090A5A0 /* User.swift */,
 				88EBF3361B2798D80090A5A0 /* Main.storyboard */,
 				885E94D11B3384FE00432335 /* LeaderViewController.swift */,
 				889C98A11B4CF9B800ACDA2C /* ShopViewController.swift */,
@@ -399,6 +408,7 @@
 				88EBF3451B2799540090A5A0 /* LaunchScreen.xib */,
 				88EBF3111B2798A70090A5A0 /* Info.plist */,
 				8842255A1B435556003122E3 /* Assets */,
+				71754B2B1BAE88BF00B490C5 /* Images-2.xcassets */,
 				88EBF3101B2798A70090A5A0 /* Supporting Files */,
 			);
 			path = PaddleBallA52;
@@ -407,7 +417,6 @@
 		88EBF3101B2798A70090A5A0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				88EBF3121B2798A70090A5A0 /* AppDelegate.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -538,12 +547,14 @@
 				884225721B4355F7003122E3 /* Icon-40@2x.png in Resources */,
 				884225791B4355F7003122E3 /* Icon-44@2x.png in Resources */,
 				88DCAD741B46EA460079046A /* peanuts-anim4.png in Resources */,
+				71754B2C1BAE88BF00B490C5 /* Images-2.xcassets in Resources */,
 				714B2CD61BA687860056D6CF /* IMG_0138.jpg in Resources */,
 				88DCAD4B1B4452150079046A /* extension_UIImage.png in Resources */,
 				885E94EE1B3A0C1E00432335 /* Comic Sans MS Bold.ttf in Resources */,
 				885E94D31B33957F00432335 /* Images.xcassets in Resources */,
 				88DCAD7B1B46EDFF0079046A /* peanuts-anim8.png in Resources */,
 				715FA4791B90074900203CE1 /* 1000CreditsSWars1.png in Resources */,
+				71754B2E1BAFDB1100B490C5 /* snoopy3.png in Resources */,
 				881048C91B3E6E4600712C9A /* badge-git-real-5d91905b69d46286cab389797ea81983.png in Resources */,
 				714B2C931BA373830056D6CF /* IMG_0122.jpg in Resources */,
 				884225831B4355F7003122E3 /* Icon-Small-40.png in Resources */,
@@ -579,6 +590,7 @@
 				889C988F1B48E47200ACDA2C /* typing-computer3.png in Resources */,
 				889C98921B48E47200ACDA2C /* typing-computer0.png in Resources */,
 				884225731B4355F7003122E3 /* Icon-50.png in Resources */,
+				71754B301BAFDBB300B490C5 /* snoopy4.png in Resources */,
 				881048CF1B3F253000712C9A /* snoopy-tennis.png in Resources */,
 				889C98901B48E47200ACDA2C /* typing-computer2.png in Resources */,
 				715FA4B01B9B59B500203CE1 /* Titans Spirit(Remember The Titans)-Trevor Rabin.mp3 in Resources */,
@@ -743,14 +755,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PaddleBallA52/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.garthmackenzie.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "95552603-12a8-4c1c-8c19-c6ce3142cf3a";
+				PROVISIONING_PROFILE = "9aa7974b-f5c9-4446-8166-69980107d859";
 			};
 			name = Debug;
 		};
@@ -758,14 +771,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
+				CODE_SIGN_IDENTITY = "iPhone Developer: GARTH MACKENZIE (ZS88LT5RYH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: GARTH MACKENZIE (ZS88LT5RYH)";
 				INFOPLIST_FILE = PaddleBallA52/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.garthmackenzie.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "95552603-12a8-4c1c-8c19-c6ce3142cf3a";
+				PROVISIONING_PROFILE = "9aa7974b-f5c9-4446-8166-69980107d859";
 			};
 			name = Release;
 		};

@@ -16,13 +16,18 @@ uses Settings.bundle for secondary settings
 - Leader board (fake) added (showing a different top two + user per view)
   with option to take selfie
 - Comic font added and scoring cleaned up
-- extra ball option added ant end of game if usert can buy
+- extra ball option added at end of game if user has credits
 
-Xcode 6.4 
+No adverts; In App Purchases; Game Center High Score plus 8 achievements
+- added optimization to shorten initial Launch
 
-Swift
 
-iOS 8.3
+Xcode 7 
+
+Swift 2
+
+Deployment Target iOS 8.3
+Base SDK = iOS 9.0
 
 Asset Credits
 -------------------------------------------------

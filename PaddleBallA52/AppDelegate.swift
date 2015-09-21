@@ -17,6 +17,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         //self.window?.tintColor = UIColor.redColor()
+//        let firstLaunch = NSUserDefaults.standardUserDefaults().boolForKey("FirstLaunch")
+//            if firstLaunch  {
+//                print("Not first launch.")
+//            }
+//            else {
+//                print("First launch, setting NSUserDefault.")
+//                NSUserDefaults.standardUserDefaults().setBool(true, forKey: "FirstLaunch")
+//            }
         return true
     }
     func applicationWillResignActive(application: UIApplication) {

@@ -12,7 +12,6 @@ import AVFoundation
 class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
 
     @IBOutlet var backdropImageView: UIImageView!
-//    @IBOutlet weak var leftTrophyImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var rightTrophyImageView: UIImageView!
     @IBOutlet weak var userPickerView: UIPickerView!
@@ -20,8 +19,6 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
     @IBOutlet weak var creditsPickerView: UIPickerView!
     @IBOutlet weak var buyCreditsButton: UIButton!
     
-    //MARK: - UIPickerViewDataSource
-    let model = UIDevice.currentDevice().model
     @IBAction func showHelpAction(sender: UIButton) {
         if helpPickerView.hidden {
             creditsPickerView.hidden = true
@@ -50,6 +47,8 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
 //            pickerView(userPickerView, didSelectRow: Settings().soundChoice, inComponent: 2)
 //        }
     }
+    //MARK: - UIPickerViewDataSource
+    let model = UIDevice.currentDevice().model
     var pickerDataSourceHelp: [UIButton] { // a computed property instead of func
         get {
             return (0..<self.hints.count).map {
@@ -74,12 +73,9 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         }
         set { self.pickerDataSourceCredits = newValue }
     }
+    var ballImages: [UIImage]?
     private var pickerDataSource: [UIImage] { // a computed property instead of func
-        get {
-            return (0..<self.ballSkins.count).map {
-                UIImage(named: self.ballSkins[$0])!
-            }
-        }
+        get { return ballImages! }
         set { self.pickerDataSource = newValue }
     }
     private var pickerDataSource1: [UIImage] { // a computed property instead of func
@@ -142,7 +138,9 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
     }
     //MARK: - UIPickerViewDelegate
     func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        if pickerView.tag == 1 { 20.0 }
+        if pickerView.tag > 0 {
+            return 45.0
+        }
         return 70.0
     }
     func pickerView(pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
@@ -150,30 +148,36 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         if pickerView.tag == 2 { return backdropImageView.bounds.width }
         return backdropImageView.bounds.width / 5.25
     }
-    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
+    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView { //expensive
         if pickerView.tag == 1 { return pickerDataSourceHelp[row] }
         if pickerView.tag == 2 { return pickerDataSourceCredits[row] }
-        var iv = UIImageView(image: pickerDataSource[row])  //use worst case(largest) pickerDataSource as default
+        var iv: UIImageView
         if component == 0 {
+            iv = UIImageView(image: pickerDataSource[row])
             iv.bounds = CGRect(x: 0, y: 0, width: 65, height: 65)
+            return iv
         }
         if component == 1 {
             iv = UIImageView(image: pickerDataSource1[row])
             iv.bounds = CGRect(x: 0, y: 0, width: 65, height: 65)
+            return iv
         }
         if component == 2 {
             iv = UIImageView(image: pickerDataSource2[row])
             iv.bounds = CGRect(x: 0, y: 0, width: 65, height: 65)
+            return iv
         }
         if component == 3 {
             iv = UIImageView(image: pickerDataSource3[row])
             iv.bounds = CGRect(x: 0, y: 0, width: 65, height: 30)
+            return iv
         }
         if component == 4 {
             iv = UIImageView(image: pickerDataSource4[row])
             iv.bounds = CGRect(x: 0, y: 0, width: 65, height: 65)
+            return iv
         }
-        return iv
+        return UIView()
     }
     var selectedHintIndex = Settings().lastHint
     var selectedCreditIndex = 0
@@ -231,7 +235,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
                         UIImage(named: "peanuts-anim\($0).png")!
                     }
                     animatedImageView.animationImages = images
-                    animatedImageView.animationDuration = 9.0
+                    animatedImageView.animationDuration = 7.0
                     animatedImageView.startAnimating()
                 }
                 if animatedImageView.tag == 333 {
@@ -253,6 +257,17 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
     //MARK: - view lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        let qualityOfServiceClass = QOS_CLASS_USER_INITIATED
+        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
+        dispatch_async(backgroundQueue, { [weak self] in
+            print("This is run on the background queue")
+            self!.ballImages = (0..<self!.ballSkins.count).map {
+                UIImage(named: self!.ballSkins[$0])!
+            }
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                print("This is run on the main queue, after the previous code in outer block")
+            })
+        })
         prepareTabBar()
         userPickerView.dataSource = self
         userPickerView.delegate = self
@@ -287,27 +302,29 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         helpPickerView.selectRow(Settings().lastHint, inComponent: 0, animated: true)
-        userPickerView.selectRow(28, inComponent: 0, animated: true)
-        pickerView(userPickerView, didSelectRow: 28, inComponent: 0)
+        userPickerView.selectRow(26, inComponent: 0, animated: true)
+        pickerView(userPickerView, didSelectRow: 26, inComponent: 0)
         updateMySkins(Settings().purchasedUid!)
         showBuyCreditsAction(UIButton())  //selectRow(Settings().soundChoice
         if let index = paddles.indexOf((Settings().myPaddles.last!)) {
             userPickerView.selectRow(index, inComponent: 3, animated: true)
         }
         userPickerView.selectRow(Settings().paddleWidthMultiplier, inComponent: 4, animated: true)
-        prepareForPurchase()
     }
     func prepareForPurchase() {
         self.tabBarController?.tabBar.hidden = false
         let shopTabBarItem = tabBarController!.tabBar.items![0] 
         shopTabBarItem.badgeValue = "\(availableCredits)"   //everything costs 10 credits or $1
-    }
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
         if availableCredits < 10 {
             let alert = UIAlertController(title: "You have \(availableCredits) Credits!", message: "Play to earn at least 10 Credits or \n\n ...Buy Credits", preferredStyle: .Alert)
             alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
             presentViewController(alert, animated: true, completion: nil)
+        }
+    }
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if helper.list.isEmpty {
+            prepareForPurchase()
         }
         helper.setIAPs()
     }
@@ -386,10 +403,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
             alertController.addAction(UIAlertAction(title: "Pay now!", style: UIAlertActionStyle.Default, handler: { (action) in
                 self.buy(sender)  //this is the main use
             }))
-            if sender.tag == 2 {  //audio...moved to showBuyCreditsAction(...
-//                if self.selectedLogin2 == nil {  //see actions at top
-//                    pickerView(userPickerView, didSelectRow: audios.count - 1, inComponent: 2)
-//                }
+            if sender.tag == 2 {
                 for i in 0..<audios.count {
                     if audios[i] == self.selectedLogin2! {
                         soundTrack = i
@@ -513,10 +527,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
             //println(sender.tag)
         case 5: //add selected credits to game
             if availableCredits > -1 {
-                if purchase() {
-                    let shopTabBarItem = tabBarController!.tabBar.items![0] 
-                    shopTabBarItem.badgeValue = Settings().availableCredits.description
-                }
+                purchase()
             } else {
                 prepareForPurchase()
             }
@@ -546,12 +557,11 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         for i in 0..<creditOptions.count {
             if i == self.selectedCreditIndex {
                 paidCredits = credits[i]
-                return paidCredits
             }
         }
-        return 10
+        return paidCredits
     }
-    func purchase() -> Bool {
+    func purchase() {
         var amount = 0.00
         if buyCreditsButton.hidden == false {
             let credits = chosenNumberOfCredits()
@@ -559,9 +569,6 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
             amount = cost[credits]!
             print(amount)
             helper.pay4Credits(credits)
-            return true
-        } else {
-            return false
         }
     }
     let audios = ["audio77",
@@ -579,8 +586,8 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         "asian",
         "art160",
         "asian33",
-        "baseball",
-        "basketball",
+//        "baseball",
+//        "basketball",
         "bicycle160",
         "blue160",
         "bully72",
@@ -611,27 +618,27 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         "ship160",
         "skateW160",
         "soccer",
-        "soccer206",
+//        "soccer206",
         "starDavid",
-        "star18",
+//        "star18",
         "star57",
         "steer160",
         "sun56",
         "sun94",
-        "tennis80",
+//        "tennis80",
         "toyota160",
-        "u157",
-        "u158",
-        "u191",
-        "u193",
-        "u194",
-        "u195",
-        "u196",
-        "u197",
-        "u199",
-        "u200",
-        "u201",
-        "u202",
+//        "u157",
+//        "u158",
+//        "u191",
+//        "u193",
+//        "u194",
+//        "u195",
+//        "u196",
+//        "u197",
+//        "u199",
+//        "u200",
+//        "u201",
+//        "u202",
         "u203",
         "u204",
         "u207",
@@ -654,7 +661,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         "POWER BALL is achieved by clearing any level with only one ball",
         "Destroy bom(s)/emoji(s) etc. for BONUS points...affected by paddle width",
         "On [Paddle Ball] game screen, pinch to allow navigation to other tabs",
-        "Go to [SHOP] tab to Buy Credits for ballSkins, paddleSkins, audioTracks, paddleWidths",
+        "Go to [SHOP] tab to Buy Credits for ballSkins, paddleSkins, audioTracks, PWs",
         "Gain COINS by earning POWER BALL...(they will appear at top of screen)",
         "Earn TRIPLE points while playing POWER BALL 3X activated levels!",
         "Gain free COIN for each 10,000 points earned! (awarded after each level)",
@@ -664,18 +671,18 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         "Personalized ball skins cost $0.99 or 10 Credits each",
         "Personalized audio tracks cost $0.99 or 10 Credits each",
         "Personalized paddle skins cost $0.99 or 10 Credits each",
-        "Paddle widths cost $0.99 or 10 Credits per width multiplier",
-        "Buy maximum paddle width and [Settings] PdWd is unlocked for all future play",
+        "Paddle width increases cost $0.99 or 10 Credits per width multiplier",
+        "[Settings] PdWd is unlocked for future play when u Buy max paddle width",
         "A wider Paddle increases the easiness of the game",
         "Gently pan RED BLOCK on game screen for distractaction...no tap ;-)",
-        "Once a ballSkin is bought, it will be available in the FREE mySkins wheel",
-        "Touch [Settings] tab for additional customizations eg. color choices, switches and sliders",
+        "Once a ballSkin is bought, it will be available in the FREE mySkins picker",
+        "Touch [Settings] tab to customize color choices, switches and sliders",
         "Ball Color only affects the default tennis ball not ballSkins",
         "Once finished shopping, touch [Paddle Ball] tab to return to game!",
-        "Add your UserId or game handle (to appear in the Leaders list) in iPhone>Settings>RedBlockPaddleBall",
-        "Touch [High Score] tab, touch upper camera button to take your picture for the Leader Board",
-        "From [High Score] tab, touch button at top right for Apple's Game Center",
-        "See Snoopy serve (and program the computer) in [Credits] screen"]
+        "Add your UserId/game handle (to appear in the Leaders list) in Settings",
+        "On [High Score] tab, use top camera to take picture 4 the LeaderBoard",
+        "See Snoopy serve (and program the computer) in [Credits] screen",
+        "On [High Score] tab, use top right button 4 Apple's Game Center"]
     let paddles = ["asian33",
         "arrow300",
         "back",
@@ -687,34 +694,34 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         "happy160",
         "image210",
         "ok128",
-        "pointLeft75",
-        "no210",
-        "r21",
-        "ring",
+//        "pointLeft75",
+//        "no210",
+//        "r21",
+//        "ring",
         "starDavid",
-        "star18",
+//        "star18",
         "star57",
-        "sun56",
-        "sun94",
+//        "sun56",
+//        "sun94",
         "sun135",
         "tiles",
-        "trophy75",
-        "u5",
+//        "trophy75",
+//        "u5",
         "u6",
         "u28",
         "u36",
-        "u37",
-        "u38",
+//        "u37",
+//        "u38",
         "u39",
-        "u44",
-        "u76",
-        "u79",
-        "u95",
-        "u104",
-        "u138",
-        "u139",
-        "u141",
-        "u148",
+//        "u44",
+//        "u76",
+//        "u79",
+//        "u95",
+//        "u104",
+//        "u138",
+//        "u139",
+//        "u141",
+//        "u148",
         "u152",
         "u154",
         "u173",

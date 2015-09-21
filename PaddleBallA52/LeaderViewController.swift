@@ -67,13 +67,21 @@ class LeaderViewController: UIViewController, GKGameCenterControllerDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        for aView in view.subviews {
+            if let button = aView as? UIButton {
+                for i in [0, 3] {
+                    if i == button.tag {
+                        button.layer.cornerRadius = 15.0
+                        button.layer.borderWidth = 1.0
+                        button.layer.borderColor = UIColor.blueColor().CGColor
+                    }
+                }
+            }
+        }
         // Do any additional setup after loading the view.
         gameCenterPlayer.authenticateHandler = { (gameCenterVC:UIViewController?, gameCenterError) -> Void in
             if gameCenterVC != nil {
-                //showAuthenticationDialogWhenReasonable: is an example method name. Create your own method that displays an authentication view when appropriate for your app.
-                //showAuthenticationDialogWhenReasonable(gameCenterVC!)
                 self.presentViewController(gameCenterVC!, animated: true, completion: { () -> Void in
-                    // no idea
                 })
             }
             else if self.gameCenterPlayer.authenticated == true {
@@ -81,7 +89,6 @@ class LeaderViewController: UIViewController, GKGameCenterControllerDelegate {
             } else  {
                 self.canUseGameCenter = false
             }
-            
             if gameCenterError != nil {
                 print("Game Center error: \(gameCenterError)")
             }
@@ -137,17 +144,6 @@ class LeaderViewController: UIViewController, GKGameCenterControllerDelegate {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        for aView in view.subviews {
-            if let button = aView as? UIButton {
-                for i in [0, 3] {
-                    if i == button.tag {
-                        button.layer.cornerRadius = 15.0
-                        button.layer.borderWidth = 1.0
-                        button.layer.borderColor = UIColor.blueColor().CGColor
-                    }
-                }
-            }
-        }
         addPlayers()
     }
     let formatter: NSDateFormatter = {

@@ -60,7 +60,7 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
                 library.writeImageDataToSavedPhotosAlbum(imageData, metadata: nil, completionBlock: nil)
             }
         } else {
-            let alert = UIAlertController(title: "You have not taken your photo yet!", message: "First, press Camera button...\n\n...then Back button to return", preferredStyle: .Alert)
+            let alert = UIAlertController(title: "For Leaderboard photos...", message: "1st, press Camera button...\n\n...then Back to return.", preferredStyle: .Alert)
             alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
             presentViewController(alert, animated: true, completion: nil)
         }

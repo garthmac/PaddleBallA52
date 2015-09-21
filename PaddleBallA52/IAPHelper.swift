@@ -50,6 +50,8 @@ class IAPHelper: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserv
     }
     func addCredits(credits:Int) {
         Settings().availableCredits += credits
+        let shopTabBarItem = UIApplication.sharedApplication().keyWindow!.rootViewController!.tabBarController!.tabBar.items![0]
+        shopTabBarItem.badgeValue = Settings().availableCredits.description
     }
     var list = [SKProduct]()
     var p = SKProduct()
@@ -110,15 +112,17 @@ class IAPHelper: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserv
                 addCredits(1000)
             case "com.garthmackenzie.PaddleBallA52.addCredits.2500":
                 print("add 2500 credits to account")
-                addCredits(2500)            default:
+                addCredits(2500)
+            default:
                 print("IAP not setup")
+                break
             }
         }
     }
     func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        print("add paymnet")
+        print("add payment")
         for transaction in transactions {
-            print(transaction.error)
+            print(transaction.error?.localizedDescription)
             switch transaction.transactionState {
             case .Purchased:
                 print("buy, ok unlock iap here")
@@ -150,17 +154,17 @@ class IAPHelper: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserv
                     print("add 2500 credits to account")
                     addCredits(2500)
                 default:
-                        print("IAP not setup")
+                    print("IAP not setup")
+                    break
                 }
                 queue.finishTransaction(transaction)
-                break;
             case .Failed:
                 print("buy error")
                 queue.finishTransaction(transaction)
-                break;
+                break
             default:
-                print("default")
-                break;
+                print("fallthrough")
+                break
             }
         }
     }

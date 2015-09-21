@@ -107,7 +107,6 @@ class CAEmitterLayerViewController: UIViewController {
 //  }
   
   // MARK: - Helpers
-  
   func resetEmitterCells() {
     emitterLayer.emitterCells = nil
     emitterLayer.emitterCells = [emitterCell]

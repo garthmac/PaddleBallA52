@@ -88,7 +88,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         self.gameView.addSubview(coin)
         return coin
         }()
-    func earnCoin() {
+    func earnCoin() { 
         if self.coinCount++ % 3 == 0 {  //move first because of annimation delay
             self.availableCredits += 1
         }
@@ -598,7 +598,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         var trans = UIViewAnimationOptions.TransitionFlipFromBottom
         if let brick = bricks[index] {
             brick.view.transform = CGAffineTransformMakeScale(-1, 1)
-            if brick.view.backgroundColor == nil { //bom image
+            if brick.view.backgroundColor == nil { //bom image 
                 trans = UIViewAnimationOptions.TransitionCrossDissolve
                 self.bonus(Int(500 / Settings().paddleWidthMultiplier) * powerBall)
             } else {

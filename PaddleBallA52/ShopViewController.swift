@@ -317,19 +317,24 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
             userPickerView.selectRow(index, inComponent: 3, animated: true)
         }
         userPickerView.selectRow(Settings().paddleWidthMultiplier, inComponent: 4, animated: true)
-        prepareForPurchase()
+        updateShopTab()
     }
-    func prepareForPurchase() {
+    func updateShopTab() {
         self.tabBarController?.tabBar.hidden = false
-        let shopTabBarItem = tabBarController!.tabBar.items![0] 
+        let shopTabBarItem = tabBarController!.tabBar.items![0]
         shopTabBarItem.badgeValue = "\(availableCredits)"   //everything costs 10 credits or $1
     }
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        if helper.list.isEmpty && availableCredits < 10 {
+    func warnIfCreditsLow() {
+        if availableCredits < 10 {
             let alert = UIAlertController(title: "You have \(availableCredits) Credits!", message: "Play to earn at least 10 Credits or \n\n ...Buy Credits", preferredStyle: .Alert)
             alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
             presentViewController(alert, animated: true, completion: nil)
+        }
+    }
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if helper.list.isEmpty {
+            warnIfCreditsLow()
         }
         helper.setIAPs()
     }
@@ -412,7 +417,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
                 for i in 0..<audios.count {
                     if audios[i] == self.selectedLogin2! {
                         soundTrack = i
-                        let autoStartTimer =  NSTimer.scheduledTimerWithTimeInterval(7.0, target: self, selector: "fireAutoStart:", userInfo: nil, repeats: false)
+                        let autoStartTimer =  NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: "fireAutoStart:", userInfo: nil, repeats: false)
                         autoStartTimer
                     }
                 }
@@ -451,9 +456,8 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
                 userPickerView.reloadAllComponents()  //refresh pickerDataSource1
                 updateMySkins(self.selectedLogin!)
             } else {
-                prepareForPurchase()
+                warnIfCreditsLow()
             }
-            //println(sender.tag)
         case 1: print(sender.tag)
         case 2: //add selected sound track to game
             if availableCredits > 9 {
@@ -474,9 +478,8 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
                     }
                 }
             } else {
-                prepareForPurchase()
+                warnIfCreditsLow()
             }
-            //println(sender.tag)
         case 3: //add selected paddle to game
             if availableCredits > 9 {
                 availableCredits -= 10
@@ -495,9 +498,8 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
                     }
                 }
             } else {
-                prepareForPurchase()
+                warnIfCreditsLow()
             }
-            //println(sender.tag)
         case 4: //adjust paddle to selected paddleWidth
             let minPWC = self.minimumPWCredits()
             if availableCredits >= minPWC {
@@ -529,14 +531,8 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
                     presentViewController(alert, animated: true, completion: nil)
                 }
             }
-            //println(sender.tag)
         case 5: //add selected credits to game
-            if availableCredits > -1 {
-                purchase()
-            } else {
-                prepareForPurchase()
-            }
-            //println(sender.tag)
+            purchase()
             default: break
         }
     }

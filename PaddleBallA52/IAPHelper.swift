@@ -77,7 +77,7 @@ class IAPHelper: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserv
         }
     }
     func request(request: SKRequest, didFailWithError error: NSError) {
-        print("please enable IAPS")
+        print("Request, didFail, (probably no wifi) please enable IAPS")
         print(error.localizedDescription)
     }
     func removeAds() {

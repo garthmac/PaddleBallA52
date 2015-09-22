@@ -89,7 +89,8 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         return coin
         }()
     func earnCoin() { 
-        if self.coinCount++ % 3 == 0 {  //move first because of annimation delay
+        self.coinCount += 1
+        if self.coinCount % 3 == 0 {  //move first because of annimation delay
             self.availableCredits += 1
         }
         //prepare for annimation
@@ -756,6 +757,8 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
                     } else {
                         Settings().endLevelBonus = 0
                         self.coinCount = 0
+                        self.coinCountLabel.text = nil
+                        self.coins.image = nil
                         self.score = 0
                         self.tier = 1
                     }

@@ -44,14 +44,17 @@ class IAPHelper: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserv
         for product in list {
             if product.productIdentifier.hasSuffix("\(credits)") {
                 p = product
+                //addCredits(credits)  //test
                 buyProduct()
             }
         }
     }
     func addCredits(credits:Int) {
         Settings().availableCredits += credits
-        let shopTabBarItem = UIApplication.sharedApplication().keyWindow!.rootViewController!.tabBarController!.tabBar.items![0]
-        shopTabBarItem.badgeValue = Settings().availableCredits.description
+        if let tabBarController = UIApplication.sharedApplication().keyWindow?.rootViewController as? UITabBarController {
+            let shopTabBarItem = tabBarController.tabBar.items![0]
+            shopTabBarItem.badgeValue = Settings().availableCredits.description
+        }
     }
     var list = [SKProduct]()
     var p = SKProduct()
@@ -76,9 +79,11 @@ class IAPHelper: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserv
             list.append(product )
         }
     }
+    var hasFailed = false
     func request(request: SKRequest, didFailWithError error: NSError) {
         print("Request, didFail, (probably no wifi) please enable IAPS")
         print(error.localizedDescription)
+        hasFailed = true
     }
     func removeAds() {
         //lblAdvert.removeFromSuperview()   //no ads to remove

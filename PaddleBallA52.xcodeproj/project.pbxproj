@@ -33,6 +33,8 @@
 		71754B301BAFDBB300B490C5 /* snoopy4.png in Resources */ = {isa = PBXBuildFile; fileRef = 71754B2F1BAFDBB300B490C5 /* snoopy4.png */; settings = {ASSET_TAGS = (); }; };
 		71A025AA1B8D5DA4002CE122 /* Forrest Gump Soundtrack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 71A025A91B8D5DA4002CE122 /* Forrest Gump Soundtrack.mp3 */; };
 		71A6E2E91B8AA0DE000AA949 /* CYMATICS- Science Vs. Music - Nigel Stanford-2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 71A6E2E81B8AA0DE000AA949 /* CYMATICS- Science Vs. Music - Nigel Stanford-2.mp3 */; };
+		71A7D30B1BB2144B003969DE /* tennisBalls.png in Resources */ = {isa = PBXBuildFile; fileRef = 71A7D30A1BB2144B003969DE /* tennisBalls.png */; settings = {ASSET_TAGS = (); }; };
+		71A7D30D1BB214E8003969DE /* psalm25.png in Resources */ = {isa = PBXBuildFile; fileRef = 71A7D30C1BB214E8003969DE /* psalm25.png */; settings = {ASSET_TAGS = (); }; };
 		881048B91B3E22F000712C9A /* TrackBall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881048B81B3E22F000712C9A /* TrackBall.swift */; };
 		881048BF1B3E59D700712C9A /* mackie_swift.png in Resources */ = {isa = PBXBuildFile; fileRef = 881048BE1B3E59D700712C9A /* mackie_swift.png */; };
 		881048C71B3E694600712C9A /* glory.png in Resources */ = {isa = PBXBuildFile; fileRef = 881048C51B3E663C00712C9A /* glory.png */; };
@@ -144,6 +146,8 @@
 		71754B2F1BAFDBB300B490C5 /* snoopy4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = snoopy4.png; sourceTree = "<group>"; };
 		71A025A91B8D5DA4002CE122 /* Forrest Gump Soundtrack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Forrest Gump Soundtrack.mp3"; sourceTree = "<group>"; };
 		71A6E2E81B8AA0DE000AA949 /* CYMATICS- Science Vs. Music - Nigel Stanford-2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "CYMATICS- Science Vs. Music - Nigel Stanford-2.mp3"; sourceTree = "<group>"; };
+		71A7D30A1BB2144B003969DE /* tennisBalls.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tennisBalls.png; sourceTree = "<group>"; };
+		71A7D30C1BB214E8003969DE /* psalm25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = psalm25.png; sourceTree = "<group>"; };
 		881048B81B3E22F000712C9A /* TrackBall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackBall.swift; sourceTree = "<group>"; };
 		881048BE1B3E59D700712C9A /* mackie_swift.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mackie_swift.png; sourceTree = "<group>"; };
 		881048C51B3E663C00712C9A /* glory.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glory.png; sourceTree = "<group>"; };
@@ -269,6 +273,7 @@
 				881048BE1B3E59D700712C9A /* mackie_swift.png */,
 				88EBF34A1B2799DF0090A5A0 /* paddle1.jpg */,
 				881048D01B3F314000712C9A /* paddle520.jpg */,
+				71A7D30C1BB214E8003969DE /* psalm25.png */,
 				88DCAD791B46EDFF0079046A /* peanuts-anim8.png */,
 				88DCAD7A1B46EDFF0079046A /* peanuts-anim7.png */,
 				88DCAD691B46EA460079046A /* peanuts-anim6.png */,
@@ -284,6 +289,7 @@
 				71754B2D1BAFDB1100B490C5 /* snoopy3.png */,
 				71754B2F1BAFDBB300B490C5 /* snoopy4.png */,
 				881048CE1B3F253000712C9A /* snoopy-tennis.png */,
+				71A7D30A1BB2144B003969DE /* tennisBalls.png */,
 				889C98851B48E47200ACDA2C /* typing-computer6.png */,
 				889C98861B48E47200ACDA2C /* typing-computer5.png */,
 				889C98871B48E47200ACDA2C /* typing-computer4.png */,
@@ -590,6 +596,7 @@
 				889C988F1B48E47200ACDA2C /* typing-computer3.png in Resources */,
 				889C98921B48E47200ACDA2C /* typing-computer0.png in Resources */,
 				884225731B4355F7003122E3 /* Icon-50.png in Resources */,
+				71A7D30B1BB2144B003969DE /* tennisBalls.png in Resources */,
 				71754B301BAFDBB300B490C5 /* snoopy4.png in Resources */,
 				881048CF1B3F253000712C9A /* snoopy-tennis.png in Resources */,
 				889C98901B48E47200ACDA2C /* typing-computer2.png in Resources */,
@@ -610,6 +617,7 @@
 				715FA4921B96254100203CE1 /* Phil Wickham - At Your Name (Yahweh, Yahweh).mp3 in Resources */,
 				88DCAD7C1B46EDFF0079046A /* peanuts-anim7.png in Resources */,
 				889C98841B48DFD400ACDA2C /* snoopy1.jpg in Resources */,
+				71A7D30D1BB214E8003969DE /* psalm25.png in Resources */,
 				881048D11B3F314000712C9A /* paddle520.jpg in Resources */,
 				8842257D1B4355F7003122E3 /* Icon-60@3x.png in Resources */,
 			);

@@ -818,7 +818,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         emitterLayerViewController.viewForEmitterLayer?.layer.addSublayer(emitterLayer)
         if powerBall == 3 {
             gameView.layer.backgroundColor = UIColor.blackColor().CGColor
-            if Settings().redBlockOn && !model.hasPrefix("iPad") {
+            if Settings().redBlockOn { 
                 emitterLayerViewController.viewForEmitterLayer?.alpha = 1
             } else {
                 emitterLayerViewController.viewForEmitterLayer?.alpha = 0

@@ -141,6 +141,10 @@ class LeaderViewController: UIViewController, GKGameCenterControllerDelegate {
             gameCenterAddProgressToAnAchievement(percent, achievementID: "com.garthmackenzie.PaddleBallA52.level.30")
             percent = (Double(Settings().tier) / 60.0)
             gameCenterAddProgressToAnAchievement(percent, achievementID: "com.garthmackenzie.PaddleBallA52.level.60")
+            percent = (Double(Settings().tier) / 90.0)
+            gameCenterAddProgressToAnAchievement(percent, achievementID: "com.garthmackenzie.PaddleBallA52.level.90")
+            percent = (Double(Settings().tier) / 120.0)
+            gameCenterAddProgressToAnAchievement(percent, achievementID: "com.garthmackenzie.PaddleBallA52.level.120")
         }
     }
     @IBOutlet weak var dateCreatedLabel: UILabel!

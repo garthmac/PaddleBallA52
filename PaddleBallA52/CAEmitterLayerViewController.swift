@@ -49,7 +49,7 @@ class CAEmitterLayerViewController: UIViewController {
     emitterCell.alphaSpeed = 1.0
     emitterCell.scale = 1.0
     emitterCell.scaleRange = 0.0
-    emitterCell.scaleSpeed = 0.1
+    emitterCell.scaleSpeed = 0.0  //0.1 slows app considerably for iPad3
     
     let zeroDegreesInRadians = degreesToRadians(0.0)
     emitterCell.spin = degreesToRadians(130.0)
@@ -60,7 +60,11 @@ class CAEmitterLayerViewController: UIViewController {
     
     emitterCell.lifetime = 2.0
     emitterCell.lifetimeRange = 0.0
-    emitterCell.birthRate = 2.0
+    if model.hasPrefix("iPad") {
+        emitterCell.birthRate = 0.5
+    } else {
+        emitterCell.birthRate = 2.0
+    }
     emitterCell.velocity = 50.0
     emitterCell.velocityRange = 500.0
     emitterCell.xAcceleration = 0.0

@@ -253,8 +253,11 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
     }
     private var availableCredits: Int { // a computed property instead of func
         get { return Settings().availableCredits }
-        set { Settings().availableCredits = newValue }
+        set {
+            Settings().availableCredits = newValue
+            updateShopTab()
         }
+    }
     let helper = IAPHelper()
     var doneLoad = false
     //MARK: - view lifecycle
@@ -333,7 +336,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        if helper.list.isEmpty {
+        if helper.list.isEmpty && !helper.hasFailed {
             warnIfCreditsLow()
         }
         helper.setIAPs()
@@ -442,9 +445,6 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         case 0: //add selected ball skin to game
             if availableCredits > 9 {
                 availableCredits -= 10
-                let shopTabBarItem = tabBarController!.tabBar.items![0] 
-                shopTabBarItem.badgeValue = availableCredits.description
-                Settings().availableCredits = availableCredits
                 let loggedInUser = User.login(self.selectedLogin!, password: "foo") //new ball
                 print(loggedInUser)
                 let paddleBallTabBarItem = tabBarController!.tabBar.items![1] 
@@ -462,8 +462,6 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         case 2: //add selected sound track to game
             if availableCredits > 9 {
                 availableCredits -= 10
-                let shopTabBarItem = tabBarController!.tabBar.items![0] 
-                shopTabBarItem.badgeValue = availableCredits.description
                 let loggedInUser = User.login(self.selectedLogin2!, password: "foo") //new audio
                 print(loggedInUser)
                 let settingsTabBarItem = tabBarController!.tabBar.items![2]
@@ -483,8 +481,6 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         case 3: //add selected paddle to game
             if availableCredits > 9 {
                 availableCredits -= 10
-                let shopTabBarItem = tabBarController!.tabBar.items![0] 
-                shopTabBarItem.badgeValue = availableCredits.description
                 if self.selectedLogin3 == nil {
                     pickerView(userPickerView, didSelectRow: 1, inComponent: 3)  //dizzy2
                 }
@@ -504,8 +500,6 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
             let minPWC = self.minimumPWCredits()
             if availableCredits >= minPWC {
                 availableCredits -= minPWC
-                let shopTabBarItem = tabBarController!.tabBar.items![0] 
-                shopTabBarItem.badgeValue = availableCredits.description
                 let loggedInUser = User.login(self.selectedLogin4!, password: "foo") //new PaddleWidth
                 print(loggedInUser)
                 let settingsTabBarItem = tabBarController!.tabBar.items![2]
@@ -533,7 +527,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
             }
         case 5: //add selected credits to game
             purchase()
-            default: break
+        default: break
         }
     }
     func minimumPWCredits() -> Int {

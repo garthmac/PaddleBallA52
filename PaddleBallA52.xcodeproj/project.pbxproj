@@ -94,7 +94,6 @@
 		88DCAD7B1B46EDFF0079046A /* peanuts-anim8.png in Resources */ = {isa = PBXBuildFile; fileRef = 88DCAD791B46EDFF0079046A /* peanuts-anim8.png */; };
 		88DCAD7C1B46EDFF0079046A /* peanuts-anim7.png in Resources */ = {isa = PBXBuildFile; fileRef = 88DCAD7A1B46EDFF0079046A /* peanuts-anim7.png */; };
 		88EBF3131B2798A70090A5A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EBF3121B2798A70090A5A0 /* AppDelegate.swift */; };
-		88EBF3291B2798A70090A5A0 /* PaddleBallA52Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EBF3281B2798A70090A5A0 /* PaddleBallA52Tests.swift */; };
 		88EBF3351B2798C50090A5A0 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 88EBF3331B2798C50090A5A0 /* LICENSE */; };
 		88EBF3371B2798D80090A5A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88EBF3361B2798D80090A5A0 /* Main.storyboard */; };
 		88EBF33E1B27992E0090A5A0 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EBF3391B27992E0090A5A0 /* Settings.swift */; };
@@ -108,16 +107,6 @@
 		88F640D21B320B9700896127 /* jazzloop2_70.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 88EBF3441B2799540090A5A0 /* jazzloop2_70.mp3 */; };
 		88F640D31B320BAA00896127 /* paddle1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 88EBF34A1B2799DF0090A5A0 /* paddle1.jpg */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		88EBF3231B2798A70090A5A0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 88EBF3051B2798A70090A5A0 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 88EBF30C1B2798A70090A5A0;
-			remoteInfo = PaddleBallA52;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		714B2C7C1BA118AA0056D6CF /* CAEmitterLayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAEmitterLayerViewController.swift; sourceTree = "<group>"; };
@@ -208,7 +197,6 @@
 		88EBF30D1B2798A70090A5A0 /* PaddleBallA52.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaddleBallA52.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88EBF3111B2798A70090A5A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88EBF3121B2798A70090A5A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		88EBF3221B2798A70090A5A0 /* PaddleBallA52Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PaddleBallA52Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		88EBF3271B2798A70090A5A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88EBF3281B2798A70090A5A0 /* PaddleBallA52Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddleBallA52Tests.swift; sourceTree = "<group>"; };
 		88EBF3321B2798C50090A5A0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -233,13 +221,6 @@
 			files = (
 				714B2CDA1BA7A7040056D6CF /* GameKit.framework in Frameworks */,
 				714B2CDC1BA7A7100056D6CF /* StoreKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		88EBF31F1B2798A70090A5A0 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,7 +367,6 @@
 			isa = PBXGroup;
 			children = (
 				88EBF30D1B2798A70090A5A0 /* PaddleBallA52.app */,
-				88EBF3221B2798A70090A5A0 /* PaddleBallA52Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -464,24 +444,6 @@
 			productReference = 88EBF30D1B2798A70090A5A0 /* PaddleBallA52.app */;
 			productType = "com.apple.product-type.application";
 		};
-		88EBF3211B2798A70090A5A0 /* PaddleBallA52Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 88EBF32F1B2798A70090A5A0 /* Build configuration list for PBXNativeTarget "PaddleBallA52Tests" */;
-			buildPhases = (
-				88EBF31E1B2798A70090A5A0 /* Sources */,
-				88EBF31F1B2798A70090A5A0 /* Frameworks */,
-				88EBF3201B2798A70090A5A0 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				88EBF3241B2798A70090A5A0 /* PBXTargetDependency */,
-			);
-			name = PaddleBallA52Tests;
-			productName = PaddleBallA52Tests;
-			productReference = 88EBF3221B2798A70090A5A0 /* PaddleBallA52Tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -505,10 +467,6 @@
 							};
 						};
 					};
-					88EBF3211B2798A70090A5A0 = {
-						CreatedOnToolsVersion = 6.3.2;
-						TestTargetID = 88EBF30C1B2798A70090A5A0;
-					};
 				};
 			};
 			buildConfigurationList = 88EBF3081B2798A70090A5A0 /* Build configuration list for PBXProject "PaddleBallA52" */;
@@ -525,7 +483,6 @@
 			projectRoot = "";
 			targets = (
 				88EBF30C1B2798A70090A5A0 /* PaddleBallA52 */,
-				88EBF3211B2798A70090A5A0 /* PaddleBallA52Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -623,13 +580,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		88EBF3201B2798A70090A5A0 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -652,23 +602,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		88EBF31E1B2798A70090A5A0 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				88EBF3291B2798A70090A5A0 /* PaddleBallA52Tests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		88EBF3241B2798A70090A5A0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 88EBF30C1B2798A70090A5A0 /* PaddleBallA52 */;
-			targetProxy = 88EBF3231B2798A70090A5A0 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		88EBF32A1B2798A70090A5A0 /* Debug */ = {
@@ -791,42 +725,6 @@
 			};
 			name = Release;
 		};
-		88EBF3301B2798A70090A5A0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = PaddleBallA52Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.garthmackenzie.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PaddleBallA52.app/PaddleBallA52";
-			};
-			name = Debug;
-		};
-		88EBF3311B2798A70090A5A0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = PaddleBallA52Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.garthmackenzie.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PaddleBallA52.app/PaddleBallA52";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -844,15 +742,6 @@
 			buildConfigurations = (
 				88EBF32D1B2798A70090A5A0 /* Debug */,
 				88EBF32E1B2798A70090A5A0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		88EBF32F1B2798A70090A5A0 /* Build configuration list for PBXNativeTarget "PaddleBallA52Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				88EBF3301B2798A70090A5A0 /* Debug */,
-				88EBF3311B2798A70090A5A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

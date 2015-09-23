@@ -95,7 +95,7 @@ class Settings {
         set { defaults.setObject(newValue, forKey: Const.HighScoreOnKey) }
     }
     var lastHint: Int {
-        get { return defaults.objectForKey(Const.HintIndexKey) as? Int ?? 1 }
+        get { return defaults.objectForKey(Const.HintIndexKey) as? Int ?? 0 }
         set { defaults.setObject(newValue, forKey: Const.HintIndexKey) }
     }
     var myAudios: [String] {

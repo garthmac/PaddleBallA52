@@ -78,6 +78,15 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         speed = Settings().speed
         setPurchasedExtras()
     }
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        ballColorPickerView.selectRow(pickerDataSource.indexOf(ballColor)!, inComponent: 0, animated: true)
+        pickerView(ballColorPickerView, didSelectRow: pickerDataSource.indexOf(ballColor)!, inComponent: 0)
+        courtColorPickerView.selectRow(pickerDataSource.indexOf(courtColor)! , inComponent: 0, animated: true)
+        pickerView(courtColorPickerView, didSelectRow: pickerDataSource.indexOf(courtColor)!, inComponent: 0)
+        paddleColorPickerView.selectRow(pickerDataSource.indexOf(paddleColor)! , inComponent: 0, animated: true)
+        pickerView(paddleColorPickerView, didSelectRow: pickerDataSource.indexOf(paddleColor)!, inComponent: 0)
+    }
     func setPurchasedExtras() {
 //        let achieved = Settings().achieved  //"00000000"
 //        let maxSoundTrack = achieved.intAtIndex(1)!
@@ -99,21 +108,21 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         paddleBallTabBarItem.badgeValue = nil
     }
     var ballColor: String {
-        get { return ballColorLabel.text! }
+        get { return Settings().ballColor }
         set {
-            ballColorLabel.text = "➢ " + newValue
             Settings().ballColor = newValue
+            ballColorLabel.text = "➢ " + newValue
         }
     }
     var courtColor: String {
-        get { return courtColorLabel.text! }
+        get { return Settings().courtColor }
         set {
             courtColorLabel.text = "➢ " + newValue
             Settings().courtColor = newValue
         }
     }
     var paddleColor: String {
-        get { return paddleColorLabel.text! }
+        get { return Settings().paddleColor }
         set {
             paddleColorLabel.text = "➢ " + newValue
             Settings().paddleColor = newValue

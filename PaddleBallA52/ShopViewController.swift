@@ -35,17 +35,12 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
             helpPickerView.hidden = true
             creditsPickerView.hidden = false
             buyCreditsButton.hidden = false
+            buyCreditsButton.superview!.bringSubviewToFront(buyCreditsButton)
             userPickerView.selectRow(audios.count - 1, inComponent: 2, animated: false)
             pickerView(userPickerView, didSelectRow: audios.count - 1, inComponent: 2)
-            creditsPickerView.selectRow(3, inComponent: 0, animated: true)
-            pickerView(creditsPickerView, didSelectRow: 3, inComponent: 0)
+            creditsPickerView.selectRow(0, inComponent: 0, animated: true)
+            pickerView(creditsPickerView, didSelectRow: 0, inComponent: 0)
         }
-//        else {
-//            creditsPickerView.hidden = true
-//            buyCreditsButton.hidden = true
-//            userPickerView.selectRow(Settings().soundChoice, inComponent: 2, animated: false)
-//            pickerView(userPickerView, didSelectRow: Settings().soundChoice, inComponent: 2)
-//        }
     }
     //MARK: - UIPickerViewDataSource
     let model = UIDevice.currentDevice().model
@@ -312,8 +307,6 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         helpPickerView.selectRow(Settings().lastHint, inComponent: 0, animated: true)
-        userPickerView.selectRow(26, inComponent: 0, animated: true)
-        pickerView(userPickerView, didSelectRow: 26, inComponent: 0)
         updateMySkins(Settings().purchasedUid!)
         showBuyCreditsAction(UIButton())  //selectRow(Settings().soundChoice
         if let index = paddles.indexOf((Settings().myPaddles.last!)) {
@@ -336,6 +329,8 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        userPickerView.selectRow(26, inComponent: 0, animated: true)
+        pickerView(userPickerView, didSelectRow: 26, inComponent: 0)
         if helper.list.isEmpty && !helper.hasFailed {
             warnIfCreditsLow()
         }

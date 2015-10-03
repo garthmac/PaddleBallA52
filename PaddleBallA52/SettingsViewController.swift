@@ -88,7 +88,7 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         pickerView(paddleColorPickerView, didSelectRow: pickerDataSource.indexOf(paddleColor)!, inComponent: 0)
     }
     func setPurchasedExtras() {
-        if Settings().tier > 1 {
+        if Settings().tier > 7 {
             if Settings().purchasedPWM < 4 {
                 difficultySelector.enabled = false
             } else {

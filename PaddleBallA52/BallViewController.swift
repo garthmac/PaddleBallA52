@@ -813,7 +813,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         } else {
             tier += 1
         }
-        if self.tier > 1 && Settings().difficulty == 0 {  //disable easy if not paid for
+        if self.tier > 7 && Settings().difficulty == 0 {  //disable easy if not paid for
             if Settings().purchasedPWM < 4 {
                 Settings().difficulty = 1
                 Settings().paddleWidthMultiplier = Settings().purchasedPWM  //1..4

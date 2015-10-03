@@ -2701,14 +2701,14 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trophy75" translatesAutoresizingMaskIntoConstraints="NO" id="S3x-Ks-qjY">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="trophy75" translatesAutoresizingMaskIntoConstraints="NO" id="S3x-Ks-qjY">
                                 <rect key="frame" x="191" y="28" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="XGz-1E-sKe"/>
                                     <constraint firstAttribute="height" constant="48" id="mFd-dz-ETk"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trophy75" translatesAutoresizingMaskIntoConstraints="NO" id="det-Fs-az0">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="trophy75" translatesAutoresizingMaskIntoConstraints="NO" id="det-Fs-az0">
                                 <rect key="frame" x="361" y="28" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="WUQ-Er-ppd"/>
@@ -2751,7 +2751,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="paddle520.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ueg-1F-lg6">
                                 <rect key="frame" x="16" y="472" width="568" height="71"/>
                             </imageView>
-                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qnn-Fu-V94">
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qnn-Fu-V94">
                                 <rect key="frame" x="407" y="30" width="45" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="9rH-I1-dBo"/>

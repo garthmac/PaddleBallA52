@@ -752,10 +752,11 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
                     self.ballCounter = 0
                     self.extraBall = 0
                     self.cornerRadius = Constants.BrickCornerRadius
-                    if (self.tier % 14) == 0 && self.score < Constants.MaxScore {  //game extension
+                    if (self.tier % 14) == 0 && self.score < Constants.MaxScore {  //game extension level 15, 29, 43...
                         self.tier += 1
                     } else {
                         Settings().endLevelBonus = 0
+                        Settings().courtColor = Constants.CourtColor
                         self.coinCount = 0
                         self.coinCountLabel.text = nil
                         self.coins.image = nil
@@ -771,6 +772,9 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
                     self.levelOne(self.tier)
                 }))
                 alertController.addAction(UIAlertAction(title: "Quit", style: .Cancel, handler: { (action) in
+                    if self.tier > 14 {
+                        Settings().courtColor = Constants.CourtColor
+                    }
                     exit(0)
                 }))
                 if (ballCounter > Constants.MaxBalls) && bricks.count != 0 && availableCredits > 9 {
@@ -781,19 +785,24 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
                     }))
                 }
                 presentViewController(alertController, animated: true, completion: nil)
+            } else { exit(0) // for iOS 7
             }
         }
         else {
             failedTier = 0
-            let alertController = UIAlertController(title: "Level Complete!", message: "\(leftover) Leftover Balls \n\n Bonus = " + ballBonus.addSeparator, preferredStyle: .Alert)
-            alertController.addAction(UIAlertAction(title: "Play", style: .Default, handler: { (action) in
+            if NSClassFromString("UIAlertController") != nil {
+                let alertController = UIAlertController(title: "Level Complete!", message: "\(leftover) Leftover Balls \n\n Bonus = " + ballBonus.addSeparator, preferredStyle: .Alert)
+                alertController.addAction(UIAlertAction(title: "Play", style: .Default, handler: { (action) in
+                    self.replay()
+                }))
+                alertController.addAction(UIAlertAction(title: "Shop...", style: .Cancel, handler: { (action) in
+                    self.replay()
+                    self.tabBarController!.selectedIndex = 0
+                }))
+                presentViewController(alertController, animated: true, completion: nil)
+            } else { // for iOS 7
                 self.replay()
-            }))
-            alertController.addAction(UIAlertAction(title: "Shop...", style: .Cancel, handler: { (action) in
-                self.replay()
-                self.tabBarController!.selectedIndex = 0
-            }))
-            presentViewController(alertController, animated: true, completion: nil)
+            }
         }
     }
     func replay() {
@@ -803,6 +812,15 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             tier = failedTier
         } else {
             tier += 1
+        }
+        if self.tier > 1 && Settings().difficulty == 0 {  //disable easy if not paid for
+            if Settings().purchasedPWM < 4 {
+                Settings().difficulty = 1
+                Settings().paddleWidthMultiplier = Settings().purchasedPWM  //1..4
+                paddleSize = CGSize(width: (CGFloat(Settings().purchasedPWM) * Constants.BallSize), height: 20.0)
+                paddle.frame.size = paddleSize
+                alert("Easy is now disabled...", message: "until you buy > 3 paddle widths.")
+            }
         }
         showScore()
         changeCourtColor()
@@ -831,6 +849,20 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             gameView.layer.backgroundColor = UIColor.colorFor(Settings().courtColor).CGColor
         }
         adjustColors()
+    }
+    func alert(title: String, message: String) {
+        if let _: AnyClass = NSClassFromString("UIAlertController") { // iOS 8
+            let myAlert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+            myAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            self.presentViewController(myAlert, animated: true, completion: nil)
+        } else { // iOS 7
+            let alert: UIAlertView = UIAlertView()
+            alert.delegate = self
+            alert.title = title
+            alert.message = message
+            alert.addButtonWithTitle("OK")
+            alert.show()
+        }
     }
     func degreesToRadians(degrees: Double) -> CGFloat {
         return CGFloat(degrees * M_PI / 180.0)

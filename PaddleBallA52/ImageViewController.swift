@@ -60,16 +60,27 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
                 library.writeImageDataToSavedPhotosAlbum(imageData, metadata: nil, completionBlock: nil)
             }
         } else {
-            let alert = UIAlertController(title: "For Leaderboard photos...", message: "1st, press Camera button...\n\n...then Back to return.", preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-            presentViewController(alert, animated: true, completion: nil)
+            alert("For Leaderboard photos...", message: "1st, press Camera button...\n\n...then Back to return.")
         }
     }
 
 //    @IBAction func back(sender: AnyObject) {
 //        presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
 //    }
-    
+    func alert(title: String, message: String) {
+        if let _: AnyClass = NSClassFromString("UIAlertController") { // iOS 8
+            let myAlert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+            myAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            self.presentViewController(myAlert, animated: true, completion: nil)
+        } else { // iOS 7
+            let alert: UIAlertView = UIAlertView()
+            alert.delegate = self
+            alert.title = title
+            alert.message = message
+            alert.addButtonWithTitle("OK")
+            alert.show()
+        }
+    }
     func makeRoomForImage() {
         var extraHeight: CGFloat = 0
         if imageView.image?.aspectRatio > 0 {

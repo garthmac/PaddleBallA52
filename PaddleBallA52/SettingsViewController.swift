@@ -88,15 +88,13 @@ class SettingsViewController: UIViewController, UIPickerViewDataSource, UIPicker
         pickerView(paddleColorPickerView, didSelectRow: pickerDataSource.indexOf(paddleColor)!, inComponent: 0)
     }
     func setPurchasedExtras() {
-//        let achieved = Settings().achieved  //"00000000"
-//        let maxSoundTrack = achieved.intAtIndex(1)!
-//        if maxSoundTrack > 0 {
-//            if let soundTrackControl = self.view.viewWithTag(222) as? UISegmentedControl {
-//                for i in 1...maxSoundTrack {
-//                    soundTrackControl.setEnabled(true, forSegmentAtIndex: i)
-//                }
-//            }
-//        }
+        if Settings().tier > 1 {
+            if Settings().purchasedPWM < 4 {
+                difficultySelector.enabled = false
+            } else {
+                difficultySelector.enabled = true
+            }
+        }
         for string in Settings().myAudios {
             for i in 0..<ShopViewController().audios.count {
                 if ShopViewController().audios[i] == string {

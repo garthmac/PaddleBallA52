@@ -322,10 +322,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
     }
     func warnIfCreditsLow() {
         if availableCredits < 10 {
-            let alert = UIAlertController(title: "You have \(availableCredits) Credits!", message: "Play to earn at least 10 Credits or \n\n ...Buy Credits", preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-            presentViewController(alert, animated: true, completion: nil)
-        }
+            alert("You have \(availableCredits) Credits!", message: "Play to earn at least 10 Credits or \n\n ...Buy Credits")        }
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -433,6 +430,8 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
             }))
             }
             presentViewController(alertController, animated: true, completion: nil)
+        } else {
+            self.buy(sender) //iOS 7
         }
     }
     func buy(sender: UIButton) {
@@ -502,6 +501,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
                 for i in 0..<iPadPaddleWidths.count {
                     if iPadPaddleWidths[i] == self.selectedLogin4! {
                         Settings().paddleWidthMultiplier = max(1, i)
+                        Settings().purchasedPWM = Settings().paddleWidthMultiplier
                     }
                 }
                 if model.hasPrefix("iPad") {
@@ -515,9 +515,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
                 }
             } else {
                 if availableCredits < minPWC {
-                    let alert = UIAlertController(title: "You have \(availableCredits) Credits!", message: "(you need \(self.minimumPWCredits()))...before buying...", preferredStyle: .Alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-                    presentViewController(alert, animated: true, completion: nil)
+                    alert("You have \(availableCredits) Credits!", message: "(you need \(self.minimumPWCredits()))...before buying...")
                 }
             }
         case 5: //add selected credits to game
@@ -537,6 +535,20 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
             }
         }
         return 10
+    }
+    func alert(title: String, message: String) {
+        if let _: AnyClass = NSClassFromString("UIAlertController") { // iOS 8
+            let myAlert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+            myAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            self.presentViewController(myAlert, animated: true, completion: nil)
+        } else { // iOS 7
+            let alert: UIAlertView = UIAlertView()
+            alert.delegate = self
+            alert.title = title
+            alert.message = message
+            alert.addButtonWithTitle("OK")
+            alert.show()
+        }
     }
     func chosenNumberOfCredits() -> Int {
         if self.selectedCreditIndex == 0 {

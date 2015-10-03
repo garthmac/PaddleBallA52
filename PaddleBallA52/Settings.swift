@@ -31,6 +31,7 @@ class Settings {
         static let PaddlesKey = "Settings.Paddles" //purchased Paddles
         static let PaddleWidthMultiplierKey = "Settings.Paddle.Width.Multiplier" //1 thru 4, initially 2 (ball widths)
         static let PaddleWidthUnlockStepperKey = "Settings.Paddle.Width.Unlock.Stepper" //enable stepper once u purchace max paddle width
+        static let PurchasedPWMKey = "Settings.Purchased.PWM"
         static let PurchasedUidKey = "Settings.Purchased.Ball.Uid"
         static let RedBlockKey = "Settings.RedBlock" //turn that annoying RedBlock off!
         static let RowsKey = "Settings.Rows" //half the # of columns
@@ -121,6 +122,10 @@ class Settings {
     var paddleWidthUnlockStepper: Bool {
         get { return defaults.objectForKey(Const.PaddleWidthUnlockStepperKey) as? Bool ?? false }
         set { defaults.setObject(newValue, forKey: Const.PaddleWidthUnlockStepperKey) }
+    }
+    var purchasedPWM: Int {
+        get { return defaults.objectForKey(Const.PurchasedPWMKey) as? Int ?? 2 }
+        set { defaults.setObject(newValue, forKey: Const.PurchasedPWMKey) }
     }
     var purchasedUid: String? {
         get { return defaults.objectForKey(Const.PurchasedUidKey) as? String ?? "" }

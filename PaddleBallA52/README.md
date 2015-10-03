@@ -1,4 +1,4 @@
-# PaddleBallA5
+# PaddleBallA5 (alias RedBlock Paddle Pong)
 
 uses segue to Tab View for primary user settings
 uses AVAudioPlayer, dynamic behaviors, timer, alert, gestures and class extentions

@@ -258,21 +258,34 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
     //MARK: - view lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        let qualityOfServiceClass = QOS_CLASS_USER_INITIATED
-        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
-        dispatch_async(backgroundQueue, { [weak self] in
-            print("This is run on the background queue")
-            self!.ballImages = (0..<self!.ballSkins.count).map {
-                UIImage(named: self!.ballSkins[$0])!
-            }
-            dispatch_async(dispatch_get_main_queue(), { [weak self] in
-                print("This is run on the main queue, after backgroundQueue code in outer closure")
-                self!.doneLoad = true
-                self!.userPickerView.reloadComponent(0)
-                self!.userPickerView.selectRow(26, inComponent: 0, animated: true)
-                self!.pickerView(self!.userPickerView, didSelectRow: 26, inComponent: 0)
+        if #available(iOS 8.0, *) {  //let qualityOfServiceClass = QOS_CLASS_USER...
+            let qualityOfServiceClass = QOS_CLASS_USER_INITIATED
+            let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
+            dispatch_async(backgroundQueue, { [weak self] in
+                print("This is run on the background queue")
+                self!.ballImages = (0..<self!.ballSkins.count).map {
+                    UIImage(named: self!.ballSkins[$0])!
+                }
+                dispatch_async(dispatch_get_main_queue(), { [weak self] in
+                    print("This is run on the main queue, after backgroundQueue code in outer closure")
+                    self!.doneLoad = true
+                    self!.userPickerView.reloadComponent(0)
+                    self!.userPickerView.selectRow(26, inComponent: 0, animated: true)
+                    self!.pickerView(self!.userPickerView, didSelectRow: 26, inComponent: 0)
+                })
             })
-        })
+        } else {
+            // Fallback for versions less than 8 for iOS 4.3 thru 7
+            UIView.animateWithDuration(0.1, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: [], animations: {
+                self.ballImages = (0..<self.ballSkins.count).map {
+                    UIImage(named: self.ballSkins[$0])! }
+                }, completion: { [weak self] (success) -> Void in
+                    self!.doneLoad = true
+                    self!.userPickerView.reloadComponent(0)
+                    self!.userPickerView.selectRow(26, inComponent: 0, animated: true)
+                    self!.pickerView(self!.userPickerView, didSelectRow: 26, inComponent: 0)
+            })
+        }
         userPickerView.delegate = self
         userPickerView.dataSource = self
         helpPickerView.delegate = self
@@ -313,7 +326,6 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
             userPickerView.selectRow(index, inComponent: 3, animated: true)
         }
         userPickerView.selectRow(Settings().paddleWidthMultiplier, inComponent: 4, animated: true)
-        updateShopTab()
     }
     func updateShopTab() {
         self.tabBarController?.tabBar.hidden = false
@@ -326,12 +338,11 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        userPickerView.selectRow(26, inComponent: 0, animated: true)
-        pickerView(userPickerView, didSelectRow: 26, inComponent: 0)
         if helper.list.isEmpty && !helper.hasFailed {
             warnIfCreditsLow()
         }
         helper.setIAPs()
+        updateShopTab()
     }
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(true)
@@ -403,7 +414,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         if audioPlayer?.playing == true {audioPlayer?.stop()}
     }
     func checkout(message: String, sender: UIButton) {
-        if NSClassFromString("UIAlertController") != nil {
+        if #available(iOS 8.0, *) {
             let alertController = UIAlertController(title: "Checkout", message: message, preferredStyle: .Alert)
             alertController.addAction(UIAlertAction(title: "Pay now!", style: UIAlertActionStyle.Default, handler: { (action) in
                 self.buy(sender)  //this is the main use
@@ -430,8 +441,8 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
             }))
             }
             presentViewController(alertController, animated: true, completion: nil)
-        } else {
-            self.buy(sender) //iOS 7
+        } else { //iOS 7
+            self.buy(sender)
         }
     }
     func buy(sender: UIButton) {
@@ -537,8 +548,8 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         return 10
     }
     func alert(title: String, message: String) {
-        if let _: AnyClass = NSClassFromString("UIAlertController") { // iOS 8
-            let myAlert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        if #available(iOS 8.0, *) {
+            let myAlert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
             myAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
             self.presentViewController(myAlert, animated: true, completion: nil)
         } else { // iOS 7

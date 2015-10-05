@@ -68,8 +68,8 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
 //        presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
 //    }
     func alert(title: String, message: String) {
-        if let _: AnyClass = NSClassFromString("UIAlertController") { // iOS 8
-            let myAlert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        if #available(iOS 8.0, *) {
+            let myAlert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
             myAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
             self.presentViewController(myAlert, animated: true, completion: nil)
         } else { // iOS 7

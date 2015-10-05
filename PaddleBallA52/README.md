@@ -26,7 +26,7 @@ Xcode 7
 
 Swift 2
 
-Deployment Target iOS 8.3
+Deployment Target iOS 8.3 -->7.0 in ver 1.1
 Base SDK = iOS 9.0
 
 Asset Credits

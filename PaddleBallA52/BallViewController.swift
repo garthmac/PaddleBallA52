@@ -743,7 +743,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
             if (ballCounter > Constants.MaxBalls && bricks.count != 0) {
                 failedTier = tier
             }
-            if NSClassFromString("UIAlertController") != nil {
+            if #available(iOS 8.0, *) {
                 let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
                 alertController.addAction(UIAlertAction(title: cancelButtonTitle, style: .Default, handler: { (action) in  //cancelButtonTitle = "Restart..." or "Next Set..."
                     self.resetWall()
@@ -775,7 +775,7 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
                     if self.tier > 14 {
                         Settings().courtColor = Constants.CourtColor
                     }
-                    exit(0)
+                    self.quit()
                 }))
                 if (ballCounter > Constants.MaxBalls) && bricks.count != 0 && availableCredits > 9 {
                     alertController.addAction(UIAlertAction(title: "Buy Extra Ball NOW!", style: .Default, handler: { (action) in
@@ -785,12 +785,14 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
                     }))
                 }
                 presentViewController(alertController, animated: true, completion: nil)
-            } else { exit(0) // for iOS 7
+            } else {  // for iOS 7
+                alert("Game Over!", message: "Try Again...")
+                NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: "quit", userInfo: nil, repeats: false)
             }
         }
         else {
             failedTier = 0
-            if NSClassFromString("UIAlertController") != nil {
+            if #available(iOS 8.0, *) {
                 let alertController = UIAlertController(title: "Level Complete!", message: "\(leftover) Leftover Balls \n\n Bonus = " + ballBonus.addSeparator, preferredStyle: .Alert)
                 alertController.addAction(UIAlertAction(title: "Play", style: .Default, handler: { (action) in
                     self.replay()
@@ -801,9 +803,14 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
                 }))
                 presentViewController(alertController, animated: true, completion: nil)
             } else { // for iOS 7
+                alert("Level Complete!", message: "\(leftover) Leftover Balls \n\n Bonus = " + ballBonus.addSeparator)
                 self.replay()
+                self.tabBarController!.selectedIndex = 0
             }
         }
+    }
+    func quit() {
+        exit(0)
     }
     func replay() {
         ballCounter = 0
@@ -851,8 +858,8 @@ class BallViewController: UIViewController, UICollisionBehaviorDelegate, AVAudio
         adjustColors()
     }
     func alert(title: String, message: String) {
-        if let _: AnyClass = NSClassFromString("UIAlertController") { // iOS 8
-            let myAlert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        if #available(iOS 8.0, *) {
+            let myAlert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
             myAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
             self.presentViewController(myAlert, animated: true, completion: nil)
         } else { // iOS 7

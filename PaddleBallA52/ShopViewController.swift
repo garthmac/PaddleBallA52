@@ -18,10 +18,12 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
     @IBOutlet weak var helpPickerView: UIPickerView!
     @IBOutlet weak var creditsPickerView: UIPickerView!
     @IBOutlet weak var buyCreditsButton: UIButton!
+    @IBOutlet weak var newsLine: UIButton!
     
     @IBAction func showHelpAction(sender: UIButton) {
         if helpPickerView.hidden {
             creditsPickerView.hidden = true
+            newsLine.hidden = true
             buyCreditsButton.hidden = true
             userPickerView.selectRow(Settings().soundChoice, inComponent: 2, animated: false)
             pickerView(userPickerView, didSelectRow: Settings().soundChoice, inComponent: 2)
@@ -34,6 +36,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         if creditsPickerView.hidden {
             helpPickerView.hidden = true
             creditsPickerView.hidden = false
+            newsLine.hidden = false
             buyCreditsButton.hidden = false
             buyCreditsButton.superview!.bringSubviewToFront(buyCreditsButton)
             userPickerView.selectRow(audios.count - 1, inComponent: 2, animated: false)
@@ -254,10 +257,18 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         }
     }
     let helper = IAPHelper()
+    var url: NSURL?
+    @IBAction func home(sender: UIButton) {
+        //print(url)
+        if url != nil {
+            UIApplication.sharedApplication().openURL(url!)
+        }
+    }
     var doneLoad = false
     //MARK: - view lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        url = NSURL(string: "https://redblockblog.wordpress.com/marketing/")!
         if #available(iOS 8.0, *) {  //let qualityOfServiceClass = QOS_CLASS_USER...
             let qualityOfServiceClass = QOS_CLASS_USER_INITIATED
             let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)

@@ -697,11 +697,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: GARTH MACKENZIE (ZS88LT5RYH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: GARTH MACKENZIE (ZS88LT5RYH)";
 				INFOPLIST_FILE = PaddleBallA52/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.garthmackenzie.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d5aec336-d894-4ada-91c7-523f13fee8c7";
+				PROVISIONING_PROFILE = "9aa7974b-f5c9-4446-8166-69980107d859";
 			};
 			name = Debug;
 		};
@@ -713,11 +713,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: GARTH MACKENZIE (ZS88LT5RYH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: GARTH MACKENZIE (ZS88LT5RYH)";
 				INFOPLIST_FILE = PaddleBallA52/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.garthmackenzie.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d5aec336-d894-4ada-91c7-523f13fee8c7";
+				PROVISIONING_PROFILE = "9aa7974b-f5c9-4446-8166-69980107d859";
 			};
 			name = Release;
 		};

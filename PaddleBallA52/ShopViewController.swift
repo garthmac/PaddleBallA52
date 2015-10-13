@@ -25,8 +25,6 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
             creditsPickerView.hidden = true
             newsLine.hidden = true
             buyCreditsButton.hidden = true
-            userPickerView.selectRow(Settings().soundChoice, inComponent: 2, animated: false)
-            pickerView(userPickerView, didSelectRow: Settings().soundChoice, inComponent: 2)
             helpPickerView.hidden = false
         } else {
             showBuyCreditsAction(sender)
@@ -38,9 +36,6 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
             creditsPickerView.hidden = false
             newsLine.hidden = false
             buyCreditsButton.hidden = false
-            buyCreditsButton.superview!.bringSubviewToFront(buyCreditsButton)
-            userPickerView.selectRow(audios.count - 1, inComponent: 2, animated: false)
-            pickerView(userPickerView, didSelectRow: audios.count - 1, inComponent: 2)
             creditsPickerView.selectRow(0, inComponent: 0, animated: true)
             pickerView(creditsPickerView, didSelectRow: 0, inComponent: 0)
         }
@@ -310,6 +305,7 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
                     button.layer.cornerRadius = 15.0
                     button.layer.borderWidth = 1.0
                     button.layer.borderColor = UIColor.blueColor().CGColor
+                    button.superview!.bringSubviewToFront(button)
                 }
             }
         }
@@ -332,7 +328,9 @@ class ShopViewController: UIViewController, AVAudioPlayerDelegate, UIPickerViewD
         super.viewWillAppear(animated)
         helpPickerView.selectRow(Settings().lastHint, inComponent: 0, animated: true)
         updateMySkins(Settings().purchasedUid!)
-        showBuyCreditsAction(UIButton())  //selectRow(Settings().soundChoice
+        userPickerView.selectRow(Settings().soundChoice, inComponent: 2, animated: true)
+        pickerView(userPickerView, didSelectRow: Settings().soundChoice, inComponent: 2)
+        showBuyCreditsAction(UIButton()) 
         if let index = paddles.indexOf((Settings().myPaddles.last!)) {
             userPickerView.selectRow(index, inComponent: 3, animated: true)
         }

@@ -25,13 +25,13 @@
 		715FA49F1B9649C400203CE1 /* Phil Wickham - This Is Amazing Grace.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 715FA49E1B9649C400203CE1 /* Phil Wickham - This Is Amazing Grace.mp3 */; };
 		715FA4B01B9B59B500203CE1 /* Titans Spirit(Remember The Titans)-Trevor Rabin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 715FA4AF1B9B59B500203CE1 /* Titans Spirit(Remember The Titans)-Trevor Rabin.mp3 */; };
 		71654E551BAA08960092E9E6 /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71654E541BAA08960092E9E6 /* IAPHelper.swift */; };
-		71754B2C1BAE88BF00B490C5 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71754B2B1BAE88BF00B490C5 /* Images-2.xcassets */; settings = {ASSET_TAGS = (); }; };
-		71754B2E1BAFDB1100B490C5 /* snoopy3.png in Resources */ = {isa = PBXBuildFile; fileRef = 71754B2D1BAFDB1100B490C5 /* snoopy3.png */; settings = {ASSET_TAGS = (); }; };
-		71754B301BAFDBB300B490C5 /* snoopy4.png in Resources */ = {isa = PBXBuildFile; fileRef = 71754B2F1BAFDBB300B490C5 /* snoopy4.png */; settings = {ASSET_TAGS = (); }; };
+		71754B2C1BAE88BF00B490C5 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71754B2B1BAE88BF00B490C5 /* Images-2.xcassets */; };
+		71754B2E1BAFDB1100B490C5 /* snoopy3.png in Resources */ = {isa = PBXBuildFile; fileRef = 71754B2D1BAFDB1100B490C5 /* snoopy3.png */; };
+		71754B301BAFDBB300B490C5 /* snoopy4.png in Resources */ = {isa = PBXBuildFile; fileRef = 71754B2F1BAFDBB300B490C5 /* snoopy4.png */; };
 		71A025AA1B8D5DA4002CE122 /* Forrest Gump Soundtrack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 71A025A91B8D5DA4002CE122 /* Forrest Gump Soundtrack.mp3 */; };
 		71A6E2E91B8AA0DE000AA949 /* CYMATICS- Science Vs. Music - Nigel Stanford-2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 71A6E2E81B8AA0DE000AA949 /* CYMATICS- Science Vs. Music - Nigel Stanford-2.mp3 */; };
-		71A7D30B1BB2144B003969DE /* tennisBalls.png in Resources */ = {isa = PBXBuildFile; fileRef = 71A7D30A1BB2144B003969DE /* tennisBalls.png */; settings = {ASSET_TAGS = (); }; };
-		71A7D30D1BB214E8003969DE /* psalm25.png in Resources */ = {isa = PBXBuildFile; fileRef = 71A7D30C1BB214E8003969DE /* psalm25.png */; settings = {ASSET_TAGS = (); }; };
+		71A7D30B1BB2144B003969DE /* tennisBalls.png in Resources */ = {isa = PBXBuildFile; fileRef = 71A7D30A1BB2144B003969DE /* tennisBalls.png */; };
+		71A7D30D1BB214E8003969DE /* psalm25.png in Resources */ = {isa = PBXBuildFile; fileRef = 71A7D30C1BB214E8003969DE /* psalm25.png */; };
 		881048B91B3E22F000712C9A /* TrackBall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881048B81B3E22F000712C9A /* TrackBall.swift */; };
 		881048BF1B3E59D700712C9A /* mackie_swift.png in Resources */ = {isa = PBXBuildFile; fileRef = 881048BE1B3E59D700712C9A /* mackie_swift.png */; };
 		881048C71B3E694600712C9A /* glory.png in Resources */ = {isa = PBXBuildFile; fileRef = 881048C51B3E663C00712C9A /* glory.png */; };
@@ -640,7 +640,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -681,7 +681,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -694,14 +694,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
-				CODE_SIGN_IDENTITY = "iPhone Developer: GARTH MACKENZIE (ZS88LT5RYH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: GARTH MACKENZIE (ZS88LT5RYH)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PaddleBallA52/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.garthmackenzie.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9aa7974b-f5c9-4446-8166-69980107d859";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -710,14 +710,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
-				CODE_SIGN_IDENTITY = "iPhone Developer: GARTH MACKENZIE (ZS88LT5RYH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: GARTH MACKENZIE (ZS88LT5RYH)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PaddleBallA52/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.garthmackenzie.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9aa7974b-f5c9-4446-8166-69980107d859";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
